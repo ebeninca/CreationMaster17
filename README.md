@@ -2,9 +2,9 @@
 
 ## Current progress ##
 
-*window is now centered and adjusted to display resolution
-*enabled linear filtering for textures in 3D preview
-*correct 3D render for all vertex formats
+* window is now centered and adjusted to display resolution
+* enabled linear filtering for textures in 3D preview
+* correct 3D render for all vertex formats
 
 ## How to download and install ##
 
