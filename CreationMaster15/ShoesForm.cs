@@ -506,7 +506,7 @@ namespace CreationMaster
             this.Controls.Add((Control)this.pickUpControl);
             this.FormBorderStyle = FormBorderStyle.None;
             this.Name = "ShoesForm";
-            this.Text = nameof(ShoesForm);
+            this.Text = "ShoesForm";
             this.Load += new EventHandler(this.ShoesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.EndInit();

@@ -75,7 +75,7 @@ namespace FifaControls
       this.Controls.Add((Control) this.panelBottom);
       this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
       this.Name = "CmsBrowser";
-      this.Text = nameof (CmsBrowser);
+      this.Text = "CmsBrowser";
       this.panelBottom.ResumeLayout(false);
       this.ResumeLayout(false);
     }

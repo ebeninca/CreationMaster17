@@ -240,7 +240,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.splitContainer1);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "ManagerForm";
-      this.Text = nameof (ManagerForm);
+      this.Text = "ManagerForm";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel1.PerformLayout();
       this.splitContainer1.Panel2.ResumeLayout(false);

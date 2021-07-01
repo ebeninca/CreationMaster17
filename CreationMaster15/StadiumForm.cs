@@ -1839,7 +1839,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "StadiumForm";
-      this.Text = nameof (StadiumForm);
+      this.Text = "StadiumForm";
       this.Load += new EventHandler(this.StadiumForm_Load);
       this.tabEsitStadium.ResumeLayout(false);
       this.pageStadiumGeneral.ResumeLayout(false);

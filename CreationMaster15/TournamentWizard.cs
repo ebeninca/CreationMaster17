@@ -1235,7 +1235,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.groupQualification);
       this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
       this.Name = "TournamentWizard";
-      this.Text = nameof (TournamentWizard);
+      this.Text = "TournamentWizard";
       this.groupKO.ResumeLayout(false);
       this.numericFinalGames.EndInit();
       this.numericKOGames.EndInit();

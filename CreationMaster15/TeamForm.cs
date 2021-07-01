@@ -3905,7 +3905,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "TeamForm";
-      this.Text = nameof (TeamForm);
+      this.Text = "TeamForm";
       this.Load += new EventHandler(this.TeamForm_Load);
       this.tableEditTeam.ResumeLayout(false);
       this.pageTeamGeneric.ResumeLayout(false);

@@ -28,7 +28,7 @@ namespace CreationMaster
       this.ClientSize = new Size(1165, 798);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "TvForm";
-      this.Text = nameof (TvForm);
+      this.Text = "TvForm";
       this.ResumeLayout(false);
     }
 

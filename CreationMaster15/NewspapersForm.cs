@@ -474,7 +474,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "NewspapersForm";
-      this.Text = nameof (NewspapersForm);
+      this.Text = "NewspapersForm";
       this.numericNewspaper1.EndInit();
       this.groupNewspaper.ResumeLayout(false);
       this.groupNewspaper.PerformLayout();

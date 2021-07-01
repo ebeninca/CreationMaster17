@@ -233,7 +233,7 @@ namespace FifaControls
       this.Controls.Add((Control) this.trackBarRed);
       this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
       this.Name = "RgbControl";
-      this.Text = nameof (RgbControl);
+      this.Text = "RgbControl";
       this.trackBarRed.EndInit();
       this.trackBarGreen.EndInit();
       this.trackBarBlue.EndInit();

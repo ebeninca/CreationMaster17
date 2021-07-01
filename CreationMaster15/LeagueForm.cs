@@ -744,7 +744,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "LeagueForm";
-      this.Text = nameof (LeagueForm);
+      this.Text = "LeagueForm";
       this.Load += new EventHandler(this.LeagueForm_Load);
       this.flowPanel.ResumeLayout(false);
       this.groupBoxTeams.ResumeLayout(false);

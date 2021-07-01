@@ -44,7 +44,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.buttonCancel);
       this.Controls.Add((Control) this.buttonImport);
       this.Name = "UgcForm";
-      this.Text = nameof (UgcForm);
+      this.Text = "UgcForm";
       this.ResumeLayout(false);
     }
 

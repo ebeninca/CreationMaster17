@@ -301,7 +301,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "GlovesForm";
-      this.Text = nameof (GlovesForm);
+      this.Text = "GlovesForm";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
       this.splitContainer1.EndInit();

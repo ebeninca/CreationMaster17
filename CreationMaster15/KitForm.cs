@@ -1966,7 +1966,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "KitForm";
-      this.Text = nameof (KitForm);
+      this.Text = "KitForm";
       this.Load += new EventHandler(this.KitForm_Load);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);

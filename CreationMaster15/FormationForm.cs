@@ -1197,7 +1197,7 @@ namespace CreationMaster
       this.Controls.Add((Control) this.pickUpControl);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Name = "FormationForm";
-      this.Text = nameof (FormationForm);
+      this.Text = "FormationForm";
       this.Load += new EventHandler(this.FormationForm_Load);
       this.groupTactic.ResumeLayout(false);
       this.groupTactic.PerformLayout();
