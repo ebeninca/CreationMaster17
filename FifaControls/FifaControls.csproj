@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Program Files (x86)\Fifa Master\Creation Master 15\FifaControls.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FifaControls</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <ApplicationVersion>0.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FifaControls</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX" />
+    <Reference Include="Microsoft.DirectX.Direct3D" />
+    <Reference Include="Microsoft.DirectX.Direct3DX" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RgbControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Previewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PickUpControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WeatherSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabeledTrack.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewCompetitionSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RankingRuleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QualifyRuleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeatherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer2D.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NumericStars.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FullSizeViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvanceRuleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer3D.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewKitCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SearchTool.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResizablerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewIdCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultiViewer2D.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CmsBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColorSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewQualRule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx" />
+    <EmbeddedResource Include="AdvanceRuleDialog.resx" />
+    <EmbeddedResource Include="CmsBrowser.resx" />
+    <EmbeddedResource Include="ColorSelector.resx" />
+    <EmbeddedResource Include="FullSizeViewer.resx" />
+    <EmbeddedResource Include="LabeledTrack.resx" />
+    <EmbeddedResource Include="ModelManager.resx" />
+    <EmbeddedResource Include="MultiViewer2D.resx" />
+    <EmbeddedResource Include="NewIdCreator.resx" />
+    <EmbeddedResource Include="NewKitCreator.resx" />
+    <EmbeddedResource Include="NumericStars.resx" />
+    <EmbeddedResource Include="PickUpControl.resx" />
+    <EmbeddedResource Include="Previewer.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="QualifyRuleDialog.resx" />
+    <EmbeddedResource Include="RankingRuleDialog.resx" />
+    <EmbeddedResource Include="RgbControl.resx" />
+    <EmbeddedResource Include="SearchTool.resx" />
+    <EmbeddedResource Include="ViewCompetitionSetting.resx" />
+    <EmbeddedResource Include="Viewer2D.resx" />
+    <EmbeddedResource Include="Viewer3D.resx" />
+    <EmbeddedResource Include="ViewQualRule.resx" />
+    <EmbeddedResource Include="WeatherForm.resx" />
+    <EmbeddedResource Include="WeatherSelector.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FifaLibrary14\FifaLibrary14.csproj">
+      <Project>{a3b0ad02-3b52-4e38-9147-fb3033676565}</Project>
+      <Name>FifaLibrary14</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)bin\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

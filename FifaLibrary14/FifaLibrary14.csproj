@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Program Files (x86)\Fifa Master\Creation Master 15\FifaLibrary14.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3B0AD02-3B52-4E38-9147-FB3033676565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FifaLibrary14</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <ApplicationVersion>14.3.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FifaLibrary</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX" />
+    <Reference Include="Microsoft.DirectX.Direct3D" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zlib.net">
+      <HintPath>lib\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Localization.cs" />
+    <Compile Include="Model3D.cs" />
+    <Compile Include="EImageType.cs" />
+    <Compile Include="Fsh.cs" />
+    <Compile Include="ImageDir.cs" />
+    <Compile Include="FshSection.cs" />
+    <Compile Include="FshImage.cs" />
+    <Compile Include="RawImage.cs" />
+    <Compile Include="MipMap.cs" />
+    <Compile Include="DxtBlock.cs" />
+    <Compile Include="FifaEnvironment.cs" />
+    <Compile Include="EFifaObjects.cs" />
+    <Compile Include="BhFile.cs" />
+    <Compile Include="BhFileReference.cs" />
+    <Compile Include="Matrix3x3.cs" />
+    <Compile Include="Rx3VertexFormat.cs" />
+    <Compile Include="Vector3x1.cs" />
+    <Compile Include="FifaFat.cs" />
+    <Compile Include="UgcFile.cs" />
+    <Compile Include="UgcDirEntry.cs" />
+    <Compile Include="RegistryInfo.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="UserMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IdObject.cs" />
+    <Compile Include="Stadium.cs" />
+    <Compile Include="IdArrayList.cs" />
+    <Compile Include="StadiumList.cs" />
+    <Compile Include="UserOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerNames.cs" />
+    <Compile Include="PlayerName.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerList.cs" />
+    <Compile Include="GenericHead.cs" />
+    <Compile Include="CareerFirstName.cs" />
+    <Compile Include="CareerLastName.cs" />
+    <Compile Include="CareerCommonName.cs" />
+    <Compile Include="CareerFirstNameList.cs" />
+    <Compile Include="CareerLastNameList.cs" />
+    <Compile Include="CareerCommonNameList.cs" />
+    <Compile Include="League.cs" />
+    <Compile Include="LeagueList.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="Rx3File.cs" />
+    <Compile Include="KitFile.cs" />
+    <Compile Include="Kit.cs" />
+    <Compile Include="KitList.cs" />
+    <Compile Include="GraphicUtil.cs" />
+    <Compile Include="FifaUtil.cs" />
+    <Compile Include="Compobj.cs" />
+    <Compile Include="CompobjList.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="Confederation.cs" />
+    <Compile Include="ConfederationList.cs" />
+    <Compile Include="Nation.cs" />
+    <Compile Include="NationList.cs" />
+    <Compile Include="Trophy.cs" />
+    <Compile Include="TrophyList.cs" />
+    <Compile Include="Stage.cs" />
+    <Compile Include="StageList.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="GroupList.cs" />
+    <Compile Include="Rank.cs" />
+    <Compile Include="RankList.cs" />
+    <Compile Include="Schedule.cs" />
+    <Compile Include="ScheduleComparer.cs" />
+    <Compile Include="ScheduleArray.cs" />
+    <Compile Include="Task.cs" />
+    <Compile Include="InitTeam.cs" />
+    <Compile Include="InitTeamList.cs" />
+    <Compile Include="ERuleApplicartionTime.cs" />
+    <Compile Include="EQualifyingRule.cs" />
+    <Compile Include="EEndOfCompetitionRule.cs" />
+    <Compile Include="CompetitionSettings.cs" />
+    <Compile Include="IdObjectComparer.cs" />
+    <Compile Include="IdString.cs" />
+    <Compile Include="FifaPlatform.cs" />
+    <Compile Include="DbReader.cs" />
+    <Compile Include="DbWriter.cs" />
+    <Compile Include="DbFile.cs" />
+    <Compile Include="TableDescriptor.cs" />
+    <Compile Include="FieldDescriptor.cs" />
+    <Compile Include="HuffmannTree.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="Record.cs" />
+    <Compile Include="RecordComparer.cs" />
+    <Compile Include="FieldComparer.cs" />
+    <Compile Include="TI.cs" />
+    <Compile Include="FI.cs" />
+    <Compile Include="CareerFile.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="CountryList.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="CmsDataSet.cs" />
+    <Compile Include="DdsFile.cs" />
+    <Compile Include="GkGloves.cs" />
+    <Compile Include="GkGlovesList.cs" />
+    <Compile Include="BallList.cs" />
+    <Compile Include="Ball.cs" />
+    <Compile Include="AdboardList.cs" />
+    <Compile Include="Adboard.cs" />
+    <Compile Include="NumberFontList.cs" />
+    <Compile Include="NumberFont.cs" />
+    <Compile Include="NameFontList.cs" />
+    <Compile Include="NameFont.cs" />
+    <Compile Include="NetList.cs" />
+    <Compile Include="Net.cs" />
+    <Compile Include="ShoesList.cs" />
+    <Compile Include="Shoes.cs" />
+    <Compile Include="MowingPatternList.cs" />
+    <Compile Include="MowingPattern.cs" />
+    <Compile Include="Newspaper.cs" />
+    <Compile Include="GlovesList.cs" />
+    <Compile Include="Gloves.cs" />
+    <Compile Include="ECompressionMode.cs" />
+    <Compile Include="FifaFileHeader.cs" />
+    <Compile Include="FifaFile.cs" />
+    <Compile Include="FifaBigFile.cs" />
+    <Compile Include="Rx3RawData.cs" />
+    <Compile Include="Rx3Header.cs" />
+    <Compile Include="Rx3FileDescriptor.cs" />
+    <Compile Include="Rx3ImageDirectory.cs" />
+    <Compile Include="Rx3ModelDirectory.cs" />
+    <Compile Include="Rx3ImageHeader.cs" />
+    <Compile Include="Rx3ModelHeader.cs" />
+    <Compile Include="Rx3Image.cs" />
+    <Compile Include="Rx3IndexArray.cs" />
+    <Compile Include="Rx3VertexArray.cs" />
+    <Compile Include="Rx3Vertex.cs" />
+    <Compile Include="Rx3Signatures.cs" />
+    <Compile Include="Referee.cs" />
+    <Compile Include="RefereeList.cs" />
+    <Compile Include="ERole.cs" />
+    <Compile Include="EPlayingDirection.cs" />
+    <Compile Include="EPlayingIntensity.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="RoleList.cs" />
+    <Compile Include="PlayingRole.cs" />
+    <Compile Include="Formation.cs" />
+    <Compile Include="FormationList.cs" />
+    <Compile Include="CareerFormation.cs" />
+    <Compile Include="CareerFormationList.cs" />
+    <Compile Include="Team.cs" />
+    <Compile Include="TeamList.cs" />
+    <Compile Include="FreeAgent.cs" />
+    <Compile Include="FreeAgentList.cs" />
+    <Compile Include="MultiClub.cs" />
+    <Compile Include="MultiClubList.cs" />
+    <Compile Include="TeamPlayer.cs" />
+    <Compile Include="Roster.cs" />
+    <Compile Include="RosterComparer.cs" />
+    <Compile Include="TeamNews.cs" />
+    <Compile Include="CmSponsor.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="Police.cs" />
+    <Compile Include="OnlineFile.cs" />
+    <Compile Include="SpecificHeadList.cs" />
+    <Compile Include="SpecificHead.cs" />
+    <Compile Include="SameNameList.cs" />
+    <Compile Include="SameName.cs" />
+    <Compile Include="NameDictionary.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserMessage.resx" />
+    <EmbeddedResource Include="UserOptions.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)bin\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

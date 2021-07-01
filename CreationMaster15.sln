@@ -1,0 +1,43 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreationMaster15", "CreationMaster15\CreationMaster15.csproj", "{31BADB8E-6894-485A-B3F2-39D813D1B1E9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3B0AD02-3B52-4E38-9147-FB3033676565} = {A3B0AD02-3B52-4E38-9147-FB3033676565}
+		{296063E9-98EC-4EBC-8C21-3B7D92FB96C7} = {296063E9-98EC-4EBC-8C21-3B7D92FB96C7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifaLibrary14", "FifaLibrary14\FifaLibrary14.csproj", "{A3B0AD02-3B52-4E38-9147-FB3033676565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifaControls", "FifaControls\FifaControls.csproj", "{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3B0AD02-3B52-4E38-9147-FB3033676565} = {A3B0AD02-3B52-4E38-9147-FB3033676565}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31BADB8E-6894-485A-B3F2-39D813D1B1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BADB8E-6894-485A-B3F2-39D813D1B1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BADB8E-6894-485A-B3F2-39D813D1B1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BADB8E-6894-485A-B3F2-39D813D1B1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B0AD02-3B52-4E38-9147-FB3033676565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B0AD02-3B52-4E38-9147-FB3033676565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B0AD02-3B52-4E38-9147-FB3033676565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B0AD02-3B52-4E38-9147-FB3033676565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296063E9-98EC-4EBC-8C21-3B7D92FB96C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B88C055E-59E7-4DAE-BD92-E73E3FE50E13}
+	EndGlobalSection
+EndGlobal
