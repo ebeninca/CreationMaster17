@@ -774,7 +774,11 @@ namespace FifaLibrary
         if (!FifaEnvironment.OpenLangDb())
           return false;
       }
-      FifaEnvironment.m_OriginalFifaDb = FifaEnvironment.m_Year != 14 ? new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaDbPartialFileName, FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaXmlPartialFileName) : new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaDbPartialFileName, FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaXmlPartialFileName);
+      FifaEnvironment.m_OriginalFifaDb = FifaEnvironment.m_Year != 14 ? 
+                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaDbPartialFileName, 
+                FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaXmlPartialFileName) : 
+                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaDbPartialFileName, 
+                FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaXmlPartialFileName);
       FifaEnvironment.ExtractCompetitionFiles();
       if (FifaEnvironment.m_Status != null)
       {
