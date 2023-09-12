@@ -4854,7 +4854,7 @@ namespace FifaLibrary
             r.IntField[FI.players_runningcode1] = this.m_runningcode1;
             r.IntField[FI.players_runningcode2] = this.m_runningcode2;
             r.IntField[FI.players_gksavetype] = this.m_gksavetype;
-            r.IntField[FI.players_faceposercode] = this.m_faceposercode;
+            //r.IntField[FI.players_faceposercode] = this.m_faceposercode;
             r.IntField[FI.players_isretiring] = this.m_isretiring;
             r.IntField[FI.players_socklengthcode] = this.m_socklengthcode;
             r.IntField[FI.players_hashighqualityhead] = this.m_hashighqualityhead;

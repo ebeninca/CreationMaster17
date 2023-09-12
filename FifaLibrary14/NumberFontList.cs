@@ -36,7 +36,7 @@ namespace FifaLibrary
       }
     }
 
-    public NumberFont CreateNewId(int color)
+    public new NumberFont CreateNewId(int color)
     {
       int fontId = -1;
       for (int id = 20 + color % 20; id <= this.MaxId; id += 20)

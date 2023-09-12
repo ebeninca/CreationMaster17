@@ -325,7 +325,7 @@ namespace FifaLibrary
       r.FloatField[FI.formations_defenders] = this.m_defenders;
       r.FloatField[FI.formations_midfielders] = this.m_midfielders;
       r.FloatField[FI.formations_attackers] = this.m_attackers;
-      r.IntField[FI.formations_attackingrole_0] = 3;
+      /*r.IntField[FI.formations_attackingrole_0] = 3;
       r.IntField[FI.formations_attackingrole_1] = 3;
       r.IntField[FI.formations_attackingrole_2] = 3;
       r.IntField[FI.formations_attackingrole_3] = 3;
@@ -346,7 +346,7 @@ namespace FifaLibrary
       r.IntField[FI.formations_defensiverole_7] = 3;
       r.IntField[FI.formations_defensiverole_8] = 3;
       r.IntField[FI.formations_defensiverole_9] = 3;
-      r.IntField[FI.formations_defensiverole_10] = 3;
+      r.IntField[FI.formations_defensiverole_10] = 3;*/
       for (int i = 0; i < 11; ++i)
         this.m_PlayingRoles[i].Save(r, i);
       this.SaveLanguage();

@@ -5836,7 +5836,8 @@ namespace FifaLibrary
         FI.nations_confederation = table20.TableDescriptor.GetFieldIndex("confederation");
         FI.nations_top_tier = table20.TableDescriptor.GetFieldIndex("top_tier");
         FI.nations_nationstartingfirstletter = table20.TableDescriptor.GetFieldIndex("nationstartingfirstletter");
-        FI.nations_teamid = table20.TableDescriptor.GetFieldIndex("teamid");
+        //FI.nations_teamid = table20.TableDescriptor.GetFieldIndex("teamid");
+        FI.nations_teamid = 3;
       }
       Table table21 = fifaDb.GetTable("manager");
       if (table21 != null)

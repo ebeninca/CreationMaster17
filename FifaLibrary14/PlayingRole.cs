@@ -692,10 +692,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position0] = this.m_Role.Id;
           r.FloatField[FI.formations_offset0x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset0y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_0] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_0] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_0] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_0] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_0] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_0] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction0 < 0)
             break;
           r.IntField[FI.formations_playerinstruction0] = this.m_PlayerInstruction;
@@ -704,10 +704,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position1] = this.m_Role.Id;
           r.FloatField[FI.formations_offset1x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset1y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_1] = (int) this.m_OffDirection;
+         /*r.IntField[FI.formations_attackingdirection_1] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_1] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_1] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_1] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_1] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction1 < 0)
             break;
           r.IntField[FI.formations_playerinstruction1] = this.m_PlayerInstruction;
@@ -716,10 +716,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position2] = this.m_Role.Id;
           r.FloatField[FI.formations_offset2x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset2y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_2] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_2] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_2] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_2] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_2] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_2] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction2 < 0)
             break;
           r.IntField[FI.formations_playerinstruction2] = this.m_PlayerInstruction;
@@ -728,10 +728,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position3] = this.m_Role.Id;
           r.FloatField[FI.formations_offset3x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset3y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_3] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_3] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_3] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_3] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_3] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_3] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction3 < 0)
             break;
           r.IntField[FI.formations_playerinstruction3] = this.m_PlayerInstruction;
@@ -740,10 +740,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position4] = this.m_Role.Id;
           r.FloatField[FI.formations_offset4x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset4y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_4] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_4] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_4] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_4] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_4] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_4] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction4 < 0)
             break;
           r.IntField[FI.formations_playerinstruction4] = this.m_PlayerInstruction;
@@ -752,10 +752,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position5] = this.m_Role.Id;
           r.FloatField[FI.formations_offset5x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset5y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_5] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_5] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_5] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_5] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_5] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_5] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction5 < 0)
             break;
           r.IntField[FI.formations_playerinstruction5] = this.m_PlayerInstruction;
@@ -764,10 +764,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position6] = this.m_Role.Id;
           r.FloatField[FI.formations_offset6x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset6y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_6] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_6] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_6] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_6] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_6] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_6] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction6 < 0)
             break;
           r.IntField[FI.formations_playerinstruction6] = this.m_PlayerInstruction;
@@ -776,10 +776,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position7] = this.m_Role.Id;
           r.FloatField[FI.formations_offset7x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset7y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_7] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_7] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_7] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_7] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_7] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_7] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction7 < 0)
             break;
           r.IntField[FI.formations_playerinstruction7] = this.m_PlayerInstruction;
@@ -788,10 +788,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position8] = this.m_Role.Id;
           r.FloatField[FI.formations_offset8x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset8y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_8] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_8] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_8] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_8] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_8] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_8] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction8 < 0)
             break;
           r.IntField[FI.formations_playerinstruction8] = this.m_PlayerInstruction;
@@ -800,10 +800,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position9] = this.m_Role.Id;
           r.FloatField[FI.formations_offset9x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset9y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_9] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_9] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_9] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_9] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_9] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_9] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction0 < 9)
             break;
           r.IntField[FI.formations_playerinstruction9] = this.m_PlayerInstruction;
@@ -812,10 +812,10 @@ namespace FifaLibrary
           r.IntField[FI.formations_position10] = this.m_Role.Id;
           r.FloatField[FI.formations_offset10x] = (float) this.m_OffsetX / 100f;
           r.FloatField[FI.formations_offset10y] = (float) this.m_OffsetY / 100f;
-          r.IntField[FI.formations_attackingdirection_10] = (int) this.m_OffDirection;
+          /*r.IntField[FI.formations_attackingdirection_10] = (int) this.m_OffDirection;
           r.IntField[FI.formations_defensivedirection_10] = (int) this.m_DefDirection;
           r.IntField[FI.formations_attackingrole_10] = (int) this.m_OffIntensity;
-          r.IntField[FI.formations_defensiverole_10] = (int) this.m_DefIntensity;
+          r.IntField[FI.formations_defensiverole_10] = (int) this.m_DefIntensity;*/
           if (FI.formations_playerinstruction0 < 10)
             break;
           r.IntField[FI.formations_playerinstruction10] = this.m_PlayerInstruction;

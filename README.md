@@ -1,4 +1,14 @@
-# README #
+# Creation Master 17 Compdata #
+
+## Pendencias
+
+- Tasks, initteams, advancement ok, falta settings
+- Weather Probability
+
+## Modifications
+
+- Support to new Qualification Rules (ChampionsCup, EuroLeague)
+- Use Fan Cards
 
 ## Current progress ##
 

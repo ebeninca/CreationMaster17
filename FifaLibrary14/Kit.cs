@@ -468,9 +468,9 @@ namespace FifaLibrary
       this.m_jerseybacknamefontcase = r.IntField[FI.teamkits_jerseybacknamefontcase];
       this.m_jerseynamefonttype = r.IntField[FI.teamkits_jerseynamefonttype];
       this.m_numberfonttype = r.IntField[FI.teamkits_numberfonttype];
-      this.m_numbercolor = r.IntField[FI.teamkits_numbercolor];
+      //this.m_numbercolor = r.IntField[FI.teamkits_numbercolor];
       this.m_shortsnumberfonttype = r.IntField[FI.teamkits_shortsnumberfonttype];
-      this.m_shortsnumbercolor = r.IntField[FI.teamkits_shortsnumbercolor];
+      //this.m_shortsnumbercolor = r.IntField[FI.teamkits_shortsnumbercolor];
       this.m_jerseynamecolorr = r.IntField[FI.teamkits_jerseynamecolorr];
       this.m_jerseynamecolorg = r.IntField[FI.teamkits_jerseynamecolorg];
       this.m_jerseynamecolorb = r.IntField[FI.teamkits_jerseynamecolorb];
@@ -524,9 +524,9 @@ namespace FifaLibrary
       r.IntField[FI.teamkits_jerseybacknamefontcase] = this.m_jerseybacknamefontcase;
       r.IntField[FI.teamkits_jerseynamefonttype] = this.m_jerseynamefonttype;
       r.IntField[FI.teamkits_numberfonttype] = this.m_numberfonttype;
-      r.IntField[FI.teamkits_numbercolor] = this.m_numbercolor;
+      //r.IntField[FI.teamkits_numbercolor] = this.m_numbercolor;
       r.IntField[FI.teamkits_shortsnumberfonttype] = this.m_shortsnumberfonttype;
-      r.IntField[FI.teamkits_shortsnumbercolor] = this.m_shortsnumbercolor;
+      //r.IntField[FI.teamkits_shortsnumbercolor] = this.m_shortsnumbercolor;
       this.m_jerseynamecolorr = (int) this.m_JerseyNameColor.R;
       this.m_jerseynamecolorg = (int) this.m_JerseyNameColor.G;
       this.m_jerseynamecolorb = (int) this.m_JerseyNameColor.B;

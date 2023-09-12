@@ -686,7 +686,7 @@ namespace FifaLibrary
       r.IntField[FI.leagueteamlinks_highestpossible] = team.highestpossible;
       r.IntField[FI.leagueteamlinks_highestprobable] = team.highestprobable;
       r.IntField[FI.leagueteamlinks_nummatchesplayed] = team.nummatchesplayed;
-      r.IntField[FI.leagueteamlinks_gapresult] = team.gapresult;
+      //r.IntField[FI.leagueteamlinks_gapresult] = team.gapresult;
       r.IntField[FI.leagueteamlinks_grouping] = team.grouping;
       r.IntField[FI.leagueteamlinks_objective] = team.objective;
       r.IntField[FI.leagueteamlinks_actualvsexpectations] = team.actualvsexpectations;

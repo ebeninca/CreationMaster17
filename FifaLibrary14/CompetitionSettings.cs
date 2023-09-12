@@ -64,6 +64,7 @@ namespace FifaLibrary
     public int m_advance_pointskeeppercentage = -1;
     public int m_advance_matchupkeep = -1;
     public int m_advance_random_draw_event = -1;
+    public string m_match_canusefancards;
     public int m_advance_randomdraw = -1;
     public int m_advance_calccompavgs = -1;
     public int m_advance_maxteamsassoc = -1;
@@ -1146,6 +1147,8 @@ namespace FifaLibrary
       }
       else if (property == "advance_random_draw_event")
         this.m_advance_random_draw_event = Convert.ToInt32(val);
+      else if (property == "match_canusefancards")
+        this.m_match_canusefancards = val;
       else if (property == "advance_randomdraw")
         this.m_advance_randomdraw = Convert.ToInt32(val);
       else if (property == "advance_calccompavgs")
@@ -1347,6 +1350,8 @@ namespace FifaLibrary
         return this.m_info_special_team_id[index].ToString();
       if (property == "advance_random_draw_rvrny")
         return this.m_advance_random_draw_event.ToString();
+      if (property == "match_canusefancards")
+        return this.m_match_canusefancards.ToString();
       if (property == "advance_randomdraw")
         return this.m_advance_randomdraw.ToString();
       if (property == "advance_calccompavgs")
@@ -1723,6 +1728,11 @@ namespace FifaLibrary
       if (this.m_advance_random_draw_event != -1)
       {
         string str = id.ToString() + ",advance_random_draw_event," + (object) this.m_advance_random_draw_event;
+        w.WriteLine(str);
+      }
+      if (this.m_match_canusefancards == "on")
+      {
+        string str = id.ToString() + ",match_canusefancards," + (object) this.m_match_canusefancards;
         w.WriteLine(str);
       }
       if (this.m_advance_randomdraw != -1)

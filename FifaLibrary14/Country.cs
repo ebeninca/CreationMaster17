@@ -401,7 +401,7 @@ namespace FifaLibrary
       r.IntField[FI.nations_confederation] = this.m_confederation + 1;
       r.IntField[FI.nations_top_tier] = this.m_top_tier ? 1 : 0;
       r.IntField[FI.nations_nationstartingfirstletter] = this.m_nationstartingfirstletter;
-      r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
+      //r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
     }
 
     public void SaveLangTable()

@@ -12,14 +12,14 @@ namespace FifaLibrary
     public static ArrayList s_Descriptions = new ArrayList();
 
     public CompobjList()
-      : base(typeof (Compobj))
+      : base(typeof(Compobj))
     {
       this.MinId = 0;
       this.MaxId = 99999;
     }
 
     public CompobjList(string path, DbFile dbFile)
-      : base(typeof (Compobj))
+      : base(typeof(Compobj))
     {
       this.MinId = 0;
       this.MaxId = 99999;
@@ -46,10 +46,10 @@ namespace FifaLibrary
       get
       {
         TrophyList trophyList = new TrophyList();
-        foreach (Compobj compobj in (ArrayList) this)
+        foreach (Compobj compobj in (ArrayList)this)
         {
           if (compobj.IsTrophy())
-            trophyList.Add((object) compobj);
+            trophyList.Add((object)compobj);
         }
         return trophyList;
       }
@@ -134,7 +134,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -146,38 +146,38 @@ namespace FifaLibrary
           string typeString = strArray[2];
           string description = strArray[3];
           int int32_3 = Convert.ToInt32(strArray[4]);
-          Compobj parentObj = (Compobj) null;
+          Compobj parentObj = (Compobj)null;
           if (int32_3 >= 0)
           {
-            parentObj = (Compobj) this.SearchId(int32_3);
+            parentObj = (Compobj)this.SearchId(int32_3);
             if (parentObj == null)
               continue;
           }
-          Compobj childObject = (Compobj) null;
+          Compobj childObject = (Compobj)null;
           switch (int32_2)
           {
             case 0:
-              this.InsertId((IdObject) new World(int32_1, typeString, description));
+              this.InsertId((IdObject)new World(int32_1, typeString, description));
               break;
             case 1:
-              childObject = (Compobj) new Confederation(int32_1, typeString, description, parentObj);
-              this.InsertId((IdObject) childObject);
+              childObject = (Compobj)new Confederation(int32_1, typeString, description, parentObj);
+              this.InsertId((IdObject)childObject);
               break;
             case 2:
-              childObject = (Compobj) new Nation(int32_1, typeString, description, parentObj);
-              this.InsertId((IdObject) childObject);
+              childObject = (Compobj)new Nation(int32_1, typeString, description, parentObj);
+              this.InsertId((IdObject)childObject);
               break;
             case 3:
-              childObject = (Compobj) new Trophy(int32_1, typeString, description, parentObj);
-              this.InsertId((IdObject) childObject);
+              childObject = (Compobj)new Trophy(int32_1, typeString, description, parentObj);
+              this.InsertId((IdObject)childObject);
               break;
             case 4:
-              childObject = (Compobj) new Stage(int32_1, typeString, description, parentObj);
-              this.InsertId((IdObject) childObject);
+              childObject = (Compobj)new Stage(int32_1, typeString, description, parentObj);
+              this.InsertId((IdObject)childObject);
               break;
             case 5:
-              childObject = (Compobj) new Group(int32_1, typeString, description, parentObj);
-              this.InsertId((IdObject) childObject);
+              childObject = (Compobj)new Group(int32_1, typeString, description, parentObj);
+              this.InsertId((IdObject)childObject);
               break;
           }
           parentObj?.AddChild(childObject);
@@ -204,7 +204,7 @@ namespace FifaLibrary
           int int32 = Convert.ToInt32(strArray[0]);
           string str2 = strArray[1];
           strArray[2].IndexOfAny(charArray);
-          ((Compobj) this.SearchId(int32))?.SetProperty(strArray[1], strArray[2]);
+          ((Compobj)this.SearchId(int32))?.SetProperty(strArray[1], strArray[2]);
         }
       }
       streamReader.Close();
@@ -216,7 +216,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -225,14 +225,14 @@ namespace FifaLibrary
         {
           int int32_1 = Convert.ToInt32(strArray[0]);
           int int32_2 = Convert.ToInt32(strArray[1]);
-          Compobj compobj = (Compobj) this.SearchId(int32_1);
+          Compobj compobj = (Compobj)this.SearchId(int32_1);
           if (compobj.IsGroup())
           {
-            Group group = (Group) compobj;
+            Group group = (Group)compobj;
             if (group != null)
             {
               Rank rank = new Rank(group, int32_2 + 1);
-              group.Ranks.Add((object) rank);
+              group.Ranks.Add((object)rank);
             }
           }
         }
@@ -246,7 +246,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -259,12 +259,12 @@ namespace FifaLibrary
           int int32_4 = Convert.ToInt32(strArray[3]);
           int int32_5 = Convert.ToInt32(strArray[4]);
           int int32_6 = Convert.ToInt32(strArray[5]);
-          Compobj compobj = (Compobj) this.SearchId(int32_1);
+          Compobj compobj = (Compobj)this.SearchId(int32_1);
           if (compobj != null)
           {
             if (compobj.IsStage())
             {
-              Stage stage = (Stage) this.SearchId(int32_1);
+              Stage stage = (Stage)this.SearchId(int32_1);
               if (stage != null)
               {
                 Schedule schedule = new Schedule(stage, int32_2, int32_3, int32_4, int32_5, int32_6);
@@ -273,7 +273,7 @@ namespace FifaLibrary
             }
             else if (compobj.IsGroup())
             {
-              Group group = (Group) this.SearchId(int32_1);
+              Group group = (Group)this.SearchId(int32_1);
               if (group != null)
               {
                 Schedule schedule = new Schedule(group, int32_2, int32_3, int32_4, int32_5, int32_6);
@@ -292,12 +292,12 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
         string[] strArray = str.Split(chArray);
-        if (strArray.Length == 8)
+        if (strArray.Length == 13)
         {
           int int32_1 = Convert.ToInt32(strArray[0]);
           int int32_2 = Convert.ToInt32(strArray[1]);
@@ -307,35 +307,51 @@ namespace FifaLibrary
           int int32_6 = Convert.ToInt32(strArray[5]);
           int int32_7 = Convert.ToInt32(strArray[6]);
           int int32_8 = Convert.ToInt32(strArray[7]);
-          Compobj compobj = (Compobj) this.SearchId(int32_1);
+          int int32_9 = Convert.ToInt32(strArray[8]);
+          int int32_10 = Convert.ToInt32(strArray[9]);
+          int int32_11 = Convert.ToInt32(strArray[10]);
+          int int32_12 = Convert.ToInt32(strArray[11]);
+          int int32_13 = Convert.ToInt32(strArray[12]);
+
+          Compobj compobj = (Compobj)this.SearchId(int32_1);
           if (compobj != null)
           {
             if (compobj.IsNation())
             {
-              Nation nation = (Nation) this.SearchId(int32_1);
+              Nation nation = (Nation)this.SearchId(int32_1);
               if (nation != null && int32_2 >= 1 && int32_2 <= 12)
               {
                 int index = int32_2 - 1;
-                nation.DryProb[index] = int32_3;
-                nation.RainProb[index] = int32_4;
-                nation.SnowProb[index] = int32_5;
+                nation.ClearProb[index] = int32_3;
+                nation.HazyProb[index] = int32_4;
+                nation.CloudyProb[index] = int32_5;
                 nation.OvercastProb[index] = int32_6;
-                nation.SunsetTime[index] = int32_7;
-                nation.DarkTime[index] = int32_8;
+                nation.FoggyProb[index] = int32_7;
+                nation.RainProb[index] = int32_8;
+                nation.ShowersProb[index] = int32_9;
+                nation.FlurriesProb[index] = int32_10;
+                nation.SnowProb[index] = int32_11;
+                nation.SunsetTime[index] = int32_12;
+                nation.DarkTime[index] = int32_13;
               }
             }
             else if (compobj.IsWorld())
             {
-              World world = (World) this.SearchId(int32_1);
+              World world = (World)this.SearchId(int32_1);
               if (world != null && int32_2 >= 1 && int32_2 <= 12)
               {
                 int index = int32_2 - 1;
-                world.DryProb[index] = int32_3;
-                world.RainProb[index] = int32_4;
-                world.SnowProb[index] = int32_5;
+                world.ClearProb[index] = int32_3;
+                world.HazyProb[index] = int32_4;
+                world.CloudyProb[index] = int32_5;
                 world.OvercastProb[index] = int32_6;
-                world.SunsetTime[index] = int32_7;
-                world.DarkTime[index] = int32_8;
+                world.FoggyProb[index] = int32_7;
+                world.RainProb[index] = int32_8;
+                world.ShowersProb[index] = int32_9;
+                world.FlurriesProb[index] = int32_10;
+                world.SnowProb[index] = int32_11;
+                world.SunsetTime[index] = int32_12;
+                world.DarkTime[index] = int32_13;
               }
             }
           }
@@ -350,7 +366,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -364,17 +380,17 @@ namespace FifaLibrary
           int int32_3 = Convert.ToInt32(strArray[4]);
           int int32_4 = Convert.ToInt32(strArray[5]);
           int int32_5 = Convert.ToInt32(strArray[6]);
-          Compobj compobj1 = (Compobj) this.SearchId(int32_1);
-          if (compobj1.IsTrophy() && (Trophy) compobj1 != null)
+          Compobj compobj1 = (Compobj)this.SearchId(int32_1);
+          if (compobj1.IsTrophy() && (Trophy)compobj1 != null)
           {
             Task action2 = new Task(when, action1, int32_2, int32_3, int32_4, int32_5);
-            Compobj compobj2 = (Compobj) this.SearchId(int32_2);
+            Compobj compobj2 = (Compobj)this.SearchId(int32_2);
             if (compobj2.IsGroup())
-              ((Group) compobj2).AddTask(action2);
+              ((Group)compobj2).AddTask(action2);
             else if (compobj2.IsStage())
-              ((Stage) compobj2).AddTask(action2);
+              ((Stage)compobj2).AddTask(action2);
             else if (compobj2.IsTrophy())
-              ((Trophy) compobj2)?.AddTask(action2);
+              ((Trophy)compobj2)?.AddTask(action2);
           }
         }
       }
@@ -387,7 +403,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -397,10 +413,10 @@ namespace FifaLibrary
           int int32_1 = Convert.ToInt32(strArray[0]);
           int int32_2 = Convert.ToInt32(strArray[1]);
           int int32_3 = Convert.ToInt32(strArray[2]);
-          Compobj compobj = (Compobj) this.SearchId(int32_1);
+          Compobj compobj = (Compobj)this.SearchId(int32_1);
           if (compobj.IsTrophy())
           {
-            Trophy trophy = (Trophy) compobj;
+            Trophy trophy = (Trophy)compobj;
             if (trophy != null)
             {
               InitTeam initTeam = new InitTeam(int32_2, int32_3);
@@ -418,7 +434,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[1]{ ',' };
+      char[] chArray = new char[1] { ',' };
       string str;
       while ((str = streamReader.ReadLine()) != null)
       {
@@ -429,12 +445,12 @@ namespace FifaLibrary
           int int32_2 = Convert.ToInt32(strArray[1]);
           int int32_3 = Convert.ToInt32(strArray[2]);
           int int32_4 = Convert.ToInt32(strArray[3]);
-          Group group1 = (Group) this.SearchId(int32_1);
-          Group group2 = (Group) this.SearchId(int32_3);
+          Group group1 = (Group)this.SearchId(int32_1);
+          Group group2 = (Group)this.SearchId(int32_3);
           if (group1 != null && group2 != null)
           {
-            Rank rank1 = (Rank) group1.Ranks.SearchId(int32_2);
-            Rank rank2 = (Rank) group2.Ranks.SearchId(int32_4);
+            Rank rank1 = (Rank)group1.Ranks.SearchId(int32_2);
+            Rank rank2 = (Rank)group2.Ranks.SearchId(int32_4);
             if (rank1 != null && rank2 != null)
             {
               if (rank1.Id != 0)
@@ -454,7 +470,7 @@ namespace FifaLibrary
       StreamReader streamReader = new StreamReader(fileName);
       if (streamReader == null)
         return false;
-      char[] chArray = new char[3]{ ',', '[', ']' };
+      char[] chArray = new char[3] { ',', '[', ']' };
       string str1;
       while ((str1 = streamReader.ReadLine()) != null)
       {
@@ -510,24 +526,24 @@ namespace FifaLibrary
 
     private bool FillFromLanguage()
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
         compobj.FillFromLanguage();
       return true;
     }
 
     public bool FillFromCompetition(Table t)
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
       {
         if (compobj.IsTrophy())
-          ((Trophy) compobj).FillFromCompetition(t);
+          ((Trophy)compobj).FillFromCompetition(t);
       }
       return true;
     }
 
     private bool SaveToLanguage()
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
         compobj.SaveToLanguage();
       return true;
     }
@@ -535,18 +551,18 @@ namespace FifaLibrary
     private bool SaveToCompetition(Table t)
     {
       int nRecords = 0;
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
       {
-        if (compobj.IsTrophy() && ((Trophy) compobj).ballid >= 0)
+        if (compobj.IsTrophy() && ((Trophy)compobj).ballid >= 0)
           ++nRecords;
       }
       t.ResizeRecords(nRecords);
       int index = 0;
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
       {
         if (compobj.IsTrophy())
         {
-          Trophy trophy = (Trophy) compobj;
+          Trophy trophy = (Trophy)compobj;
           if (trophy.ballid >= 0)
           {
             Record record = t.Records[index];
@@ -564,10 +580,10 @@ namespace FifaLibrary
       int length = 0;
       string[] strArray1 = new string[256];
       if (FifaEnvironment.LangDb == null)
-        return (string[]) null;
+        return (string[])null;
       Table table = FifaEnvironment.LangDb.Table[0];
       if (table == null)
-        return (string[]) null;
+        return (string[])null;
       for (int index = 0; index < table.NRecords; ++index)
       {
         string str = table.Records[index].CompressedString[FI.language_stringid];
@@ -584,11 +600,11 @@ namespace FifaLibrary
     {
       CompobjList.s_Descriptions.Clear();
       string[] fceDescriptors = this.GetFceDescriptors();
-      CompobjList.s_Descriptions.AddRange((ICollection) fceDescriptors);
-      foreach (Compobj compobj in (ArrayList) this)
+      CompobjList.s_Descriptions.AddRange((ICollection)fceDescriptors);
+      foreach (Compobj compobj in (ArrayList)this)
       {
-        if (compobj.IsStage() && !compobj.Description.StartsWith("FCE_") && !CompobjList.s_Descriptions.Contains((object) compobj.Description))
-          CompobjList.s_Descriptions.Add((object) compobj.Description);
+        if (compobj.IsStage() && !compobj.Description.StartsWith("FCE_") && !CompobjList.s_Descriptions.Contains((object)compobj.Description))
+          CompobjList.s_Descriptions.Add((object)compobj.Description);
       }
       CompobjList.s_Descriptions.Sort();
     }
@@ -597,12 +613,12 @@ namespace FifaLibrary
     {
       get
       {
-        foreach (Compobj compobj in (ArrayList) this)
+        foreach (Compobj compobj in (ArrayList)this)
         {
           if (compobj.IsWorld())
-            return (World) compobj;
+            return (World)compobj;
         }
-        return (World) null;
+        return (World)null;
       }
     }
 
@@ -735,7 +751,7 @@ namespace FifaLibrary
     private bool SaveToInternationals(string fileName)
     {
       int num1 = 0;
-      char[] chArray = new char[3]{ ',', '[', ']' };
+      char[] chArray = new char[3] { ',', '[', ']' };
       if (!File.Exists(fileName))
         return false;
       File.Copy(fileName, fileName + ".bak", true);
@@ -760,7 +776,7 @@ namespace FifaLibrary
             {
               while (enumerator.MoveNext())
               {
-                Country current = (Country) enumerator.Current;
+                Country current = (Country)enumerator.Current;
                 if (current.NationalTeam != null)
                 {
                   int level = current.Level;
@@ -831,7 +847,7 @@ namespace FifaLibrary
 
     public void Link()
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
       {
         if (compobj.IsTrophy())
         {
@@ -853,23 +869,23 @@ namespace FifaLibrary
 
     private void Normalize()
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
         compobj.Normalize();
     }
 
     public Trophy SearchTrophy(int assetId)
     {
-      foreach (Compobj compobj in (ArrayList) this)
+      foreach (Compobj compobj in (ArrayList)this)
       {
         if (compobj.IsTrophy() && compobj.Settings.m_asset_id == assetId)
-          return (Trophy) compobj;
+          return (Trophy)compobj;
       }
-      return (Trophy) null;
+      return (Trophy)null;
     }
 
     public int GetInternationalFriendlyId()
     {
-      foreach (Trophy trophy in (ArrayList) this.Trophies)
+      foreach (Trophy trophy in (ArrayList)this.Trophies)
       {
         if (trophy.Settings.m_comp_type == "INTERFRIENDLY")
           return trophy.Id;

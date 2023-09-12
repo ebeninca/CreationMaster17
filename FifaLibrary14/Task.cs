@@ -274,9 +274,33 @@ namespace FifaLibrary
         this.m_League = (League) FifaEnvironment.Leagues.SearchId(this.m_Parameter1);
         this.m_Team = (Team) null;
       }
+      else if (this.m_Action == "FillChampionsCup")
+      {
+        this.m_Rule = EQualifyingRule.FillChampionsCup;
+        this.m_Trophy1 = (Trophy) null;
+        this.m_Trophy2 = (Trophy) null;
+        this.m_League = (League) FifaEnvironment.Leagues.SearchId(this.m_Parameter1);
+        this.m_Team = (Team) null;
+      }
       else if (this.m_Action == "FillFromSpecialTeams")
       {
         this.m_Rule = EQualifyingRule.FillFromSpecialTeams;
+        this.m_Trophy1 = (Trophy) null;
+        this.m_Trophy2 = (Trophy) null;
+        this.m_League = (League) null;
+        this.m_Team = (Team) null;
+      }
+      else if (this.m_Action == "FillEuroLeagueWinnerPlayoff")
+      {
+        this.m_Rule = EQualifyingRule.FillEuroLeagueWinnerPlayoff;
+        this.m_Trophy1 = (Trophy) null;
+        this.m_Trophy2 = (Trophy) null;
+        this.m_League = (League) null;
+        this.m_Team = (Team) null;
+      }
+      else if (this.m_Action == "FillEuroLeagueWinnerGroupStage")
+      {
+        this.m_Rule = EQualifyingRule.FillEuroLeagueWinnerGroupStage;
         this.m_Trophy1 = (Trophy) null;
         this.m_Trophy2 = (Trophy) null;
         this.m_League = (League) null;
@@ -428,8 +452,22 @@ namespace FifaLibrary
               break;
             }
             break;
+          case EQualifyingRule.FillChampionsCup:
+            if (this.m_League != null)
+            {
+              str = "Get up to " + this.m_Parameter2.ToString() + " team(s) from league: " + this.m_League.ToString() + " (max " + this.m_Parameter3.ToString() + ") for Champions Cup";
+              this.m_Parameter1 = this.m_League.Id;
+              break;
+            }
+            break;
           case EQualifyingRule.FillFromSpecialTeams:
             str = "Get " + this.m_Parameter1.ToString() + " team(s) from Special Teams Group";
+            break;
+          case EQualifyingRule.FillEuroLeagueWinnerGroupStage:
+            str = "Get winner of Euro League Group Stage";
+            break;
+          case EQualifyingRule.FillEuroLeagueWinnerPlayoff:
+            str = "Get winner of Euro League Playoff";
             break;
           case EQualifyingRule.FillWithTeam:
             if (this.m_Team != null)
@@ -465,9 +503,11 @@ namespace FifaLibrary
           str = str + (this.m_Trophy1 != null ? this.m_Trophy1.Id.ToString() : this.m_Parameter1.ToString()) + "," + (this.m_League != null ? this.m_League.Id.ToString() : this.m_Parameter2.ToString()) + "," + this.m_Parameter3.ToString();
         else if (this.m_Action == "FillFromLeague")
           str = str + (this.m_League != null ? this.m_League.Id.ToString() : this.m_Parameter1.ToString()) + "," + this.m_Parameter2.ToString() + "," + this.m_Parameter3.ToString();
-        else if (this.m_Action == "FillFromLeagueMaxFromCountry")
+        else if (this.m_Action == "FillFromLeagueMaxFromCountry" || this.m_Action == "FillChampionsCup")
           str = str + (this.m_League != null ? this.m_League.Id.ToString() : this.m_Parameter1.ToString()) + "," + this.m_Parameter2.ToString() + "," + this.m_Parameter3.ToString();
         else if (this.m_Action == "FillFromSpecialTeams")
+          str = str + this.m_Parameter1.ToString() + "," + this.m_Parameter2.ToString() + "," + this.m_Parameter3.ToString();
+        else if (this.m_Action == "FillEuroLeagueWinnerPlayoff" || this.m_Action == "FillEuroLeagueWinnerGroupStage")
           str = str + this.m_Parameter1.ToString() + "," + this.m_Parameter2.ToString() + "," + this.m_Parameter3.ToString();
         else if (this.m_Action == "FillWithTeam")
           str = str + this.m_Parameter1.ToString() + "," + (this.m_Team != null ? this.m_Team.Id.ToString() : this.m_Parameter2.ToString()) + "," + this.m_Parameter3.ToString();
@@ -540,12 +580,12 @@ namespace FifaLibrary
           if (targetLeague != null)
             task.Parameter1 = targetLeague.Id;
         }
-        else if (this.m_Action == "FillFromLeagueMaxFromCountry")
+        else if (this.m_Action == "FillFromLeagueMaxFromCountry" || this.m_Action == "FillChampionsCup")
         {
           if (targetLeague != null)
             task.Parameter1 = targetLeague.Id;
         }
-        else if (!(this.m_Action == "FillFromSpecialTeams") && !(this.m_Action == "FillWithTeam"))
+        else if (!(this.m_Action == "FillFromSpecialTeams") && !(this.m_Action == "FillWithTeam") && !(this.m_Action == "FillEuroLeagueWinnerPlayoff") && !(this.m_Action == "FillEuroLeagueWinnerGroupStage"))
         {
           if (this.m_Action == "FillFromLeagueInOrder")
           {

@@ -820,7 +820,7 @@ namespace FifaLibrary
         FifaEnvironment.m_Status.Text = "Saving big files";
         FifaEnvironment.m_Status.GetCurrentParent().Refresh();
       }
-      FifaEnvironment.m_FifaFat.Save();
+      //FifaEnvironment.m_FifaFat.Save();
       return true;
     }
 
