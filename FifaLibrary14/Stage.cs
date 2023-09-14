@@ -208,7 +208,9 @@ namespace FifaLibrary
           this.Trophy.Settings.m_match_matchimportance = this.Settings.m_match_matchimportance;
         this.Settings.m_match_matchimportance = -1;
       }
-      if (this.Settings.m_N_info_color_slot_adv_group != 0 && this.Groups != null)
+
+      //this.Settings.
+      /*if (this.Settings.m_N_info_color_slot_adv_group != 0 && this.Groups != null)
       {
         foreach (Group group in (ArrayList) this.Groups)
         {
@@ -221,7 +223,8 @@ namespace FifaLibrary
           }
         }
         this.Settings.m_N_info_color_slot_adv_group = 0;
-      }
+      }*/
+
       if (this.Settings.m_match_stagetype == null)
         this.Settings.m_match_stagetype = "LEAGUE";
       if (this.Settings.m_match_stagetype != "SETUP" && this.Settings.m_match_matchsituation == null)

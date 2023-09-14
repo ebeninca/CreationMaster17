@@ -39,6 +39,7 @@ namespace FifaLibrary
     public int[] m_info_color_slot_releg = new int[4];
     public int[] m_info_color_slot_releg_poss = new int[4];
     public int[] m_info_color_slot_adv_group = new int[8];
+    //public int m_stage_info_color_slot_adv_group = -1;
     public int m_info_slot_champ = -1;
     public int[] m_info_slot_promo = new int[4];
     public int[] m_info_slot_promo_poss = new int[4];
@@ -558,7 +559,7 @@ namespace FifaLibrary
       get
       {
         if (this.m_TrophyCompdependency == null && this.m_schedule_compdependency != -1)
-          this.m_TrophyCompdependency = (Trophy) FifaEnvironment.CompetitionObjects.SearchId(this.m_schedule_compdependency);
+          this.m_TrophyCompdependency = (Trophy)FifaEnvironment.CompetitionObjects.SearchId(this.m_schedule_compdependency);
         return this.m_TrophyCompdependency;
       }
       set
@@ -573,7 +574,7 @@ namespace FifaLibrary
       get
       {
         if (this.m_TrophyForcecomp == null && this.m_schedule_forcecomp != -1)
-          this.m_TrophyForcecomp = (Trophy) FifaEnvironment.CompetitionObjects.SearchId(this.m_schedule_forcecomp);
+          this.m_TrophyForcecomp = (Trophy)FifaEnvironment.CompetitionObjects.SearchId(this.m_schedule_forcecomp);
         return this.m_TrophyForcecomp;
       }
       set
@@ -805,51 +806,51 @@ namespace FifaLibrary
         return;
       if (this.m_standings_checkrank == -1)
       {
-        this.m_StageStandingsCheckRank = (Stage) null;
+        this.m_StageStandingsCheckRank = (Stage)null;
       }
       else
       {
-        Compobj compobj = (Compobj) FifaEnvironment.CompetitionObjects.SearchId(this.m_standings_checkrank);
-        this.m_StageStandingsCheckRank = compobj == null || !compobj.IsStage() ? (Stage) null : (Stage) compobj;
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_standings_checkrank);
+        this.m_StageStandingsCheckRank = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
       }
       if (this.m_advance_standingsrank == -1)
       {
-        this.m_StageAdvanceStandingsRank = (Stage) null;
+        this.m_StageAdvanceStandingsRank = (Stage)null;
       }
       else
       {
-        Compobj compobj = (Compobj) FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingsrank);
-        this.m_StageAdvanceStandingsRank = compobj == null || !compobj.IsStage() ? (Stage) null : (Stage) compobj;
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingsrank);
+        this.m_StageAdvanceStandingsRank = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
       }
       if (this.m_advance_standingskeep == -1)
       {
-        this.m_StageAdvanceStandingsKeep = (Stage) null;
+        this.m_StageAdvanceStandingsKeep = (Stage)null;
       }
       else
       {
-        Compobj compobj = (Compobj) FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingskeep);
-        this.m_StageAdvanceStandingsKeep = compobj == null || !compobj.IsStage() ? (Stage) null : (Stage) compobj;
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingskeep);
+        this.m_StageAdvanceStandingsKeep = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
       }
       if (this.m_advance_pointskeep == -1)
       {
-        this.m_StageAdvancePointsKeep = (Stage) null;
+        this.m_StageAdvancePointsKeep = (Stage)null;
       }
       else
       {
-        Compobj compobj = (Compobj) FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_pointskeep);
-        this.m_StageAdvancePointsKeep = compobj == null || !compobj.IsStage() ? (Stage) null : (Stage) compobj;
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_pointskeep);
+        this.m_StageAdvancePointsKeep = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
       }
       if (this.m_advance_maxteamsstageref == -1)
       {
-        this.m_StageAdvanceMaxteamsStageRef = (Stage) null;
+        this.m_StageAdvanceMaxteamsStageRef = (Stage)null;
       }
       else
       {
-        Compobj compobj = (Compobj) FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_maxteamsstageref);
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_maxteamsstageref);
         if (compobj != null && compobj.IsStage())
-          this.m_StageAdvanceMaxteamsStageRef = (Stage) compobj;
+          this.m_StageAdvanceMaxteamsStageRef = (Stage)compobj;
         else
-          this.m_StageAdvanceMaxteamsStageRef = (Stage) null;
+          this.m_StageAdvanceMaxteamsStageRef = (Stage)null;
       }
     }
 
@@ -1113,6 +1114,7 @@ namespace FifaLibrary
       }
       else if (property == "info_color_slot_adv_group")
       {
+        //this.m_stage_info_color_slot_adv_group = Convert.ToInt32(val);
         if (this.m_info_color_slot_adv_group == null)
           this.m_info_color_slot_adv_group = new int[8];
         if (this.m_N_info_color_slot_adv_group >= this.m_info_color_slot_adv_group.Length)
@@ -1372,7 +1374,7 @@ namespace FifaLibrary
         return this.m_schedule_reversed.ToString();
       if (property == "schedule_year_real")
         return this.m_schedule_year_real.ToString();
-      return property == "standings_checkrank" ? this.m_standings_checkrank.ToString() : (string) null;
+      return property == "standings_checkrank" ? this.m_standings_checkrank.ToString() : (string)null;
     }
 
     public bool SaveToSettings(int id, StreamWriter w)
@@ -1381,7 +1383,7 @@ namespace FifaLibrary
         return false;
       if (this.m_asset_id != -1)
       {
-        string str = id.ToString() + ",asset_id," + (object) this.m_asset_id;
+        string str = id.ToString() + ",asset_id," + (object)this.m_asset_id;
         w.WriteLine(str);
       }
       if (this.m_comp_type != null)
@@ -1391,7 +1393,7 @@ namespace FifaLibrary
       }
       if (this.m_nation_id != -1)
       {
-        string str = id.ToString() + ",nation_id," + (object) this.m_nation_id;
+        string str = id.ToString() + ",nation_id," + (object)this.m_nation_id;
         w.WriteLine(str);
       }
       if (this.m_rule_bookings != null)
@@ -1411,72 +1413,72 @@ namespace FifaLibrary
       }
       if (this.m_rule_numsubsbench != -1)
       {
-        string str = id.ToString() + ",rule_numsubsbench," + (object) this.m_rule_numsubsbench;
+        string str = id.ToString() + ",rule_numsubsbench," + (object)this.m_rule_numsubsbench;
         w.WriteLine(str);
       }
       if (this.m_rule_numsubsmatch != -1)
       {
-        string str = id.ToString() + ",rule_numsubsmatch," + (object) this.m_rule_numsubsmatch;
+        string str = id.ToString() + ",rule_numsubsmatch," + (object)this.m_rule_numsubsmatch;
         w.WriteLine(str);
       }
       if (this.m_rule_suspension != -1)
       {
-        string str = id.ToString() + ",rule_suspension," + (object) this.m_rule_suspension;
+        string str = id.ToString() + ",rule_suspension," + (object)this.m_rule_suspension;
         w.WriteLine(str);
       }
       if (this.m_rule_numyellowstored != -1)
       {
-        string str = id.ToString() + ",rule_numyellowstored," + (object) this.m_rule_numyellowstored;
+        string str = id.ToString() + ",rule_numyellowstored," + (object)this.m_rule_numyellowstored;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbanredmax != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbanredmax," + (object) this.m_rule_numgamesbanredmax;
+        string str = id.ToString() + ",rule_numgamesbanredmax," + (object)this.m_rule_numgamesbanredmax;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbanredmin != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbanredmin," + (object) this.m_rule_numgamesbanredmin;
+        string str = id.ToString() + ",rule_numgamesbanredmin," + (object)this.m_rule_numgamesbanredmin;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbandoubleyellowmax != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbandoubleyellowmax," + (object) this.m_rule_numgamesbandoubleyellowmax;
+        string str = id.ToString() + ",rule_numgamesbandoubleyellowmax," + (object)this.m_rule_numgamesbandoubleyellowmax;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbandoubleyellowmin != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbandoubleyellowmin," + (object) this.m_rule_numgamesbandoubleyellowmin;
+        string str = id.ToString() + ",rule_numgamesbandoubleyellowmin," + (object)this.m_rule_numgamesbandoubleyellowmin;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbanyellowsmax != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbanyellowsmax," + (object) this.m_rule_numgamesbanyellowsmax;
+        string str = id.ToString() + ",rule_numgamesbanyellowsmax," + (object)this.m_rule_numgamesbanyellowsmax;
         w.WriteLine(str);
       }
       if (this.m_rule_numgamesbanyellowsmin != -1)
       {
-        string str = id.ToString() + ",rule_numgamesbanyellowsmin," + (object) this.m_rule_numgamesbanyellowsmin;
+        string str = id.ToString() + ",rule_numgamesbanyellowsmin," + (object)this.m_rule_numgamesbanyellowsmin;
         w.WriteLine(str);
       }
       if (this.m_standings_pointswin != -1)
       {
-        string str = id.ToString() + ",standings_pointswin," + (object) this.m_standings_pointswin;
+        string str = id.ToString() + ",standings_pointswin," + (object)this.m_standings_pointswin;
         w.WriteLine(str);
       }
       if (this.m_standings_pointsdraw != -1)
       {
-        string str = id.ToString() + ",standings_pointsdraw," + (object) this.m_standings_pointsdraw;
+        string str = id.ToString() + ",standings_pointsdraw," + (object)this.m_standings_pointsdraw;
         w.WriteLine(str);
       }
       if (this.m_standings_pointsloss != -1)
       {
-        string str = id.ToString() + ",standings_pointsloss," + (object) this.m_standings_pointsloss;
+        string str = id.ToString() + ",standings_pointsloss," + (object)this.m_standings_pointsloss;
         w.WriteLine(str);
       }
       if (this.m_standings_checkrank != -1)
       {
-        string str = id.ToString() + ",standings_checkrank," + (object) this.m_standings_checkrank;
+        string str = id.ToString() + ",standings_checkrank," + (object)this.m_standings_checkrank;
         w.WriteLine(str);
       }
       if (this.m_schedule_seasonstartmonth != null)
@@ -1486,27 +1488,27 @@ namespace FifaLibrary
       }
       if (this.m_schedule_year_start != -1)
       {
-        string str = id.ToString() + ",schedule_year_start," + (object) this.m_schedule_year_start;
+        string str = id.ToString() + ",schedule_year_start," + (object)this.m_schedule_year_start;
         w.WriteLine(str);
       }
       if (this.m_schedule_year_offset != -1)
       {
-        string str = id.ToString() + ",schedule_year_offset," + (object) this.m_schedule_year_offset;
+        string str = id.ToString() + ",schedule_year_offset," + (object)this.m_schedule_year_offset;
         w.WriteLine(str);
       }
       if (this.m_schedule_friendlydaysbetweenmin != -1)
       {
-        string str = id.ToString() + ",schedule_friendlydaysbetweenmin," + (object) this.m_schedule_friendlydaysbetweenmin;
+        string str = id.ToString() + ",schedule_friendlydaysbetweenmin," + (object)this.m_schedule_friendlydaysbetweenmin;
         w.WriteLine(str);
       }
       if (this.m_schedule_friendlydaysbefore != -1)
       {
-        string str = id.ToString() + ",schedule_friendlydaysbefore," + (object) this.m_schedule_friendlydaysbefore;
+        string str = id.ToString() + ",schedule_friendlydaysbefore," + (object)this.m_schedule_friendlydaysbefore;
         w.WriteLine(str);
       }
       if (this.m_schedule_internationaldependency != -1)
       {
-        string str = id.ToString() + ",schedule_internationaldependency," + (object) this.m_schedule_internationaldependency;
+        string str = id.ToString() + ",schedule_internationaldependency," + (object)this.m_schedule_internationaldependency;
         w.WriteLine(str);
       }
       if (this.m_schedule_use_dates_comp != -1)
@@ -1514,43 +1516,43 @@ namespace FifaLibrary
         int internationalFriendlyId = FifaEnvironment.CompetitionObjects.GetInternationalFriendlyId();
         if (internationalFriendlyId != -1)
         {
-          string str = id.ToString() + ",schedule_use_dates_comp," + (object) internationalFriendlyId;
+          string str = id.ToString() + ",schedule_use_dates_comp," + (object)internationalFriendlyId;
           w.WriteLine(str);
         }
       }
       if (this.m_schedule_checkconflict == 1)
       {
-        string str = id.ToString() + ",schedule_checkconflict," + (object) this.m_schedule_checkconflict;
+        string str = id.ToString() + ",schedule_checkconflict," + (object)this.m_schedule_checkconflict;
         w.WriteLine(str);
       }
       if (this.TrophyCompdependency != null)
       {
-        string str = id.ToString() + ",schedule_compdependency," + (object) this.m_TrophyCompdependency.Id;
+        string str = id.ToString() + ",schedule_compdependency," + (object)this.m_TrophyCompdependency.Id;
         w.WriteLine(str);
       }
       if (this.TrophyForcecomp != null)
       {
-        string str = id.ToString() + ",schedule_forcecomp," + (object) this.m_TrophyForcecomp.Id;
+        string str = id.ToString() + ",schedule_forcecomp," + (object)this.m_TrophyForcecomp.Id;
         w.WriteLine(str);
       }
       if (this.m_schedule_matchreplay != -1)
       {
-        string str = id.ToString() + ",schedule_matchreplay," + (object) this.m_schedule_matchreplay;
+        string str = id.ToString() + ",schedule_matchreplay," + (object)this.m_schedule_matchreplay;
         w.WriteLine(str);
       }
       if (this.m_schedule_reversed != -1)
       {
-        string str = id.ToString() + ",schedule_reversed," + (object) this.m_schedule_reversed;
+        string str = id.ToString() + ",schedule_reversed," + (object)this.m_schedule_reversed;
         w.WriteLine(str);
       }
       if (this.m_schedule_year_real != -1)
       {
-        string str = id.ToString() + ",schedule_year_real," + (object) this.m_schedule_year_real;
+        string str = id.ToString() + ",schedule_year_real," + (object)this.m_schedule_year_real;
         w.WriteLine(str);
       }
       if (this.m_match_matchimportance != -1)
       {
-        string str = id.ToString() + ",match_matchimportance," + (object) this.m_match_matchimportance;
+        string str = id.ToString() + ",match_matchimportance," + (object)this.m_match_matchimportance;
         w.WriteLine(str);
       }
       if (this.m_match_stagetype != null)
@@ -1596,19 +1598,19 @@ namespace FifaLibrary
         {
           if (this.m_match_stadium[index] >= 0)
           {
-            string str = id.ToString() + ",match_stadium," + (object) this.m_match_stadium[index];
+            string str = id.ToString() + ",match_stadium," + (object)this.m_match_stadium[index];
             w.WriteLine(str);
           }
         }
       }
       if (this.m_info_prize_money != -1)
       {
-        string str = id.ToString() + ",info_prize_money," + (object) this.m_info_prize_money;
+        string str = id.ToString() + ",info_prize_money," + (object)this.m_info_prize_money;
         w.WriteLine(str);
       }
       if (this.m_info_prize_money_drop != -1)
       {
-        string str = id.ToString() + ",info_prize_money_drop," + (object) this.m_info_prize_money_drop;
+        string str = id.ToString() + ",info_prize_money_drop," + (object)this.m_info_prize_money_drop;
         w.WriteLine(str);
       }
       this.m_N_standings_sort = CompetitionSettings.SetStandingRule(this.m_StandingsSort, ref this.m_standings_sort);
@@ -1619,155 +1621,155 @@ namespace FifaLibrary
       }
       if (this.m_num_games != -1)
       {
-        string str = id.ToString() + ",num_games," + (object) this.m_num_games;
+        string str = id.ToString() + ",num_games," + (object)this.m_num_games;
         w.WriteLine(str);
       }
       if (this.m_info_color_slot_champ != -1)
       {
-        string str = id.ToString() + ",info_color_slot_champ," + (object) this.m_info_color_slot_champ;
+        string str = id.ToString() + ",info_color_slot_champ," + (object)this.m_info_color_slot_champ;
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_champ_cup; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_champ_cup," + (object) this.m_info_color_slot_champ_cup[index];
+        string str = id.ToString() + ",info_color_slot_champ_cup," + (object)this.m_info_color_slot_champ_cup[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_euro_league; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_euro_league," + (object) this.m_info_color_slot_euro_league[index];
+        string str = id.ToString() + ",info_color_slot_euro_league," + (object)this.m_info_color_slot_euro_league[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_promo; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_promo," + (object) this.m_info_color_slot_promo[index];
+        string str = id.ToString() + ",info_color_slot_promo," + (object)this.m_info_color_slot_promo[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_promo_poss; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_promo_poss," + (object) this.m_info_color_slot_promo_poss[index];
+        string str = id.ToString() + ",info_color_slot_promo_poss," + (object)this.m_info_color_slot_promo_poss[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_releg; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_releg," + (object) this.m_info_color_slot_releg[index];
+        string str = id.ToString() + ",info_color_slot_releg," + (object)this.m_info_color_slot_releg[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_releg_poss; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_releg_poss," + (object) this.m_info_color_slot_releg_poss[index];
+        string str = id.ToString() + ",info_color_slot_releg_poss," + (object)this.m_info_color_slot_releg_poss[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_color_slot_adv_group; ++index)
       {
-        string str = id.ToString() + ",info_color_slot_adv_group," + (object) this.m_info_color_slot_adv_group[index];
+        string str = id.ToString() + ",info_color_slot_adv_group," + (object)this.m_info_color_slot_adv_group[index];
         w.WriteLine(str);
       }
       if (this.m_info_slot_champ != -1)
       {
-        string str = id.ToString() + ",info_slot_champ," + (object) this.m_info_slot_champ;
+        string str = id.ToString() + ",info_slot_champ," + (object)this.m_info_slot_champ;
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_slot_promo; ++index)
       {
-        string str = id.ToString() + ",info_slot_promo," + (object) this.m_info_slot_promo[index];
+        string str = id.ToString() + ",info_slot_promo," + (object)this.m_info_slot_promo[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_slot_promo_poss; ++index)
       {
-        string str = id.ToString() + ",info_slot_promo_poss," + (object) this.m_info_slot_promo_poss[index];
+        string str = id.ToString() + ",info_slot_promo_poss," + (object)this.m_info_slot_promo_poss[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_slot_releg; ++index)
       {
-        string str = id.ToString() + ",info_slot_releg," + (object) this.m_info_slot_releg[index];
+        string str = id.ToString() + ",info_slot_releg," + (object)this.m_info_slot_releg[index];
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_slot_releg_poss; ++index)
       {
-        string str = id.ToString() + ",info_slot_releg_poss," + (object) this.m_info_slot_releg_poss[index];
+        string str = id.ToString() + ",info_slot_releg_poss," + (object)this.m_info_slot_releg_poss[index];
         w.WriteLine(str);
       }
       if (this.m_info_league_promo != -1)
       {
-        string str = id.ToString() + ",info_league_promo," + (object) this.m_info_league_promo;
+        string str = id.ToString() + ",info_league_promo," + (object)this.m_info_league_promo;
         w.WriteLine(str);
       }
       if (this.m_info_league_releg != -1)
       {
-        string str = id.ToString() + ",info_league_releg," + (object) this.m_info_league_releg;
+        string str = id.ToString() + ",info_league_releg," + (object)this.m_info_league_releg;
         w.WriteLine(str);
       }
       for (int index = 0; index < this.m_N_info_special_team_id; ++index)
       {
         if (this.m_info_special_team_id[index] >= 0)
         {
-          string str = id.ToString() + ",info_special_team_id," + (object) this.m_info_special_team_id[index];
+          string str = id.ToString() + ",info_special_team_id," + (object)this.m_info_special_team_id[index];
           w.WriteLine(str);
         }
       }
       if (this.m_advance_pointskeep != -1)
       {
-        string str = id.ToString() + ",advance_pointskeep," + (object) this.m_advance_pointskeep;
+        string str = id.ToString() + ",advance_pointskeep," + (object)this.m_advance_pointskeep;
         w.WriteLine(str);
       }
       if (this.m_advance_pointskeeppercentage != -1)
       {
-        string str = id.ToString() + ",advance_pointskeeppercentage," + (object) this.m_advance_pointskeeppercentage;
+        string str = id.ToString() + ",advance_pointskeeppercentage," + (object)this.m_advance_pointskeeppercentage;
         w.WriteLine(str);
       }
       if (this.m_advance_matchupkeep != -1)
       {
-        string str = id.ToString() + ",advance_matchupkeep," + (object) this.m_advance_matchupkeep;
+        string str = id.ToString() + ",advance_matchupkeep," + (object)this.m_advance_matchupkeep;
         w.WriteLine(str);
       }
       if (this.m_advance_standingsrank != -1)
       {
-        string str = id.ToString() + ",advance_standingsrank," + (object) this.m_advance_standingsrank;
+        string str = id.ToString() + ",advance_standingsrank," + (object)this.m_advance_standingsrank;
         w.WriteLine(str);
       }
       if (this.m_advance_random_draw_event != -1)
       {
-        string str = id.ToString() + ",advance_random_draw_event," + (object) this.m_advance_random_draw_event;
+        string str = id.ToString() + ",advance_random_draw_event," + (object)this.m_advance_random_draw_event;
         w.WriteLine(str);
       }
       if (this.m_match_canusefancards == "on")
       {
-        string str = id.ToString() + ",match_canusefancards," + (object) this.m_match_canusefancards;
+        string str = id.ToString() + ",match_canusefancards," + (object)this.m_match_canusefancards;
         w.WriteLine(str);
       }
       if (this.m_advance_randomdraw != -1)
       {
-        string str = id.ToString() + ",advance_randomdraw," + (object) this.m_advance_randomdraw;
+        string str = id.ToString() + ",advance_randomdraw," + (object)this.m_advance_randomdraw;
         w.WriteLine(str);
       }
       if (this.m_advance_maxteamsassoc != -1)
       {
-        string str = id.ToString() + ",advance_maxteamsassoc," + (object) this.m_advance_maxteamsassoc;
+        string str = id.ToString() + ",advance_maxteamsassoc," + (object)this.m_advance_maxteamsassoc;
         w.WriteLine(str);
       }
       if (this.m_advance_maxteamsgroup != -1)
       {
-        string str = id.ToString() + ",advance_maxteamsgroup," + (object) this.m_advance_maxteamsgroup;
+        string str = id.ToString() + ",advance_maxteamsgroup," + (object)this.m_advance_maxteamsgroup;
         w.WriteLine(str);
       }
       if (this.m_advance_maxteamsstageref != -1)
       {
-        string str = id.ToString() + ",advance_maxteamsstageref," + (object) this.m_advance_maxteamsstageref;
+        string str = id.ToString() + ",advance_maxteamsstageref," + (object)this.m_advance_maxteamsstageref;
         w.WriteLine(str);
       }
       if (this.m_advance_calccompavgs != -1)
       {
-        string str = id.ToString() + ",advance_calccompavgs," + (object) this.m_advance_calccompavgs;
+        string str = id.ToString() + ",advance_calccompavgs," + (object)this.m_advance_calccompavgs;
         w.WriteLine(str);
       }
       if (this.m_advance_standingskeep != -1)
       {
-        string str = id.ToString() + ",advance_standingskeep," + (object) this.m_advance_standingskeep;
+        string str = id.ToString() + ",advance_standingskeep," + (object)this.m_advance_standingskeep;
         w.WriteLine(str);
       }
       if (this.m_advance_teamcompdependency != -1)
       {
-        string str = id.ToString() + ",advance_teamcompdependency," + (object) this.m_advance_teamcompdependency;
+        string str = id.ToString() + ",advance_teamcompdependency," + (object)this.m_advance_teamcompdependency;
         w.WriteLine(str);
       }
       return true;
@@ -1925,7 +1927,7 @@ namespace FifaLibrary
     private void UnsetProperty(string property, int index)
     {
       if (this.IsStringProperty(property))
-        this.SetProperty(property, index, (string) null);
+        this.SetProperty(property, index, (string)null);
       else
         this.SetProperty(property, index, "-1");
     }

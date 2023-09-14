@@ -485,6 +485,10 @@ namespace CreationMaster
     private NumericUpDown numericKeepPointsStageRef;
     private Button buttonReplicateTropy;
     private CheckBox checkUseFanCards;
+    private GroupBox groupStageInfoColors;
+    private NumericUpDown numericStageColorAdvanceMax;
+    private NumericUpDown numericStageColorAdvanceMin;
+    private CheckBox checkStageInfoColorAdvance;
     private Viewer2D viewer2DTrophy;
 
     public CompetitionForm()
@@ -1282,6 +1286,29 @@ namespace CreationMaster
           if (league != null)
             this.comboLeagueStats.SelectedItem = (object)league;
         }
+
+        if (this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY" || this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP")
+        {
+          this.groupStageInfoColors.Visible = true;
+          if (numericStageColorAdvanceMin.Value == -1 || numericStageColorAdvanceMax.Value == -1)
+          {
+            this.checkStageInfoColorAdvance.Checked = false;
+            this.numericStageColorAdvanceMin.Visible = false;
+            this.numericStageColorAdvanceMax.Visible = false;
+          }
+          else
+          {
+            this.checkStageInfoColorAdvance.Checked = true;
+            this.numericStageColorAdvanceMin.Visible = true;
+            this.numericStageColorAdvanceMax.Visible = true;
+            this.numericStageColorAdvanceMin.Value = this.m_CurrentStage.Settings.m_info_color_slot_adv_group[0];
+            this.numericStageColorAdvanceMax.Value = this.m_CurrentStage.Settings.m_info_color_slot_adv_group[this.m_CurrentStage.Settings.m_N_info_color_slot_adv_group - 1];
+          }
+        }
+        else
+          this.groupStageInfoColors.Visible = false;
+
+
         this.m_LockToPanel = false;
       }
     }
@@ -1468,7 +1495,7 @@ namespace CreationMaster
           this.groupPlayGroup.Visible = true;
           this.groupGroupScheduke.Visible = true;
           if (this.m_CurrentGroup.Settings.m_num_games <= 0)
-            this.m_CurrentGroup.Settings.m_num_games = 1;
+            this.m_CurrentGroup.Settings.m_num_games = 0;
           this.numericNumGames.Value = (Decimal)this.m_CurrentGroup.Settings.m_num_games;
           this.treeGroupSchedule.Nodes.Clear();
           this.groupGroupScheduleDetails.Visible = false;
@@ -2038,6 +2065,16 @@ namespace CreationMaster
         return;
       this.m_CurrentStage.Settings.m_match_matchsituation = (string)this.comboMatchSituation.SelectedItem;
       this.m_CurrentStage.Settings.m_schedule_matchreplay = this.m_CurrentStage.Settings.m_match_matchsituation == "REPLAY" ? 1 : -1;
+
+      if (this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE")
+        groupLeaguetasks.Visible = true;
+      else
+        groupLeaguetasks.Visible = false;
+
+      if (this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP" || this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY")
+        groupStageInfoColors.Visible = true;
+      else
+        groupStageInfoColors.Visible = false;
     }
 
     private void numericPrizeMoney_ValueChanged(object sender, EventArgs e)
@@ -4576,15 +4613,11 @@ namespace CreationMaster
       this.labeTrophylLongName = new System.Windows.Forms.Label();
       this.textTrophyShortName = new System.Windows.Forms.TextBox();
       this.groupStage = new System.Windows.Forms.GroupBox();
-      this.groupSetupStage = new System.Windows.Forms.GroupBox();
-      this.checkRandomDraw = new System.Windows.Forms.CheckBox();
-      this.groupBox2 = new System.Windows.Forms.GroupBox();
-      this.comboSpecialTeam4 = new System.Windows.Forms.ComboBox();
-      this.comboSpecialTeam3 = new System.Windows.Forms.ComboBox();
-      this.comboSpecialTeam2 = new System.Windows.Forms.ComboBox();
-      this.comboSpecialTeam1 = new System.Windows.Forms.ComboBox();
-      this.checkCalccompavgs = new System.Windows.Forms.CheckBox();
       this.groupPlayStage = new System.Windows.Forms.GroupBox();
+      this.groupStageInfoColors = new System.Windows.Forms.GroupBox();
+      this.numericStageColorAdvanceMax = new System.Windows.Forms.NumericUpDown();
+      this.numericStageColorAdvanceMin = new System.Windows.Forms.NumericUpDown();
+      this.checkStageInfoColorAdvance = new System.Windows.Forms.CheckBox();
       this.checkUseFanCards = new System.Windows.Forms.CheckBox();
       this.numericKeepPointsStageRef = new System.Windows.Forms.NumericUpDown();
       this.checkRandomDrawEvent = new System.Windows.Forms.CheckBox();
@@ -4645,6 +4678,14 @@ namespace CreationMaster
       this.label9 = new System.Windows.Forms.Label();
       this.comboMatchSituation = new System.Windows.Forms.ComboBox();
       this.label8 = new System.Windows.Forms.Label();
+      this.groupSetupStage = new System.Windows.Forms.GroupBox();
+      this.checkRandomDraw = new System.Windows.Forms.CheckBox();
+      this.groupBox2 = new System.Windows.Forms.GroupBox();
+      this.comboSpecialTeam4 = new System.Windows.Forms.ComboBox();
+      this.comboSpecialTeam3 = new System.Windows.Forms.ComboBox();
+      this.comboSpecialTeam2 = new System.Windows.Forms.ComboBox();
+      this.comboSpecialTeam1 = new System.Windows.Forms.ComboBox();
+      this.checkCalccompavgs = new System.Windows.Forms.CheckBox();
       this.comboStageStandingRules = new System.Windows.Forms.ComboBox();
       this.checkStageStandingsRules = new System.Windows.Forms.CheckBox();
       this.numericStandingsRank = new System.Windows.Forms.NumericUpDown();
@@ -4932,9 +4973,10 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericAssetId)).BeginInit();
       this.groupSchedule.SuspendLayout();
       this.groupStage.SuspendLayout();
-      this.groupSetupStage.SuspendLayout();
-      this.groupBox2.SuspendLayout();
       this.groupPlayStage.SuspendLayout();
+      this.groupStageInfoColors.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStageColorAdvanceMax)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStageColorAdvanceMin)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericKeepPointsStageRef)).BeginInit();
       this.groupLeaguetasks.SuspendLayout();
       this.groupStageSchedules.SuspendLayout();
@@ -4949,6 +4991,8 @@ namespace CreationMaster
       this.groupStadiums.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericMoneyDrop)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericPrizeMoney)).BeginInit();
+      this.groupSetupStage.SuspendLayout();
+      this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingsRank)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingKeep)).BeginInit();
       this.toolCompetitionTree.SuspendLayout();
@@ -7065,8 +7109,8 @@ namespace CreationMaster
       // 
       // groupStage
       // 
-      this.groupStage.Controls.Add(this.groupSetupStage);
       this.groupStage.Controls.Add(this.groupPlayStage);
+      this.groupStage.Controls.Add(this.groupSetupStage);
       this.groupStage.Controls.Add(this.comboStageStandingRules);
       this.groupStage.Controls.Add(this.checkStageStandingsRules);
       this.groupStage.Controls.Add(this.numericStandingsRank);
@@ -7083,91 +7127,9 @@ namespace CreationMaster
       this.groupStage.Text = "Stage";
       this.groupStage.Visible = false;
       // 
-      // groupSetupStage
-      // 
-      this.groupSetupStage.Controls.Add(this.checkRandomDraw);
-      this.groupSetupStage.Controls.Add(this.groupBox2);
-      this.groupSetupStage.Controls.Add(this.checkCalccompavgs);
-      this.groupSetupStage.Location = new System.Drawing.Point(8, 75);
-      this.groupSetupStage.Name = "groupSetupStage";
-      this.groupSetupStage.Size = new System.Drawing.Size(468, 157);
-      this.groupSetupStage.TabIndex = 17;
-      this.groupSetupStage.TabStop = false;
-      this.groupSetupStage.Text = "Setup Stage";
-      // 
-      // checkRandomDraw
-      // 
-      this.checkRandomDraw.AutoSize = true;
-      this.checkRandomDraw.Location = new System.Drawing.Point(9, 19);
-      this.checkRandomDraw.Name = "checkRandomDraw";
-      this.checkRandomDraw.Size = new System.Drawing.Size(94, 17);
-      this.checkRandomDraw.TabIndex = 20;
-      this.checkRandomDraw.Text = "Random Draw";
-      this.checkRandomDraw.UseVisualStyleBackColor = true;
-      this.checkRandomDraw.CheckedChanged += new System.EventHandler(this.checkRandomDraw_CheckedChanged);
-      // 
-      // groupBox2
-      // 
-      this.groupBox2.Controls.Add(this.comboSpecialTeam4);
-      this.groupBox2.Controls.Add(this.comboSpecialTeam3);
-      this.groupBox2.Controls.Add(this.comboSpecialTeam2);
-      this.groupBox2.Controls.Add(this.comboSpecialTeam1);
-      this.groupBox2.Location = new System.Drawing.Point(180, 15);
-      this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(176, 134);
-      this.groupBox2.TabIndex = 19;
-      this.groupBox2.TabStop = false;
-      this.groupBox2.Text = "Special Teams";
-      // 
-      // comboSpecialTeam4
-      // 
-      this.comboSpecialTeam4.FormattingEnabled = true;
-      this.comboSpecialTeam4.Location = new System.Drawing.Point(9, 100);
-      this.comboSpecialTeam4.Name = "comboSpecialTeam4";
-      this.comboSpecialTeam4.Size = new System.Drawing.Size(157, 21);
-      this.comboSpecialTeam4.TabIndex = 29;
-      this.comboSpecialTeam4.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam4_SelectedIndexChanged);
-      // 
-      // comboSpecialTeam3
-      // 
-      this.comboSpecialTeam3.FormattingEnabled = true;
-      this.comboSpecialTeam3.Location = new System.Drawing.Point(9, 73);
-      this.comboSpecialTeam3.Name = "comboSpecialTeam3";
-      this.comboSpecialTeam3.Size = new System.Drawing.Size(157, 21);
-      this.comboSpecialTeam3.TabIndex = 28;
-      this.comboSpecialTeam3.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam3_SelectedIndexChanged);
-      // 
-      // comboSpecialTeam2
-      // 
-      this.comboSpecialTeam2.FormattingEnabled = true;
-      this.comboSpecialTeam2.Location = new System.Drawing.Point(9, 46);
-      this.comboSpecialTeam2.Name = "comboSpecialTeam2";
-      this.comboSpecialTeam2.Size = new System.Drawing.Size(157, 21);
-      this.comboSpecialTeam2.TabIndex = 27;
-      this.comboSpecialTeam2.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam2_SelectedIndexChanged);
-      // 
-      // comboSpecialTeam1
-      // 
-      this.comboSpecialTeam1.FormattingEnabled = true;
-      this.comboSpecialTeam1.Location = new System.Drawing.Point(9, 19);
-      this.comboSpecialTeam1.Name = "comboSpecialTeam1";
-      this.comboSpecialTeam1.Size = new System.Drawing.Size(157, 21);
-      this.comboSpecialTeam1.TabIndex = 26;
-      this.comboSpecialTeam1.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam1_SelectedIndexChanged);
-      // 
-      // checkCalccompavgs
-      // 
-      this.checkCalccompavgs.AutoSize = true;
-      this.checkCalccompavgs.Location = new System.Drawing.Point(9, 42);
-      this.checkCalccompavgs.Name = "checkCalccompavgs";
-      this.checkCalccompavgs.Size = new System.Drawing.Size(160, 17);
-      this.checkCalccompavgs.TabIndex = 0;
-      this.checkCalccompavgs.Text = "Sort by Competition Average";
-      this.checkCalccompavgs.UseVisualStyleBackColor = true;
-      this.checkCalccompavgs.CheckedChanged += new System.EventHandler(this.checkCalccompavgs_CheckedChanged);
-      // 
       // groupPlayStage
       // 
+      this.groupPlayStage.Controls.Add(this.groupStageInfoColors);
       this.groupPlayStage.Controls.Add(this.checkUseFanCards);
       this.groupPlayStage.Controls.Add(this.numericKeepPointsStageRef);
       this.groupPlayStage.Controls.Add(this.checkRandomDrawEvent);
@@ -7192,12 +7154,83 @@ namespace CreationMaster
       this.groupPlayStage.Controls.Add(this.label9);
       this.groupPlayStage.Controls.Add(this.comboMatchSituation);
       this.groupPlayStage.Controls.Add(this.label8);
-      this.groupPlayStage.Location = new System.Drawing.Point(8, 75);
+      this.groupPlayStage.Location = new System.Drawing.Point(8, 87);
       this.groupPlayStage.Name = "groupPlayStage";
-      this.groupPlayStage.Size = new System.Drawing.Size(776, 643);
+      this.groupPlayStage.Size = new System.Drawing.Size(776, 629);
       this.groupPlayStage.TabIndex = 18;
       this.groupPlayStage.TabStop = false;
       this.groupPlayStage.Text = "Play Stage";
+      // 
+      // groupStageInfoColors
+      // 
+      this.groupStageInfoColors.Controls.Add(this.numericStageColorAdvanceMax);
+      this.groupStageInfoColors.Controls.Add(this.numericStageColorAdvanceMin);
+      this.groupStageInfoColors.Controls.Add(this.checkStageInfoColorAdvance);
+      this.groupStageInfoColors.Location = new System.Drawing.Point(3, 433);
+      this.groupStageInfoColors.Name = "groupStageInfoColors";
+      this.groupStageInfoColors.Size = new System.Drawing.Size(254, 50);
+      this.groupStageInfoColors.TabIndex = 176;
+      this.groupStageInfoColors.TabStop = false;
+      this.groupStageInfoColors.Text = "Groups Colors";
+      // 
+      // numericStageColorAdvanceMax
+      // 
+      this.numericStageColorAdvanceMax.Location = new System.Drawing.Point(188, 19);
+      this.numericStageColorAdvanceMax.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMax.Name = "numericStageColorAdvanceMax";
+      this.numericStageColorAdvanceMax.Size = new System.Drawing.Size(61, 20);
+      this.numericStageColorAdvanceMax.TabIndex = 43;
+      this.numericStageColorAdvanceMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericStageColorAdvanceMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMax.ValueChanged += new System.EventHandler(this.numericStageColorAdvanceMax_ValueChanged);
+      // 
+      // numericStageColorAdvanceMin
+      // 
+      this.numericStageColorAdvanceMin.Location = new System.Drawing.Point(122, 19);
+      this.numericStageColorAdvanceMin.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMin.Name = "numericStageColorAdvanceMin";
+      this.numericStageColorAdvanceMin.Size = new System.Drawing.Size(61, 20);
+      this.numericStageColorAdvanceMin.TabIndex = 42;
+      this.numericStageColorAdvanceMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericStageColorAdvanceMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericStageColorAdvanceMin.ValueChanged += new System.EventHandler(this.numericStageColorAdvanceMin_ValueChanged);
+      // 
+      // checkStageInfoColorAdvance
+      // 
+      this.checkStageInfoColorAdvance.AutoSize = true;
+      this.checkStageInfoColorAdvance.Location = new System.Drawing.Point(6, 20);
+      this.checkStageInfoColorAdvance.Name = "checkStageInfoColorAdvance";
+      this.checkStageInfoColorAdvance.Size = new System.Drawing.Size(69, 17);
+      this.checkStageInfoColorAdvance.TabIndex = 7;
+      this.checkStageInfoColorAdvance.Text = "Advance";
+      this.checkStageInfoColorAdvance.UseVisualStyleBackColor = true;
+      this.checkStageInfoColorAdvance.CheckedChanged += new System.EventHandler(this.checkStageInfoColorAdvance_CheckedChanged);
       // 
       // checkUseFanCards
       // 
@@ -7248,9 +7281,9 @@ namespace CreationMaster
       this.groupLeaguetasks.Controls.Add(this.comboLeagueStats);
       this.groupLeaguetasks.Controls.Add(this.checkUpdateLeagueStats);
       this.groupLeaguetasks.Controls.Add(this.checkClearLeagueStats);
-      this.groupLeaguetasks.Location = new System.Drawing.Point(3, 431);
+      this.groupLeaguetasks.Location = new System.Drawing.Point(263, 433);
       this.groupLeaguetasks.Name = "groupLeaguetasks";
-      this.groupLeaguetasks.Size = new System.Drawing.Size(358, 125);
+      this.groupLeaguetasks.Size = new System.Drawing.Size(187, 125);
       this.groupLeaguetasks.TabIndex = 172;
       this.groupLeaguetasks.TabStop = false;
       this.groupLeaguetasks.Text = "League Actions";
@@ -7271,7 +7304,7 @@ namespace CreationMaster
       this.comboLeagueStats.FormattingEnabled = true;
       this.comboLeagueStats.Location = new System.Drawing.Point(6, 19);
       this.comboLeagueStats.Name = "comboLeagueStats";
-      this.comboLeagueStats.Size = new System.Drawing.Size(346, 21);
+      this.comboLeagueStats.Size = new System.Drawing.Size(175, 21);
       this.comboLeagueStats.TabIndex = 170;
       this.comboLeagueStats.SelectedIndexChanged += new System.EventHandler(this.comboLeagueStats_SelectedIndexChanged);
       // 
@@ -7302,9 +7335,9 @@ namespace CreationMaster
       this.groupStageSchedules.Controls.Add(this.treeStageSchedule);
       this.groupStageSchedules.Controls.Add(this.panelStageScheduleDetails);
       this.groupStageSchedules.Controls.Add(this.toolStageSchedule);
-      this.groupStageSchedules.Location = new System.Drawing.Point(466, 0);
+      this.groupStageSchedules.Location = new System.Drawing.Point(471, 5);
       this.groupStageSchedules.Name = "groupStageSchedules";
-      this.groupStageSchedules.Size = new System.Drawing.Size(305, 646);
+      this.groupStageSchedules.Size = new System.Drawing.Size(305, 604);
       this.groupStageSchedules.TabIndex = 19;
       this.groupStageSchedules.TabStop = false;
       this.groupStageSchedules.Text = "Schedules";
@@ -7314,9 +7347,9 @@ namespace CreationMaster
       this.treeStageSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeStageSchedule.FullRowSelect = true;
       this.treeStageSchedule.HideSelection = false;
-      this.treeStageSchedule.Location = new System.Drawing.Point(3, 220);
+      this.treeStageSchedule.Location = new System.Drawing.Point(3, 232);
       this.treeStageSchedule.Name = "treeStageSchedule";
-      this.treeStageSchedule.Size = new System.Drawing.Size(299, 423);
+      this.treeStageSchedule.Size = new System.Drawing.Size(299, 369);
       this.treeStageSchedule.TabIndex = 7;
       this.treeStageSchedule.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeStageSchedule_AfterSelect);
       // 
@@ -7326,7 +7359,7 @@ namespace CreationMaster
       this.panelStageScheduleDetails.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelStageScheduleDetails.Location = new System.Drawing.Point(3, 126);
       this.panelStageScheduleDetails.Name = "panelStageScheduleDetails";
-      this.panelStageScheduleDetails.Size = new System.Drawing.Size(299, 94);
+      this.panelStageScheduleDetails.Size = new System.Drawing.Size(299, 106);
       this.panelStageScheduleDetails.TabIndex = 8;
       // 
       // groupStageScheduleDetails
@@ -7339,7 +7372,7 @@ namespace CreationMaster
       this.groupStageScheduleDetails.Controls.Add(this.label35);
       this.groupStageScheduleDetails.Controls.Add(this.comboStageTime);
       this.groupStageScheduleDetails.Controls.Add(this.label34);
-      this.groupStageScheduleDetails.Location = new System.Drawing.Point(3, 0);
+      this.groupStageScheduleDetails.Location = new System.Drawing.Point(13, 10);
       this.groupStageScheduleDetails.Name = "groupStageScheduleDetails";
       this.groupStageScheduleDetails.Size = new System.Drawing.Size(264, 90);
       this.groupStageScheduleDetails.TabIndex = 25;
@@ -7593,7 +7626,7 @@ namespace CreationMaster
       // numericRegularSeason
       // 
       this.numericRegularSeason.BackColor = System.Drawing.Color.Yellow;
-      this.numericRegularSeason.Location = new System.Drawing.Point(367, 402);
+      this.numericRegularSeason.Location = new System.Drawing.Point(367, 399);
       this.numericRegularSeason.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -7619,7 +7652,7 @@ namespace CreationMaster
             "Extra Time, Penalties (No Away Goal Rule)",
             "Penalties",
             "Regular Season Rank"});
-      this.comboSpecialKo2Rule.Location = new System.Drawing.Point(152, 402);
+      this.comboSpecialKo2Rule.Location = new System.Drawing.Point(152, 399);
       this.comboSpecialKo2Rule.Name = "comboSpecialKo2Rule";
       this.comboSpecialKo2Rule.Size = new System.Drawing.Size(209, 21);
       this.comboSpecialKo2Rule.TabIndex = 164;
@@ -7628,7 +7661,7 @@ namespace CreationMaster
       // checkSpecialKo2Rule
       // 
       this.checkSpecialKo2Rule.Appearance = System.Windows.Forms.Appearance.Button;
-      this.checkSpecialKo2Rule.Location = new System.Drawing.Point(3, 402);
+      this.checkSpecialKo2Rule.Location = new System.Drawing.Point(3, 399);
       this.checkSpecialKo2Rule.Name = "checkSpecialKo2Rule";
       this.checkSpecialKo2Rule.Size = new System.Drawing.Size(136, 23);
       this.checkSpecialKo2Rule.TabIndex = 163;
@@ -7644,7 +7677,7 @@ namespace CreationMaster
             "Extra Time, Penalties",
             "Penalties",
             "Replay"});
-      this.comboSpecialKo1Rule.Location = new System.Drawing.Point(152, 373);
+      this.comboSpecialKo1Rule.Location = new System.Drawing.Point(152, 370);
       this.comboSpecialKo1Rule.Name = "comboSpecialKo1Rule";
       this.comboSpecialKo1Rule.Size = new System.Drawing.Size(209, 21);
       this.comboSpecialKo1Rule.TabIndex = 162;
@@ -7653,7 +7686,7 @@ namespace CreationMaster
       // checkSpecialKo1Rule
       // 
       this.checkSpecialKo1Rule.Appearance = System.Windows.Forms.Appearance.Button;
-      this.checkSpecialKo1Rule.Location = new System.Drawing.Point(3, 373);
+      this.checkSpecialKo1Rule.Location = new System.Drawing.Point(3, 370);
       this.checkSpecialKo1Rule.Name = "checkSpecialKo1Rule";
       this.checkSpecialKo1Rule.Size = new System.Drawing.Size(136, 23);
       this.checkSpecialKo1Rule.TabIndex = 161;
@@ -7713,9 +7746,9 @@ namespace CreationMaster
       this.checkClausuraSchedule.AutoSize = true;
       this.checkClausuraSchedule.Location = new System.Drawing.Point(9, 215);
       this.checkClausuraSchedule.Name = "checkClausuraSchedule";
-      this.checkClausuraSchedule.Size = new System.Drawing.Size(115, 17);
+      this.checkClausuraSchedule.Size = new System.Drawing.Size(170, 17);
       this.checkClausuraSchedule.TabIndex = 23;
-      this.checkClausuraSchedule.Text = "Clausura Schedule";
+      this.checkClausuraSchedule.Text = "Clausura Schedule (Reversed)";
       this.checkClausuraSchedule.UseVisualStyleBackColor = true;
       this.checkClausuraSchedule.CheckedChanged += new System.EventHandler(this.checkClausuraSchedule_CheckedChanged);
       // 
@@ -7733,7 +7766,7 @@ namespace CreationMaster
       this.groupStadiums.Controls.Add(this.comboStadium3);
       this.groupStadiums.Controls.Add(this.comboStadium2);
       this.groupStadiums.Controls.Add(this.comboStadium1);
-      this.groupStadiums.Location = new System.Drawing.Point(228, 16);
+      this.groupStadiums.Location = new System.Drawing.Point(228, 6);
       this.groupStadiums.Name = "groupStadiums";
       this.groupStadiums.Size = new System.Drawing.Size(222, 347);
       this.groupStadiums.TabIndex = 20;
@@ -7853,9 +7886,9 @@ namespace CreationMaster
       this.checkMaxteamsgroup.AutoSize = true;
       this.checkMaxteamsgroup.Location = new System.Drawing.Point(9, 191);
       this.checkMaxteamsgroup.Name = "checkMaxteamsgroup";
-      this.checkMaxteamsgroup.Size = new System.Drawing.Size(111, 17);
+      this.checkMaxteamsgroup.Size = new System.Drawing.Size(115, 17);
       this.checkMaxteamsgroup.TabIndex = 2;
-      this.checkMaxteamsgroup.Text = "Avoid same group";
+      this.checkMaxteamsgroup.Text = "Avoid Same Group";
       this.checkMaxteamsgroup.UseVisualStyleBackColor = true;
       this.checkMaxteamsgroup.CheckedChanged += new System.EventHandler(this.checkMaxteamsgroup_CheckedChanged);
       // 
@@ -7966,6 +7999,90 @@ namespace CreationMaster
       this.label8.Size = new System.Drawing.Size(81, 13);
       this.label8.TabIndex = 16;
       this.label8.Text = "Match Situation";
+      // 
+      // groupSetupStage
+      // 
+      this.groupSetupStage.Controls.Add(this.checkRandomDraw);
+      this.groupSetupStage.Controls.Add(this.groupBox2);
+      this.groupSetupStage.Controls.Add(this.checkCalccompavgs);
+      this.groupSetupStage.Location = new System.Drawing.Point(6, 73);
+      this.groupSetupStage.Name = "groupSetupStage";
+      this.groupSetupStage.Size = new System.Drawing.Size(468, 161);
+      this.groupSetupStage.TabIndex = 17;
+      this.groupSetupStage.TabStop = false;
+      this.groupSetupStage.Text = "Setup Stage";
+      this.groupSetupStage.Visible = false;
+      // 
+      // checkRandomDraw
+      // 
+      this.checkRandomDraw.AutoSize = true;
+      this.checkRandomDraw.Location = new System.Drawing.Point(9, 19);
+      this.checkRandomDraw.Name = "checkRandomDraw";
+      this.checkRandomDraw.Size = new System.Drawing.Size(94, 17);
+      this.checkRandomDraw.TabIndex = 20;
+      this.checkRandomDraw.Text = "Random Draw";
+      this.checkRandomDraw.UseVisualStyleBackColor = true;
+      this.checkRandomDraw.CheckedChanged += new System.EventHandler(this.checkRandomDraw_CheckedChanged);
+      // 
+      // groupBox2
+      // 
+      this.groupBox2.Controls.Add(this.comboSpecialTeam4);
+      this.groupBox2.Controls.Add(this.comboSpecialTeam3);
+      this.groupBox2.Controls.Add(this.comboSpecialTeam2);
+      this.groupBox2.Controls.Add(this.comboSpecialTeam1);
+      this.groupBox2.Location = new System.Drawing.Point(180, 15);
+      this.groupBox2.Name = "groupBox2";
+      this.groupBox2.Size = new System.Drawing.Size(176, 134);
+      this.groupBox2.TabIndex = 19;
+      this.groupBox2.TabStop = false;
+      this.groupBox2.Text = "Special Teams";
+      // 
+      // comboSpecialTeam4
+      // 
+      this.comboSpecialTeam4.FormattingEnabled = true;
+      this.comboSpecialTeam4.Location = new System.Drawing.Point(9, 100);
+      this.comboSpecialTeam4.Name = "comboSpecialTeam4";
+      this.comboSpecialTeam4.Size = new System.Drawing.Size(157, 21);
+      this.comboSpecialTeam4.TabIndex = 29;
+      this.comboSpecialTeam4.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam4_SelectedIndexChanged);
+      // 
+      // comboSpecialTeam3
+      // 
+      this.comboSpecialTeam3.FormattingEnabled = true;
+      this.comboSpecialTeam3.Location = new System.Drawing.Point(9, 73);
+      this.comboSpecialTeam3.Name = "comboSpecialTeam3";
+      this.comboSpecialTeam3.Size = new System.Drawing.Size(157, 21);
+      this.comboSpecialTeam3.TabIndex = 28;
+      this.comboSpecialTeam3.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam3_SelectedIndexChanged);
+      // 
+      // comboSpecialTeam2
+      // 
+      this.comboSpecialTeam2.FormattingEnabled = true;
+      this.comboSpecialTeam2.Location = new System.Drawing.Point(9, 46);
+      this.comboSpecialTeam2.Name = "comboSpecialTeam2";
+      this.comboSpecialTeam2.Size = new System.Drawing.Size(157, 21);
+      this.comboSpecialTeam2.TabIndex = 27;
+      this.comboSpecialTeam2.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam2_SelectedIndexChanged);
+      // 
+      // comboSpecialTeam1
+      // 
+      this.comboSpecialTeam1.FormattingEnabled = true;
+      this.comboSpecialTeam1.Location = new System.Drawing.Point(9, 19);
+      this.comboSpecialTeam1.Name = "comboSpecialTeam1";
+      this.comboSpecialTeam1.Size = new System.Drawing.Size(157, 21);
+      this.comboSpecialTeam1.TabIndex = 26;
+      this.comboSpecialTeam1.SelectedIndexChanged += new System.EventHandler(this.comboSpecialTeam1_SelectedIndexChanged);
+      // 
+      // checkCalccompavgs
+      // 
+      this.checkCalccompavgs.AutoSize = true;
+      this.checkCalccompavgs.Location = new System.Drawing.Point(9, 42);
+      this.checkCalccompavgs.Name = "checkCalccompavgs";
+      this.checkCalccompavgs.Size = new System.Drawing.Size(160, 17);
+      this.checkCalccompavgs.TabIndex = 0;
+      this.checkCalccompavgs.Text = "Sort by Competition Average";
+      this.checkCalccompavgs.UseVisualStyleBackColor = true;
+      this.checkCalccompavgs.CheckedChanged += new System.EventHandler(this.checkCalccompavgs_CheckedChanged);
       // 
       // comboStageStandingRules
       // 
@@ -9612,7 +9729,7 @@ namespace CreationMaster
       this.groupRules.Controls.Add(this.panelAdvancement);
       this.groupRules.Location = new System.Drawing.Point(6, 47);
       this.groupRules.Name = "groupRules";
-      this.groupRules.Size = new System.Drawing.Size(509, 472);
+      this.groupRules.Size = new System.Drawing.Size(509, 428);
       this.groupRules.TabIndex = 39;
       this.groupRules.TabStop = false;
       this.groupRules.Text = "Rules";
@@ -9624,7 +9741,7 @@ namespace CreationMaster
       this.panelQualificationRules.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelQualificationRules.Location = new System.Drawing.Point(3, 16);
       this.panelQualificationRules.Name = "panelQualificationRules";
-      this.panelQualificationRules.Size = new System.Drawing.Size(503, 453);
+      this.panelQualificationRules.Size = new System.Drawing.Size(503, 409);
       this.panelQualificationRules.TabIndex = 15;
       // 
       // toolRules
@@ -9665,7 +9782,7 @@ namespace CreationMaster
       this.panelAdvancement.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelAdvancement.Location = new System.Drawing.Point(3, 16);
       this.panelAdvancement.Name = "panelAdvancement";
-      this.panelAdvancement.Size = new System.Drawing.Size(503, 453);
+      this.panelAdvancement.Size = new System.Drawing.Size(503, 409);
       this.panelAdvancement.TabIndex = 16;
       // 
       // groupPlayGroup
@@ -9683,11 +9800,6 @@ namespace CreationMaster
       this.numericNumGames.Location = new System.Drawing.Point(78, 10);
       this.numericNumGames.Maximum = new decimal(new int[] {
             4,
-            0,
-            0,
-            0});
-      this.numericNumGames.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -9718,7 +9830,7 @@ namespace CreationMaster
       this.groupGroupScheduke.Controls.Add(this.toolGroupSchedule);
       this.groupGroupScheduke.Location = new System.Drawing.Point(520, 11);
       this.groupGroupScheduke.Name = "groupGroupScheduke";
-      this.groupGroupScheduke.Size = new System.Drawing.Size(267, 707);
+      this.groupGroupScheduke.Size = new System.Drawing.Size(267, 662);
       this.groupGroupScheduke.TabIndex = 34;
       this.groupGroupScheduke.TabStop = false;
       this.groupGroupScheduke.Text = "Schedules";
@@ -9729,7 +9841,7 @@ namespace CreationMaster
       this.treeGroupSchedule.HideSelection = false;
       this.treeGroupSchedule.Location = new System.Drawing.Point(3, 220);
       this.treeGroupSchedule.Name = "treeGroupSchedule";
-      this.treeGroupSchedule.Size = new System.Drawing.Size(264, 487);
+      this.treeGroupSchedule.Size = new System.Drawing.Size(264, 435);
       this.treeGroupSchedule.TabIndex = 7;
       this.treeGroupSchedule.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeGroupSchedule_AfterSelect);
       // 
@@ -10014,7 +10126,7 @@ namespace CreationMaster
       this.groupSlots.Controls.Add(this.checkInfoRelegation);
       this.groupSlots.Controls.Add(this.checkInfoPossibleRelegation);
       this.groupSlots.Controls.Add(this.checkInfoChamp);
-      this.groupSlots.Location = new System.Drawing.Point(263, 525);
+      this.groupSlots.Location = new System.Drawing.Point(263, 480);
       this.groupSlots.Name = "groupSlots";
       this.groupSlots.Size = new System.Drawing.Size(252, 193);
       this.groupSlots.TabIndex = 33;
@@ -10312,7 +10424,7 @@ namespace CreationMaster
       this.groupInfoColors.Controls.Add(this.checkInfoColorEuropa);
       this.groupInfoColors.Controls.Add(this.checkInfoColorChampions);
       this.groupInfoColors.Controls.Add(this.checkInfoColorChamp);
-      this.groupInfoColors.Location = new System.Drawing.Point(5, 525);
+      this.groupInfoColors.Location = new System.Drawing.Point(5, 480);
       this.groupInfoColors.Name = "groupInfoColors";
       this.groupInfoColors.Size = new System.Drawing.Size(254, 193);
       this.groupInfoColors.TabIndex = 32;
@@ -11052,11 +11164,12 @@ namespace CreationMaster
       this.groupSchedule.PerformLayout();
       this.groupStage.ResumeLayout(false);
       this.groupStage.PerformLayout();
-      this.groupSetupStage.ResumeLayout(false);
-      this.groupSetupStage.PerformLayout();
-      this.groupBox2.ResumeLayout(false);
       this.groupPlayStage.ResumeLayout(false);
       this.groupPlayStage.PerformLayout();
+      this.groupStageInfoColors.ResumeLayout(false);
+      this.groupStageInfoColors.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStageColorAdvanceMax)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStageColorAdvanceMin)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericKeepPointsStageRef)).EndInit();
       this.groupLeaguetasks.ResumeLayout(false);
       this.groupStageSchedules.ResumeLayout(false);
@@ -11074,6 +11187,9 @@ namespace CreationMaster
       this.groupStadiums.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.numericMoneyDrop)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericPrizeMoney)).EndInit();
+      this.groupSetupStage.ResumeLayout(false);
+      this.groupSetupStage.PerformLayout();
+      this.groupBox2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingsRank)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingKeep)).EndInit();
       this.toolCompetitionTree.ResumeLayout(false);
@@ -11177,6 +11293,50 @@ namespace CreationMaster
       this.panelCompObj.PerformLayout();
       this.ResumeLayout(false);
 
+    }
+
+    private void checkStageInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.numericStageColorAdvanceMin.Visible = this.numericStageColorAdvanceMax.Visible = this.checkStageInfoColorAdvance.Checked;
+      if (this.checkStageInfoColorAdvance.Checked)
+      {
+        int min, max;
+        this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+        if (min <= 0 || max <= 0)
+          min = max = 1;
+        this.numericStageColorAdvanceMin.Value = (Decimal)min;
+        this.numericStageColorAdvanceMax.Value = (Decimal)max;
+      }
+      else
+        this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(-1, -1);
+    }
+
+    private void numericStageColorAdvanceMax_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      int min1 = (int)this.numericStageColorAdvanceMin.Value;
+      int max1 = (int)this.numericStageColorAdvanceMax.Value;
+      int min2, max2;
+      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+        return;
+      this.numericStageColorAdvanceMax.Value = (Decimal)max2;
+    }
+
+    private void numericStageColorAdvanceMin_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      int min1 = (int)this.numericStageColorAdvanceMin.Value;
+      int max1 = (int)this.numericStageColorAdvanceMax.Value;
+      int min2, max2;
+      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+        return;
+      this.numericStageColorAdvanceMin.Value = (Decimal)min2;
     }
   }
 }
