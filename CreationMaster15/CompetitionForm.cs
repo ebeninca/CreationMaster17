@@ -489,6 +489,9 @@ namespace CreationMaster
     private NumericUpDown numericStageColorAdvanceMax;
     private NumericUpDown numericStageColorAdvanceMin;
     private CheckBox checkStageInfoColorAdvance;
+    private ComboBox comboWorldStartingMonth;
+    private Label label72;
+    private CheckBox checkLowCelebrationLevel;
     private Viewer2D viewer2DTrophy;
 
     public CompetitionForm()
@@ -987,6 +990,7 @@ namespace CreationMaster
       this.textLanguageName.Enabled = false;
       this.comboLanguageKey.Visible = false;
       this.numericStartYear.Value = (Decimal)this.m_CurrentWorld.Settings.m_schedule_year_start;
+      this.comboWorldStartingMonth.Text = this.m_CurrentWorld.Settings.GetProperty("schedule_seasonstartmonth", 0, out bool _);
       this.m_LockToPanel = false;
     }
 
@@ -1290,7 +1294,9 @@ namespace CreationMaster
         if (this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY" || this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP")
         {
           this.groupStageInfoColors.Visible = true;
-          if (numericStageColorAdvanceMin.Value == -1 || numericStageColorAdvanceMax.Value == -1)
+          int min, max;
+          this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+          if (min == -1 || max == -1)
           {
             this.checkStageInfoColorAdvance.Checked = false;
             this.numericStageColorAdvanceMin.Visible = false;
@@ -1301,8 +1307,8 @@ namespace CreationMaster
             this.checkStageInfoColorAdvance.Checked = true;
             this.numericStageColorAdvanceMin.Visible = true;
             this.numericStageColorAdvanceMax.Visible = true;
-            this.numericStageColorAdvanceMin.Value = this.m_CurrentStage.Settings.m_info_color_slot_adv_group[0];
-            this.numericStageColorAdvanceMax.Value = this.m_CurrentStage.Settings.m_info_color_slot_adv_group[this.m_CurrentStage.Settings.m_N_info_color_slot_adv_group - 1];
+            this.numericStageColorAdvanceMin.Value = (Decimal)min;
+            this.numericStageColorAdvanceMax.Value = (Decimal)max;
           }
         }
         else
@@ -1625,6 +1631,9 @@ namespace CreationMaster
         if (isSpecific)
           this.comboTrophyStandingRules.SelectedIndex = this.m_CurrentTrophy.Settings.m_StandingsSort;
         this.checkTrophyStandingsRules.Checked = isSpecific;
+
+        this.checkLowCelebrationLevel.Checked = this.m_CurrentTrophy.Settings.m_match_celebrationlevel == "LOW";
+
         if (this.m_CurrentTrophy.Settings.m_comp_type == "INTERCUP" || this.m_CurrentTrophy.Settings.m_comp_type == "INTERQUAL")
         {
           this.groupInternationalschedule.Visible = true;
@@ -4477,6 +4486,65 @@ namespace CreationMaster
       base.Dispose(disposing);
     }
 
+
+    private void checkStageInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.numericStageColorAdvanceMin.Visible = this.numericStageColorAdvanceMax.Visible = this.checkStageInfoColorAdvance.Checked;
+      if (this.checkStageInfoColorAdvance.Checked)
+      {
+        int min, max;
+        this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+        if (min <= 0 || max <= 0)
+          min = max = 1;
+        this.numericStageColorAdvanceMin.Value = (Decimal)min;
+        this.numericStageColorAdvanceMax.Value = (Decimal)max;
+      }
+      else
+        this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(-1, -1);
+    }
+
+    private void numericStageColorAdvanceMax_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      int min1 = (int)this.numericStageColorAdvanceMin.Value;
+      int max1 = (int)this.numericStageColorAdvanceMax.Value;
+      int min2, max2;
+      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+        return;
+      this.numericStageColorAdvanceMax.Value = (Decimal)max2;
+    }
+
+    private void numericStageColorAdvanceMin_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      int min1 = (int)this.numericStageColorAdvanceMin.Value;
+      int max1 = (int)this.numericStageColorAdvanceMax.Value;
+      int min2, max2;
+      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+        return;
+      this.numericStageColorAdvanceMin.Value = (Decimal)min2;
+    }
+
+    private void comboWorldStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel || this.comboWorldStartingMonth.SelectedItem == null)
+        return;
+      this.m_CurrentWorld.Settings.m_schedule_seasonstartmonth = (string)this.comboWorldStartingMonth.SelectedItem;
+    }
+
+    private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.m_CurrentTrophy.Settings.m_match_celebrationlevel = this.checkLowCelebrationLevel.Checked ? "LOW" : null;
+    }
+
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
@@ -4710,6 +4778,8 @@ namespace CreationMaster
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.tabCompetitions = new System.Windows.Forms.TabControl();
       this.pageWorld = new System.Windows.Forms.TabPage();
+      this.comboWorldStartingMonth = new System.Windows.Forms.ComboBox();
+      this.label72 = new System.Windows.Forms.Label();
       this.numericStartYear = new System.Windows.Forms.NumericUpDown();
       this.label13 = new System.Windows.Forms.Label();
       this.pageConfederation = new System.Windows.Forms.TabPage();
@@ -4820,8 +4890,12 @@ namespace CreationMaster
       this.tabPageTrophyGraphics = new System.Windows.Forms.TabPage();
       this.groupGraphics = new System.Windows.Forms.GroupBox();
       this.buttonReplicateTropy = new System.Windows.Forms.Button();
+      this.viewer2DTrophy = new FifaControls.Viewer2D();
       this.buttonReplicateTrophy128 = new System.Windows.Forms.Button();
+      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
+      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
       this.group3D = new System.Windows.Forms.GroupBox();
+      this.viewer3D = new FifaControls.Viewer3D();
       this.toolNear3D = new System.Windows.Forms.ToolStrip();
       this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -4829,6 +4903,7 @@ namespace CreationMaster
       this.buttonExport3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.buttonRemove3DModel = new System.Windows.Forms.ToolStripButton();
+      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
       this.pageStage = new System.Windows.Forms.TabPage();
       this.pageGroup = new System.Windows.Forms.TabPage();
       this.groupGroup = new System.Windows.Forms.GroupBox();
@@ -4915,11 +4990,7 @@ namespace CreationMaster
       this.label2 = new System.Windows.Forms.Label();
       this.textFourCharName = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.viewer2DTrophy = new FifaControls.Viewer2D();
-      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
-      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
-      this.viewer3D = new FifaControls.Viewer3D();
-      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
+      this.checkLowCelebrationLevel = new System.Windows.Forms.CheckBox();
       this.groupConfederation.SuspendLayout();
       this.groupNation.SuspendLayout();
       this.groupWeather.SuspendLayout();
@@ -6635,6 +6706,7 @@ namespace CreationMaster
       // 
       // groupTrophy
       // 
+      this.groupTrophy.Controls.Add(this.checkLowCelebrationLevel);
       this.groupTrophy.Controls.Add(this.groupInternationalschedule);
       this.groupTrophy.Controls.Add(this.label67);
       this.groupTrophy.Controls.Add(this.numericBall);
@@ -6658,7 +6730,7 @@ namespace CreationMaster
       this.groupTrophy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.groupTrophy.Location = new System.Drawing.Point(3, 3);
       this.groupTrophy.Name = "groupTrophy";
-      this.groupTrophy.Size = new System.Drawing.Size(532, 587);
+      this.groupTrophy.Size = new System.Drawing.Size(532, 642);
       this.groupTrophy.TabIndex = 9;
       this.groupTrophy.TabStop = false;
       this.groupTrophy.Text = "Trophy";
@@ -6672,7 +6744,7 @@ namespace CreationMaster
       this.groupInternationalschedule.Controls.Add(this.label69);
       this.groupInternationalschedule.Controls.Add(this.label68);
       this.groupInternationalschedule.Controls.Add(this.numericInternationalFirstYear);
-      this.groupInternationalschedule.Location = new System.Drawing.Point(8, 474);
+      this.groupInternationalschedule.Location = new System.Drawing.Point(8, 526);
       this.groupInternationalschedule.Name = "groupInternationalschedule";
       this.groupInternationalschedule.Size = new System.Drawing.Size(347, 90);
       this.groupInternationalschedule.TabIndex = 167;
@@ -6823,7 +6895,7 @@ namespace CreationMaster
       // 
       this.groupBenchPlayers.Controls.Add(this.radioBench7Players);
       this.groupBenchPlayers.Controls.Add(this.radioBench5Players);
-      this.groupBenchPlayers.Location = new System.Drawing.Point(6, 418);
+      this.groupBenchPlayers.Location = new System.Drawing.Point(6, 470);
       this.groupBenchPlayers.Name = "groupBenchPlayers";
       this.groupBenchPlayers.Size = new System.Drawing.Size(349, 50);
       this.groupBenchPlayers.TabIndex = 161;
@@ -6864,7 +6936,7 @@ namespace CreationMaster
             "Team Rating",
             "Previous Ranking",
             "Points, Goals, Head To Head"});
-      this.comboTrophyStandingRules.Location = new System.Drawing.Point(164, 157);
+      this.comboTrophyStandingRules.Location = new System.Drawing.Point(164, 209);
       this.comboTrophyStandingRules.Name = "comboTrophyStandingRules";
       this.comboTrophyStandingRules.Size = new System.Drawing.Size(185, 21);
       this.comboTrophyStandingRules.TabIndex = 160;
@@ -6937,7 +7009,7 @@ namespace CreationMaster
       // checkTrophyStandingsRules
       // 
       this.checkTrophyStandingsRules.Appearance = System.Windows.Forms.Appearance.Button;
-      this.checkTrophyStandingsRules.Location = new System.Drawing.Point(15, 157);
+      this.checkTrophyStandingsRules.Location = new System.Drawing.Point(15, 209);
       this.checkTrophyStandingsRules.Name = "checkTrophyStandingsRules";
       this.checkTrophyStandingsRules.Size = new System.Drawing.Size(136, 23);
       this.checkTrophyStandingsRules.TabIndex = 15;
@@ -6963,7 +7035,7 @@ namespace CreationMaster
       this.groupPromotionRelegation.Controls.Add(this.comboPromotionLeague);
       this.groupPromotionRelegation.Controls.Add(this.checkPromotionLeague);
       this.groupPromotionRelegation.Controls.Add(this.checkRelegationLeague);
-      this.groupPromotionRelegation.Location = new System.Drawing.Point(6, 321);
+      this.groupPromotionRelegation.Location = new System.Drawing.Point(6, 373);
       this.groupPromotionRelegation.Name = "groupPromotionRelegation";
       this.groupPromotionRelegation.Size = new System.Drawing.Size(349, 91);
       this.groupPromotionRelegation.TabIndex = 20;
@@ -7030,7 +7102,7 @@ namespace CreationMaster
       this.groupSchedule.Controls.Add(this.checkScheduleConflicts);
       this.groupSchedule.Controls.Add(this.comboSchedForce);
       this.groupSchedule.Controls.Add(this.checkForceSchedule);
-      this.groupSchedule.Location = new System.Drawing.Point(9, 186);
+      this.groupSchedule.Location = new System.Drawing.Point(9, 238);
       this.groupSchedule.Name = "groupSchedule";
       this.groupSchedule.Size = new System.Drawing.Size(349, 108);
       this.groupSchedule.TabIndex = 21;
@@ -8377,6 +8449,8 @@ namespace CreationMaster
       // 
       // pageWorld
       // 
+      this.pageWorld.Controls.Add(this.comboWorldStartingMonth);
+      this.pageWorld.Controls.Add(this.label72);
       this.pageWorld.Controls.Add(this.numericStartYear);
       this.pageWorld.Controls.Add(this.label13);
       this.pageWorld.Location = new System.Drawing.Point(4, 22);
@@ -8387,9 +8461,40 @@ namespace CreationMaster
       this.pageWorld.Text = "FIFA";
       this.pageWorld.UseVisualStyleBackColor = true;
       // 
+      // comboWorldStartingMonth
+      // 
+      this.comboWorldStartingMonth.FormattingEnabled = true;
+      this.comboWorldStartingMonth.Items.AddRange(new object[] {
+            "JAN",
+            "FEB",
+            "MAR",
+            "APR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AUG",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DEC"});
+      this.comboWorldStartingMonth.Location = new System.Drawing.Point(179, 70);
+      this.comboWorldStartingMonth.Name = "comboWorldStartingMonth";
+      this.comboWorldStartingMonth.Size = new System.Drawing.Size(90, 21);
+      this.comboWorldStartingMonth.TabIndex = 23;
+      this.comboWorldStartingMonth.SelectedIndexChanged += new System.EventHandler(this.comboWorldStartMonth_SelectedIndexChanged);
+      // 
+      // label72
+      // 
+      this.label72.AutoSize = true;
+      this.label72.Location = new System.Drawing.Point(22, 73);
+      this.label72.Name = "label72";
+      this.label72.Size = new System.Drawing.Size(101, 13);
+      this.label72.TabIndex = 22;
+      this.label72.Text = "Season Start Month";
+      // 
       // numericStartYear
       // 
-      this.numericStartYear.Location = new System.Drawing.Point(118, 30);
+      this.numericStartYear.Location = new System.Drawing.Point(149, 30);
       this.numericStartYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -8414,7 +8519,7 @@ namespace CreationMaster
       // label13
       // 
       this.label13.AutoSize = true;
-      this.label13.Location = new System.Drawing.Point(27, 37);
+      this.label13.Location = new System.Drawing.Point(22, 32);
       this.label13.Name = "label13";
       this.label13.Size = new System.Drawing.Size(54, 13);
       this.label13.TabIndex = 20;
@@ -9596,6 +9701,25 @@ namespace CreationMaster
       this.buttonReplicateTropy.UseVisualStyleBackColor = true;
       this.buttonReplicateTropy.Click += new System.EventHandler(this.buttonReplicateTropy_Click);
       // 
+      // viewer2DTrophy
+      // 
+      this.viewer2DTrophy.AutoTransparency = true;
+      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy.ButtonStripVisible = false;
+      this.viewer2DTrophy.CurrentBitmap = null;
+      this.viewer2DTrophy.ExtendedFormat = false;
+      this.viewer2DTrophy.FullSizeButton = false;
+      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
+      this.viewer2DTrophy.Name = "viewer2DTrophy";
+      this.viewer2DTrophy.RemoveButton = false;
+      this.viewer2DTrophy.ShowButton = false;
+      this.viewer2DTrophy.ShowButtonChecked = true;
+      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy.TabIndex = 171;
+      // 
       // buttonReplicateTrophy128
       // 
       this.buttonReplicateTrophy128.Location = new System.Drawing.Point(563, 179);
@@ -9605,6 +9729,39 @@ namespace CreationMaster
       this.buttonReplicateTrophy128.Text = "Replicate";
       this.buttonReplicateTrophy128.UseVisualStyleBackColor = true;
       this.buttonReplicateTrophy128.Click += new System.EventHandler(this.buttonReplicateTrophy128_Click);
+      // 
+      // viewer2DTrophy128
+      // 
+      this.viewer2DTrophy128.AutoTransparency = true;
+      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy128.ButtonStripVisible = false;
+      this.viewer2DTrophy128.CurrentBitmap = null;
+      this.viewer2DTrophy128.ExtendedFormat = false;
+      this.viewer2DTrophy128.FullSizeButton = false;
+      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
+      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
+      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
+      this.viewer2DTrophy128.RemoveButton = false;
+      this.viewer2DTrophy128.ShowButton = false;
+      this.viewer2DTrophy128.ShowButtonChecked = true;
+      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
+      this.viewer2DTrophy128.TabIndex = 169;
+      // 
+      // multiViewer2DTextures
+      // 
+      this.multiViewer2DTextures.AutoTransparency = false;
+      this.multiViewer2DTextures.Bitmaps = null;
+      this.multiViewer2DTextures.CheckBitmapSize = true;
+      this.multiViewer2DTextures.FixedSize = true;
+      this.multiViewer2DTextures.FullSizeButton = false;
+      this.multiViewer2DTextures.LabelText = "Texture";
+      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
+      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
+      this.multiViewer2DTextures.ShowDeleteButton = false;
+      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
+      this.multiViewer2DTextures.TabIndex = 168;
       // 
       // group3D
       // 
@@ -9616,6 +9773,30 @@ namespace CreationMaster
       this.group3D.TabIndex = 167;
       this.group3D.TabStop = false;
       this.group3D.Text = "3D Model";
+      // 
+      // viewer3D
+      // 
+      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
+      this.viewer3D.BackColor = System.Drawing.Color.Gray;
+      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.viewer3D.LightDirectionX = 0.5F;
+      this.viewer3D.LightDirectionY = -0.25F;
+      this.viewer3D.LightDirectionZ = -1F;
+      this.viewer3D.LightX = -30F;
+      this.viewer3D.LightY = 10F;
+      this.viewer3D.LightZ = 30F;
+      this.viewer3D.Location = new System.Drawing.Point(3, 16);
+      this.viewer3D.Name = "viewer3D";
+      this.viewer3D.RotationX = 0F;
+      this.viewer3D.RotationY = 0F;
+      this.viewer3D.RotationYCoeff = 0.01F;
+      this.viewer3D.Size = new System.Drawing.Size(439, 270);
+      this.viewer3D.TabIndex = 1;
+      this.viewer3D.ViewX = 0F;
+      this.viewer3D.ViewY = 35F;
+      this.viewer3D.ViewZ = 105F;
+      this.viewer3D.ZbufferRenderState = null;
       // 
       // toolNear3D
       // 
@@ -9683,6 +9864,25 @@ namespace CreationMaster
       this.buttonRemove3DModel.Size = new System.Drawing.Size(23, 22);
       this.buttonRemove3DModel.Text = "Remove 3D Model";
       this.buttonRemove3DModel.Click += new System.EventHandler(this.buttonRemove3DModel_Click);
+      // 
+      // viewer2DTrophy256
+      // 
+      this.viewer2DTrophy256.AutoTransparency = true;
+      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy256.ButtonStripVisible = false;
+      this.viewer2DTrophy256.CurrentBitmap = null;
+      this.viewer2DTrophy256.ExtendedFormat = false;
+      this.viewer2DTrophy256.FullSizeButton = false;
+      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
+      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
+      this.viewer2DTrophy256.RemoveButton = false;
+      this.viewer2DTrophy256.ShowButton = false;
+      this.viewer2DTrophy256.ShowButtonChecked = true;
+      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy256.TabIndex = 163;
       // 
       // pageStage
       // 
@@ -10996,100 +11196,17 @@ namespace CreationMaster
       this.label1.TabIndex = 0;
       this.label1.Text = "4 Chars Name";
       // 
-      // viewer2DTrophy
+      // checkLowCelebrationLevel
       // 
-      this.viewer2DTrophy.AutoTransparency = true;
-      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy.ButtonStripVisible = false;
-      this.viewer2DTrophy.CurrentBitmap = null;
-      this.viewer2DTrophy.ExtendedFormat = false;
-      this.viewer2DTrophy.FullSizeButton = false;
-      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
-      this.viewer2DTrophy.Name = "viewer2DTrophy";
-      this.viewer2DTrophy.RemoveButton = false;
-      this.viewer2DTrophy.ShowButton = false;
-      this.viewer2DTrophy.ShowButtonChecked = true;
-      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy.TabIndex = 171;
-      // 
-      // viewer2DTrophy128
-      // 
-      this.viewer2DTrophy128.AutoTransparency = true;
-      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy128.ButtonStripVisible = false;
-      this.viewer2DTrophy128.CurrentBitmap = null;
-      this.viewer2DTrophy128.ExtendedFormat = false;
-      this.viewer2DTrophy128.FullSizeButton = false;
-      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
-      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
-      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
-      this.viewer2DTrophy128.RemoveButton = false;
-      this.viewer2DTrophy128.ShowButton = false;
-      this.viewer2DTrophy128.ShowButtonChecked = true;
-      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
-      this.viewer2DTrophy128.TabIndex = 169;
-      // 
-      // multiViewer2DTextures
-      // 
-      this.multiViewer2DTextures.AutoTransparency = false;
-      this.multiViewer2DTextures.Bitmaps = null;
-      this.multiViewer2DTextures.CheckBitmapSize = true;
-      this.multiViewer2DTextures.FixedSize = true;
-      this.multiViewer2DTextures.FullSizeButton = false;
-      this.multiViewer2DTextures.LabelText = "Texture";
-      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
-      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
-      this.multiViewer2DTextures.ShowDeleteButton = false;
-      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
-      this.multiViewer2DTextures.TabIndex = 168;
-      // 
-      // viewer3D
-      // 
-      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
-      this.viewer3D.BackColor = System.Drawing.Color.Gray;
-      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.viewer3D.LightDirectionX = 0.5F;
-      this.viewer3D.LightDirectionY = -0.25F;
-      this.viewer3D.LightDirectionZ = -1F;
-      this.viewer3D.LightX = -30F;
-      this.viewer3D.LightY = 10F;
-      this.viewer3D.LightZ = 30F;
-      this.viewer3D.Location = new System.Drawing.Point(3, 16);
-      this.viewer3D.Name = "viewer3D";
-      this.viewer3D.RotationX = 0F;
-      this.viewer3D.RotationY = 0F;
-      this.viewer3D.RotationYCoeff = 0.01F;
-      this.viewer3D.Size = new System.Drawing.Size(439, 270);
-      this.viewer3D.TabIndex = 1;
-      this.viewer3D.ViewX = 0F;
-      this.viewer3D.ViewY = 35F;
-      this.viewer3D.ViewZ = 105F;
-      this.viewer3D.ZbufferRenderState = null;
-      // 
-      // viewer2DTrophy256
-      // 
-      this.viewer2DTrophy256.AutoTransparency = true;
-      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy256.ButtonStripVisible = false;
-      this.viewer2DTrophy256.CurrentBitmap = null;
-      this.viewer2DTrophy256.ExtendedFormat = false;
-      this.viewer2DTrophy256.FullSizeButton = false;
-      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
-      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
-      this.viewer2DTrophy256.RemoveButton = false;
-      this.viewer2DTrophy256.ShowButton = false;
-      this.viewer2DTrophy256.ShowButtonChecked = true;
-      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy256.TabIndex = 163;
+      this.checkLowCelebrationLevel.AutoSize = true;
+      this.checkLowCelebrationLevel.Location = new System.Drawing.Point(18, 171);
+      this.checkLowCelebrationLevel.Name = "checkLowCelebrationLevel";
+      this.checkLowCelebrationLevel.Size = new System.Drawing.Size(131, 17);
+      this.checkLowCelebrationLevel.TabIndex = 168;
+      this.checkLowCelebrationLevel.Text = "Low Celebration Level";
+      this.toolTip.SetToolTip(this.checkLowCelebrationLevel, "Check this box for international competitions");
+      this.checkLowCelebrationLevel.UseVisualStyleBackColor = true;
+      this.checkLowCelebrationLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
       // 
       // CompetitionForm
       // 
@@ -11293,50 +11410,6 @@ namespace CreationMaster
       this.panelCompObj.PerformLayout();
       this.ResumeLayout(false);
 
-    }
-
-    private void checkStageInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericStageColorAdvanceMin.Visible = this.numericStageColorAdvanceMax.Visible = this.checkStageInfoColorAdvance.Checked;
-      if (this.checkStageInfoColorAdvance.Checked)
-      {
-        int min, max;
-        this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericStageColorAdvanceMin.Value = (Decimal)min;
-        this.numericStageColorAdvanceMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(-1, -1);
-    }
-
-    private void numericStageColorAdvanceMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericStageColorAdvanceMin.Value;
-      int max1 = (int)this.numericStageColorAdvanceMax.Value;
-      int min2, max2;
-      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericStageColorAdvanceMax.Value = (Decimal)max2;
-    }
-
-    private void numericStageColorAdvanceMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericStageColorAdvanceMin.Value;
-      int max1 = (int)this.numericStageColorAdvanceMax.Value;
-      int min2, max2;
-      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericStageColorAdvanceMin.Value = (Decimal)min2;
     }
   }
 }

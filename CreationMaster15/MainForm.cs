@@ -1107,7 +1107,7 @@ namespace CreationMaster
       this.MinimumSize = new System.Drawing.Size(200, 200);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Creation Master 15 (2021.1)";
+      this.Text = "Creation Master 17 CompData (2023.10)";
       this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
       this.menuStrip.ResumeLayout(false);
       this.menuStrip.PerformLayout();

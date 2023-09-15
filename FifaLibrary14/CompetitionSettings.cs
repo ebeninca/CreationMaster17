@@ -94,6 +94,7 @@ namespace FifaLibrary
     public string m_match_endruleko2leg1;
     public int m_N_endruleko2leg2;
     public string m_match_endrulefriendly;
+    public string m_match_celebrationlevel;
     public int[] m_match_stadium;
     public int m_N_match_stadium;
     public int m_N_info_color_slot_champ_cup;
@@ -974,6 +975,8 @@ namespace FifaLibrary
       }
       else if (property == "match_endrulefriendly")
         this.m_match_endrulefriendly = val;
+      else if (property == "match_celebrationlevel")
+        this.m_match_celebrationlevel = val;
       else if (property == "info_prize_money")
         this.m_info_prize_money = Convert.ToInt32(val);
       else if (property == "info_prize_money_drop")
@@ -1237,6 +1240,8 @@ namespace FifaLibrary
         return this.m_match_endruleko2leg2[index];
       if (property == "match_endrulefriendly")
         return this.m_match_endrulefriendly;
+      if (property == "match_celebrationlevel")
+        return this.m_match_celebrationlevel;
       if (property == "info_prize_money")
         return this.m_info_prize_money.ToString();
       if (property == "info_prize_money_drop")
@@ -1590,6 +1595,11 @@ namespace FifaLibrary
       if (this.m_match_endrulefriendly != null)
       {
         string str = id.ToString() + ",match_endrulefriendly," + this.m_match_endrulefriendly;
+        w.WriteLine(str);
+      }
+      if (this.m_match_celebrationlevel != null)
+      {
+        string str = id.ToString() + ",match_celebrationlevel," + this.m_match_celebrationlevel;
         w.WriteLine(str);
       }
       if (this.m_match_stadium != null)

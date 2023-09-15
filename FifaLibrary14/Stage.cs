@@ -209,7 +209,6 @@ namespace FifaLibrary
         this.Settings.m_match_matchimportance = -1;
       }
 
-      //this.Settings.
       /*if (this.Settings.m_N_info_color_slot_adv_group != 0 && this.Groups != null)
       {
         foreach (Group group in (ArrayList) this.Groups)
