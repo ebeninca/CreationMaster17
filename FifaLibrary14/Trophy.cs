@@ -131,7 +131,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        if (record.GetAndCheckIntField(FI.competition_competitionid) == this.Settings.m_asset_id)
+        if (record.GetAndCheckIntField(FI.competition_competitionid) == this.Settings.m_asset_id[0])
         {
           this.m_ballid = record.GetAndCheckIntField(FI.competition_ballid);
           break;
@@ -143,7 +143,7 @@ namespace FifaLibrary
     {
       if (this.m_ballid < 0)
         return;
-      r.IntField[FI.competition_competitionid] = this.Settings.m_asset_id;
+      r.IntField[FI.competition_competitionid] = this.Settings.m_asset_id[0];
       r.IntField[FI.competition_ballid] = this.m_ballid;
     }
 
@@ -197,7 +197,7 @@ namespace FifaLibrary
         bool flag = false;
         foreach (Compobj competitionObject in (ArrayList) FifaEnvironment.CompetitionObjects)
         {
-          if (competitionObject.Settings.m_asset_id == index)
+          if (competitionObject.Settings.m_asset_id[0] == index)
           {
             flag = true;
             break;
@@ -224,8 +224,8 @@ namespace FifaLibrary
     {
       if (FifaEnvironment.Language != null)
       {
-        this.m_ShortName = FifaEnvironment.Language.GetTournamentString(this.Settings.m_asset_id, Language.ETournamentStringType.Abbr15);
-        this.m_LongName = FifaEnvironment.Language.GetTournamentString(this.Settings.m_asset_id, Language.ETournamentStringType.Full);
+        this.m_ShortName = FifaEnvironment.Language.GetTournamentString(this.Settings.m_asset_id[0], Language.ETournamentStringType.Abbr15);
+        this.m_LongName = FifaEnvironment.Language.GetTournamentString(this.Settings.m_asset_id[0], Language.ETournamentStringType.Full);
         if (this.m_LongName == null && this.m_ShortName == null)
           this.m_ShortName = FifaEnvironment.Language.GetString(this.Description);
         if (this.m_LongName == null)
@@ -249,8 +249,8 @@ namespace FifaLibrary
     {
       if (FifaEnvironment.Language == null)
         return false;
-      FifaEnvironment.Language.SetTournamentString(this.Settings.m_asset_id, Language.ETournamentStringType.Abbr15, this.m_ShortName);
-      FifaEnvironment.Language.SetTournamentString(this.Settings.m_asset_id, Language.ETournamentStringType.Full, this.m_LongName);
+      FifaEnvironment.Language.SetTournamentString(this.Settings.m_asset_id[0], Language.ETournamentStringType.Abbr15, this.m_ShortName);
+      FifaEnvironment.Language.SetTournamentString(this.Settings.m_asset_id[0], Language.ETournamentStringType.Full, this.m_LongName);
       return true;
     }
 
@@ -528,7 +528,7 @@ namespace FifaLibrary
 
     public string TrophyDdsFileName()
     {
-      return Trophy.TrophyDdsFileName(this.Settings.m_asset_id);
+      return Trophy.TrophyDdsFileName(this.Settings.m_asset_id[0]);
     }
 
     public Bitmap GetTrophy()
@@ -538,7 +538,7 @@ namespace FifaLibrary
 
     public bool SetTrophy(Bitmap bitmap)
     {
-      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName(), this.Settings.m_asset_id, bitmap);
+      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName(), this.Settings.m_asset_id[0], bitmap);
     }
 
     public bool DeleteTrophy()
@@ -558,7 +558,7 @@ namespace FifaLibrary
 
     public string TrophyDdsFileName256()
     {
-      return Trophy.TrophyDdsFileName256(this.Settings.m_asset_id);
+      return Trophy.TrophyDdsFileName256(this.Settings.m_asset_id[0]);
     }
 
     public Bitmap GetTrophy256()
@@ -568,7 +568,7 @@ namespace FifaLibrary
 
     public bool SetTrophy256(Bitmap bitmap)
     {
-      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName256(), this.Settings.m_asset_id, bitmap);
+      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName256(), this.Settings.m_asset_id[0], bitmap);
     }
 
     public bool DeleteTrophy256()
@@ -588,7 +588,7 @@ namespace FifaLibrary
 
     public string TrophyDdsFileName128()
     {
-      return Trophy.TrophyDdsFileName128(this.Settings.m_asset_id);
+      return Trophy.TrophyDdsFileName128(this.Settings.m_asset_id[0]);
     }
 
     public Bitmap GetTrophy128()
@@ -598,7 +598,7 @@ namespace FifaLibrary
 
     public bool SetTrophy128(Bitmap bitmap)
     {
-      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName128(), this.Settings.m_asset_id, bitmap);
+      return bitmap != null && FifaEnvironment.SetDdsArtasset(this.TrophyTemplateFileName128(), this.Settings.m_asset_id[0], bitmap);
     }
 
     public bool DeleteTrophy128()
@@ -613,7 +613,7 @@ namespace FifaLibrary
 
     public string TexturesFileName()
     {
-      return Trophy.TexturesFileName(this.Settings.m_asset_id);
+      return Trophy.TexturesFileName(this.Settings.m_asset_id[0]);
     }
 
     public string TexturesTemplateFileName()
@@ -648,7 +648,7 @@ namespace FifaLibrary
 
     public string ModelFileName()
     {
-      return Trophy.ModelFileName(this.Settings.m_asset_id);
+      return Trophy.ModelFileName(this.Settings.m_asset_id[0]);
     }
 
     public string ModelTemplateFileName()

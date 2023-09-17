@@ -492,6 +492,13 @@ namespace CreationMaster
     private ComboBox comboWorldStartingMonth;
     private Label label72;
     private CheckBox checkLowCelebrationLevel;
+    private Label label73;
+    private NumericUpDown numericAssetIdAperClau;
+    private NumericUpDown numericStandingAgg;
+    private CheckBox checkStandingAgg;
+    private NumericUpDown numericQuarterJLeague;
+    private CheckBox checkBoxQuarterJLeague;
+    private CheckBox checkBoxIgnoreJLeague;
     private Viewer2D viewer2DTrophy;
 
     public CompetitionForm()
@@ -1182,6 +1189,15 @@ namespace CreationMaster
           this.numericStandingKeep.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingskeep;
         this.checkStandingKeep.Checked = this.m_CurrentStage.Settings.Advance_standingskeep != -1;
         this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
+        if (this.m_CurrentStage.Settings.Advance_standingsagg != -1)
+          this.numericStandingAgg.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsagg;
+        this.checkStandingAgg.Checked = this.m_CurrentStage.Settings.Advance_standingsagg != -1;
+        this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
+        this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
+        if (this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1)
+          this.numericQuarterJLeague.Value = (Decimal)this.m_CurrentStage.Settings.Advance_jleagueqtrsetup;
+        this.checkBoxQuarterJLeague.Checked = this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1;
+        this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
         if (this.m_CurrentStage.Settings.Advance_standingsrank != -1)
           this.numericStandingsRank.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsrank;
         this.checkStandingsRank.Checked = this.m_CurrentStage.Settings.Advance_standingsrank != -1;
@@ -1250,6 +1266,7 @@ namespace CreationMaster
           this.groupSetupStage.Visible = true;
           this.groupPlayStage.Visible = false;
           this.checkRandomDraw.Checked = this.m_CurrentStage.Settings.m_advance_randomdraw != -1;
+          this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
           this.checkCalccompavgs.Checked = this.m_CurrentStage.Settings.m_advance_calccompavgs != -1;
           for (int index = 0; index < 4; ++index)
           {
@@ -1600,7 +1617,8 @@ namespace CreationMaster
         this.groupTrophy.Text = this.m_CurrentTrophy.ShortName;
         this.textTrophyLongName.Text = this.m_CurrentTrophy.LongName;
         this.textTrophyShortName.Text = this.m_CurrentTrophy.ShortName;
-        this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id;
+        this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
+        this.numericAssetIdAperClau.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[1];
         this.numericBall.Value = (Decimal)this.m_CurrentTrophy.ballid;
         this.comboCompetitionType.SelectedItem = (object)this.m_CurrentTrophy.Settings.m_comp_type;
         this.checkScheduleConflicts.Checked = this.m_CurrentTrophy.Settings.m_schedule_checkconflict == 1;
@@ -1921,20 +1939,20 @@ namespace CreationMaster
       if (this.m_LockToPanel || this.m_Locked)
         return;
       int assetId = (int)this.numericAssetId.Value;
-      if (assetId == this.m_CurrentTrophy.Settings.m_asset_id)
+      if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[0])
         return;
       this.m_Locked = true;
       foreach (Compobj competitionObject in (ArrayList)FifaEnvironment.CompetitionObjects)
       {
-        if (competitionObject.IsTrophy() && competitionObject.Settings.m_asset_id == assetId)
+        if (competitionObject.IsTrophy() && competitionObject.Settings.m_asset_id[0] == assetId)
         {
           int num = (int)FifaEnvironment.UserMessages.ShowMessage(1015);
-          this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id;
+          this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
           this.m_Locked = false;
           return;
         }
       }
-      this.m_CurrentTrophy.Settings.m_asset_id = assetId;
+      this.m_CurrentTrophy.Settings.SetAssetId(0, assetId);
       this.m_CurrentTrophy.Description = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
       this.textLanguageKey.Text = this.m_CurrentTrophy.Description;
       this.textFourCharName.Text = "C" + this.m_CurrentTrophy.Settings.m_asset_id.ToString();
@@ -2274,7 +2292,7 @@ namespace CreationMaster
         return;
       this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
       this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
-      this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
+      //this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
     }
 
     private void checkKeepPointsPercentage_CheckedChanged(object sender, EventArgs e)
@@ -2363,7 +2381,7 @@ namespace CreationMaster
         return;
       this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
       this.numericStandingsRank.Visible = this.checkStandingsRank.Checked;
-      this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
+      //this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
     }
 
     private void numericStandingsRank_ValueChanged(object sender, EventArgs e)
@@ -3311,7 +3329,7 @@ namespace CreationMaster
       Trophy trophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
       this.m_CurrentCompobj.Trophies.Add((object)trophy);
       this.m_Competitions.Add((object)trophy);
-      trophy.Settings.m_asset_id = assetId;
+      trophy.Settings.m_asset_id[0] = assetId;
       trophy.Settings.m_rule_numsubsbench = 5;
       trophy.Settings.m_match_matchimportance = 25;
       trophy.Settings.m_comp_type = "LEAGUE";
@@ -3506,7 +3524,7 @@ namespace CreationMaster
       Trophy newTrophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
       this.m_CurrentCompobj.Trophies.Add((object)newTrophy);
       this.m_Competitions.Add((object)newTrophy);
-      newTrophy.Settings.m_asset_id = assetId;
+      newTrophy.Settings.m_asset_id[0] = assetId;
       newTrophy.Settings.m_rule_numsubsbench = this.m_ClipboardTrophy.Settings.m_rule_numsubsbench;
       newTrophy.Settings.m_match_matchimportance = this.m_ClipboardTrophy.Settings.m_match_matchimportance;
       newTrophy.Settings.m_comp_type = this.m_ClipboardTrophy.Settings.m_comp_type;
@@ -3542,6 +3560,7 @@ namespace CreationMaster
         stage1.Settings.m_advance_maxteamsgroup = stage2.Settings.m_advance_maxteamsgroup;
         stage1.Settings.m_schedule_reversed = stage2.Settings.m_schedule_reversed;
         stage1.Settings.Advance_standingskeep = stage2.Settings.Advance_standingskeep;
+        stage1.Settings.Advance_standingsagg = stage2.Settings.Advance_standingsagg;
         stage1.Settings.Advance_pointskeep = stage2.Settings.Advance_pointskeep;
         stage1.Settings.m_advance_pointskeeppercentage = stage2.Settings.m_advance_pointskeeppercentage;
         stage1.Settings.Advance_standingsrank = stage2.Settings.Advance_standingsrank;
@@ -3549,6 +3568,7 @@ namespace CreationMaster
         stage1.Settings.m_EndRuleKo2Leg2 = stage2.Settings.m_EndRuleKo2Leg2;
         stage1.Settings.Standings_checkrank = stage2.Settings.Standings_checkrank;
         stage1.Settings.m_advance_randomdraw = stage2.Settings.m_advance_randomdraw;
+        stage1.Settings.m_advance_jleagueignorecheck = stage2.Settings.m_advance_jleagueignorecheck;
         stage1.Settings.m_advance_calccompavgs = stage2.Settings.m_advance_calccompavgs;
         stage2.CopyTasks(stage1, targetLeague);
         TreeNode treeNode2 = treeNode1.Nodes.Add(stage1.ToString());
@@ -4545,6 +4565,18 @@ namespace CreationMaster
       this.m_CurrentTrophy.Settings.m_match_celebrationlevel = this.checkLowCelebrationLevel.Checked ? "LOW" : null;
     }
 
+    private void numericAssetIdAperClau_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel || this.m_Locked)
+        return;
+      int assetId = (int)this.numericAssetIdAperClau.Value;
+      if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[1])
+        return;
+      this.m_Locked = true;
+      this.m_CurrentTrophy.Settings.SetAssetId(1, assetId);
+      this.m_Locked = false;
+    }
+
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
@@ -4644,6 +4676,9 @@ namespace CreationMaster
       this.numericNationYellowsStored = new System.Windows.Forms.NumericUpDown();
       this.comboNationStartMonth = new System.Windows.Forms.ComboBox();
       this.groupTrophy = new System.Windows.Forms.GroupBox();
+      this.label73 = new System.Windows.Forms.Label();
+      this.numericAssetIdAperClau = new System.Windows.Forms.NumericUpDown();
+      this.checkLowCelebrationLevel = new System.Windows.Forms.CheckBox();
       this.groupInternationalschedule = new System.Windows.Forms.GroupBox();
       this.label71 = new System.Windows.Forms.Label();
       this.comboTrophyStartMonth = new System.Windows.Forms.ComboBox();
@@ -4681,6 +4716,8 @@ namespace CreationMaster
       this.labeTrophylLongName = new System.Windows.Forms.Label();
       this.textTrophyShortName = new System.Windows.Forms.TextBox();
       this.groupStage = new System.Windows.Forms.GroupBox();
+      this.numericStandingAgg = new System.Windows.Forms.NumericUpDown();
+      this.checkStandingAgg = new System.Windows.Forms.CheckBox();
       this.groupPlayStage = new System.Windows.Forms.GroupBox();
       this.groupStageInfoColors = new System.Windows.Forms.GroupBox();
       this.numericStageColorAdvanceMax = new System.Windows.Forms.NumericUpDown();
@@ -4747,6 +4784,9 @@ namespace CreationMaster
       this.comboMatchSituation = new System.Windows.Forms.ComboBox();
       this.label8 = new System.Windows.Forms.Label();
       this.groupSetupStage = new System.Windows.Forms.GroupBox();
+      this.numericQuarterJLeague = new System.Windows.Forms.NumericUpDown();
+      this.checkBoxQuarterJLeague = new System.Windows.Forms.CheckBox();
+      this.checkBoxIgnoreJLeague = new System.Windows.Forms.CheckBox();
       this.checkRandomDraw = new System.Windows.Forms.CheckBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.comboSpecialTeam4 = new System.Windows.Forms.ComboBox();
@@ -4890,12 +4930,8 @@ namespace CreationMaster
       this.tabPageTrophyGraphics = new System.Windows.Forms.TabPage();
       this.groupGraphics = new System.Windows.Forms.GroupBox();
       this.buttonReplicateTropy = new System.Windows.Forms.Button();
-      this.viewer2DTrophy = new FifaControls.Viewer2D();
       this.buttonReplicateTrophy128 = new System.Windows.Forms.Button();
-      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
-      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
       this.group3D = new System.Windows.Forms.GroupBox();
-      this.viewer3D = new FifaControls.Viewer3D();
       this.toolNear3D = new System.Windows.Forms.ToolStrip();
       this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -4903,7 +4939,6 @@ namespace CreationMaster
       this.buttonExport3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.buttonRemove3DModel = new System.Windows.Forms.ToolStripButton();
-      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
       this.pageStage = new System.Windows.Forms.TabPage();
       this.pageGroup = new System.Windows.Forms.TabPage();
       this.groupGroup = new System.Windows.Forms.GroupBox();
@@ -4990,7 +5025,11 @@ namespace CreationMaster
       this.label2 = new System.Windows.Forms.Label();
       this.textFourCharName = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.checkLowCelebrationLevel = new System.Windows.Forms.CheckBox();
+      this.viewer2DTrophy = new FifaControls.Viewer2D();
+      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
+      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
+      this.viewer3D = new FifaControls.Viewer3D();
+      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
       this.groupConfederation.SuspendLayout();
       this.groupNation.SuspendLayout();
       this.groupWeather.SuspendLayout();
@@ -5033,6 +5072,7 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericNationYellowsStored)).BeginInit();
       this.groupTrophy.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericAssetIdAperClau)).BeginInit();
       this.groupInternationalschedule.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericInternationalPeriodicity)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericInternationalFirstYear)).BeginInit();
@@ -5044,6 +5084,7 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericAssetId)).BeginInit();
       this.groupSchedule.SuspendLayout();
       this.groupStage.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStandingAgg)).BeginInit();
       this.groupPlayStage.SuspendLayout();
       this.groupStageInfoColors.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericStageColorAdvanceMax)).BeginInit();
@@ -5063,6 +5104,7 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericMoneyDrop)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericPrizeMoney)).BeginInit();
       this.groupSetupStage.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericQuarterJLeague)).BeginInit();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingsRank)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingKeep)).BeginInit();
@@ -6706,6 +6748,8 @@ namespace CreationMaster
       // 
       // groupTrophy
       // 
+      this.groupTrophy.Controls.Add(this.label73);
+      this.groupTrophy.Controls.Add(this.numericAssetIdAperClau);
       this.groupTrophy.Controls.Add(this.checkLowCelebrationLevel);
       this.groupTrophy.Controls.Add(this.groupInternationalschedule);
       this.groupTrophy.Controls.Add(this.label67);
@@ -6735,6 +6779,41 @@ namespace CreationMaster
       this.groupTrophy.TabStop = false;
       this.groupTrophy.Text = "Trophy";
       this.groupTrophy.Visible = false;
+      // 
+      // label73
+      // 
+      this.label73.AutoSize = true;
+      this.label73.Location = new System.Drawing.Point(16, 107);
+      this.label73.Name = "label73";
+      this.label73.Size = new System.Drawing.Size(134, 13);
+      this.label73.TabIndex = 169;
+      this.label73.Text = "Asset Id Apertura/Clausura";
+      // 
+      // numericAssetIdAperClau
+      // 
+      this.numericAssetIdAperClau.Location = new System.Drawing.Point(164, 103);
+      this.numericAssetIdAperClau.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
+      this.numericAssetIdAperClau.Name = "numericAssetIdAperClau";
+      this.numericAssetIdAperClau.Size = new System.Drawing.Size(146, 20);
+      this.numericAssetIdAperClau.TabIndex = 170;
+      this.numericAssetIdAperClau.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericAssetIdAperClau.ValueChanged += new System.EventHandler(this.numericAssetIdAperClau_ValueChanged);
+      // 
+      // checkLowCelebrationLevel
+      // 
+      this.checkLowCelebrationLevel.AutoSize = true;
+      this.checkLowCelebrationLevel.Location = new System.Drawing.Point(18, 183);
+      this.checkLowCelebrationLevel.Name = "checkLowCelebrationLevel";
+      this.checkLowCelebrationLevel.Size = new System.Drawing.Size(131, 17);
+      this.checkLowCelebrationLevel.TabIndex = 168;
+      this.checkLowCelebrationLevel.Text = "Low Celebration Level";
+      this.toolTip.SetToolTip(this.checkLowCelebrationLevel, "Check this box for international competitions");
+      this.checkLowCelebrationLevel.UseVisualStyleBackColor = true;
+      this.checkLowCelebrationLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
       // 
       // groupInternationalschedule
       // 
@@ -6954,7 +7033,7 @@ namespace CreationMaster
       // labelMatchImportance
       // 
       this.labelMatchImportance.AutoSize = true;
-      this.labelMatchImportance.Location = new System.Drawing.Point(15, 133);
+      this.labelMatchImportance.Location = new System.Drawing.Point(15, 160);
       this.labelMatchImportance.Name = "labelMatchImportance";
       this.labelMatchImportance.Size = new System.Drawing.Size(93, 13);
       this.labelMatchImportance.TabIndex = 14;
@@ -6964,7 +7043,7 @@ namespace CreationMaster
       // labelCompetitionType
       // 
       this.labelCompetitionType.AutoSize = true;
-      this.labelCompetitionType.Location = new System.Drawing.Point(16, 107);
+      this.labelCompetitionType.Location = new System.Drawing.Point(16, 134);
       this.labelCompetitionType.Name = "labelCompetitionType";
       this.labelCompetitionType.Size = new System.Drawing.Size(89, 13);
       this.labelCompetitionType.TabIndex = 10;
@@ -6972,7 +7051,7 @@ namespace CreationMaster
       // 
       // numericImportance
       // 
-      this.numericImportance.Location = new System.Drawing.Point(164, 131);
+      this.numericImportance.Location = new System.Drawing.Point(164, 158);
       this.numericImportance.Name = "numericImportance";
       this.numericImportance.Size = new System.Drawing.Size(68, 20);
       this.numericImportance.TabIndex = 157;
@@ -6982,7 +7061,7 @@ namespace CreationMaster
       // labelAssetId
       // 
       this.labelAssetId.AutoSize = true;
-      this.labelAssetId.Location = new System.Drawing.Point(16, 85);
+      this.labelAssetId.Location = new System.Drawing.Point(16, 80);
       this.labelAssetId.Name = "labelAssetId";
       this.labelAssetId.Size = new System.Drawing.Size(45, 13);
       this.labelAssetId.TabIndex = 12;
@@ -7000,7 +7079,7 @@ namespace CreationMaster
             "INTERCUP",
             "INTERQUAL",
             "INTERFRIENDLY"});
-      this.comboCompetitionType.Location = new System.Drawing.Point(164, 104);
+      this.comboCompetitionType.Location = new System.Drawing.Point(164, 131);
       this.comboCompetitionType.Name = "comboCompetitionType";
       this.comboCompetitionType.Size = new System.Drawing.Size(185, 21);
       this.comboCompetitionType.TabIndex = 156;
@@ -7181,6 +7260,8 @@ namespace CreationMaster
       // 
       // groupStage
       // 
+      this.groupStage.Controls.Add(this.numericStandingAgg);
+      this.groupStage.Controls.Add(this.checkStandingAgg);
       this.groupStage.Controls.Add(this.groupPlayStage);
       this.groupStage.Controls.Add(this.groupSetupStage);
       this.groupStage.Controls.Add(this.comboStageStandingRules);
@@ -7198,6 +7279,32 @@ namespace CreationMaster
       this.groupStage.TabStop = false;
       this.groupStage.Text = "Stage";
       this.groupStage.Visible = false;
+      // 
+      // numericStandingAgg
+      // 
+      this.numericStandingAgg.BackColor = System.Drawing.Color.Yellow;
+      this.numericStandingAgg.Location = new System.Drawing.Point(697, 20);
+      this.numericStandingAgg.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+      this.numericStandingAgg.Name = "numericStandingAgg";
+      this.numericStandingAgg.Size = new System.Drawing.Size(83, 20);
+      this.numericStandingAgg.TabIndex = 169;
+      this.numericStandingAgg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericStandingAgg.ValueChanged += new System.EventHandler(this.numericStandingAgg_ValueChanged);
+      // 
+      // checkStandingAgg
+      // 
+      this.checkStandingAgg.AutoSize = true;
+      this.checkStandingAgg.Location = new System.Drawing.Point(568, 22);
+      this.checkStandingAgg.Name = "checkStandingAgg";
+      this.checkStandingAgg.Size = new System.Drawing.Size(123, 17);
+      this.checkStandingAgg.TabIndex = 168;
+      this.checkStandingAgg.Text = "Aggregate standings";
+      this.checkStandingAgg.UseVisualStyleBackColor = true;
+      this.checkStandingAgg.CheckedChanged += new System.EventHandler(this.checkStandingAgg_CheckedChanged);
       // 
       // groupPlayStage
       // 
@@ -8074,16 +8181,56 @@ namespace CreationMaster
       // 
       // groupSetupStage
       // 
+      this.groupSetupStage.Controls.Add(this.numericQuarterJLeague);
+      this.groupSetupStage.Controls.Add(this.checkBoxQuarterJLeague);
+      this.groupSetupStage.Controls.Add(this.checkBoxIgnoreJLeague);
       this.groupSetupStage.Controls.Add(this.checkRandomDraw);
       this.groupSetupStage.Controls.Add(this.groupBox2);
       this.groupSetupStage.Controls.Add(this.checkCalccompavgs);
-      this.groupSetupStage.Location = new System.Drawing.Point(6, 73);
+      this.groupSetupStage.Location = new System.Drawing.Point(6, 75);
       this.groupSetupStage.Name = "groupSetupStage";
-      this.groupSetupStage.Size = new System.Drawing.Size(468, 161);
+      this.groupSetupStage.Size = new System.Drawing.Size(610, 159);
       this.groupSetupStage.TabIndex = 17;
       this.groupSetupStage.TabStop = false;
       this.groupSetupStage.Text = "Setup Stage";
       this.groupSetupStage.Visible = false;
+      // 
+      // numericQuarterJLeague
+      // 
+      this.numericQuarterJLeague.BackColor = System.Drawing.Color.Yellow;
+      this.numericQuarterJLeague.Location = new System.Drawing.Point(511, 44);
+      this.numericQuarterJLeague.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+      this.numericQuarterJLeague.Name = "numericQuarterJLeague";
+      this.numericQuarterJLeague.Size = new System.Drawing.Size(83, 20);
+      this.numericQuarterJLeague.TabIndex = 170;
+      this.numericQuarterJLeague.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericQuarterJLeague.ValueChanged += new System.EventHandler(this.numericQuarterJLeague_ValueChanged);
+      // 
+      // checkBoxQuarterJLeague
+      // 
+      this.checkBoxQuarterJLeague.AutoSize = true;
+      this.checkBoxQuarterJLeague.Location = new System.Drawing.Point(369, 45);
+      this.checkBoxQuarterJLeague.Name = "checkBoxQuarterJLeague";
+      this.checkBoxQuarterJLeague.Size = new System.Drawing.Size(137, 17);
+      this.checkBoxQuarterJLeague.TabIndex = 169;
+      this.checkBoxQuarterJLeague.Text = "Quarter setup J-League";
+      this.checkBoxQuarterJLeague.UseVisualStyleBackColor = true;
+      this.checkBoxQuarterJLeague.CheckedChanged += new System.EventHandler(this.checkBoxQuarterJLeague_CheckedChanged);
+      // 
+      // checkBoxIgnoreJLeague
+      // 
+      this.checkBoxIgnoreJLeague.AutoSize = true;
+      this.checkBoxIgnoreJLeague.Location = new System.Drawing.Point(369, 19);
+      this.checkBoxIgnoreJLeague.Name = "checkBoxIgnoreJLeague";
+      this.checkBoxIgnoreJLeague.Size = new System.Drawing.Size(136, 17);
+      this.checkBoxIgnoreJLeague.TabIndex = 168;
+      this.checkBoxIgnoreJLeague.Text = "Ignore check J-League";
+      this.checkBoxIgnoreJLeague.UseVisualStyleBackColor = true;
+      this.checkBoxIgnoreJLeague.CheckedChanged += new System.EventHandler(this.checkBoxIgnoreJLeague_CheckedChanged);
       // 
       // checkRandomDraw
       // 
@@ -8187,7 +8334,7 @@ namespace CreationMaster
       // numericStandingsRank
       // 
       this.numericStandingsRank.BackColor = System.Drawing.Color.Yellow;
-      this.numericStandingsRank.Location = new System.Drawing.Point(480, 46);
+      this.numericStandingsRank.Location = new System.Drawing.Point(479, 46);
       this.numericStandingsRank.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -8237,7 +8384,7 @@ namespace CreationMaster
       // numericStandingKeep
       // 
       this.numericStandingKeep.BackColor = System.Drawing.Color.Yellow;
-      this.numericStandingKeep.Location = new System.Drawing.Point(480, 20);
+      this.numericStandingKeep.Location = new System.Drawing.Point(479, 20);
       this.numericStandingKeep.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -9701,25 +9848,6 @@ namespace CreationMaster
       this.buttonReplicateTropy.UseVisualStyleBackColor = true;
       this.buttonReplicateTropy.Click += new System.EventHandler(this.buttonReplicateTropy_Click);
       // 
-      // viewer2DTrophy
-      // 
-      this.viewer2DTrophy.AutoTransparency = true;
-      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy.ButtonStripVisible = false;
-      this.viewer2DTrophy.CurrentBitmap = null;
-      this.viewer2DTrophy.ExtendedFormat = false;
-      this.viewer2DTrophy.FullSizeButton = false;
-      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
-      this.viewer2DTrophy.Name = "viewer2DTrophy";
-      this.viewer2DTrophy.RemoveButton = false;
-      this.viewer2DTrophy.ShowButton = false;
-      this.viewer2DTrophy.ShowButtonChecked = true;
-      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy.TabIndex = 171;
-      // 
       // buttonReplicateTrophy128
       // 
       this.buttonReplicateTrophy128.Location = new System.Drawing.Point(563, 179);
@@ -9729,39 +9857,6 @@ namespace CreationMaster
       this.buttonReplicateTrophy128.Text = "Replicate";
       this.buttonReplicateTrophy128.UseVisualStyleBackColor = true;
       this.buttonReplicateTrophy128.Click += new System.EventHandler(this.buttonReplicateTrophy128_Click);
-      // 
-      // viewer2DTrophy128
-      // 
-      this.viewer2DTrophy128.AutoTransparency = true;
-      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy128.ButtonStripVisible = false;
-      this.viewer2DTrophy128.CurrentBitmap = null;
-      this.viewer2DTrophy128.ExtendedFormat = false;
-      this.viewer2DTrophy128.FullSizeButton = false;
-      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
-      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
-      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
-      this.viewer2DTrophy128.RemoveButton = false;
-      this.viewer2DTrophy128.ShowButton = false;
-      this.viewer2DTrophy128.ShowButtonChecked = true;
-      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
-      this.viewer2DTrophy128.TabIndex = 169;
-      // 
-      // multiViewer2DTextures
-      // 
-      this.multiViewer2DTextures.AutoTransparency = false;
-      this.multiViewer2DTextures.Bitmaps = null;
-      this.multiViewer2DTextures.CheckBitmapSize = true;
-      this.multiViewer2DTextures.FixedSize = true;
-      this.multiViewer2DTextures.FullSizeButton = false;
-      this.multiViewer2DTextures.LabelText = "Texture";
-      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
-      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
-      this.multiViewer2DTextures.ShowDeleteButton = false;
-      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
-      this.multiViewer2DTextures.TabIndex = 168;
       // 
       // group3D
       // 
@@ -9773,30 +9868,6 @@ namespace CreationMaster
       this.group3D.TabIndex = 167;
       this.group3D.TabStop = false;
       this.group3D.Text = "3D Model";
-      // 
-      // viewer3D
-      // 
-      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
-      this.viewer3D.BackColor = System.Drawing.Color.Gray;
-      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.viewer3D.LightDirectionX = 0.5F;
-      this.viewer3D.LightDirectionY = -0.25F;
-      this.viewer3D.LightDirectionZ = -1F;
-      this.viewer3D.LightX = -30F;
-      this.viewer3D.LightY = 10F;
-      this.viewer3D.LightZ = 30F;
-      this.viewer3D.Location = new System.Drawing.Point(3, 16);
-      this.viewer3D.Name = "viewer3D";
-      this.viewer3D.RotationX = 0F;
-      this.viewer3D.RotationY = 0F;
-      this.viewer3D.RotationYCoeff = 0.01F;
-      this.viewer3D.Size = new System.Drawing.Size(439, 270);
-      this.viewer3D.TabIndex = 1;
-      this.viewer3D.ViewX = 0F;
-      this.viewer3D.ViewY = 35F;
-      this.viewer3D.ViewZ = 105F;
-      this.viewer3D.ZbufferRenderState = null;
       // 
       // toolNear3D
       // 
@@ -9864,25 +9935,6 @@ namespace CreationMaster
       this.buttonRemove3DModel.Size = new System.Drawing.Size(23, 22);
       this.buttonRemove3DModel.Text = "Remove 3D Model";
       this.buttonRemove3DModel.Click += new System.EventHandler(this.buttonRemove3DModel_Click);
-      // 
-      // viewer2DTrophy256
-      // 
-      this.viewer2DTrophy256.AutoTransparency = true;
-      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy256.ButtonStripVisible = false;
-      this.viewer2DTrophy256.CurrentBitmap = null;
-      this.viewer2DTrophy256.ExtendedFormat = false;
-      this.viewer2DTrophy256.FullSizeButton = false;
-      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
-      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
-      this.viewer2DTrophy256.RemoveButton = false;
-      this.viewer2DTrophy256.ShowButton = false;
-      this.viewer2DTrophy256.ShowButtonChecked = true;
-      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy256.TabIndex = 163;
       // 
       // pageStage
       // 
@@ -11196,17 +11248,100 @@ namespace CreationMaster
       this.label1.TabIndex = 0;
       this.label1.Text = "4 Chars Name";
       // 
-      // checkLowCelebrationLevel
+      // viewer2DTrophy
       // 
-      this.checkLowCelebrationLevel.AutoSize = true;
-      this.checkLowCelebrationLevel.Location = new System.Drawing.Point(18, 171);
-      this.checkLowCelebrationLevel.Name = "checkLowCelebrationLevel";
-      this.checkLowCelebrationLevel.Size = new System.Drawing.Size(131, 17);
-      this.checkLowCelebrationLevel.TabIndex = 168;
-      this.checkLowCelebrationLevel.Text = "Low Celebration Level";
-      this.toolTip.SetToolTip(this.checkLowCelebrationLevel, "Check this box for international competitions");
-      this.checkLowCelebrationLevel.UseVisualStyleBackColor = true;
-      this.checkLowCelebrationLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+      this.viewer2DTrophy.AutoTransparency = true;
+      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy.ButtonStripVisible = false;
+      this.viewer2DTrophy.CurrentBitmap = null;
+      this.viewer2DTrophy.ExtendedFormat = false;
+      this.viewer2DTrophy.FullSizeButton = false;
+      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
+      this.viewer2DTrophy.Name = "viewer2DTrophy";
+      this.viewer2DTrophy.RemoveButton = false;
+      this.viewer2DTrophy.ShowButton = false;
+      this.viewer2DTrophy.ShowButtonChecked = true;
+      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy.TabIndex = 171;
+      // 
+      // viewer2DTrophy128
+      // 
+      this.viewer2DTrophy128.AutoTransparency = true;
+      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy128.ButtonStripVisible = false;
+      this.viewer2DTrophy128.CurrentBitmap = null;
+      this.viewer2DTrophy128.ExtendedFormat = false;
+      this.viewer2DTrophy128.FullSizeButton = false;
+      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
+      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
+      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
+      this.viewer2DTrophy128.RemoveButton = false;
+      this.viewer2DTrophy128.ShowButton = false;
+      this.viewer2DTrophy128.ShowButtonChecked = true;
+      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
+      this.viewer2DTrophy128.TabIndex = 169;
+      // 
+      // multiViewer2DTextures
+      // 
+      this.multiViewer2DTextures.AutoTransparency = false;
+      this.multiViewer2DTextures.Bitmaps = null;
+      this.multiViewer2DTextures.CheckBitmapSize = true;
+      this.multiViewer2DTextures.FixedSize = true;
+      this.multiViewer2DTextures.FullSizeButton = false;
+      this.multiViewer2DTextures.LabelText = "Texture";
+      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
+      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
+      this.multiViewer2DTextures.ShowDeleteButton = false;
+      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
+      this.multiViewer2DTextures.TabIndex = 168;
+      // 
+      // viewer3D
+      // 
+      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
+      this.viewer3D.BackColor = System.Drawing.Color.Gray;
+      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.viewer3D.LightDirectionX = 0.5F;
+      this.viewer3D.LightDirectionY = -0.25F;
+      this.viewer3D.LightDirectionZ = -1F;
+      this.viewer3D.LightX = -30F;
+      this.viewer3D.LightY = 10F;
+      this.viewer3D.LightZ = 30F;
+      this.viewer3D.Location = new System.Drawing.Point(3, 16);
+      this.viewer3D.Name = "viewer3D";
+      this.viewer3D.RotationX = 0F;
+      this.viewer3D.RotationY = 0F;
+      this.viewer3D.RotationYCoeff = 0.01F;
+      this.viewer3D.Size = new System.Drawing.Size(439, 270);
+      this.viewer3D.TabIndex = 1;
+      this.viewer3D.ViewX = 0F;
+      this.viewer3D.ViewY = 35F;
+      this.viewer3D.ViewZ = 105F;
+      this.viewer3D.ZbufferRenderState = null;
+      // 
+      // viewer2DTrophy256
+      // 
+      this.viewer2DTrophy256.AutoTransparency = true;
+      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy256.ButtonStripVisible = false;
+      this.viewer2DTrophy256.CurrentBitmap = null;
+      this.viewer2DTrophy256.ExtendedFormat = false;
+      this.viewer2DTrophy256.FullSizeButton = false;
+      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
+      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
+      this.viewer2DTrophy256.RemoveButton = false;
+      this.viewer2DTrophy256.ShowButton = false;
+      this.viewer2DTrophy256.ShowButtonChecked = true;
+      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy256.TabIndex = 163;
       // 
       // CompetitionForm
       // 
@@ -11266,6 +11401,7 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericNationYellowsStored)).EndInit();
       this.groupTrophy.ResumeLayout(false);
       this.groupTrophy.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericAssetIdAperClau)).EndInit();
       this.groupInternationalschedule.ResumeLayout(false);
       this.groupInternationalschedule.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericInternationalPeriodicity)).EndInit();
@@ -11281,6 +11417,7 @@ namespace CreationMaster
       this.groupSchedule.PerformLayout();
       this.groupStage.ResumeLayout(false);
       this.groupStage.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericStandingAgg)).EndInit();
       this.groupPlayStage.ResumeLayout(false);
       this.groupPlayStage.PerformLayout();
       this.groupStageInfoColors.ResumeLayout(false);
@@ -11306,6 +11443,7 @@ namespace CreationMaster
       ((System.ComponentModel.ISupportInitialize)(this.numericPrizeMoney)).EndInit();
       this.groupSetupStage.ResumeLayout(false);
       this.groupSetupStage.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericQuarterJLeague)).EndInit();
       this.groupBox2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingsRank)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericStandingKeep)).EndInit();
@@ -11410,6 +11548,45 @@ namespace CreationMaster
       this.panelCompObj.PerformLayout();
       this.ResumeLayout(false);
 
+    }
+
+    private void checkStandingAgg_CheckedChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
+      this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
+     //this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
+    }
+
+    private void numericStandingAgg_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingsagg == (int)this.numericStandingAgg.Value)
+        return;
+      this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
+    }
+
+    private void checkBoxQuarterJLeague_CheckedChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
+      this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
+      //this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
+    }
+
+    private void numericQuarterJLeague_ValueChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_jleagueqtrsetup == (int)this.numericQuarterJLeague.Value)
+        return;
+      this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
+    }
+
+    private void checkBoxIgnoreJLeague_CheckedChanged(object sender, EventArgs e)
+    {
+      if (this.m_LockToPanel)
+        return;
+      this.m_CurrentStage.Settings.m_advance_jleagueignorecheck = this.checkBoxIgnoreJLeague.Checked ? 1 : -1;
     }
   }
 }

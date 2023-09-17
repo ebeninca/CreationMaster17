@@ -877,7 +877,7 @@ namespace FifaLibrary
     {
       foreach (Compobj compobj in (ArrayList)this)
       {
-        if (compobj.IsTrophy() && compobj.Settings.m_asset_id == assetId)
+        if (compobj.IsTrophy() && Array.IndexOf(compobj.Settings.m_asset_id, assetId) >= 0)
           return (Trophy)compobj;
       }
       return (Trophy)null;

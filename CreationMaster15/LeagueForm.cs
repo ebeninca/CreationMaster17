@@ -1238,10 +1238,10 @@ namespace CreationMaster
       selectedItem.SetTinyLogoDark(tinyLogo2);
       if (trophy1 != null)
       {
-        trophy1.Settings.m_asset_id = selectedItem.Id;
+        trophy1.Settings.m_asset_id[0] = selectedItem.Id;
         trophy1.SetTrophy256(bitmap1);
         trophy1.SetTrophy128(bitmap2);
-        trophy1.Settings.m_asset_id = this.m_CurrentLeague.Id;
+        trophy1.Settings.m_asset_id[0] = this.m_CurrentLeague.Id;
         trophy1.TypeString = "C" + this.m_CurrentLeague.Id.ToString();
         trophy1.Description = FifaEnvironment.Language.GetTournamentConventionalString(this.m_CurrentLeague.Id, Language.ETournamentStringType.Abbr15);
         trophy1.SetTextures(bitmaps1);
@@ -1249,10 +1249,10 @@ namespace CreationMaster
       }
       if (trophy2 != null)
       {
-        trophy2.Settings.m_asset_id = id;
+        trophy2.Settings.m_asset_id[0] = id;
         trophy2.SetTrophy256(bitmap3);
         trophy2.SetTrophy128(bitmap4);
-        trophy2.Settings.m_asset_id = selectedItem.Id;
+        trophy2.Settings.m_asset_id[0] = selectedItem.Id;
         trophy2.TypeString = "C" + selectedItem.Id.ToString();
         trophy2.Description = FifaEnvironment.Language.GetTournamentConventionalString(selectedItem.Id, Language.ETournamentStringType.Abbr15);
         trophy2.SetTextures(bitmaps2);

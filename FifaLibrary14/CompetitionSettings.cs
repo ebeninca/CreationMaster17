@@ -8,7 +8,8 @@ namespace FifaLibrary
   public class CompetitionSettings
   {
     public int m_nation_id = -1;
-    public int m_asset_id = -1;
+    public int[] m_asset_id = new int[2];
+    public int m_N_asset_id;
     public int m_rule_numsubsbench = -1;
     public int m_rule_numsubsmatch = -1;
     public int m_rule_suspension = -1;
@@ -72,6 +73,9 @@ namespace FifaLibrary
     public int m_advance_maxteamsgroup = -1;
     private int m_advance_maxteamsstageref = -1;
     private int m_advance_standingskeep = -1;
+    private int m_advance_standingsagg = -1;
+    public int m_advance_jleagueignorecheck = -1;
+    private int m_advance_jleagueqtrsetup = -1;
     private int m_advance_standingsrank = -1;
     private int m_standings_checkrank = -1;
     public int m_advance_teamcompdependency = -1;
@@ -84,6 +88,8 @@ namespace FifaLibrary
     public int m_N_standings_sort;
     private Stage m_StageAdvanceMaxteamsStageRef;
     private Stage m_StageAdvanceStandingsKeep;
+    private Stage m_StageAdvanceStandingsAgg;
+    private Stage m_StageAdvanceJLeagueQtrSetup;
     private Stage m_StageAdvanceStandingsRank;
     private Stage m_StageStandingsCheckRank;
     private Stage m_StageAdvancePointsKeep;
@@ -555,6 +561,17 @@ namespace FifaLibrary
       return true;
     }
 
+    public bool SetAssetId(int pos, int val)
+    {
+      this.m_asset_id[pos] = val;
+      this.m_N_asset_id = 0;
+      foreach (int assetId in m_asset_id)
+      {
+        this.m_N_asset_id += (assetId > 0 ? 1 : 0);
+      }
+      return true;
+    }
+
     public Trophy TrophyCompdependency
     {
       get
@@ -620,6 +637,45 @@ namespace FifaLibrary
       set
       {
         this.m_advance_standingskeep = value;
+        this.UpdateStageReferenceUsingId();
+      }
+    }
+
+    public int Advance_standingsagg
+    {
+      get
+      {
+        return this.m_advance_standingsagg;
+      }
+      set
+      {
+        this.m_advance_standingsagg = value;
+        this.UpdateStageReferenceUsingId();
+      }
+    }
+
+    public int Advance_jleagueignorecheck
+    {
+      get
+      {
+        return this.m_advance_jleagueignorecheck;
+      }
+      set
+      {
+        this.m_advance_jleagueignorecheck = value;
+        this.UpdateStageReferenceUsingId();
+      }
+    }
+
+    public int Advance_jleagueqtrsetup
+    {
+      get
+      {
+        return this.m_advance_jleagueqtrsetup;
+      }
+      set
+      {
+        this.m_advance_jleagueqtrsetup = value;
         this.UpdateStageReferenceUsingId();
       }
     }
@@ -796,6 +852,8 @@ namespace FifaLibrary
     {
       this.m_advance_maxteamsstageref = this.m_StageAdvanceMaxteamsStageRef != null ? this.m_StageAdvanceMaxteamsStageRef.Id : -1;
       this.m_advance_standingskeep = this.m_StageAdvanceStandingsKeep != null ? this.m_StageAdvanceStandingsKeep.Id : -1;
+      this.m_advance_standingsagg = this.m_StageAdvanceStandingsAgg != null ? this.m_StageAdvanceStandingsAgg.Id : -1;
+      this.m_advance_jleagueqtrsetup = this.m_StageAdvanceJLeagueQtrSetup != null ? this.m_StageAdvanceJLeagueQtrSetup.Id : -1;
       this.m_advance_standingsrank = this.m_StageAdvanceStandingsRank != null ? this.m_StageAdvanceStandingsRank.Id : -1;
       this.m_standings_checkrank = this.m_StageStandingsCheckRank != null ? this.m_StageStandingsCheckRank.Id : -1;
       this.m_advance_pointskeep = this.m_StageAdvancePointsKeep != null ? this.m_StageAdvancePointsKeep.Id : -1;
@@ -831,6 +889,24 @@ namespace FifaLibrary
       {
         Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingskeep);
         this.m_StageAdvanceStandingsKeep = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
+      }
+      if (this.m_advance_standingsagg == -1)
+      {
+        this.m_StageAdvanceStandingsAgg = (Stage)null;
+      }
+      else
+      {
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_standingsagg);
+        this.m_StageAdvanceStandingsAgg = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
+      }
+      if (this.m_advance_jleagueqtrsetup == -1)
+      {
+        this.m_StageAdvanceJLeagueQtrSetup = (Stage)null;
+      }
+      else
+      {
+        Compobj compobj = (Compobj)FifaEnvironment.CompetitionObjects.SearchId(this.m_advance_jleagueqtrsetup);
+        this.m_StageAdvanceJLeagueQtrSetup = compobj == null || !compobj.IsStage() ? (Stage)null : (Stage)compobj;
       }
       if (this.m_advance_pointskeep == -1)
       {
@@ -923,8 +999,6 @@ namespace FifaLibrary
         this.m_rule_injuries = val;
       else if (property == "rule_numsubsbench")
         this.m_rule_numsubsbench = Convert.ToInt32(val);
-      else if (property == "rule_numsubsmatch")
-        this.m_rule_numsubsmatch = Convert.ToInt32(val);
       else if (property == "rule_suspension")
         this.m_rule_suspension = Convert.ToInt32(val);
       else if (property == "rule_numyellowstored")
@@ -956,7 +1030,14 @@ namespace FifaLibrary
       else if (property == "nation_id")
         this.m_nation_id = Convert.ToInt32(val);
       else if (property == "asset_id")
-        this.m_asset_id = Convert.ToInt32(val);
+      {
+        if (this.m_asset_id == null)
+          this.m_asset_id = new int[2];
+        if (this.m_N_asset_id >= this.m_asset_id.Length)
+          return;
+        this.m_asset_id[this.m_N_asset_id] = Convert.ToInt32(val);
+        ++this.m_N_asset_id;
+      }
       else if (property == "match_endruleleague")
         this.m_match_endruleleague = val;
       else if (property == "match_endruleko1leg")
@@ -1125,10 +1206,6 @@ namespace FifaLibrary
         this.m_info_color_slot_adv_group[this.m_N_info_color_slot_adv_group] = Convert.ToInt32(val);
         ++this.m_N_info_color_slot_adv_group;
       }
-      else if (property == "advance_standingsrank")
-        this.Advance_standingsrank = Convert.ToInt32(val);
-      else if (property == "asset_id")
-        this.m_asset_id = Convert.ToInt32(val);
       else if (property == "rule_numsubsmatch")
         this.m_rule_numsubsmatch = Convert.ToInt32(val);
       else if (property == "schedule_checkconflict")
@@ -1166,6 +1243,12 @@ namespace FifaLibrary
         this.Advance_maxteamsstageref = Convert.ToInt32(val);
       else if (property == "advance_standingskeep")
         this.Advance_standingskeep = Convert.ToInt32(val);
+      else if (property == "advance_standingsagg")
+        this.Advance_standingsagg = Convert.ToInt32(val);
+      else if (property == "advance_jleague_ignore_check")
+        this.Advance_jleagueignorecheck = Convert.ToInt32(val);
+      else if (property == "advance_jleague_qtr_setup")
+        this.Advance_jleagueqtrsetup = Convert.ToInt32(val);
       else if (property == "advance_standingsrank")
         this.Advance_standingsrank = Convert.ToInt32(val);
       else if (property == "schedule_matchreplay")
@@ -1371,6 +1454,12 @@ namespace FifaLibrary
         return this.m_advance_maxteamsstageref.ToString();
       if (property == "advance_standingskeep")
         return this.m_advance_standingskeep.ToString();
+      if (property == "advance_standingsagg")
+        return this.m_advance_standingsagg.ToString();
+      if (property == "advance_jleague_ignore_check")
+        return this.m_advance_jleagueignorecheck.ToString();
+      if (property == "advance_jleague_qtr_setup")
+        return this.m_advance_jleagueqtrsetup.ToString();
       if (property == "advance_standingsrank")
         return this.m_advance_standingsrank.ToString();
       if (property == "schedule_matchreplay")
@@ -1386,9 +1475,9 @@ namespace FifaLibrary
     {
       if (w == null)
         return false;
-      if (this.m_asset_id != -1)
+      for (int index = 0; index < this.m_N_asset_id; ++index)
       {
-        string str = id.ToString() + ",asset_id," + (object)this.m_asset_id;
+        string str = id.ToString() + ",asset_id," + (object)this.m_asset_id[index];
         w.WriteLine(str);
       }
       if (this.m_comp_type != null)
@@ -1562,6 +1651,8 @@ namespace FifaLibrary
       }
       if (this.m_match_stagetype != null)
       {
+        if (this.m_match_matchsituation == "LEAGUE")
+          return true;
         string str = id.ToString() + ",match_stagetype," + this.m_match_stagetype;
         w.WriteLine(str);
       }
@@ -1775,6 +1866,21 @@ namespace FifaLibrary
       if (this.m_advance_standingskeep != -1)
       {
         string str = id.ToString() + ",advance_standingskeep," + (object)this.m_advance_standingskeep;
+        w.WriteLine(str);
+      }
+      if (this.m_advance_standingsagg != -1)
+      {
+        string str = id.ToString() + ",advance_standingsagg," + (object)this.m_advance_standingsagg;
+        w.WriteLine(str);
+      }
+      if (this.m_advance_jleagueignorecheck != -1)
+      {
+        string str = id.ToString() + ",advance_jleague_ignore_check," + (object)this.m_advance_jleagueignorecheck;
+        w.WriteLine(str);
+      }
+      if (this.m_advance_jleagueqtrsetup != -1)
+      {
+        string str = id.ToString() + ",advance_jleague_qtr_setup," + (object)this.m_advance_jleagueqtrsetup;
         w.WriteLine(str);
       }
       if (this.m_advance_teamcompdependency != -1)
