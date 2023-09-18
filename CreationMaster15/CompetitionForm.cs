@@ -4930,8 +4930,12 @@ namespace CreationMaster
       this.tabPageTrophyGraphics = new System.Windows.Forms.TabPage();
       this.groupGraphics = new System.Windows.Forms.GroupBox();
       this.buttonReplicateTropy = new System.Windows.Forms.Button();
+      this.viewer2DTrophy = new FifaControls.Viewer2D();
       this.buttonReplicateTrophy128 = new System.Windows.Forms.Button();
+      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
+      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
       this.group3D = new System.Windows.Forms.GroupBox();
+      this.viewer3D = new FifaControls.Viewer3D();
       this.toolNear3D = new System.Windows.Forms.ToolStrip();
       this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -4939,6 +4943,7 @@ namespace CreationMaster
       this.buttonExport3DModel = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.buttonRemove3DModel = new System.Windows.Forms.ToolStripButton();
+      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
       this.pageStage = new System.Windows.Forms.TabPage();
       this.pageGroup = new System.Windows.Forms.TabPage();
       this.groupGroup = new System.Windows.Forms.GroupBox();
@@ -5025,11 +5030,6 @@ namespace CreationMaster
       this.label2 = new System.Windows.Forms.Label();
       this.textFourCharName = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.viewer2DTrophy = new FifaControls.Viewer2D();
-      this.viewer2DTrophy128 = new FifaControls.Viewer2D();
-      this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
-      this.viewer3D = new FifaControls.Viewer3D();
-      this.viewer2DTrophy256 = new FifaControls.Viewer2D();
       this.groupConfederation.SuspendLayout();
       this.groupNation.SuspendLayout();
       this.groupWeather.SuspendLayout();
@@ -9848,6 +9848,25 @@ namespace CreationMaster
       this.buttonReplicateTropy.UseVisualStyleBackColor = true;
       this.buttonReplicateTropy.Click += new System.EventHandler(this.buttonReplicateTropy_Click);
       // 
+      // viewer2DTrophy
+      // 
+      this.viewer2DTrophy.AutoTransparency = true;
+      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy.ButtonStripVisible = false;
+      this.viewer2DTrophy.CurrentBitmap = null;
+      this.viewer2DTrophy.ExtendedFormat = false;
+      this.viewer2DTrophy.FullSizeButton = false;
+      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
+      this.viewer2DTrophy.Name = "viewer2DTrophy";
+      this.viewer2DTrophy.RemoveButton = false;
+      this.viewer2DTrophy.ShowButton = false;
+      this.viewer2DTrophy.ShowButtonChecked = true;
+      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy.TabIndex = 171;
+      // 
       // buttonReplicateTrophy128
       // 
       this.buttonReplicateTrophy128.Location = new System.Drawing.Point(563, 179);
@@ -9857,6 +9876,39 @@ namespace CreationMaster
       this.buttonReplicateTrophy128.Text = "Replicate";
       this.buttonReplicateTrophy128.UseVisualStyleBackColor = true;
       this.buttonReplicateTrophy128.Click += new System.EventHandler(this.buttonReplicateTrophy128_Click);
+      // 
+      // viewer2DTrophy128
+      // 
+      this.viewer2DTrophy128.AutoTransparency = true;
+      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy128.ButtonStripVisible = false;
+      this.viewer2DTrophy128.CurrentBitmap = null;
+      this.viewer2DTrophy128.ExtendedFormat = false;
+      this.viewer2DTrophy128.FullSizeButton = false;
+      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
+      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
+      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
+      this.viewer2DTrophy128.RemoveButton = false;
+      this.viewer2DTrophy128.ShowButton = false;
+      this.viewer2DTrophy128.ShowButtonChecked = true;
+      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
+      this.viewer2DTrophy128.TabIndex = 169;
+      // 
+      // multiViewer2DTextures
+      // 
+      this.multiViewer2DTextures.AutoTransparency = false;
+      this.multiViewer2DTextures.Bitmaps = null;
+      this.multiViewer2DTextures.CheckBitmapSize = true;
+      this.multiViewer2DTextures.FixedSize = true;
+      this.multiViewer2DTextures.FullSizeButton = false;
+      this.multiViewer2DTextures.LabelText = "Texture";
+      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
+      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
+      this.multiViewer2DTextures.ShowDeleteButton = false;
+      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
+      this.multiViewer2DTextures.TabIndex = 168;
       // 
       // group3D
       // 
@@ -9868,6 +9920,30 @@ namespace CreationMaster
       this.group3D.TabIndex = 167;
       this.group3D.TabStop = false;
       this.group3D.Text = "3D Model";
+      // 
+      // viewer3D
+      // 
+      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
+      this.viewer3D.BackColor = System.Drawing.Color.Gray;
+      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.viewer3D.LightDirectionX = 0.5F;
+      this.viewer3D.LightDirectionY = -0.25F;
+      this.viewer3D.LightDirectionZ = -1F;
+      this.viewer3D.LightX = -30F;
+      this.viewer3D.LightY = 10F;
+      this.viewer3D.LightZ = 30F;
+      this.viewer3D.Location = new System.Drawing.Point(3, 16);
+      this.viewer3D.Name = "viewer3D";
+      this.viewer3D.RotationX = 0F;
+      this.viewer3D.RotationY = 0F;
+      this.viewer3D.RotationYCoeff = 0.01F;
+      this.viewer3D.Size = new System.Drawing.Size(439, 270);
+      this.viewer3D.TabIndex = 1;
+      this.viewer3D.ViewX = 0F;
+      this.viewer3D.ViewY = 35F;
+      this.viewer3D.ViewZ = 105F;
+      this.viewer3D.ZbufferRenderState = null;
       // 
       // toolNear3D
       // 
@@ -9935,6 +10011,25 @@ namespace CreationMaster
       this.buttonRemove3DModel.Size = new System.Drawing.Size(23, 22);
       this.buttonRemove3DModel.Text = "Remove 3D Model";
       this.buttonRemove3DModel.Click += new System.EventHandler(this.buttonRemove3DModel_Click);
+      // 
+      // viewer2DTrophy256
+      // 
+      this.viewer2DTrophy256.AutoTransparency = true;
+      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
+      this.viewer2DTrophy256.ButtonStripVisible = false;
+      this.viewer2DTrophy256.CurrentBitmap = null;
+      this.viewer2DTrophy256.ExtendedFormat = false;
+      this.viewer2DTrophy256.FullSizeButton = false;
+      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
+      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
+      this.viewer2DTrophy256.RemoveButton = false;
+      this.viewer2DTrophy256.ShowButton = false;
+      this.viewer2DTrophy256.ShowButtonChecked = true;
+      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
+      this.viewer2DTrophy256.TabIndex = 163;
       // 
       // pageStage
       // 
@@ -11247,101 +11342,6 @@ namespace CreationMaster
       this.label1.Size = new System.Drawing.Size(74, 13);
       this.label1.TabIndex = 0;
       this.label1.Text = "4 Chars Name";
-      // 
-      // viewer2DTrophy
-      // 
-      this.viewer2DTrophy.AutoTransparency = true;
-      this.viewer2DTrophy.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy.ButtonStripVisible = false;
-      this.viewer2DTrophy.CurrentBitmap = null;
-      this.viewer2DTrophy.ExtendedFormat = false;
-      this.viewer2DTrophy.FullSizeButton = false;
-      this.viewer2DTrophy.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy.Location = new System.Drawing.Point(271, 19);
-      this.viewer2DTrophy.Name = "viewer2DTrophy";
-      this.viewer2DTrophy.RemoveButton = false;
-      this.viewer2DTrophy.ShowButton = false;
-      this.viewer2DTrophy.ShowButtonChecked = true;
-      this.viewer2DTrophy.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy.TabIndex = 171;
-      // 
-      // viewer2DTrophy128
-      // 
-      this.viewer2DTrophy128.AutoTransparency = true;
-      this.viewer2DTrophy128.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy128.ButtonStripVisible = false;
-      this.viewer2DTrophy128.CurrentBitmap = null;
-      this.viewer2DTrophy128.ExtendedFormat = false;
-      this.viewer2DTrophy128.FullSizeButton = false;
-      this.viewer2DTrophy128.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy128.ImageSize = new System.Drawing.Size(128, 128);
-      this.viewer2DTrophy128.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy128.Location = new System.Drawing.Point(533, 20);
-      this.viewer2DTrophy128.Name = "viewer2DTrophy128";
-      this.viewer2DTrophy128.RemoveButton = false;
-      this.viewer2DTrophy128.ShowButton = false;
-      this.viewer2DTrophy128.ShowButtonChecked = true;
-      this.viewer2DTrophy128.Size = new System.Drawing.Size(128, 153);
-      this.viewer2DTrophy128.TabIndex = 169;
-      // 
-      // multiViewer2DTextures
-      // 
-      this.multiViewer2DTextures.AutoTransparency = false;
-      this.multiViewer2DTextures.Bitmaps = null;
-      this.multiViewer2DTextures.CheckBitmapSize = true;
-      this.multiViewer2DTextures.FixedSize = true;
-      this.multiViewer2DTextures.FullSizeButton = false;
-      this.multiViewer2DTextures.LabelText = "Texture";
-      this.multiViewer2DTextures.Location = new System.Drawing.Point(6, 314);
-      this.multiViewer2DTextures.Name = "multiViewer2DTextures";
-      this.multiViewer2DTextures.ShowDeleteButton = false;
-      this.multiViewer2DTextures.Size = new System.Drawing.Size(256, 306);
-      this.multiViewer2DTextures.TabIndex = 168;
-      // 
-      // viewer3D
-      // 
-      this.viewer3D.AmbientColor = System.Drawing.Color.Black;
-      this.viewer3D.BackColor = System.Drawing.Color.Gray;
-      this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.viewer3D.LightDirectionX = 0.5F;
-      this.viewer3D.LightDirectionY = -0.25F;
-      this.viewer3D.LightDirectionZ = -1F;
-      this.viewer3D.LightX = -30F;
-      this.viewer3D.LightY = 10F;
-      this.viewer3D.LightZ = 30F;
-      this.viewer3D.Location = new System.Drawing.Point(3, 16);
-      this.viewer3D.Name = "viewer3D";
-      this.viewer3D.RotationX = 0F;
-      this.viewer3D.RotationY = 0F;
-      this.viewer3D.RotationYCoeff = 0.01F;
-      this.viewer3D.Size = new System.Drawing.Size(439, 270);
-      this.viewer3D.TabIndex = 1;
-      this.viewer3D.ViewX = 0F;
-      this.viewer3D.ViewY = 35F;
-      this.viewer3D.ViewZ = 105F;
-      this.viewer3D.ZbufferRenderState = null;
-      // 
-      // viewer2DTrophy256
-      // 
-      this.viewer2DTrophy256.AutoTransparency = true;
-      this.viewer2DTrophy256.BackColor = System.Drawing.Color.Transparent;
-      this.viewer2DTrophy256.ButtonStripVisible = false;
-      this.viewer2DTrophy256.CurrentBitmap = null;
-      this.viewer2DTrophy256.ExtendedFormat = false;
-      this.viewer2DTrophy256.FullSizeButton = false;
-      this.viewer2DTrophy256.ImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.viewer2DTrophy256.ImageSize = new System.Drawing.Size(256, 256);
-      this.viewer2DTrophy256.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
-      this.viewer2DTrophy256.Location = new System.Drawing.Point(6, 20);
-      this.viewer2DTrophy256.Name = "viewer2DTrophy256";
-      this.viewer2DTrophy256.RemoveButton = false;
-      this.viewer2DTrophy256.ShowButton = false;
-      this.viewer2DTrophy256.ShowButtonChecked = true;
-      this.viewer2DTrophy256.Size = new System.Drawing.Size(256, 281);
-      this.viewer2DTrophy256.TabIndex = 163;
       // 
       // CompetitionForm
       // 

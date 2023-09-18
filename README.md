@@ -3,10 +3,7 @@
 ## Pendencias
 
 - Weather Probability
-- Preventing to set num_games in INTERFRIENDLY, it duplicates the national teams games
 - Argentina num_games = 0
-
-- PRIZE MONEY SENDO REMOVIDO APOS NAO SALVAR MAIS STAGETYPE=LEAGUE
 
 ```
 -0,nation_id,-1
@@ -23,10 +20,6 @@
 // year real at stage level 
 -760,schedule_year_real,2016
 
-// looks like its not needed, just being setted by CM15 when match_situation is LEAGUE
-// ECONOMIA GRANDE DE LINHAS +/- 50
-+769,match_stagetype,LEAGUE 
-
 // stadium has been move from Group to Stage by CM15
 -857,match_stadium,14
 
@@ -38,14 +31,15 @@
 // year zero ??
 -1662,schedule_year_real,0
 
- 1699,standings_sort,H2HGOALDIFF
- 1699,standings_sort,H2HGOALSFOR
++1699,standings_sort,H2HGOALDIFF
++1699,standings_sort,H2HGOALSFOR
  
  ```
 
 ## Modifications
 
 v003
+- Preventing to set num_games in INTERFRIENDLY to avoid duplicate the national teams games
 - Support for J-League parameters on match_stagetype=SETUP
 - Support for Stage "Aggregate standings"
 - Not setting match_stagetype=LEAGUE if match_situation is already LEAGUE

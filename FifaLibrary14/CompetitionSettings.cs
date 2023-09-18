@@ -1651,10 +1651,11 @@ namespace FifaLibrary
       }
       if (this.m_match_stagetype != null)
       {
-        if (this.m_match_matchsituation == "LEAGUE")
-          return true;
-        string str = id.ToString() + ",match_stagetype," + this.m_match_stagetype;
-        w.WriteLine(str);
+        if (this.m_match_matchsituation != "LEAGUE")
+        {
+          string str = id.ToString() + ",match_stagetype," + this.m_match_stagetype;
+          w.WriteLine(str);
+        }
       }
       if (this.m_match_matchsituation != null)
       {
@@ -1722,8 +1723,11 @@ namespace FifaLibrary
       }
       if (this.m_num_games != -1)
       {
-        string str = id.ToString() + ",num_games," + (object)this.m_num_games;
-        w.WriteLine(str);
+        if (this.m_ParentSettings.m_ParentSettings.m_comp_type != "INTERFRIENDLY") 
+        { 
+          string str = id.ToString() + ",num_games," + (object)this.m_num_games;
+          w.WriteLine(str);
+        }
       }
       if (this.m_info_color_slot_champ != -1)
       {
@@ -1923,7 +1927,7 @@ namespace FifaLibrary
         case 2:
           rules[0] = "POINTS";
           rules[1] = "H2HPOINTS";
-          rules[3] = "H2HGOALDIFF";
+          rules[2] = "H2HGOALDIFF";
           rules[3] = "H2HGOALSFOR";
           rules[4] = "GOALDIFF";
           rules[5] = "GOALSFOR";
