@@ -2179,12 +2179,6 @@ namespace CreationMaster
             this.viewer2D.picture.BackgroundImageLayout = ImageLayout.Center;
             this.ShowBigFile(bigFileName);
           }
-          else if (this.radioCountryCard.Checked)
-          {
-            string bigFileName = this.m_TempFolder + "\\" + Country.CardFlagBigFileName(int32);
-            this.viewer2D.picture.BackgroundImageLayout = ImageLayout.Center;
-            this.ShowBigFile(bigFileName);
-          }
           else if (this.radioCountryFlag512x512.Checked)
           {
             string ddsFileName = this.m_TempFolder + "\\" + Country.Flag512DdsFileName(int32);

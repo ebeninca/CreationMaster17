@@ -573,7 +573,7 @@ namespace CreationMaster
       }
       else if (this.m_Type == "Team")
       {
-        this.m_ReplacedObject = (object) FifaEnvironment.Teams.FitTeam(this.m_Name, this.m_Id);
+        this.m_ReplacedObject = (object) FifaEnvironment.Teams.FitTeam(this.m_Name);
         if (this.m_ReplacedObject != null)
           this.UsedObject = PatchedObject.EUsedObject.UseFitting;
         if (this.m_ReplacedObject == null && FifaEnvironment.Teams.Count > 0)
@@ -1278,7 +1278,7 @@ namespace CreationMaster
             {
               usedObject.FillFromNations(record);
               if (PatchedObject.s_TeamCrossReferenceRequired)
-                usedObject.m_countryid_IfNationalTeam = MainForm.m_PatchLoaderForm.CrossReference("Team", usedObject.m_countryid_IfNationalTeam);
+                usedObject.countryid_IfNationalTeam = MainForm.m_PatchLoaderForm.CrossReference("Team", usedObject.countryid_IfNationalTeam);
               usedObject.LinkCountry(FifaEnvironment.Countries);
               break;
             }
@@ -1487,7 +1487,7 @@ namespace CreationMaster
             usedObject.Load(record);
             if (PatchedObject.s_TeamCrossReferenceRequired)
               usedObject.NationalTeamId = MainForm.m_PatchLoaderForm.CrossReference("Team", usedObject.NationalTeamId);
-            usedObject.LinkTeam(FifaEnvironment.Teams);
+            usedObject.LinkNationalTeam(FifaEnvironment.Teams);
             break;
           }
         }
@@ -1513,13 +1513,6 @@ namespace CreationMaster
         {
           Bitmap bitmapFromBigFile = FifaEnvironment.GetBitmapFromBigFile(str4);
           usedObject.SetMiniFlag(bitmapFromBigFile);
-        }
-        string str5 = Country.CardFlagBigFileName(this.m_Id);
-        string str6 = MainForm.m_PatchLoaderForm.m_TempFolder + "\\" + str5;
-        if (File.Exists(str6))
-        {
-          Bitmap bitmapFromBigFile = FifaEnvironment.GetBitmapFromBigFile(str6);
-          usedObject.SetCardFlag(bitmapFromBigFile);
         }
         string str7 = Country.Flag512DdsFileName(this.m_Id);
         string str8 = MainForm.m_PatchLoaderForm.m_TempFolder + "\\" + str7;

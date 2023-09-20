@@ -1063,6 +1063,7 @@ namespace FifaLibrary
     public static int nations_confederation = -1;
     public static int nations_top_tier = -1;
     public static int nations_nationstartingfirstletter = -1;
+    public static int nations_isocountrycode = -1;
     public static int nations_teamid = -1;
     public static int manager_firstname = -1;
     public static int manager_surname = -1;
@@ -5837,6 +5838,7 @@ namespace FifaLibrary
         FI.nations_top_tier = table20.TableDescriptor.GetFieldIndex("top_tier");
         FI.nations_nationstartingfirstletter = table20.TableDescriptor.GetFieldIndex("nationstartingfirstletter");
         //FI.nations_teamid = table20.TableDescriptor.GetFieldIndex("teamid");
+        FI.nations_isocountrycode = table20.TableDescriptor.GetFieldIndex("isocountrycode");
         FI.nations_teamid = 3;
       }
       Table table21 = fifaDb.GetTable("manager");

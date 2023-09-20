@@ -1,5 +1,7 @@
 ﻿// Original code created by Rinaldo
 
+using System;
+using System.Collections;
 using System.Drawing;
 
 namespace FifaLibrary
@@ -8,6 +10,7 @@ namespace FifaLibrary
   {
     private int m_ChantRegionIndex;
     private int m_PALanguageIndex;
+    private string m_ISOCountryCode;
     private int m_CrowdBedsRegionIndex;
     private int m_WhistlesRegionIndex;
     private int m_AmbienceRegionIndex;
@@ -50,6 +53,18 @@ namespace FifaLibrary
       set
       {
         this.m_PALanguageIndex = value;
+      }
+    }
+
+    public string ISOCountryCode
+    {
+      get
+      {
+        return this.m_ISOCountryCode;
+      }
+      set
+      {
+        this.m_ISOCountryCode = value;
       }
     }
 
@@ -296,12 +311,13 @@ namespace FifaLibrary
       this.m_top_tier = false;
       this.m_nationstartingfirstletter = 1;
       this.m_NationalTeamId = -1;
-      this.m_NationalTeam = (Team) null;
+      this.m_NationalTeam = (Team)null;
       this.m_WorldCupTarget = 0;
       this.m_ContinentalCupTarget = 0;
       this.m_Level = 7;
       this.m_ChantRegionIndex = 1;
       this.m_PALanguageIndex = 0;
+      this.m_ISOCountryCode = "XX";
       this.m_CrowdBedsRegionIndex = 0;
       this.m_WhistlesRegionIndex = 0;
       this.m_AmbienceRegionIndex = 0;
@@ -322,7 +338,9 @@ namespace FifaLibrary
 
     public void Load(Record r)
     {
+      this.Id = r.GetAndCheckIntField(FI.nations_nationid);
       this.m_nationname = r.StringField[FI.nations_nationname];
+      this.m_ISOCountryCode = r.StringField[FI.nations_isocountrycode];
       this.m_confederation = r.GetAndCheckIntField(FI.nations_confederation) - 1;
       this.m_top_tier = r.GetAndCheckIntField(FI.nations_top_tier) != 0;
       this.m_nationstartingfirstletter = r.GetAndCheckIntField(FI.nations_nationstartingfirstletter);
@@ -340,7 +358,7 @@ namespace FifaLibrary
       }
       if (this.m_LanguageName == null)
         this.m_LanguageName = this.m_nationname;
-      this.m_NationalTeamId = r.GetAndCheckIntField(FI.nations_teamid);
+      //this.m_NationalTeamId = r.GetAndCheckIntField(FI.nations_teamid);
     }
 
     public void FillFromAudionation(Record r)
@@ -372,12 +390,20 @@ namespace FifaLibrary
       r.IntField[FI.audionation_ReactionsRegionIndex] = this.m_ReactionsRegionIndex;
     }
 
-    public void LinkTeam(TeamList teamList)
+    public void LinkNationalTeam(TeamList teamList)
     {
       if (teamList == null)
         return;
-      this.m_NationalTeam = (Team) teamList.SearchId(this.m_NationalTeamId);
-      Team nationalTeam = this.m_NationalTeam;
+      foreach (Team team in (ArrayList)teamList)
+      {
+        if (team.DatabaseName.Equals(this.m_nationname))
+        {
+          this.m_NationalTeam = team;
+          this.m_NationalTeamId = team.Id;
+          break;
+        }
+      }
+
     }
 
     public void SetNationalTeam(Team nationalTeam, int nationalTeamId)
@@ -385,7 +411,7 @@ namespace FifaLibrary
       if (nationalTeam != null)
         nationalTeamId = nationalTeam.Id;
       if (nationalTeamId == -1)
-        nationalTeam = (Team) null;
+        nationalTeam = (Team)null;
       this.m_NationalTeam?.UnsetAsNationalTeam(nationalTeamId);
       this.m_NationalTeam = nationalTeam;
       this.m_NationalTeamId = nationalTeamId;
@@ -398,10 +424,11 @@ namespace FifaLibrary
     {
       r.IntField[FI.nations_nationid] = this.Id;
       r.StringField[FI.nations_nationname] = this.m_nationname;
+      r.StringField[FI.nations_isocountrycode] = this.m_ISOCountryCode;
       r.IntField[FI.nations_confederation] = this.m_confederation + 1;
       r.IntField[FI.nations_top_tier] = this.m_top_tier ? 1 : 0;
       r.IntField[FI.nations_nationstartingfirstletter] = this.m_nationstartingfirstletter;
-      //r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
+      r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
     }
 
     public void SaveLangTable()
@@ -411,6 +438,7 @@ namespace FifaLibrary
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Full, this.m_LanguageName);
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr15, this.m_LanguageShortName);
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr3, this.m_LanguageAbbreviation);
+      FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr2, this.m_ISOCountryCode);
     }
 
     public override string ToString()
@@ -523,41 +551,6 @@ namespace FifaLibrary
     public bool DeleteMiniFlag()
     {
       return FifaEnvironment.DeleteFromZdata(this.MiniFlagBigFileName());
-    }
-
-    public string CardFlagBigFileName()
-    {
-      return Country.CardFlagBigFileName(this.Id);
-    }
-
-    public static string CardFlagTemplateBigFileName()
-    {
-      return FifaEnvironment.Year == 14 ? "data/ui/artassets/cardflags/2014_#.big" : "data/ui/artassets/cardflags/#.big";
-    }
-
-    public static string CardFlagTemplateDdsName()
-    {
-      return "2";
-    }
-
-    public static string CardFlagBigFileName(int id)
-    {
-      return "data/ui/artassets/cardflags/" + id.ToString() + ".big";
-    }
-
-    public Bitmap GetCardFlag()
-    {
-      return FifaEnvironment.GetArtasset(Country.CardFlagBigFileName(this.Id));
-    }
-
-    public bool SetCardFlag(Bitmap bitmap)
-    {
-      return FifaEnvironment.SetArtasset(Country.CardFlagTemplateBigFileName(), Country.CardFlagTemplateDdsName(), this.Id, bitmap);
-    }
-
-    public bool DeleteCardFlag()
-    {
-      return FifaEnvironment.DeleteFromZdata(this.CardFlagBigFileName());
     }
 
     public bool Fit(string lowerName, int id)

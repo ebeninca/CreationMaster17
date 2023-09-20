@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace FifaLibrary
 {
@@ -13,12 +14,12 @@ namespace FifaLibrary
     }
 
     public TeamList()
-      : base(typeof (Team))
+      : base(typeof(Team))
     {
     }
 
     public TeamList(DbFile fifaDbFile)
-      : base(typeof (Team))
+      : base(typeof(Team))
     {
       this.Load(fifaDbFile);
     }
@@ -47,7 +48,7 @@ namespace FifaLibrary
       this.Clear();
       for (int index = 0; index < t.NRecords; ++index)
         teamArray[index] = new Team(t.Records[index]);
-      this.AddRange((ICollection) teamArray);
+      this.AddRange((ICollection)teamArray);
       this.SortId();
     }
 
@@ -56,7 +57,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.stadiumassignments_teamid]))?.FillFromStadiumAssignments(record);
+        ((Team)this.SearchId(record.IntField[FI.stadiumassignments_teamid]))?.FillFromStadiumAssignments(record);
       }
     }
 
@@ -65,7 +66,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NValidRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.manager_teamid]))?.FillFromManager(record);
+        ((Team)this.SearchId(record.IntField[FI.manager_teamid]))?.FillFromManager(record);
       }
     }
 
@@ -74,7 +75,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.teamstadiumlinks_teamid]))?.FillFromTeamStadiumLinks(record);
+        ((Team)this.SearchId(record.IntField[FI.teamstadiumlinks_teamid]))?.FillFromTeamStadiumLinks(record);
       }
     }
 
@@ -83,7 +84,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.teamkits_teamtechid]))?.FillFromTeamkits(record);
+        ((Team)this.SearchId(record.IntField[FI.teamkits_teamtechid]))?.FillFromTeamkits(record);
       }
     }
 
@@ -92,7 +93,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NValidRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.formations_teamid]))?.FillFromFormations(record);
+        ((Team)this.SearchId(record.IntField[FI.formations_teamid]))?.FillFromFormations(record);
       }
     }
 
@@ -101,17 +102,25 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.teamformationteamstylelinks_teamid]))?.FillFromTeamFormationLinks(record);
+        ((Team)this.SearchId(record.IntField[FI.teamformationteamstylelinks_teamid]))?.FillFromTeamFormationLinks(record);
       }
     }
 
     public void FillFromNations(Table t)
     {
-      for (int index = 0; index < t.NRecords; ++index)
+      foreach (Team team in (ArrayList)this)
       {
-        Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.nations_teamid]))?.FillFromNations(record);
+        for (int index = 0; index < t.NRecords; ++index)
+        {
+          Record record = t.Records[index];
+          if (team.DatabaseName.Equals(record.StringField[FI.nations_nationname]))
+          {
+            team.FillFromNations(record);
+            break;
+          }
+        }
       }
+
     }
 
     public void FillFromLeagueTeamLinks(Table t)
@@ -119,7 +128,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.leagueteamlinks_teamid]))?.FillFromLeagueTeamLinks(record);
+        ((Team)this.SearchId(record.IntField[FI.leagueteamlinks_teamid]))?.FillFromLeagueTeamLinks(record);
       }
     }
 
@@ -128,8 +137,8 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        Team team1 = (Team) this.SearchId(record.IntField[FI.rivals_teamid1]);
-        Team team2 = (Team) this.SearchId(record.IntField[FI.rivals_teamid2]);
+        Team team1 = (Team)this.SearchId(record.IntField[FI.rivals_teamid1]);
+        Team team2 = (Team)this.SearchId(record.IntField[FI.rivals_teamid2]);
         if (team1 != null)
           ;
       }
@@ -140,7 +149,7 @@ namespace FifaLibrary
       for (int index = 0; index < t.NRecords; ++index)
       {
         Record record = t.Records[index];
-        ((Team) this.SearchId(record.IntField[FI.rowteamnationlinks_teamid]))?.FillFromRowTeamNationLinks(record);
+        ((Team)this.SearchId(record.IntField[FI.rowteamnationlinks_teamid]))?.FillFromRowTeamNationLinks(record);
       }
     }
 
@@ -157,24 +166,24 @@ namespace FifaLibrary
       {
         Record record = t.Records[index];
         int num1 = record.IntField[FI.teamplayerlinks_teamid];
-        Team team = (Team) this.SearchId(num1);
+        Team team = (Team)this.SearchId(num1);
         if (team == null)
         {
-          int num2 = (int) FifaEnvironment.UserMessages.ShowMessage(5016, num1);
+          int num2 = (int)FifaEnvironment.UserMessages.ShowMessage(5016, num1);
         }
         else
         {
           int num3 = record.IntField[FI.teamplayerlinks_playerid];
-          Player player = (Player) FifaEnvironment.Players.SearchId(num3);
+          Player player = (Player)FifaEnvironment.Players.SearchId(num3);
           if (player == null)
           {
-            int num4 = (int) FifaEnvironment.UserMessages.ShowMessage(5017, num3);
+            int num4 = (int)FifaEnvironment.UserMessages.ShowMessage(5017, num3);
           }
           else
           {
             player.PlayFor(team);
             TeamPlayer teamPlayer = new TeamPlayer(record, player, team);
-            team.Roster.Add((object) teamPlayer);
+            team.Roster.Add((object)teamPlayer);
           }
         }
       }
@@ -184,7 +193,7 @@ namespace FifaLibrary
     {
       if (kitList == null)
         return;
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkKits(kitList);
     }
 
@@ -192,43 +201,43 @@ namespace FifaLibrary
     {
       if (ballList == null)
         return;
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkBall(ballList);
     }
 
     public void LinkStadiums(StadiumList stadiumList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkStadium(stadiumList);
     }
 
     public void LinkLeague(LeagueList leagueList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkLeague(leagueList);
     }
 
     public void LinkOpponent(TeamList teamList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkTeam(teamList);
     }
 
     public void LinkCountry(CountryList countryList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkCountry(countryList);
     }
 
     public void LinkFormation(FormationList formationList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkFormation(formationList);
     }
 
     public void LinkPlayer(PlayerList playerList)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
         team.LinkPlayer(playerList);
     }
 
@@ -241,10 +250,10 @@ namespace FifaLibrary
       Table table5 = fifaDbFile.Table[TI.rowteamnationlinks];
       Table table6 = fifaDbFile.Table[TI.teamplayerlinks];
       Table table7 = fifaDbFile.Table[TI.teamformationteamstylelinks];
-      Table table8 = (Table) null;
+      Table table8 = (Table)null;
       if (TI.defaultteamdata >= 0)
         table8 = fifaDbFile.Table[TI.defaultteamdata];
-      Table table9 = (Table) null;
+      Table table9 = (Table)null;
       if (TI.default_teamsheets >= 0)
         table9 = fifaDbFile.Table[TI.default_teamsheets];
       table1.ResizeRecords(this.Count);
@@ -257,14 +266,14 @@ namespace FifaLibrary
       int nRecords4 = 0;
       int nRecords5 = 0;
       int index1 = 0;
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
       {
         Record record1 = table1.Records[index1];
-        Record r1 = (Record) null;
+        Record r1 = (Record)null;
         if (table8 != null)
           r1 = table8.Records[index1];
         Record record2 = table2.Records[index1];
-        Record r2 = (Record) null;
+        Record r2 = (Record)null;
         if (table9 != null)
           r2 = table9.Records[index1];
         ++index1;
@@ -295,9 +304,9 @@ namespace FifaLibrary
       int index5 = 0;
       int index6 = 0;
       int artificialkey = 0;
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
       {
-        foreach (TeamPlayer teamPlayer in (ArrayList) team.Roster)
+        foreach (TeamPlayer teamPlayer in (ArrayList)team.Roster)
         {
           Record record = table6.Records[index2];
           ++index2;
@@ -335,53 +344,53 @@ namespace FifaLibrary
     {
       TeamList teamList = new TeamList();
       if (filter == null)
-        return (IdArrayList) this;
+        return (IdArrayList)this;
       if (filter.GetType().Name == "League")
       {
-        League league = (League) filter;
+        League league = (League)filter;
         for (int index = 0; index < this.Count; ++index)
         {
-          Team team = (Team) this[index];
+          Team team = (Team)this[index];
           if (team.League == league)
-            teamList.Add((object) team);
+            teamList.Add((object)team);
         }
-        return (IdArrayList) teamList;
+        return (IdArrayList)teamList;
       }
       if (!(filter.GetType().Name == "Country"))
-        return (IdArrayList) this;
-      Country country = (Country) filter;
+        return (IdArrayList)this;
+      Country country = (Country)filter;
       for (int index = 0; index < this.Count; ++index)
       {
-        Team team = (Team) this[index];
+        Team team = (Team)this[index];
         if (team.Country == country)
-          teamList.Add((object) team);
+          teamList.Add((object)team);
       }
-      return (IdArrayList) teamList;
+      return (IdArrayList)teamList;
     }
 
     public void DeleteTeam(Team team)
     {
-      this.RemoveId((IdObject) team);
+      this.RemoveId((IdObject)team);
     }
 
-    public Team FitTeam(string name, int id)
+    public Team FitTeam(string name)
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
       {
         if (team.DatabaseName == name)
           return team;
       }
-      return (Team) null;
+      return (Team)null;
     }
 
     public Team IsInTopLeague()
     {
-      foreach (Team team in (ArrayList) this)
+      foreach (Team team in (ArrayList)this)
       {
         if (team.IsInTopLeague())
           return team;
       }
-      return (Team) null;
+      return (Team)null;
     }
   }
 }

@@ -1,4 +1,4 @@
-# Creation Master 17 Compdata #
+# Creation Master 17 Legacy #
 
 ## Pendencias
 
@@ -36,8 +36,16 @@
  
  ```
 
+ERROR numericLeagueID limit 2048
+
 ## Modifications
 
+v004
+- League/Trophy id max = 9999
+- Multiple fixes related with Legacy assets in all screens
+- Fixed link between Country and National Team
+- Support for ISOCountryCode on Country Screen
+- Using FIFA 17 Country/League/Teams assets (Extracted with FrostyEditor 1.0.6.2)
 v003
 - Preventing to set num_games in INTERFRIENDLY to avoid duplicate the national teams games
 - Support for J-League parameters on match_stagetype=SETUP

@@ -21,7 +21,7 @@ namespace FifaLibrary
     {
       Table table = FifaEnvironment.FifaDb.Table[TI.leagues];
       int minId = 1;
-      int maxId = 2028;
+      int maxId = 9999;
       this.Load(FifaEnvironment.FifaDb.Table[TI.leagues], minId, maxId);
       this.FillFromBoardOutcomes(fifaDbFile.Table[TI.career_boardoutcomes]);
     }

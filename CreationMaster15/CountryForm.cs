@@ -32,10 +32,7 @@ namespace CreationMaster
     private Viewer2D viewer2DFlag;
     private Viewer2D viewer2DMiniFlag;
     private ToolTip toolTip;
-    private NumericUpDown numericNationalTeam;
-    private ComboBox comboNationalTeam;
     private PictureBox pictureNationalTeam;
-    private Label labelNationalTeam;
     private Button buttonGetId;
     public PickUpControl pickUpControl;
     private BindingSource countryBindingSource;
@@ -54,7 +51,6 @@ namespace CreationMaster
     private ComboBox comboCrowdType;
     private ComboBox comboPepper;
     private CheckBox checkTopTier;
-    private Viewer2D viewer2DCardFlag;
     private Label label3;
     private Label label2;
     private Label label1;
@@ -70,6 +66,9 @@ namespace CreationMaster
     private TextBox textLanguageAbbreviation;
     private TextBox textLanguageShortName;
     private Label labelNationShortName;
+    private Label label5;
+    private TextBox textCountryISO;
+    private GroupBox groupBox1;
     private Viewer2D viewer2DFlag512;
 
     public CountryForm()
@@ -92,10 +91,6 @@ namespace CreationMaster
       this.viewer2DMiniFlag.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteMiniFlag);
       this.viewer2DMiniFlag.ButtonStripVisible = true;
       this.viewer2DMiniFlag.RemoveButton = true;
-      this.viewer2DCardFlag.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageCardFlag);
-      this.viewer2DCardFlag.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteCardFlag);
-      this.viewer2DCardFlag.ButtonStripVisible = true;
-      this.viewer2DCardFlag.RemoveButton = true;
       this.viewer2DShape.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageShape);
       this.viewer2DShape.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteShape);
       this.viewer2DShape.ButtonStripVisible = true;
@@ -110,15 +105,15 @@ namespace CreationMaster
     public void Preset()
     {
       this.m_NewIdCreator.IdList = (IdArrayList) FifaEnvironment.Countries;
-      this.comboNationalTeam.Items.Clear();
-      this.comboNationalTeam.BeginUpdate();
-      this.comboNationalTeam.Items.Add((object) this.m_NotPresent);
-      this.comboNationalTeam.Items.AddRange(FifaEnvironment.Teams.ToArray());
+      //this.comboNationalTeam.Items.Clear();
+      //this.comboNationalTeam.BeginUpdate();
+      //this.comboNationalTeam.Items.Add((object) this.m_NotPresent);
+      //this.comboNationalTeam.Items.AddRange(FifaEnvironment.Teams.ToArray());
       int maxValue = FifaEnvironment.FifaDb.Table[TI.players].TableDescriptor.MaxValues[FI.players_nationality];
       if (maxValue < (int) byte.MaxValue)
         maxValue = (int) byte.MaxValue;
       this.numericCountryId.Maximum = (Decimal) maxValue;
-      this.comboNationalTeam.EndUpdate();
+      //this.comboNationalTeam.EndUpdate();
       this.pickUpControl.ObjectList = (IdArrayList) FifaEnvironment.Countries;
     }
 
@@ -138,7 +133,6 @@ namespace CreationMaster
       this.viewer2DFlag.CurrentBitmap = this.m_CurrentCountry.GetFlag();
       this.viewer2DFlag512.CurrentBitmap = this.m_CurrentCountry.GetFlag512();
       this.viewer2DMiniFlag.CurrentBitmap = this.m_CurrentCountry.GetMiniFlag();
-      this.viewer2DCardFlag.CurrentBitmap = this.m_CurrentCountry.GetCardFlag();
       this.viewer2DShape.CurrentBitmap = this.m_CurrentCountry.GetShape();
       this.pictureNationalTeam.BackgroundImage = this.m_CurrentCountry.NationalTeam != null ? (Image) this.m_CurrentCountry.NationalTeam.GetCrest() : (Image) null;
       GC.Collect();
@@ -215,16 +209,6 @@ namespace CreationMaster
       return this.m_CurrentCountry.DeleteMiniFlag();
     }
 
-    private bool ImportImageCardFlag(object sender, Bitmap bitmap)
-    {
-      return this.m_CurrentCountry.SetCardFlag(bitmap);
-    }
-
-    private bool DeleteCardFlag(object sender)
-    {
-      return this.m_CurrentCountry.DeleteCardFlag();
-    }
-
     private bool ImportImageShape(object sender, Bitmap bitmap)
     {
       return this.m_CurrentCountry.SetShape(bitmap);
@@ -269,64 +253,6 @@ namespace CreationMaster
       }
       else
         this.numericCountryId.Value = (Decimal) newId;
-    }
-
-    private void numericNationalTeam_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_IsNationalTeamLocked)
-        return;
-      this.m_IsNationalTeamLocked = true;
-      int num1 = (int) this.numericNationalTeam.Value;
-      Team nationalTeam = (Team) FifaEnvironment.Teams.SearchId(num1);
-      this.comboNationalTeam.SelectedItem = nationalTeam == null ? (object) this.m_NotPresent : (object) nationalTeam;
-      if (num1 == this.m_CurrentCountry.NationalTeamId)
-        this.m_IsNationalTeamLocked = false;
-      else if (num1 > 0 && FifaEnvironment.Countries.SearchNationalTeamId(num1) != null)
-      {
-        this.numericNationalTeam.Value = (Decimal) this.m_CurrentCountry.NationalTeamId;
-        int num2 = (int) FifaEnvironment.UserMessages.ShowMessage(1014);
-        this.m_IsNationalTeamLocked = false;
-      }
-      else
-      {
-        this.m_CurrentCountry.SetNationalTeam(nationalTeam, num1);
-        this.pictureNationalTeam.BackgroundImage = (Image) nationalTeam?.GetCrest();
-        this.m_IsNationalTeamLocked = false;
-      }
-    }
-
-    private void comboNationalTeam_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_IsNationalTeamLocked)
-        return;
-      this.m_IsNationalTeamLocked = true;
-      int nationalTeamId;
-      Team nationalTeam;
-      if (this.comboNationalTeam.SelectedItem.ToString() == this.m_NotPresent)
-      {
-        nationalTeamId = -1;
-        nationalTeam = (Team) null;
-      }
-      else
-      {
-        nationalTeam = (Team) this.comboNationalTeam.SelectedItem;
-        nationalTeamId = nationalTeam.Id;
-      }
-      if (nationalTeam == this.m_CurrentCountry.NationalTeam)
-        this.m_IsNationalTeamLocked = false;
-      else if (nationalTeamId > 0 && FifaEnvironment.Countries.SearchNationalTeamId(nationalTeamId) != null)
-      {
-        this.comboNationalTeam.SelectedItem = (object) this.m_CurrentCountry.NationalTeam;
-        int num = (int) FifaEnvironment.UserMessages.ShowMessage(1014);
-        this.m_IsNationalTeamLocked = false;
-      }
-      else
-      {
-        this.numericNationalTeam.Value = (Decimal) nationalTeamId;
-        this.m_CurrentCountry.SetNationalTeam(nationalTeam, nationalTeamId);
-        this.pictureNationalTeam.BackgroundImage = (Image) nationalTeam?.GetCrest();
-        this.m_IsNationalTeamLocked = false;
-      }
     }
 
     private void pictureNationalTeam_DoubleClick(object sender, EventArgs e)
@@ -478,706 +404,802 @@ namespace CreationMaster
 
     private void InitializeComponent()
     {
-      this.components = (IContainer) new Container();
-      ComponentResourceManager resources = new ComponentResourceManager(typeof (CountryForm));
-      this.flowLayoutPanel = new FlowLayoutPanel();
-      this.groupBox = new GroupBox();
-      this.viewer2DFlag512 = new Viewer2D();
-      this.labelContry3Letters = new Label();
-      this.textLanguageAbbreviation = new TextBox();
-      this.countryBindingSource = new BindingSource(this.components);
-      this.textLanguageShortName = new TextBox();
-      this.labelNationShortName = new Label();
-      this.label4 = new Label();
-      this.numericLevel = new NumericUpDown();
-      this.comboRegionalTarget = new ComboBox();
-      this.comboWorkltarget = new ComboBox();
-      this.labeRegionalTarget = new Label();
-      this.labelWorldTarget = new Label();
-      this.checkTopTier = new CheckBox();
-      this.buttonGetId = new Button();
-      this.viewer2DFlag = new Viewer2D();
-      this.viewer2DCardFlag = new Viewer2D();
-      this.pictureNationalTeam = new PictureBox();
-      this.viewer2DMiniFlag = new Viewer2D();
-      this.comboNationalTeam = new ComboBox();
-      this.numericNationalTeam = new NumericUpDown();
-      this.numericCountryId = new NumericUpDown();
-      this.comboContinent = new ComboBox();
-      this.textLanguageName = new TextBox();
-      this.labelNationalTeam = new Label();
-      this.labelLanguageName = new Label();
-      this.textDatabaseCountryName = new TextBox();
-      this.labelDatabaseCountryName = new Label();
-      this.labelContinent = new Label();
-      this.labelCountrId = new Label();
-      this.groupCountryShape = new GroupBox();
-      this.viewer2DShape = new Viewer2D();
-      this.groupAudio = new GroupBox();
-      this.label3 = new Label();
-      this.label2 = new Label();
-      this.label1 = new Label();
-      this.comboPepper = new ComboBox();
-      this.comboPlayerCall = new ComboBox();
-      this.comboCrowdType = new ComboBox();
-      this.checkCanWhistle = new CheckBox();
-      this.checkTauntKeeper = new CheckBox();
-      this.comboLanguage = new ComboBox();
-      this.label15 = new Label();
-      this.label14 = new Label();
-      this.label11 = new Label();
-      this.label10 = new Label();
-      this.comboChants = new ComboBox();
-      this.label9 = new Label();
-      this.toolTip = new ToolTip(this.components);
-      this.sponsorListBindingSource = new BindingSource(this.components);
-      this.pickUpControl = new PickUpControl();
+      this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CountryForm));
+      this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+      this.groupBox = new System.Windows.Forms.GroupBox();
+      this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.pictureNationalTeam = new System.Windows.Forms.PictureBox();
+      this.comboWorkltarget = new System.Windows.Forms.ComboBox();
+      this.countryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.labelWorldTarget = new System.Windows.Forms.Label();
+      this.labeRegionalTarget = new System.Windows.Forms.Label();
+      this.comboRegionalTarget = new System.Windows.Forms.ComboBox();
+      this.label5 = new System.Windows.Forms.Label();
+      this.textCountryISO = new System.Windows.Forms.TextBox();
+      this.viewer2DFlag512 = new FifaControls.Viewer2D();
+      this.labelContry3Letters = new System.Windows.Forms.Label();
+      this.textLanguageAbbreviation = new System.Windows.Forms.TextBox();
+      this.textLanguageShortName = new System.Windows.Forms.TextBox();
+      this.labelNationShortName = new System.Windows.Forms.Label();
+      this.label4 = new System.Windows.Forms.Label();
+      this.numericLevel = new System.Windows.Forms.NumericUpDown();
+      this.checkTopTier = new System.Windows.Forms.CheckBox();
+      this.buttonGetId = new System.Windows.Forms.Button();
+      this.viewer2DFlag = new FifaControls.Viewer2D();
+      this.viewer2DMiniFlag = new FifaControls.Viewer2D();
+      this.numericCountryId = new System.Windows.Forms.NumericUpDown();
+      this.comboContinent = new System.Windows.Forms.ComboBox();
+      this.textLanguageName = new System.Windows.Forms.TextBox();
+      this.labelLanguageName = new System.Windows.Forms.Label();
+      this.textDatabaseCountryName = new System.Windows.Forms.TextBox();
+      this.labelDatabaseCountryName = new System.Windows.Forms.Label();
+      this.labelContinent = new System.Windows.Forms.Label();
+      this.labelCountrId = new System.Windows.Forms.Label();
+      this.groupCountryShape = new System.Windows.Forms.GroupBox();
+      this.viewer2DShape = new FifaControls.Viewer2D();
+      this.groupAudio = new System.Windows.Forms.GroupBox();
+      this.label3 = new System.Windows.Forms.Label();
+      this.label2 = new System.Windows.Forms.Label();
+      this.label1 = new System.Windows.Forms.Label();
+      this.comboPepper = new System.Windows.Forms.ComboBox();
+      this.comboPlayerCall = new System.Windows.Forms.ComboBox();
+      this.comboCrowdType = new System.Windows.Forms.ComboBox();
+      this.checkCanWhistle = new System.Windows.Forms.CheckBox();
+      this.checkTauntKeeper = new System.Windows.Forms.CheckBox();
+      this.comboLanguage = new System.Windows.Forms.ComboBox();
+      this.label15 = new System.Windows.Forms.Label();
+      this.label14 = new System.Windows.Forms.Label();
+      this.label11 = new System.Windows.Forms.Label();
+      this.label10 = new System.Windows.Forms.Label();
+      this.comboChants = new System.Windows.Forms.ComboBox();
+      this.label9 = new System.Windows.Forms.Label();
+      this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+      this.sponsorListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.pickUpControl = new FifaControls.PickUpControl();
       this.flowLayoutPanel.SuspendLayout();
       this.groupBox.SuspendLayout();
-      ((ISupportInitialize) this.countryBindingSource).BeginInit();
-      this.numericLevel.BeginInit();
-      ((ISupportInitialize) this.pictureNationalTeam).BeginInit();
-      this.numericNationalTeam.BeginInit();
-      this.numericCountryId.BeginInit();
+      this.groupBox1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureNationalTeam)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericLevel)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericCountryId)).BeginInit();
       this.groupCountryShape.SuspendLayout();
       this.groupAudio.SuspendLayout();
-      ((ISupportInitialize) this.sponsorListBindingSource).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.sponsorListBindingSource)).BeginInit();
       this.SuspendLayout();
+      // 
+      // flowLayoutPanel
+      // 
       this.flowLayoutPanel.AutoScroll = true;
-      this.flowLayoutPanel.Controls.Add((Control) this.groupBox);
-      this.flowLayoutPanel.Controls.Add((Control) this.groupCountryShape);
-      this.flowLayoutPanel.Controls.Add((Control) this.groupAudio);
-      this.flowLayoutPanel.Dock = DockStyle.Fill;
-      this.flowLayoutPanel.Location = new Point(0, 25);
+      this.flowLayoutPanel.Controls.Add(this.groupBox);
+      this.flowLayoutPanel.Controls.Add(this.groupCountryShape);
+      this.flowLayoutPanel.Controls.Add(this.groupAudio);
+      this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.flowLayoutPanel.Location = new System.Drawing.Point(0, 25);
       this.flowLayoutPanel.Name = "flowLayoutPanel";
-      this.flowLayoutPanel.Size = new Size(1357, 807);
+      this.flowLayoutPanel.Size = new System.Drawing.Size(1357, 807);
       this.flowLayoutPanel.TabIndex = 0;
-      this.groupBox.Controls.Add((Control) this.viewer2DFlag512);
-      this.groupBox.Controls.Add((Control) this.labelContry3Letters);
-      this.groupBox.Controls.Add((Control) this.textLanguageAbbreviation);
-      this.groupBox.Controls.Add((Control) this.textLanguageShortName);
-      this.groupBox.Controls.Add((Control) this.labelNationShortName);
-      this.groupBox.Controls.Add((Control) this.label4);
-      this.groupBox.Controls.Add((Control) this.numericLevel);
-      this.groupBox.Controls.Add((Control) this.comboRegionalTarget);
-      this.groupBox.Controls.Add((Control) this.comboWorkltarget);
-      this.groupBox.Controls.Add((Control) this.labeRegionalTarget);
-      this.groupBox.Controls.Add((Control) this.labelWorldTarget);
-      this.groupBox.Controls.Add((Control) this.checkTopTier);
-      this.groupBox.Controls.Add((Control) this.buttonGetId);
-      this.groupBox.Controls.Add((Control) this.viewer2DFlag);
-      this.groupBox.Controls.Add((Control) this.viewer2DCardFlag);
-      this.groupBox.Controls.Add((Control) this.pictureNationalTeam);
-      this.groupBox.Controls.Add((Control) this.viewer2DMiniFlag);
-      this.groupBox.Controls.Add((Control) this.comboNationalTeam);
-      this.groupBox.Controls.Add((Control) this.numericNationalTeam);
-      this.groupBox.Controls.Add((Control) this.numericCountryId);
-      this.groupBox.Controls.Add((Control) this.comboContinent);
-      this.groupBox.Controls.Add((Control) this.textLanguageName);
-      this.groupBox.Controls.Add((Control) this.labelNationalTeam);
-      this.groupBox.Controls.Add((Control) this.labelLanguageName);
-      this.groupBox.Controls.Add((Control) this.textDatabaseCountryName);
-      this.groupBox.Controls.Add((Control) this.labelDatabaseCountryName);
-      this.groupBox.Controls.Add((Control) this.labelContinent);
-      this.groupBox.Controls.Add((Control) this.labelCountrId);
-      this.groupBox.Location = new Point(3, 1);
-      this.groupBox.Margin = new Padding(3, 1, 3, 3);
+      // 
+      // groupBox
+      // 
+      this.groupBox.Controls.Add(this.groupBox1);
+      this.groupBox.Controls.Add(this.label5);
+      this.groupBox.Controls.Add(this.textCountryISO);
+      this.groupBox.Controls.Add(this.viewer2DFlag512);
+      this.groupBox.Controls.Add(this.labelContry3Letters);
+      this.groupBox.Controls.Add(this.textLanguageAbbreviation);
+      this.groupBox.Controls.Add(this.textLanguageShortName);
+      this.groupBox.Controls.Add(this.labelNationShortName);
+      this.groupBox.Controls.Add(this.label4);
+      this.groupBox.Controls.Add(this.numericLevel);
+      this.groupBox.Controls.Add(this.checkTopTier);
+      this.groupBox.Controls.Add(this.buttonGetId);
+      this.groupBox.Controls.Add(this.viewer2DFlag);
+      this.groupBox.Controls.Add(this.viewer2DMiniFlag);
+      this.groupBox.Controls.Add(this.numericCountryId);
+      this.groupBox.Controls.Add(this.comboContinent);
+      this.groupBox.Controls.Add(this.textLanguageName);
+      this.groupBox.Controls.Add(this.labelLanguageName);
+      this.groupBox.Controls.Add(this.textDatabaseCountryName);
+      this.groupBox.Controls.Add(this.labelDatabaseCountryName);
+      this.groupBox.Controls.Add(this.labelContinent);
+      this.groupBox.Controls.Add(this.labelCountrId);
+      this.groupBox.Location = new System.Drawing.Point(3, 1);
+      this.groupBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 3);
       this.groupBox.Name = "groupBox";
-      this.groupBox.Size = new Size(929, 402);
+      this.groupBox.Size = new System.Drawing.Size(800, 442);
       this.groupBox.TabIndex = 0;
       this.groupBox.TabStop = false;
+      // 
+      // groupBox1
+      // 
+      this.groupBox1.Controls.Add(this.pictureNationalTeam);
+      this.groupBox1.Controls.Add(this.comboWorkltarget);
+      this.groupBox1.Controls.Add(this.labelWorldTarget);
+      this.groupBox1.Controls.Add(this.labeRegionalTarget);
+      this.groupBox1.Controls.Add(this.comboRegionalTarget);
+      this.groupBox1.Location = new System.Drawing.Point(4, 245);
+      this.groupBox1.Name = "groupBox1";
+      this.groupBox1.Size = new System.Drawing.Size(230, 191);
+      this.groupBox1.TabIndex = 3;
+      this.groupBox1.TabStop = false;
+      this.groupBox1.Text = "National Team";
+      // 
+      // pictureNationalTeam
+      // 
+      this.pictureNationalTeam.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+      this.pictureNationalTeam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.pictureNationalTeam.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.pictureNationalTeam.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.pictureNationalTeam.Location = new System.Drawing.Point(115, 16);
+      this.pictureNationalTeam.Name = "pictureNationalTeam";
+      this.pictureNationalTeam.Size = new System.Drawing.Size(100, 100);
+      this.pictureNationalTeam.TabIndex = 134;
+      this.pictureNationalTeam.TabStop = false;
+      this.pictureNationalTeam.DoubleClick += new System.EventHandler(this.pictureNationalTeam_DoubleClick);
+      // 
+      // comboWorkltarget
+      // 
+      this.comboWorkltarget.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.countryBindingSource, "WorldCupTarget", true));
+      this.comboWorkltarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.comboWorkltarget.ItemHeight = 13;
+      this.comboWorkltarget.Items.AddRange(new object[] {
+            "N/A",
+            "WIN",
+            "FINAL",
+            "SEMI",
+            "QUARTER",
+            "KNOCKOUT",
+            "QUALIFY"});
+      this.comboWorkltarget.Location = new System.Drawing.Point(108, 125);
+      this.comboWorkltarget.Name = "comboWorkltarget";
+      this.comboWorkltarget.Size = new System.Drawing.Size(115, 21);
+      this.comboWorkltarget.TabIndex = 154;
+      // 
+      // countryBindingSource
+      // 
+      this.countryBindingSource.DataSource = typeof(FifaLibrary.Country);
+      // 
+      // labelWorldTarget
+      // 
+      this.labelWorldTarget.AutoSize = true;
+      this.labelWorldTarget.BackColor = System.Drawing.SystemColors.Control;
+      this.labelWorldTarget.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelWorldTarget.Location = new System.Drawing.Point(2, 129);
+      this.labelWorldTarget.Name = "labelWorldTarget";
+      this.labelWorldTarget.Size = new System.Drawing.Size(91, 13);
+      this.labelWorldTarget.TabIndex = 152;
+      this.labelWorldTarget.Text = "World Cup Target";
+      this.labelWorldTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // labeRegionalTarget
+      // 
+      this.labeRegionalTarget.AutoSize = true;
+      this.labeRegionalTarget.BackColor = System.Drawing.SystemColors.Control;
+      this.labeRegionalTarget.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labeRegionalTarget.Location = new System.Drawing.Point(1, 160);
+      this.labeRegionalTarget.Name = "labeRegionalTarget";
+      this.labeRegionalTarget.Size = new System.Drawing.Size(105, 13);
+      this.labeRegionalTarget.TabIndex = 153;
+      this.labeRegionalTarget.Text = "Regional Cup Target";
+      this.labeRegionalTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // comboRegionalTarget
+      // 
+      this.comboRegionalTarget.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.countryBindingSource, "ContinentalCupTarget", true));
+      this.comboRegionalTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.comboRegionalTarget.ItemHeight = 13;
+      this.comboRegionalTarget.Items.AddRange(new object[] {
+            "N/A",
+            "WIN",
+            "FINAL",
+            "SEMI",
+            "QUARTER",
+            "KNOCKOUT",
+            "QUALIFY"});
+      this.comboRegionalTarget.Location = new System.Drawing.Point(108, 156);
+      this.comboRegionalTarget.Name = "comboRegionalTarget";
+      this.comboRegionalTarget.Size = new System.Drawing.Size(115, 21);
+      this.comboRegionalTarget.TabIndex = 155;
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.BackColor = System.Drawing.Color.Transparent;
+      this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.label5.Location = new System.Drawing.Point(6, 168);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(92, 13);
+      this.label5.TabIndex = 164;
+      this.label5.Text = "ISO Country Code";
+      this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // textCountryISO
+      // 
+      this.textCountryISO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.countryBindingSource, "ISOCountryCode", true));
+      this.textCountryISO.Location = new System.Drawing.Point(117, 164);
+      this.textCountryISO.Name = "textCountryISO";
+      this.textCountryISO.Size = new System.Drawing.Size(117, 20);
+      this.textCountryISO.TabIndex = 163;
+      this.textCountryISO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      // 
+      // viewer2DFlag512
+      // 
       this.viewer2DFlag512.AutoTransparency = false;
-      this.viewer2DFlag512.BackColor = Color.Transparent;
+      this.viewer2DFlag512.BackColor = System.Drawing.Color.Transparent;
       this.viewer2DFlag512.ButtonStripVisible = true;
-      this.viewer2DFlag512.CurrentBitmap = (Bitmap) null;
+      this.viewer2DFlag512.CurrentBitmap = null;
       this.viewer2DFlag512.ExtendedFormat = false;
       this.viewer2DFlag512.FullSizeButton = false;
-      this.viewer2DFlag512.ImageLayout = ImageLayout.Zoom;
-      this.viewer2DFlag512.ImageSize = new Size(512, 512);
-      this.viewer2DFlag512.ImageSizeMultiplier = Viewer2D.SizeMultiplier.None;
-      this.viewer2DFlag512.Location = new Point(659, 14);
+      this.viewer2DFlag512.ImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+      this.viewer2DFlag512.ImageSize = new System.Drawing.Size(512, 512);
+      this.viewer2DFlag512.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DFlag512.Location = new System.Drawing.Point(525, 14);
       this.viewer2DFlag512.Name = "viewer2DFlag512";
       this.viewer2DFlag512.RemoveButton = false;
       this.viewer2DFlag512.ShowButton = true;
       this.viewer2DFlag512.ShowButtonChecked = true;
-      this.viewer2DFlag512.Size = new Size(256, 281);
+      this.viewer2DFlag512.Size = new System.Drawing.Size(256, 281);
       this.viewer2DFlag512.TabIndex = 162;
-      this.toolTip.SetToolTip((Control) this.viewer2DFlag512, "Country Flag 512 x 512");
+      this.toolTip.SetToolTip(this.viewer2DFlag512, "Country Flag 512 x 512");
+      // 
+      // labelContry3Letters
+      // 
       this.labelContry3Letters.AutoSize = true;
-      this.labelContry3Letters.BackColor = Color.Transparent;
-      this.labelContry3Letters.ImeMode = ImeMode.NoControl;
-      this.labelContry3Letters.Location = new Point(6, 109);
+      this.labelContry3Letters.BackColor = System.Drawing.Color.Transparent;
+      this.labelContry3Letters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelContry3Letters.Location = new System.Drawing.Point(6, 116);
       this.labelContry3Letters.Name = "labelContry3Letters";
-      this.labelContry3Letters.Size = new Size(66, 13);
+      this.labelContry3Letters.Size = new System.Drawing.Size(66, 13);
       this.labelContry3Letters.TabIndex = 161;
       this.labelContry3Letters.Text = "Abbreviation";
-      this.labelContry3Letters.TextAlign = ContentAlignment.MiddleLeft;
-      this.textLanguageAbbreviation.DataBindings.Add(new Binding("Text", (object) this.countryBindingSource, "LanguageAbbreviation", true));
-      this.textLanguageAbbreviation.Location = new Point(101, 109);
+      this.labelContry3Letters.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // textLanguageAbbreviation
+      // 
+      this.textLanguageAbbreviation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.countryBindingSource, "LanguageAbbreviation", true));
+      this.textLanguageAbbreviation.Location = new System.Drawing.Point(101, 112);
       this.textLanguageAbbreviation.Name = "textLanguageAbbreviation";
-      this.textLanguageAbbreviation.Size = new Size(133, 20);
+      this.textLanguageAbbreviation.Size = new System.Drawing.Size(133, 20);
       this.textLanguageAbbreviation.TabIndex = 160;
-      this.countryBindingSource.DataSource = (object) typeof (Country);
-      this.textLanguageShortName.DataBindings.Add(new Binding("Text", (object) this.countryBindingSource, "LanguageShortName", true));
-      this.textLanguageShortName.Location = new Point(101, 84);
+      // 
+      // textLanguageShortName
+      // 
+      this.textLanguageShortName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.countryBindingSource, "LanguageShortName", true));
+      this.textLanguageShortName.Location = new System.Drawing.Point(101, 87);
       this.textLanguageShortName.Name = "textLanguageShortName";
-      this.textLanguageShortName.Size = new Size(133, 20);
+      this.textLanguageShortName.Size = new System.Drawing.Size(133, 20);
       this.textLanguageShortName.TabIndex = 158;
-      this.textLanguageShortName.TextChanged += new EventHandler(this.textLanguageShortName_TextChanged);
+      this.textLanguageShortName.TextChanged += new System.EventHandler(this.textLanguageShortName_TextChanged);
+      // 
+      // labelNationShortName
+      // 
       this.labelNationShortName.AutoSize = true;
-      this.labelNationShortName.BackColor = Color.Transparent;
-      this.labelNationShortName.ImeMode = ImeMode.NoControl;
-      this.labelNationShortName.Location = new Point(6, 87);
+      this.labelNationShortName.BackColor = System.Drawing.Color.Transparent;
+      this.labelNationShortName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelNationShortName.Location = new System.Drawing.Point(6, 91);
       this.labelNationShortName.Name = "labelNationShortName";
-      this.labelNationShortName.Size = new Size(63, 13);
+      this.labelNationShortName.Size = new System.Drawing.Size(63, 13);
       this.labelNationShortName.TabIndex = 159;
       this.labelNationShortName.Text = "Short Name";
-      this.labelNationShortName.TextAlign = ContentAlignment.MiddleLeft;
+      this.labelNationShortName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // label4
+      // 
       this.label4.AutoSize = true;
-      this.label4.BackColor = Color.Transparent;
-      this.label4.ImeMode = ImeMode.NoControl;
-      this.label4.Location = new Point(122, 374);
+      this.label4.BackColor = System.Drawing.Color.Transparent;
+      this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.label4.Location = new System.Drawing.Point(7, 195);
       this.label4.Name = "label4";
-      this.label4.Size = new Size(33, 13);
+      this.label4.Size = new System.Drawing.Size(33, 13);
       this.label4.TabIndex = 157;
       this.label4.Text = "Level";
-      this.label4.TextAlign = ContentAlignment.MiddleLeft;
-      this.numericLevel.DataBindings.Add(new Binding("Value", (object) this.countryBindingSource, "Level", true));
-      this.numericLevel.Location = new Point(161, 372);
-      this.numericLevel.Maximum = new Decimal(new int[4]
-      {
-        7,
-        0,
-        0,
-        0
-      });
-      this.numericLevel.Minimum = new Decimal(new int[4]
-      {
-        1,
-        0,
-        0,
-        0
-      });
+      this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // numericLevel
+      // 
+      this.numericLevel.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.countryBindingSource, "Level", true));
+      this.numericLevel.Location = new System.Drawing.Point(117, 192);
+      this.numericLevel.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+      this.numericLevel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
       this.numericLevel.Name = "numericLevel";
-      this.numericLevel.Size = new Size(71, 20);
+      this.numericLevel.Size = new System.Drawing.Size(117, 20);
       this.numericLevel.TabIndex = 156;
-      this.numericLevel.TextAlign = HorizontalAlignment.Center;
-      this.numericLevel.Value = new Decimal(new int[4]
-      {
-        1,
-        0,
-        0,
-        0
-      });
-      this.comboRegionalTarget.DataBindings.Add(new Binding("SelectedIndex", (object) this.countryBindingSource, "ContinentalCupTarget", true));
-      this.comboRegionalTarget.Font = new Font("Microsoft Sans Serif", 8.25f);
-      this.comboRegionalTarget.ItemHeight = 13;
-      this.comboRegionalTarget.Items.AddRange(new object[7]
-      {
-        (object) "N/A",
-        (object) "WIN",
-        (object) "FINAL",
-        (object) "SEMI",
-        (object) "QUARTER",
-        (object) "KNOCKOUT",
-        (object) "QUALIFY"
-      });
-      this.comboRegionalTarget.Location = new Point(117, 345);
-      this.comboRegionalTarget.Name = "comboRegionalTarget";
-      this.comboRegionalTarget.Size = new Size(115, 21);
-      this.comboRegionalTarget.TabIndex = 155;
-      this.comboWorkltarget.DataBindings.Add(new Binding("SelectedIndex", (object) this.countryBindingSource, "WorldCupTarget", true));
-      this.comboWorkltarget.Font = new Font("Microsoft Sans Serif", 8.25f);
-      this.comboWorkltarget.ItemHeight = 13;
-      this.comboWorkltarget.Items.AddRange(new object[7]
-      {
-        (object) "N/A",
-        (object) "WIN",
-        (object) "FINAL",
-        (object) "SEMI",
-        (object) "QUARTER",
-        (object) "KNOCKOUT",
-        (object) "QUALIFY"
-      });
-      this.comboWorkltarget.Location = new Point(117, 318);
-      this.comboWorkltarget.Name = "comboWorkltarget";
-      this.comboWorkltarget.Size = new Size(115, 21);
-      this.comboWorkltarget.TabIndex = 154;
-      this.labeRegionalTarget.AutoSize = true;
-      this.labeRegionalTarget.BackColor = SystemColors.Control;
-      this.labeRegionalTarget.ImeMode = ImeMode.NoControl;
-      this.labeRegionalTarget.Location = new Point(6, 348);
-      this.labeRegionalTarget.Name = "labeRegionalTarget";
-      this.labeRegionalTarget.Size = new Size(105, 13);
-      this.labeRegionalTarget.TabIndex = 153;
-      this.labeRegionalTarget.Text = "Regional Cup Target";
-      this.labeRegionalTarget.TextAlign = ContentAlignment.MiddleLeft;
-      this.labelWorldTarget.AutoSize = true;
-      this.labelWorldTarget.BackColor = SystemColors.Control;
-      this.labelWorldTarget.ImeMode = ImeMode.NoControl;
-      this.labelWorldTarget.Location = new Point(6, 321);
-      this.labelWorldTarget.Name = "labelWorldTarget";
-      this.labelWorldTarget.Size = new Size(91, 13);
-      this.labelWorldTarget.TabIndex = 152;
-      this.labelWorldTarget.Text = "World Cup Target";
-      this.labelWorldTarget.TextAlign = ContentAlignment.MiddleLeft;
-      this.checkTopTier.DataBindings.Add(new Binding("Checked", (object) this.countryBindingSource, "Top_tier", true));
-      this.checkTopTier.Location = new Point(4, 372);
+      this.numericLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      // 
+      // checkTopTier
+      // 
+      this.checkTopTier.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.countryBindingSource, "Top_tier", true));
+      this.checkTopTier.Location = new System.Drawing.Point(4, 221);
       this.checkTopTier.Name = "checkTopTier";
-      this.checkTopTier.RightToLeft = RightToLeft.Yes;
-      this.checkTopTier.Size = new Size(107, 18);
+      this.checkTopTier.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkTopTier.Size = new System.Drawing.Size(169, 18);
       this.checkTopTier.TabIndex = 151;
       this.checkTopTier.Text = "Top tier";
-      this.checkTopTier.TextAlign = ContentAlignment.MiddleRight;
+      this.checkTopTier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       this.checkTopTier.UseVisualStyleBackColor = true;
-      this.buttonGetId.Image = (Image) resources.GetObject("buttonGetId.Image");
-      this.buttonGetId.Location = new Point(207, 36);
+      this.checkTopTier.CheckedChanged += new System.EventHandler(this.checkTopTier_CheckedChanged);
+      // 
+      // buttonGetId
+      // 
+      this.buttonGetId.Image = ((System.Drawing.Image)(resources.GetObject("buttonGetId.Image")));
+      this.buttonGetId.Location = new System.Drawing.Point(207, 38);
       this.buttonGetId.Name = "buttonGetId";
-      this.buttonGetId.Size = new Size(25, 23);
+      this.buttonGetId.Size = new System.Drawing.Size(25, 23);
       this.buttonGetId.TabIndex = 150;
-      this.toolTip.SetToolTip((Control) this.buttonGetId, "Get a free id");
+      this.toolTip.SetToolTip(this.buttonGetId, "Get a free id");
       this.buttonGetId.UseVisualStyleBackColor = true;
-      this.buttonGetId.Click += new EventHandler(this.buttonGetId_Click);
+      this.buttonGetId.Click += new System.EventHandler(this.buttonGetId_Click);
+      // 
+      // viewer2DFlag
+      // 
       this.viewer2DFlag.AutoTransparency = true;
-      this.viewer2DFlag.BackColor = Color.Transparent;
+      this.viewer2DFlag.BackColor = System.Drawing.Color.Transparent;
       this.viewer2DFlag.ButtonStripVisible = true;
-      this.viewer2DFlag.CurrentBitmap = (Bitmap) null;
+      this.viewer2DFlag.CurrentBitmap = null;
       this.viewer2DFlag.ExtendedFormat = false;
       this.viewer2DFlag.FullSizeButton = false;
-      this.viewer2DFlag.ImageLayout = ImageLayout.None;
-      this.viewer2DFlag.ImageSize = new Size(256, 256);
-      this.viewer2DFlag.ImageSizeMultiplier = Viewer2D.SizeMultiplier.Auto256;
-      this.viewer2DFlag.Location = new Point(240, 13);
+      this.viewer2DFlag.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DFlag.ImageSize = new System.Drawing.Size(256, 256);
+      this.viewer2DFlag.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.Auto256;
+      this.viewer2DFlag.Location = new System.Drawing.Point(240, 13);
       this.viewer2DFlag.Name = "viewer2DFlag";
       this.viewer2DFlag.RemoveButton = false;
       this.viewer2DFlag.ShowButton = true;
       this.viewer2DFlag.ShowButtonChecked = true;
-      this.viewer2DFlag.Size = new Size(256, 281);
+      this.viewer2DFlag.Size = new System.Drawing.Size(256, 281);
       this.viewer2DFlag.TabIndex = 1;
-      this.toolTip.SetToolTip((Control) this.viewer2DFlag, "Country Badge");
-      this.viewer2DCardFlag.AutoTransparency = true;
-      this.viewer2DCardFlag.BackColor = Color.Transparent;
-      this.viewer2DCardFlag.ButtonStripVisible = true;
-      this.viewer2DCardFlag.CurrentBitmap = (Bitmap) null;
-      this.viewer2DCardFlag.ExtendedFormat = false;
-      this.viewer2DCardFlag.FullSizeButton = false;
-      this.viewer2DCardFlag.ImageLayout = ImageLayout.None;
-      this.viewer2DCardFlag.ImageSize = new Size(256, 256);
-      this.viewer2DCardFlag.ImageSizeMultiplier = Viewer2D.SizeMultiplier.None;
-      this.viewer2DCardFlag.Location = new Point(502, 13);
-      this.viewer2DCardFlag.Name = "viewer2DCardFlag";
-      this.viewer2DCardFlag.RemoveButton = false;
-      this.viewer2DCardFlag.ShowButton = true;
-      this.viewer2DCardFlag.ShowButtonChecked = true;
-      this.viewer2DCardFlag.Size = new Size(150, 177);
-      this.viewer2DCardFlag.TabIndex = 30;
-      this.toolTip.SetToolTip((Control) this.viewer2DCardFlag, "Country Flag");
-      this.pictureNationalTeam.BackgroundImageLayout = ImageLayout.Zoom;
-      this.pictureNationalTeam.BorderStyle = BorderStyle.FixedSingle;
-      this.pictureNationalTeam.Cursor = Cursors.Hand;
-      this.pictureNationalTeam.ImeMode = ImeMode.NoControl;
-      this.pictureNationalTeam.Location = new Point(117, 209);
-      this.pictureNationalTeam.Name = "pictureNationalTeam";
-      this.pictureNationalTeam.Size = new Size(100, 100);
-      this.pictureNationalTeam.TabIndex = 134;
-      this.pictureNationalTeam.TabStop = false;
-      this.pictureNationalTeam.DoubleClick += new EventHandler(this.pictureNationalTeam_DoubleClick);
+      this.toolTip.SetToolTip(this.viewer2DFlag, "Country Badge");
+      // 
+      // viewer2DMiniFlag
+      // 
       this.viewer2DMiniFlag.AutoTransparency = false;
-      this.viewer2DMiniFlag.BackColor = Color.Transparent;
+      this.viewer2DMiniFlag.BackColor = System.Drawing.Color.Transparent;
       this.viewer2DMiniFlag.ButtonStripVisible = true;
-      this.viewer2DMiniFlag.CurrentBitmap = (Bitmap) null;
+      this.viewer2DMiniFlag.CurrentBitmap = null;
       this.viewer2DMiniFlag.ExtendedFormat = false;
       this.viewer2DMiniFlag.FullSizeButton = false;
-      this.viewer2DMiniFlag.ImageLayout = ImageLayout.None;
-      this.viewer2DMiniFlag.ImageSize = new Size(64, 64);
-      this.viewer2DMiniFlag.ImageSizeMultiplier = Viewer2D.SizeMultiplier.None;
-      this.viewer2DMiniFlag.Location = new Point(502, 230);
+      this.viewer2DMiniFlag.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DMiniFlag.ImageSize = new System.Drawing.Size(64, 64);
+      this.viewer2DMiniFlag.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DMiniFlag.Location = new System.Drawing.Point(238, 313);
       this.viewer2DMiniFlag.Name = "viewer2DMiniFlag";
       this.viewer2DMiniFlag.RemoveButton = false;
       this.viewer2DMiniFlag.ShowButton = true;
       this.viewer2DMiniFlag.ShowButtonChecked = true;
-      this.viewer2DMiniFlag.Size = new Size(64, 64);
+      this.viewer2DMiniFlag.Size = new System.Drawing.Size(64, 64);
       this.viewer2DMiniFlag.TabIndex = 2;
-      this.comboNationalTeam.ItemHeight = 13;
-      this.comboNationalTeam.Location = new Point(101, 182);
-      this.comboNationalTeam.MaxLength = (int) short.MaxValue;
-      this.comboNationalTeam.Name = "comboNationalTeam";
-      this.comboNationalTeam.Size = new Size(133, 21);
-      this.comboNationalTeam.Sorted = true;
-      this.comboNationalTeam.TabIndex = 132;
-      this.toolTip.SetToolTip((Control) this.comboNationalTeam, "Use this to assign to the country an existing national team");
-      this.comboNationalTeam.SelectedIndexChanged += new EventHandler(this.comboNationalTeam_SelectedIndexChanged);
-      this.numericNationalTeam.DataBindings.Add(new Binding("Value", (object) this.countryBindingSource, "NationalTeamId", true));
-      this.numericNationalTeam.Location = new Point(101, 159);
-      this.numericNationalTeam.Maximum = new Decimal(new int[4]
-      {
-        200000,
-        0,
-        0,
-        0
-      });
-      this.numericNationalTeam.Minimum = new Decimal(new int[4]
-      {
-        1,
-        0,
-        0,
-        int.MinValue
-      });
-      this.numericNationalTeam.Name = "numericNationalTeam";
-      this.numericNationalTeam.Size = new Size(133, 20);
-      this.numericNationalTeam.TabIndex = 131;
-      this.numericNationalTeam.TextAlign = HorizontalAlignment.Center;
-      this.toolTip.SetToolTip((Control) this.numericNationalTeam, "Use this to assign a national team identifier though the national team does not exists");
-      this.numericNationalTeam.ValueChanged += new EventHandler(this.numericNationalTeam_ValueChanged);
-      this.numericCountryId.DataBindings.Add(new Binding("Value", (object) this.countryBindingSource, "Id", true));
-      this.numericCountryId.Location = new Point(101, 37);
-      this.numericCountryId.Maximum = new Decimal(new int[4]
-      {
-        200000,
-        0,
-        0,
-        0
-      });
+      // 
+      // numericCountryId
+      // 
+      this.numericCountryId.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.countryBindingSource, "Id", true));
+      this.numericCountryId.Location = new System.Drawing.Point(101, 39);
+      this.numericCountryId.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
       this.numericCountryId.Name = "numericCountryId";
-      this.numericCountryId.Size = new Size(100, 20);
+      this.numericCountryId.Size = new System.Drawing.Size(100, 20);
       this.numericCountryId.TabIndex = 143;
-      this.numericCountryId.TextAlign = HorizontalAlignment.Center;
-      this.numericCountryId.ValueChanged += new EventHandler(this.numericCountryId_ValueChanged);
-      this.comboContinent.DataBindings.Add(new Binding("SelectedIndex", (object) this.countryBindingSource, "Confederation", true));
-      this.comboContinent.Font = new Font("Microsoft Sans Serif", 8.25f);
+      this.numericCountryId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.numericCountryId.ValueChanged += new System.EventHandler(this.numericCountryId_ValueChanged);
+      // 
+      // comboContinent
+      // 
+      this.comboContinent.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.countryBindingSource, "Confederation", true));
+      this.comboContinent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
       this.comboContinent.ItemHeight = 13;
-      this.comboContinent.Items.AddRange(new object[7]
-      {
-        (object) "None",
-        (object) "Europe",
-        (object) "Africa",
-        (object) "South America",
-        (object) "Asia",
-        (object) "Oceania",
-        (object) "North America"
-      });
-      this.comboContinent.Location = new Point(101, 135);
+      this.comboContinent.Items.AddRange(new object[] {
+            "None",
+            "Europe",
+            "Africa",
+            "South America",
+            "Asia",
+            "Oceania",
+            "North America"});
+      this.comboContinent.Location = new System.Drawing.Point(101, 138);
       this.comboContinent.Name = "comboContinent";
-      this.comboContinent.Size = new Size(133, 21);
+      this.comboContinent.Size = new System.Drawing.Size(133, 21);
       this.comboContinent.TabIndex = 145;
-      this.textLanguageName.DataBindings.Add(new Binding("Text", (object) this.countryBindingSource, "LanguageName", true));
-      this.textLanguageName.Location = new Point(101, 60);
+      // 
+      // textLanguageName
+      // 
+      this.textLanguageName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.countryBindingSource, "LanguageName", true));
+      this.textLanguageName.Location = new System.Drawing.Point(101, 63);
       this.textLanguageName.Name = "textLanguageName";
-      this.textLanguageName.Size = new Size(133, 20);
+      this.textLanguageName.Size = new System.Drawing.Size(133, 20);
       this.textLanguageName.TabIndex = 144;
-      this.textLanguageName.TextChanged += new EventHandler(this.textLanguageName_TextChanged);
-      this.labelNationalTeam.AutoSize = true;
-      this.labelNationalTeam.BackColor = SystemColors.Control;
-      this.labelNationalTeam.ImeMode = ImeMode.NoControl;
-      this.labelNationalTeam.Location = new Point(6, 170);
-      this.labelNationalTeam.Name = "labelNationalTeam";
-      this.labelNationalTeam.Size = new Size(76, 13);
-      this.labelNationalTeam.TabIndex = 133;
-      this.labelNationalTeam.Text = "National Team";
-      this.labelNationalTeam.TextAlign = ContentAlignment.MiddleLeft;
+      this.textLanguageName.TextChanged += new System.EventHandler(this.textLanguageName_TextChanged);
+      // 
+      // labelLanguageName
+      // 
       this.labelLanguageName.AutoSize = true;
-      this.labelLanguageName.BackColor = Color.Transparent;
-      this.labelLanguageName.ImeMode = ImeMode.NoControl;
-      this.labelLanguageName.Location = new Point(6, 59);
+      this.labelLanguageName.BackColor = System.Drawing.Color.Transparent;
+      this.labelLanguageName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelLanguageName.Location = new System.Drawing.Point(6, 67);
       this.labelLanguageName.Name = "labelLanguageName";
-      this.labelLanguageName.Size = new Size(35, 13);
+      this.labelLanguageName.Size = new System.Drawing.Size(35, 13);
       this.labelLanguageName.TabIndex = 147;
       this.labelLanguageName.Text = "Name";
-      this.labelLanguageName.TextAlign = ContentAlignment.MiddleLeft;
-      this.textDatabaseCountryName.DataBindings.Add(new Binding("Text", (object) this.countryBindingSource, "DatabaseName", true));
-      this.textDatabaseCountryName.Location = new Point(101, 14);
+      this.labelLanguageName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // textDatabaseCountryName
+      // 
+      this.textDatabaseCountryName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.countryBindingSource, "DatabaseName", true));
+      this.textDatabaseCountryName.Location = new System.Drawing.Point(101, 14);
       this.textDatabaseCountryName.Name = "textDatabaseCountryName";
-      this.textDatabaseCountryName.Size = new Size(133, 20);
+      this.textDatabaseCountryName.Size = new System.Drawing.Size(133, 20);
       this.textDatabaseCountryName.TabIndex = 142;
+      // 
+      // labelDatabaseCountryName
+      // 
       this.labelDatabaseCountryName.AutoSize = true;
-      this.labelDatabaseCountryName.BackColor = Color.Transparent;
-      this.labelDatabaseCountryName.ImeMode = ImeMode.NoControl;
-      this.labelDatabaseCountryName.Location = new Point(6, 13);
+      this.labelDatabaseCountryName.BackColor = System.Drawing.Color.Transparent;
+      this.labelDatabaseCountryName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelDatabaseCountryName.Location = new System.Drawing.Point(6, 17);
       this.labelDatabaseCountryName.Name = "labelDatabaseCountryName";
-      this.labelDatabaseCountryName.Size = new Size(84, 13);
+      this.labelDatabaseCountryName.Size = new System.Drawing.Size(84, 13);
       this.labelDatabaseCountryName.TabIndex = 146;
       this.labelDatabaseCountryName.Text = "Database Name";
-      this.labelDatabaseCountryName.TextAlign = ContentAlignment.MiddleLeft;
+      this.labelDatabaseCountryName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // labelContinent
+      // 
       this.labelContinent.AutoSize = true;
-      this.labelContinent.BackColor = Color.Transparent;
-      this.labelContinent.ImeMode = ImeMode.NoControl;
-      this.labelContinent.Location = new Point(6, 135);
+      this.labelContinent.BackColor = System.Drawing.Color.Transparent;
+      this.labelContinent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelContinent.Location = new System.Drawing.Point(6, 143);
       this.labelContinent.Name = "labelContinent";
-      this.labelContinent.Size = new Size(73, 13);
+      this.labelContinent.Size = new System.Drawing.Size(73, 13);
       this.labelContinent.TabIndex = 148;
       this.labelContinent.Text = "Confederation";
-      this.labelContinent.TextAlign = ContentAlignment.MiddleLeft;
+      this.labelContinent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // labelCountrId
+      // 
       this.labelCountrId.AutoSize = true;
-      this.labelCountrId.BackColor = Color.Transparent;
-      this.labelCountrId.ImeMode = ImeMode.NoControl;
-      this.labelCountrId.Location = new Point(6, 36);
+      this.labelCountrId.BackColor = System.Drawing.Color.Transparent;
+      this.labelCountrId.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.labelCountrId.Location = new System.Drawing.Point(6, 42);
       this.labelCountrId.Name = "labelCountrId";
-      this.labelCountrId.Size = new Size(55, 13);
+      this.labelCountrId.Size = new System.Drawing.Size(55, 13);
       this.labelCountrId.TabIndex = 149;
       this.labelCountrId.Text = "Country Id";
-      this.labelCountrId.TextAlign = ContentAlignment.MiddleLeft;
-      this.groupCountryShape.Controls.Add((Control) this.viewer2DShape);
-      this.groupCountryShape.Location = new Point(3, 409);
+      this.labelCountrId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // groupCountryShape
+      // 
+      this.groupCountryShape.Controls.Add(this.viewer2DShape);
+      this.groupCountryShape.Location = new System.Drawing.Point(809, 3);
       this.groupCountryShape.Name = "groupCountryShape";
-      this.groupCountryShape.Size = new Size(528, 308);
+      this.groupCountryShape.Size = new System.Drawing.Size(528, 308);
       this.groupCountryShape.TabIndex = 4;
       this.groupCountryShape.TabStop = false;
       this.groupCountryShape.Text = "Map (Shape)";
+      // 
+      // viewer2DShape
+      // 
       this.viewer2DShape.AutoTransparency = true;
-      this.viewer2DShape.BackColor = Color.Transparent;
+      this.viewer2DShape.BackColor = System.Drawing.Color.Transparent;
       this.viewer2DShape.ButtonStripVisible = true;
-      this.viewer2DShape.CurrentBitmap = (Bitmap) null;
+      this.viewer2DShape.CurrentBitmap = null;
       this.viewer2DShape.ExtendedFormat = false;
       this.viewer2DShape.FullSizeButton = false;
-      this.viewer2DShape.ImageLayout = ImageLayout.None;
-      this.viewer2DShape.ImageSize = new Size(512, 256);
-      this.viewer2DShape.ImageSizeMultiplier = Viewer2D.SizeMultiplier.None;
-      this.viewer2DShape.Location = new Point(6, 16);
+      this.viewer2DShape.ImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.viewer2DShape.ImageSize = new System.Drawing.Size(512, 256);
+      this.viewer2DShape.ImageSizeMultiplier = FifaControls.Viewer2D.SizeMultiplier.None;
+      this.viewer2DShape.Location = new System.Drawing.Point(6, 16);
       this.viewer2DShape.Name = "viewer2DShape";
       this.viewer2DShape.RemoveButton = false;
       this.viewer2DShape.ShowButton = true;
       this.viewer2DShape.ShowButtonChecked = true;
-      this.viewer2DShape.Size = new Size(512, 281);
+      this.viewer2DShape.Size = new System.Drawing.Size(512, 281);
       this.viewer2DShape.TabIndex = 2;
-      this.toolTip.SetToolTip((Control) this.viewer2DShape, "Country Badge");
-      this.groupAudio.Controls.Add((Control) this.label3);
-      this.groupAudio.Controls.Add((Control) this.label2);
-      this.groupAudio.Controls.Add((Control) this.label1);
-      this.groupAudio.Controls.Add((Control) this.comboPepper);
-      this.groupAudio.Controls.Add((Control) this.comboPlayerCall);
-      this.groupAudio.Controls.Add((Control) this.comboCrowdType);
-      this.groupAudio.Controls.Add((Control) this.checkCanWhistle);
-      this.groupAudio.Controls.Add((Control) this.checkTauntKeeper);
-      this.groupAudio.Controls.Add((Control) this.comboLanguage);
-      this.groupAudio.Controls.Add((Control) this.label15);
-      this.groupAudio.Controls.Add((Control) this.label14);
-      this.groupAudio.Controls.Add((Control) this.label11);
-      this.groupAudio.Controls.Add((Control) this.label10);
-      this.groupAudio.Controls.Add((Control) this.comboChants);
-      this.groupAudio.Controls.Add((Control) this.label9);
-      this.groupAudio.Location = new Point(537, 409);
+      this.toolTip.SetToolTip(this.viewer2DShape, "Country Badge");
+      // 
+      // groupAudio
+      // 
+      this.groupAudio.Controls.Add(this.label3);
+      this.groupAudio.Controls.Add(this.label2);
+      this.groupAudio.Controls.Add(this.label1);
+      this.groupAudio.Controls.Add(this.comboPepper);
+      this.groupAudio.Controls.Add(this.comboPlayerCall);
+      this.groupAudio.Controls.Add(this.comboCrowdType);
+      this.groupAudio.Controls.Add(this.checkCanWhistle);
+      this.groupAudio.Controls.Add(this.checkTauntKeeper);
+      this.groupAudio.Controls.Add(this.comboLanguage);
+      this.groupAudio.Controls.Add(this.label15);
+      this.groupAudio.Controls.Add(this.label14);
+      this.groupAudio.Controls.Add(this.label11);
+      this.groupAudio.Controls.Add(this.label10);
+      this.groupAudio.Controls.Add(this.comboChants);
+      this.groupAudio.Controls.Add(this.label9);
+      this.groupAudio.Location = new System.Drawing.Point(3, 449);
       this.groupAudio.Name = "groupAudio";
-      this.groupAudio.Size = new Size(624, 250);
+      this.groupAudio.Size = new System.Drawing.Size(624, 250);
       this.groupAudio.TabIndex = 3;
       this.groupAudio.TabStop = false;
       this.groupAudio.Text = "Audio";
       this.groupAudio.Visible = false;
+      // 
+      // label3
+      // 
       this.label3.AutoSize = true;
-      this.label3.Location = new Point(11, 219);
+      this.label3.Location = new System.Drawing.Point(11, 219);
       this.label3.Name = "label3";
-      this.label3.Size = new Size(55, 13);
+      this.label3.Size = new System.Drawing.Size(55, 13);
       this.label3.TabIndex = 33;
       this.label3.Text = "Reactions";
+      // 
+      // label2
+      // 
       this.label2.AutoSize = true;
-      this.label2.Location = new Point(11, 192);
+      this.label2.Location = new System.Drawing.Point(11, 192);
       this.label2.Name = "label2";
-      this.label2.Size = new Size(46, 13);
+      this.label2.Size = new System.Drawing.Size(46, 13);
       this.label2.TabIndex = 32;
       this.label2.Text = "Heckles";
+      // 
+      // label1
+      // 
       this.label1.AutoSize = true;
-      this.label1.Location = new Point(9, 165);
+      this.label1.Location = new System.Drawing.Point(9, 165);
       this.label1.Name = "label1";
-      this.label1.Size = new Size(54, 13);
+      this.label1.Size = new System.Drawing.Size(54, 13);
       this.label1.TabIndex = 31;
       this.label1.Text = "Ambience";
+      // 
+      // comboPepper
+      // 
       this.comboPepper.FormattingEnabled = true;
-      this.comboPepper.Items.AddRange(new object[8]
-      {
-        (object) "Undefined",
-        (object) "English",
-        (object) "French",
-        (object) "Italian",
-        (object) "German",
-        (object) "Spanish",
-        (object) "Scandinavian",
-        (object) "Brazilian"
-      });
-      this.comboPepper.Location = new Point(88, 132);
+      this.comboPepper.Items.AddRange(new object[] {
+            "Undefined",
+            "English",
+            "French",
+            "Italian",
+            "German",
+            "Spanish",
+            "Scandinavian",
+            "Brazilian"});
+      this.comboPepper.Location = new System.Drawing.Point(88, 132);
       this.comboPepper.Name = "comboPepper";
-      this.comboPepper.Size = new Size(145, 21);
+      this.comboPepper.Size = new System.Drawing.Size(145, 21);
       this.comboPepper.TabIndex = 29;
-      this.comboPepper.SelectedIndexChanged += new EventHandler(this.comboPepper_SelectedIndexChanged);
+      this.comboPepper.SelectedIndexChanged += new System.EventHandler(this.comboPepper_SelectedIndexChanged);
+      // 
+      // comboPlayerCall
+      // 
       this.comboPlayerCall.FormattingEnabled = true;
-      this.comboPlayerCall.Items.AddRange(new object[19]
-      {
-        (object) "English",
-        (object) "French",
-        (object) "Italian",
-        (object) "German",
-        (object) "Spanish",
-        (object) "Brazilian",
-        (object) "Japaneese",
-        (object) "Korean",
-        (object) "Dutch",
-        (object) "Danish",
-        (object) "Swedish",
-        (object) "Norwegian",
-        (object) "Portuguese",
-        (object) "Russian",
-        (object) "US English",
-        (object) "Iranian",
-        (object) "Indian",
-        (object) "Chineese",
-        (object) "Arabic"
-      });
-      this.comboPlayerCall.Location = new Point(88, 105);
+      this.comboPlayerCall.Items.AddRange(new object[] {
+            "English",
+            "French",
+            "Italian",
+            "German",
+            "Spanish",
+            "Brazilian",
+            "Japaneese",
+            "Korean",
+            "Dutch",
+            "Danish",
+            "Swedish",
+            "Norwegian",
+            "Portuguese",
+            "Russian",
+            "US English",
+            "Iranian",
+            "Indian",
+            "Chineese",
+            "Arabic"});
+      this.comboPlayerCall.Location = new System.Drawing.Point(88, 105);
       this.comboPlayerCall.Name = "comboPlayerCall";
-      this.comboPlayerCall.Size = new Size(145, 21);
+      this.comboPlayerCall.Size = new System.Drawing.Size(145, 21);
       this.comboPlayerCall.TabIndex = 28;
-      this.comboPlayerCall.SelectedIndexChanged += new EventHandler(this.comboPlayerCall_SelectedIndexChanged);
+      this.comboPlayerCall.SelectedIndexChanged += new System.EventHandler(this.comboPlayerCall_SelectedIndexChanged);
+      // 
+      // comboCrowdType
+      // 
       this.comboCrowdType.FormattingEnabled = true;
-      this.comboCrowdType.Items.AddRange(new object[3]
-      {
-        (object) " 0 = English",
-        (object) " 8 = Brazilian",
-        (object) "15 = Rest of World"
-      });
-      this.comboCrowdType.Location = new Point(88, 78);
+      this.comboCrowdType.Items.AddRange(new object[] {
+            " 0 = English",
+            " 8 = Brazilian",
+            "15 = Rest of World"});
+      this.comboCrowdType.Location = new System.Drawing.Point(88, 78);
       this.comboCrowdType.Name = "comboCrowdType";
-      this.comboCrowdType.Size = new Size(145, 21);
+      this.comboCrowdType.Size = new System.Drawing.Size(145, 21);
       this.comboCrowdType.TabIndex = 27;
-      this.comboCrowdType.SelectedIndexChanged += new EventHandler(this.comboCrowdType_SelectedIndexChanged);
+      this.comboCrowdType.SelectedIndexChanged += new System.EventHandler(this.comboCrowdType_SelectedIndexChanged);
+      // 
+      // checkCanWhistle
+      // 
       this.checkCanWhistle.AutoSize = true;
-      this.checkCanWhistle.Location = new Point(259, 48);
+      this.checkCanWhistle.Location = new System.Drawing.Point(259, 48);
       this.checkCanWhistle.Name = "checkCanWhistle";
-      this.checkCanWhistle.RightToLeft = RightToLeft.Yes;
-      this.checkCanWhistle.Size = new Size(83, 17);
+      this.checkCanWhistle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkCanWhistle.Size = new System.Drawing.Size(83, 17);
       this.checkCanWhistle.TabIndex = 26;
       this.checkCanWhistle.Text = "Can Whistle";
       this.checkCanWhistle.UseVisualStyleBackColor = true;
-      this.checkCanWhistle.CheckedChanged += new EventHandler(this.checkCanWhistle_CheckedChanged);
+      this.checkCanWhistle.CheckedChanged += new System.EventHandler(this.checkCanWhistle_CheckedChanged);
+      // 
+      // checkTauntKeeper
+      // 
       this.checkTauntKeeper.AutoSize = true;
-      this.checkTauntKeeper.Location = new Point(251, 25);
+      this.checkTauntKeeper.Location = new System.Drawing.Point(251, 25);
       this.checkTauntKeeper.Name = "checkTauntKeeper";
-      this.checkTauntKeeper.RightToLeft = RightToLeft.Yes;
-      this.checkTauntKeeper.Size = new Size(91, 17);
+      this.checkTauntKeeper.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkTauntKeeper.Size = new System.Drawing.Size(91, 17);
       this.checkTauntKeeper.TabIndex = 25;
       this.checkTauntKeeper.Text = "Taunt Keeper";
       this.checkTauntKeeper.UseVisualStyleBackColor = true;
-      this.checkTauntKeeper.CheckedChanged += new EventHandler(this.checkTauntKeeper_CheckedChanged);
+      this.checkTauntKeeper.CheckedChanged += new System.EventHandler(this.checkTauntKeeper_CheckedChanged);
+      // 
+      // comboLanguage
+      // 
       this.comboLanguage.FormattingEnabled = true;
-      this.comboLanguage.Items.AddRange(new object[18]
-      {
-        (object) "English ",
-        (object) "French ",
-        (object) "German ",
-        (object) "Italian ",
-        (object) "Spanish from Spain ",
-        (object) "Croatian",
-        (object) "Czech",
-        (object) "Dutch",
-        (object) "Greek",
-        (object) "Polish ",
-        (object) "Russian",
-        (object) "Swedish",
-        (object) "Turkish",
-        (object) "Spanish from Mexico ",
-        (object) "Spanish from Argentina ",
-        (object) "Brazilian Portuguese",
-        (object) "Korean",
-        (object) "Japanese"
-      });
-      this.comboLanguage.Location = new Point(89, 24);
+      this.comboLanguage.Items.AddRange(new object[] {
+            "English ",
+            "French ",
+            "German ",
+            "Italian ",
+            "Spanish from Spain ",
+            "Croatian",
+            "Czech",
+            "Dutch",
+            "Greek",
+            "Polish ",
+            "Russian",
+            "Swedish",
+            "Turkish",
+            "Spanish from Mexico ",
+            "Spanish from Argentina ",
+            "Brazilian Portuguese",
+            "Korean",
+            "Japanese"});
+      this.comboLanguage.Location = new System.Drawing.Point(89, 24);
       this.comboLanguage.Name = "comboLanguage";
-      this.comboLanguage.Size = new Size(144, 21);
+      this.comboLanguage.Size = new System.Drawing.Size(144, 21);
       this.comboLanguage.TabIndex = 24;
-      this.comboLanguage.SelectedIndexChanged += new EventHandler(this.comboLanguage_SelectedIndexChanged);
+      this.comboLanguage.SelectedIndexChanged += new System.EventHandler(this.comboLanguage_SelectedIndexChanged);
+      // 
+      // label15
+      // 
       this.label15.AutoSize = true;
-      this.label15.Location = new Point(9, 135);
+      this.label15.Location = new System.Drawing.Point(9, 135);
       this.label15.Name = "label15";
-      this.label15.Size = new Size(42, 13);
+      this.label15.Size = new System.Drawing.Size(42, 13);
       this.label15.TabIndex = 23;
       this.label15.Text = "Whistle";
+      // 
+      // label14
+      // 
       this.label14.AutoSize = true;
-      this.label14.Location = new Point(9, 108);
+      this.label14.Location = new System.Drawing.Point(9, 108);
       this.label14.Name = "label14";
-      this.label14.Size = new Size(56, 13);
+      this.label14.Size = new System.Drawing.Size(56, 13);
       this.label14.TabIndex = 22;
       this.label14.Text = "Player Call";
+      // 
+      // label11
+      // 
       this.label11.AutoSize = true;
-      this.label11.Location = new Point(9, 81);
+      this.label11.Location = new System.Drawing.Point(9, 81);
       this.label11.Name = "label11";
-      this.label11.Size = new Size(64, 13);
+      this.label11.Size = new System.Drawing.Size(64, 13);
       this.label11.TabIndex = 19;
       this.label11.Text = "Crowd Type";
+      // 
+      // label10
+      // 
       this.label10.AutoSize = true;
-      this.label10.Location = new Point(6, 27);
+      this.label10.Location = new System.Drawing.Point(6, 27);
       this.label10.Name = "label10";
-      this.label10.Size = new Size(55, 13);
+      this.label10.Size = new System.Drawing.Size(55, 13);
       this.label10.TabIndex = 18;
       this.label10.Text = "Language";
+      // 
+      // comboChants
+      // 
       this.comboChants.FormattingEnabled = true;
-      this.comboChants.Items.AddRange(new object[16]
-      {
-        (object) "English Area",
-        (object) "French Area",
-        (object) "Italy",
-        (object) "German Area",
-        (object) "Spain",
-        (object) "Scandinavian Area",
-        (object) "Rest Of World",
-        (object) "Latin America",
-        (object) "Brazil",
-        (object) "Africa",
-        (object) "Asia",
-        (object) "Mexico",
-        (object) "Denmark",
-        (object) "Russian Area",
-        (object) "Portugal",
-        (object) "Turkey"
-      });
-      this.comboChants.Location = new Point(89, 51);
+      this.comboChants.Items.AddRange(new object[] {
+            "English Area",
+            "French Area",
+            "Italy",
+            "German Area",
+            "Spain",
+            "Scandinavian Area",
+            "Rest Of World",
+            "Latin America",
+            "Brazil",
+            "Africa",
+            "Asia",
+            "Mexico",
+            "Denmark",
+            "Russian Area",
+            "Portugal",
+            "Turkey"});
+      this.comboChants.Location = new System.Drawing.Point(89, 51);
       this.comboChants.Name = "comboChants";
-      this.comboChants.Size = new Size(144, 21);
+      this.comboChants.Size = new System.Drawing.Size(144, 21);
       this.comboChants.TabIndex = 17;
-      this.comboChants.SelectedIndexChanged += new EventHandler(this.comboChants_SelectedIndexChanged);
+      this.comboChants.SelectedIndexChanged += new System.EventHandler(this.comboChants_SelectedIndexChanged);
+      // 
+      // label9
+      // 
       this.label9.AutoSize = true;
-      this.label9.Location = new Point(9, 54);
+      this.label9.Location = new System.Drawing.Point(9, 54);
       this.label9.Name = "label9";
-      this.label9.Size = new Size(40, 13);
+      this.label9.Size = new System.Drawing.Size(40, 13);
       this.label9.TabIndex = 16;
       this.label9.Text = "Chants";
-      this.pickUpControl.BackColor = SystemColors.Control;
+      // 
+      // pickUpControl
+      // 
+      this.pickUpControl.BackColor = System.Drawing.SystemColors.Control;
       this.pickUpControl.CloneButtonEnabled = false;
       this.pickUpControl.CreateButtonEnabled = true;
       this.pickUpControl.CurrentIndex = 0;
-      this.pickUpControl.Dock = DockStyle.Top;
-      this.pickUpControl.FilterByList = (string[]) null;
+      this.pickUpControl.Dock = System.Windows.Forms.DockStyle.Top;
+      this.pickUpControl.FilterByList = null;
       this.pickUpControl.FilterEnabled = false;
-      this.pickUpControl.FilterValues = (IdArrayList[]) null;
-      this.pickUpControl.Location = new Point(0, 0);
+      this.pickUpControl.FilterValues = null;
+      this.pickUpControl.Location = new System.Drawing.Point(0, 0);
       this.pickUpControl.MainSelectionEnabled = true;
       this.pickUpControl.Name = "pickUpControl";
-      this.pickUpControl.ObjectList = (IdArrayList) null;
+      this.pickUpControl.ObjectList = null;
       this.pickUpControl.RefreshButtonEnabled = true;
       this.pickUpControl.RemoveButtonEnabled = true;
       this.pickUpControl.SearchEnabled = true;
-      this.pickUpControl.Size = new Size(1357, 25);
+      this.pickUpControl.Size = new System.Drawing.Size(1357, 25);
       this.pickUpControl.TabIndex = 2;
       this.pickUpControl.WizardButtonEnabled = false;
       this.pickUpControl.YoungPlayersEnabled = false;
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.ClientSize = new Size(1357, 832);
-      this.Controls.Add((Control) this.flowLayoutPanel);
-      this.Controls.Add((Control) this.pickUpControl);
-      this.FormBorderStyle = FormBorderStyle.None;
+      // 
+      // CountryForm
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.ClientSize = new System.Drawing.Size(1357, 832);
+      this.Controls.Add(this.flowLayoutPanel);
+      this.Controls.Add(this.pickUpControl);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "CountryForm";
       this.Text = "Country";
-      this.Load += new EventHandler(this.CountryForm_Load);
+      this.Load += new System.EventHandler(this.CountryForm_Load);
       this.flowLayoutPanel.ResumeLayout(false);
       this.groupBox.ResumeLayout(false);
       this.groupBox.PerformLayout();
-      ((ISupportInitialize) this.countryBindingSource).EndInit();
-      this.numericLevel.EndInit();
-      ((ISupportInitialize) this.pictureNationalTeam).EndInit();
-      this.numericNationalTeam.EndInit();
-      this.numericCountryId.EndInit();
+      this.groupBox1.ResumeLayout(false);
+      this.groupBox1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureNationalTeam)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericLevel)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericCountryId)).EndInit();
       this.groupCountryShape.ResumeLayout(false);
       this.groupAudio.ResumeLayout(false);
       this.groupAudio.PerformLayout();
-      ((ISupportInitialize) this.sponsorListBindingSource).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.sponsorListBindingSource)).EndInit();
       this.ResumeLayout(false);
+
+    }
+
+    private void checkTopTier_CheckedChanged(object sender, EventArgs e)
+    {
+
     }
   }
 }

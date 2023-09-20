@@ -918,8 +918,6 @@ namespace CreationMaster
               this.CheckAndExport(country.ShapeFileName());
             if (this.checkCountryFlag512x512.Checked)
               this.CheckAndExport(country.Flag512DdsFileName());
-            if (this.checkCountryCardFlag.Checked)
-              this.CheckAndExport(country.CardFlagBigFileName());
             if (this.checkCountryMiniFlag.Checked)
               this.CheckAndExport(country.MiniFlagBigFileName());
           }

@@ -1107,7 +1107,7 @@ namespace CreationMaster
       this.MinimumSize = new System.Drawing.Size(200, 200);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Creation Master 17 CompData (2023.10)";
+      this.Text = "Creation Master 17 Legacy (2023.10)";
       this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
       this.menuStrip.ResumeLayout(false);
       this.menuStrip.PerformLayout();
@@ -1500,6 +1500,8 @@ namespace CreationMaster
                     flag = FifaEnvironment.Initialize(14, rootDir);
                 if (rootDir.Contains("15"))
                     flag = FifaEnvironment.Initialize(15, rootDir);
+                if (rootDir.Contains("17"))
+                    flag = FifaEnvironment.Initialize(17, rootDir);
             }
             if (!flag)
             {

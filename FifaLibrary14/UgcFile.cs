@@ -137,7 +137,7 @@ namespace FifaLibrary
         Record record1 = table1.Records[index1];
         record1.GetAndCheckIntField(FI.teams_assetid);
         int andCheckIntField1 = record1.GetAndCheckIntField(FI.teams_teamid);
-        Team team = FifaEnvironment.Teams.FitTeam(record1.StringField[FI.teams_teamname], 0);
+        Team team = FifaEnvironment.Teams.FitTeam(record1.StringField[FI.teams_teamname]);
         if (team != null)
         {
           if (statusBar != null)
@@ -382,7 +382,7 @@ namespace FifaLibrary
         }
         if (team == null)
         {
-          team = FifaEnvironment.Teams.FitTeam(record1.StringField[FI.teams_teamname], 0);
+          team = FifaEnvironment.Teams.FitTeam(record1.StringField[FI.teams_teamname]);
           if (team != null && country.Id != 216 && team.Country != country)
             team = (Team) null;
           team?.Roster.ResetToEmpty();
@@ -975,7 +975,7 @@ namespace FifaLibrary
         }
         if (team == null)
         {
-          team = FifaEnvironment.Teams.FitTeam(record.StringField[FI.teams_teamname], 0);
+          team = FifaEnvironment.Teams.FitTeam(record.StringField[FI.teams_teamname]);
           if (team != null && country.Id != 216 && team.Country != country)
             team = (Team) null;
           team?.Roster.ResetToEmpty();

@@ -644,11 +644,59 @@ namespace FifaLibrary
       return true;
     }
 
+    public static bool Initialize17(string rootDir)
+    {
+      if (FifaEnvironment.m_UserMessages == null)
+        FifaEnvironment.m_UserMessages = new UserMessage();
+      if (FifaEnvironment.m_UserOptions == null)
+        FifaEnvironment.m_UserOptions = new UserOptions();
+      FifaEnvironment.m_FifaFat = (FifaFat) null;
+      FifaEnvironment.m_FifaDb = (DbFile) null;
+      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.InitializeLaunchFolder();
+      FifaEnvironment.m_Year = 17;
+      FifaEnvironment.m_GameKey = RegistryInfo.GetFifaKey(FifaEnvironment.m_Year);
+      if (rootDir == null)
+      {
+        if (!RegistryInfo.IsFifaInstalled(FifaEnvironment.m_GameKey))
+          return false;
+        FifaEnvironment.m_RootDir = RegistryInfo.GetInstallDir(FifaEnvironment.m_GameKey);
+      }
+      else
+        FifaEnvironment.m_RootDir = rootDir;
+      FifaEnvironment.m_GameDir = FifaEnvironment.m_RootDir + "\\";
+      FifaEnvironment.m_FifaDbPartialFileName = "data\\db\\fifa_ng_db.db";
+      FifaEnvironment.m_FifaDbFileName = FifaEnvironment.m_GameDir + FifaEnvironment.m_FifaDbPartialFileName;
+      FifaEnvironment.m_FifaXmlPartialFileName = "data\\db\\fifa_ng_db-meta.xml";
+      FifaEnvironment.m_FifaXmlFileName = FifaEnvironment.m_GameDir + FifaEnvironment.m_FifaXmlPartialFileName;
+      FifaEnvironment.m_LangDbFileName = FifaEnvironment.GetLanguageDbFilename(FifaEnvironment.m_GameKey);
+      FifaEnvironment.m_LangXmlFileName = FifaEnvironment.GetLanguageXmlFilename(FifaEnvironment.m_GameKey);
+      FifaEnvironment.m_TempFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+      FifaEnvironment.m_TempFolder += "\\FM_temp";
+      FifaEnvironment.m_ExportFolder = FifaEnvironment.m_UserOptions.m_AutoExportFolder ? FifaEnvironment.m_TempFolder : FifaEnvironment.m_UserOptions.m_ExportFolder;
+      if (!Directory.Exists(FifaEnvironment.m_TempFolder))
+        Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
+      if (!Directory.Exists(FifaEnvironment.m_ExportFolder))
+        Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
+      FifaEnvironment.s_NameFontList = (NameFontList) null;
+      FifaEnvironment.s_NumberFontList = (NumberFontList) null;
+      FifaEnvironment.s_MowingPatternList = (MowingPatternList) null;
+      FifaEnvironment.s_NetList = (NetList) null;
+      FifaEnvironment.s_GkGlovesList = (GkGlovesList) null;
+      FifaEnvironment.s_ShoesList = (ShoesList) null;
+      FifaEnvironment.s_AdboardList = (AdboardList) null;
+      FifaEnvironment.s_BallList = (BallList) null;
+      FifaEnvironment.s_ShoesList = (ShoesList) null;
+      return true;
+    }
+
     public static bool Initialize(int year, string rootDir)
     {
       if (year == 14)
         return FifaEnvironment.Initialize14(rootDir);
-      return year == 15 && FifaEnvironment.Initialize15(rootDir);
+      if (year == 15)
+        return FifaEnvironment.Initialize15(rootDir);
+      return year == 17 && FifaEnvironment.Initialize17(rootDir);
     }
 
     public static string GetLanguageDbFilename(string game)
@@ -946,6 +994,11 @@ namespace FifaLibrary
         FI.InitFI(FifaEnvironment.m_FifaDb);
       }
       if (FifaEnvironment.m_Year == 15)
+      {
+        TI.InitTIAsFIFA14(FifaEnvironment.m_FifaDb);
+        FI.InitFI(FifaEnvironment.m_FifaDb);
+      }
+      if (FifaEnvironment.m_Year == 17)
       {
         TI.InitTIAsFIFA14(FifaEnvironment.m_FifaDb);
         FI.InitFI(FifaEnvironment.m_FifaDb);
@@ -2178,7 +2231,7 @@ namespace FifaLibrary
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
         FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
-        FifaEnvironment.s_CountryList.LinkTeam(FifaEnvironment.s_TeamList);
+        FifaEnvironment.s_CountryList.LinkNationalTeam(FifaEnvironment.s_TeamList);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_FormationList != null)
       {
         FifaEnvironment.s_TeamList.LinkFormation(FifaEnvironment.s_FormationList);

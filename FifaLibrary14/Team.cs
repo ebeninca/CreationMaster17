@@ -133,7 +133,7 @@ namespace FifaLibrary
     private int m_matchdaydefenserating;
     private int m_matchdaymidfieldrating;
     private int m_matchdayattackrating;
-    public int m_countryid_IfNationalTeam;
+    private int m_countryid_IfNationalTeam;
     public int m_countryid_IfRowTeam;
     private Country m_Country;
     private int m_leagueid;
@@ -1128,6 +1128,20 @@ namespace FifaLibrary
       }
     }
 
+    public int countryid_IfNationalTeam
+    {
+      get
+      {
+        return this.m_countryid_IfNationalTeam;
+      }
+      set
+      {
+        this.m_countryid_IfNationalTeam = value;
+      }
+    }
+
+    
+
     public Roster Roster
     {
       get
@@ -1144,7 +1158,7 @@ namespace FifaLibrary
       }
       set
       {
-        if (this.IsNationalTeam())
+        if (this.IsNationalTeam)
         {
           if (this.m_Country == value)
             return;
@@ -1177,14 +1191,17 @@ namespace FifaLibrary
       this.m_countryid_IfNationalTeam = 0;
     }
 
-    public bool IsNationalTeam()
+    public bool IsNationalTeam
     {
-      return this.m_countryid_IfNationalTeam != 0;
+      get
+      { 
+        return this.m_countryid_IfNationalTeam != 0;
+      }
     }
 
     public bool IsClub()
     {
-      return !this.IsNationalTeam() && this.Id != 111072 && (this.Id != 111205 && this.Id != 112190) && this.Id != 111596 && this.Id != 111592;
+      return !this.IsNationalTeam && this.Id != 111072 && (this.Id != 111205 && this.Id != 112190) && this.Id != 111596 && this.Id != 111592;
     }
 
     public League League

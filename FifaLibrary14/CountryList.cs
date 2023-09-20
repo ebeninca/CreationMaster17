@@ -95,10 +95,10 @@ namespace FifaLibrary
       return (Country) null;
     }
 
-    public void LinkTeam(TeamList teamList)
+    public void LinkNationalTeam(TeamList teamList)
     {
       foreach (Country country in (ArrayList) this)
-        country.LinkTeam(teamList);
+        country.LinkNationalTeam(teamList);
     }
   }
 }
