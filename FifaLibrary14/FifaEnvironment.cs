@@ -2228,10 +2228,6 @@ namespace FifaLibrary
         FifaEnvironment.s_PlayerList.LinkCountry(FifaEnvironment.s_CountryList);
       if (FifaEnvironment.s_PlayerList != null && FifaEnvironment.s_TeamList != null)
         FifaEnvironment.s_PlayerList.LinkTeam(FifaEnvironment.s_TeamList);
-      if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
-        FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
-      if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
-        FifaEnvironment.s_CountryList.LinkNationalTeam(FifaEnvironment.s_TeamList);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_FormationList != null)
       {
         FifaEnvironment.s_TeamList.LinkFormation(FifaEnvironment.s_FormationList);
@@ -2250,6 +2246,10 @@ namespace FifaLibrary
         FifaEnvironment.s_TeamList.LinkLeague(FifaEnvironment.s_LeagueList);
       if ((fifaObjects & EFifaObjects.FifaTournament) != (EFifaObjects) 0)
         FifaEnvironment.s_CompetitionObjects = new CompobjList(FifaEnvironment.m_GameDir, FifaEnvironment.m_FifaDb);
+      if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
+        FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
+      /*if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null && FifaEnvironment.s_CompetitionObjects != null)
+        FifaEnvironment.s_CountryList.LinkNationalTeam(FifaEnvironment.s_TeamList);*/
       if (FifaEnvironment.s_CompetitionObjects == null)
         return;
       FifaEnvironment.s_CompetitionObjects.Link();

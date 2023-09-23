@@ -1651,7 +1651,12 @@ namespace FifaLibrary
       }
       if (this.m_match_stagetype != null)
       {
-        if (this.m_match_matchsituation != "LEAGUE")
+        if (this.m_match_matchsituation == "LEAGUE" && id == 0)
+        {
+          string str = id.ToString() + ",match_stagetype," + this.m_match_stagetype;
+          w.WriteLine(str);
+        }
+        else if (this.m_match_matchsituation != "LEAGUE")
         {
           string str = id.ToString() + ",match_stagetype," + this.m_match_stagetype;
           w.WriteLine(str);

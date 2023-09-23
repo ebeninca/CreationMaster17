@@ -1927,6 +1927,12 @@ namespace FifaLibrary
       this.m_formationid = r.GetAndCheckIntField(FI.teamformationteamstylelinks_formationid);
     }
 
+    public void FillFromCountry(Country country)
+    {
+      this.m_countryid_IfNationalTeam = country.NationalTeamId;
+      this.m_Country = country;
+    }
+
     public void FillFromNations(Record r)
     {
       this.m_countryid_IfNationalTeam = r.GetAndCheckIntField(FI.nations_nationid);
@@ -2024,8 +2030,8 @@ namespace FifaLibrary
           this.m_countryid_IfRowTeam = this.m_League.Country.Id;
         }
       }
-      else
-        this.m_Country = (Country) countryList.SearchId(this.m_countryid_IfNationalTeam);
+      //else
+      //  this.m_Country = (Country) countryList.SearchId(this.m_countryid_IfNationalTeam);
     }
 
     public void LinkFormation(FormationList formationList)

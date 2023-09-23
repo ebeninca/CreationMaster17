@@ -29,7 +29,7 @@ namespace FifaLibrary
       int minId = 130010;
       int maxId = 200000;
       this.Load(fifaDbFile.Table[TI.teams], minId, maxId);
-      this.FillFromNations(fifaDbFile.Table[TI.nations]);
+      //this.FillFromNations(fifaDbFile.Table[TI.nations]);
       this.FillFromStadiumAssignments(fifaDbFile.Table[TI.stadiumassignments]);
       this.FillFromManager(fifaDbFile.Table[TI.manager]);
       this.FillFromTeamStadiumLinks(fifaDbFile.Table[TI.teamstadiumlinks]);
@@ -113,7 +113,8 @@ namespace FifaLibrary
         for (int index = 0; index < t.NRecords; ++index)
         {
           Record record = t.Records[index];
-          if (team.DatabaseName.Equals(record.StringField[FI.nations_nationname]))
+          string fullName = FifaEnvironment.Language.GetCountryString(record.IntField[FI.nations_nationid], Language.ECountryStringType.Full);
+          if (team.DatabaseName.Equals(record.StringField[FI.nations_nationname]) || team.DatabaseName.Equals(fullName))
           {
             team.FillFromNations(record);
             break;

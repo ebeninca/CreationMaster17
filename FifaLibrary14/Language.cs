@@ -276,8 +276,6 @@ namespace FifaLibrary
           return "nationname_abbr3_" + countryId.ToString();
         case Language.ECountryStringType.Abbr15:
           return "NationName_" + countryId.ToString() + "_abbr_15";
-        case Language.ECountryStringType.Abbr2:
-          return "nationname_abbr2_" + countryId.ToString();
         default:
           return (string) null;
       }
@@ -301,7 +299,6 @@ namespace FifaLibrary
       this.RemoveString(this.GetCountryConventionalString(countryId, Language.ECountryStringType.Abbr15));
       this.RemoveString(this.GetCountryConventionalString(countryId, Language.ECountryStringType.Abbr3));
       this.RemoveString(this.GetCountryConventionalString(countryId, Language.ECountryStringType.Full));
-      this.RemoveString(this.GetCountryConventionalString(countryId, Language.ECountryStringType.Abbr2));
     }
 
     public void RemoveCountryString(int countryId, Language.ECountryStringType stringType)
@@ -585,7 +582,6 @@ namespace FifaLibrary
       Full,
       Abbr3,
       Abbr15,
-      Abbr2,
     }
 
     public enum ETeamStringType

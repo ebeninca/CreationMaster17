@@ -481,7 +481,7 @@ namespace FifaLibrary
         {
           int int32_1 = Convert.ToInt32(strArray[0]);
           int int32_2 = Convert.ToInt32(strArray[1]);
-          Convert.ToInt32(strArray[2]);
+          int nationalTeamId = Convert.ToInt32(strArray[2]);
           Convert.ToInt32(strArray[3]);
           string str2 = strArray[5];
           string str3 = strArray[7];
@@ -502,12 +502,13 @@ namespace FifaLibrary
               country.WorldCupTarget = 5;
             else if (str2 == "QUALIFY")
               country.WorldCupTarget = 6;
+
             if (str3 == "N/A")
               country.ContinentalCupTarget = 0;
             else if (str3 == "WIN")
               country.ContinentalCupTarget = 1;
-            else if (str2 == "FINAL")
-              country.WorldCupTarget = 2;
+            else if (str3 == "FINAL")
+              country.ContinentalCupTarget = 2;
             else if (str3 == "SEMI")
               country.ContinentalCupTarget = 3;
             else if (str3 == "QUARTER")
@@ -516,7 +517,12 @@ namespace FifaLibrary
               country.ContinentalCupTarget = 5;
             else if (str3 == "QUALIFY")
               country.ContinentalCupTarget = 6;
+
             country.Level = int32_1;
+            Team nationalTeam = (Team)FifaEnvironment.Teams.SearchId(nationalTeamId);
+            country.NationalTeamId = nationalTeamId;
+            country.NationalTeam = nationalTeam;
+            nationalTeam.FillFromCountry(country);
           }
         }
       }

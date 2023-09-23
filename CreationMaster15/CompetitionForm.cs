@@ -499,6 +499,12 @@ namespace CreationMaster
     private NumericUpDown numericQuarterJLeague;
     private CheckBox checkBoxQuarterJLeague;
     private CheckBox checkBoxIgnoreJLeague;
+    private GroupBox groupBox3;
+    private RadioButton radioButton3;
+    private RadioButton radioButton4;
+    private GroupBox groupBox1;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
     private Viewer2D viewer2DTrophy;
 
     public CompetitionForm()
@@ -4818,6 +4824,12 @@ namespace CreationMaster
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.tabCompetitions = new System.Windows.Forms.TabControl();
       this.pageWorld = new System.Windows.Forms.TabPage();
+      this.groupBox3 = new System.Windows.Forms.GroupBox();
+      this.radioButton3 = new System.Windows.Forms.RadioButton();
+      this.radioButton4 = new System.Windows.Forms.RadioButton();
+      this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.radioButton1 = new System.Windows.Forms.RadioButton();
+      this.radioButton2 = new System.Windows.Forms.RadioButton();
       this.comboWorldStartingMonth = new System.Windows.Forms.ComboBox();
       this.label72 = new System.Windows.Forms.Label();
       this.numericStartYear = new System.Windows.Forms.NumericUpDown();
@@ -5115,6 +5127,8 @@ namespace CreationMaster
       this.splitContainer1.SuspendLayout();
       this.tabCompetitions.SuspendLayout();
       this.pageWorld.SuspendLayout();
+      this.groupBox3.SuspendLayout();
+      this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericStartYear)).BeginInit();
       this.pageConfederation.SuspendLayout();
       this.pageNation.SuspendLayout();
@@ -8596,6 +8610,8 @@ namespace CreationMaster
       // 
       // pageWorld
       // 
+      this.pageWorld.Controls.Add(this.groupBox3);
+      this.pageWorld.Controls.Add(this.groupBox1);
       this.pageWorld.Controls.Add(this.comboWorldStartingMonth);
       this.pageWorld.Controls.Add(this.label72);
       this.pageWorld.Controls.Add(this.numericStartYear);
@@ -8607,6 +8623,72 @@ namespace CreationMaster
       this.pageWorld.TabIndex = 5;
       this.pageWorld.Text = "FIFA";
       this.pageWorld.UseVisualStyleBackColor = true;
+      // 
+      // groupBox3
+      // 
+      this.groupBox3.Controls.Add(this.radioButton3);
+      this.groupBox3.Controls.Add(this.radioButton4);
+      this.groupBox3.Location = new System.Drawing.Point(16, 122);
+      this.groupBox3.Name = "groupBox3";
+      this.groupBox3.Size = new System.Drawing.Size(262, 50);
+      this.groupBox3.TabIndex = 163;
+      this.groupBox3.TabStop = false;
+      this.groupBox3.Text = "Bench Players";
+      // 
+      // radioButton3
+      // 
+      this.radioButton3.AutoSize = true;
+      this.radioButton3.Location = new System.Drawing.Point(110, 19);
+      this.radioButton3.Name = "radioButton3";
+      this.radioButton3.Size = new System.Drawing.Size(68, 17);
+      this.radioButton3.TabIndex = 1;
+      this.radioButton3.TabStop = true;
+      this.radioButton3.Text = "7 Players";
+      this.radioButton3.UseVisualStyleBackColor = true;
+      // 
+      // radioButton4
+      // 
+      this.radioButton4.AutoSize = true;
+      this.radioButton4.Location = new System.Drawing.Point(9, 19);
+      this.radioButton4.Name = "radioButton4";
+      this.radioButton4.Size = new System.Drawing.Size(68, 17);
+      this.radioButton4.TabIndex = 0;
+      this.radioButton4.TabStop = true;
+      this.radioButton4.Text = "5 Players";
+      this.radioButton4.UseVisualStyleBackColor = true;
+      // 
+      // groupBox1
+      // 
+      this.groupBox1.Controls.Add(this.radioButton1);
+      this.groupBox1.Controls.Add(this.radioButton2);
+      this.groupBox1.Location = new System.Drawing.Point(16, 178);
+      this.groupBox1.Name = "groupBox1";
+      this.groupBox1.Size = new System.Drawing.Size(262, 50);
+      this.groupBox1.TabIndex = 162;
+      this.groupBox1.TabStop = false;
+      this.groupBox1.Text = "Substituitions Allowed per Match";
+      // 
+      // radioButton1
+      // 
+      this.radioButton1.AutoSize = true;
+      this.radioButton1.Location = new System.Drawing.Point(110, 19);
+      this.radioButton1.Name = "radioButton1";
+      this.radioButton1.Size = new System.Drawing.Size(68, 17);
+      this.radioButton1.TabIndex = 1;
+      this.radioButton1.TabStop = true;
+      this.radioButton1.Text = "5 Players";
+      this.radioButton1.UseVisualStyleBackColor = true;
+      // 
+      // radioButton2
+      // 
+      this.radioButton2.AutoSize = true;
+      this.radioButton2.Location = new System.Drawing.Point(9, 19);
+      this.radioButton2.Name = "radioButton2";
+      this.radioButton2.Size = new System.Drawing.Size(68, 17);
+      this.radioButton2.TabIndex = 0;
+      this.radioButton2.TabStop = true;
+      this.radioButton2.Text = "3 Players";
+      this.radioButton2.UseVisualStyleBackColor = true;
       // 
       // comboWorldStartingMonth
       // 
@@ -11456,6 +11538,10 @@ namespace CreationMaster
       this.tabCompetitions.ResumeLayout(false);
       this.pageWorld.ResumeLayout(false);
       this.pageWorld.PerformLayout();
+      this.groupBox3.ResumeLayout(false);
+      this.groupBox3.PerformLayout();
+      this.groupBox1.ResumeLayout(false);
+      this.groupBox1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericStartYear)).EndInit();
       this.pageConfederation.ResumeLayout(false);
       this.pageNation.ResumeLayout(false);

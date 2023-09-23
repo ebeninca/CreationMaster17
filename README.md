@@ -35,12 +35,15 @@
 +1699,standings_sort,H2HGOALSFOR
  
  ```
-
-ERROR numericLeagueID limit 2048
+- Bench at FIFA Level
+- FIFA DB IS SMALLER AFTER SAVING FOR THE FIRST TIME, LOSS OF DATA?
+- 3D MODELS ON MULTIPLE SCREENS, TRY BALL FIRST, SEEMS TO BE THE EASIEST
 
 ## Modifications
 
 v004
+- Changed the link between country and team, now using Internationals.txt
+- Fixed "Regional Cup Target" bug
 - League/Trophy id max = 9999
 - Multiple fixes related with Legacy assets in all screens
 - Fixed link between Country and National Team

@@ -300,6 +300,8 @@ namespace CreationMaster
     private int m_BoundLeft;
     private int m_BoundTop;
     private CheckBox checkNationalTeam;
+    private Label label4;
+    private TextBox textBoxAbbreviation;
     private bool m_LockUserChanges;
 
     protected override void Dispose(bool disposing)
@@ -582,6 +584,8 @@ namespace CreationMaster
       this.formationListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.ballListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.prevLeagueListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.label4 = new System.Windows.Forms.Label();
+      this.textBoxAbbreviation = new System.Windows.Forms.TextBox();
       this.tableEditTeam.SuspendLayout();
       this.pageTeamGeneric.SuspendLayout();
       this.flowPanelTeamGeneric.SuspendLayout();
@@ -799,6 +803,8 @@ namespace CreationMaster
       // 
       // groupBoxName
       // 
+      this.groupBoxName.Controls.Add(this.label4);
+      this.groupBoxName.Controls.Add(this.textBoxAbbreviation);
       this.groupBoxName.Controls.Add(this.label3);
       this.groupBoxName.Controls.Add(this.textTeamName7);
       this.groupBoxName.Controls.Add(this.textScoreBoardName);
@@ -813,7 +819,7 @@ namespace CreationMaster
       this.groupBoxName.Controls.Add(this.labelScoreBoardName);
       this.groupBoxName.Location = new System.Drawing.Point(3, 454);
       this.groupBoxName.Name = "groupBoxName";
-      this.groupBoxName.Size = new System.Drawing.Size(270, 160);
+      this.groupBoxName.Size = new System.Drawing.Size(270, 196);
       this.groupBoxName.TabIndex = 0;
       this.groupBoxName.TabStop = false;
       this.groupBoxName.Text = "Name";
@@ -848,7 +854,7 @@ namespace CreationMaster
       // textScoreBoardName
       // 
       this.textScoreBoardName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true));
-      this.textScoreBoardName.Location = new System.Drawing.Point(98, 130);
+      this.textScoreBoardName.Location = new System.Drawing.Point(98, 156);
       this.textScoreBoardName.Name = "textScoreBoardName";
       this.textScoreBoardName.Size = new System.Drawing.Size(160, 20);
       this.textScoreBoardName.TabIndex = 5;
@@ -937,7 +943,7 @@ namespace CreationMaster
       // labelScoreBoardName
       // 
       this.labelScoreBoardName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-      this.labelScoreBoardName.Location = new System.Drawing.Point(4, 130);
+      this.labelScoreBoardName.Location = new System.Drawing.Point(4, 156);
       this.labelScoreBoardName.Name = "labelScoreBoardName";
       this.labelScoreBoardName.Size = new System.Drawing.Size(88, 20);
       this.labelScoreBoardName.TabIndex = 54;
@@ -950,7 +956,7 @@ namespace CreationMaster
       this.groupBox1.Controls.Add(this.labelStadiumName);
       this.groupBox1.Controls.Add(this.comboStadiums);
       this.groupBox1.Controls.Add(this.labelStadium);
-      this.groupBox1.Location = new System.Drawing.Point(3, 620);
+      this.groupBox1.Location = new System.Drawing.Point(3, 656);
       this.groupBox1.Name = "groupBox1";
       this.groupBox1.Size = new System.Drawing.Size(270, 67);
       this.groupBox1.TabIndex = 1;
@@ -1009,7 +1015,7 @@ namespace CreationMaster
       this.groupManager.Controls.Add(this.label17);
       this.groupManager.Controls.Add(this.textBox2);
       this.groupManager.Controls.Add(this.label16);
-      this.groupManager.Location = new System.Drawing.Point(3, 693);
+      this.groupManager.Location = new System.Drawing.Point(279, 3);
       this.groupManager.Name = "groupManager";
       this.groupManager.Size = new System.Drawing.Size(270, 72);
       this.groupManager.TabIndex = 2;
@@ -1083,7 +1089,7 @@ namespace CreationMaster
       this.groupBox3.Controls.Add(this.labelInitialBudget);
       this.groupBox3.Controls.Add(this.labelInternationalPrestige);
       this.groupBox3.Controls.Add(this.numericInitialBudget);
-      this.groupBox3.Location = new System.Drawing.Point(279, 3);
+      this.groupBox3.Location = new System.Drawing.Point(279, 81);
       this.groupBox3.Name = "groupBox3";
       this.groupBox3.Size = new System.Drawing.Size(270, 486);
       this.groupBox3.TabIndex = 3;
@@ -1518,7 +1524,7 @@ namespace CreationMaster
       this.groupLastYear.Controls.Add(this.checkIsChampion);
       this.groupLastYear.Controls.Add(this.label19);
       this.groupLastYear.Controls.Add(this.label18);
-      this.groupLastYear.Location = new System.Drawing.Point(279, 495);
+      this.groupLastYear.Location = new System.Drawing.Point(279, 573);
       this.groupLastYear.Name = "groupLastYear";
       this.groupLastYear.Size = new System.Drawing.Size(270, 101);
       this.groupLastYear.TabIndex = 4;
@@ -1603,7 +1609,7 @@ namespace CreationMaster
       this.groupLocation.Controls.Add(this.label25);
       this.groupLocation.Controls.Add(this.label24);
       this.groupLocation.Controls.Add(this.label23);
-      this.groupLocation.Location = new System.Drawing.Point(279, 602);
+      this.groupLocation.Location = new System.Drawing.Point(555, 3);
       this.groupLocation.Name = "groupLocation";
       this.groupLocation.Size = new System.Drawing.Size(270, 102);
       this.groupLocation.TabIndex = 162;
@@ -1718,7 +1724,7 @@ namespace CreationMaster
       this.groupTeamTraits.Controls.Add(this.checkSquadRotation);
       this.groupTeamTraits.Controls.Add(this.checkLoyalBoard);
       this.groupTeamTraits.Controls.Add(this.checkImpatientBoard);
-      this.groupTeamTraits.Location = new System.Drawing.Point(555, 3);
+      this.groupTeamTraits.Location = new System.Drawing.Point(555, 111);
       this.groupTeamTraits.Name = "groupTeamTraits";
       this.groupTeamTraits.Size = new System.Drawing.Size(270, 209);
       this.groupTeamTraits.TabIndex = 161;
@@ -4617,6 +4623,26 @@ namespace CreationMaster
       // prevLeagueListBindingSource
       // 
       this.prevLeagueListBindingSource.DataSource = typeof(FifaLibrary.LeagueList);
+      // 
+      // label4
+      // 
+      this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.label4.Location = new System.Drawing.Point(4, 131);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(88, 20);
+      this.label4.TabIndex = 58;
+      this.label4.Text = "Abbreviation";
+      this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.toolTip.SetToolTip(this.label4, "Double click to fill automatically");
+      // 
+      // textBoxAbbreviation
+      // 
+      this.textBoxAbbreviation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true));
+      this.textBoxAbbreviation.Location = new System.Drawing.Point(98, 131);
+      this.textBoxAbbreviation.Name = "textBoxAbbreviation";
+      this.textBoxAbbreviation.Size = new System.Drawing.Size(160, 20);
+      this.textBoxAbbreviation.TabIndex = 57;
       // 
       // TeamForm
       // 

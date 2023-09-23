@@ -395,8 +395,8 @@ namespace FifaLibrary
       if (teamList == null)
         return;
       foreach (Team team in (ArrayList)teamList)
-      {
-        if (team.DatabaseName.Equals(this.m_nationname))
+      { 
+        if (team.Id == this.m_NationalTeamId)
         {
           this.m_NationalTeam = team;
           this.m_NationalTeamId = team.Id;
@@ -428,7 +428,7 @@ namespace FifaLibrary
       r.IntField[FI.nations_confederation] = this.m_confederation + 1;
       r.IntField[FI.nations_top_tier] = this.m_top_tier ? 1 : 0;
       r.IntField[FI.nations_nationstartingfirstletter] = this.m_nationstartingfirstletter;
-      r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
+      //r.IntField[FI.nations_teamid] = this.m_NationalTeamId;
     }
 
     public void SaveLangTable()
@@ -438,7 +438,6 @@ namespace FifaLibrary
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Full, this.m_LanguageName);
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr15, this.m_LanguageShortName);
       FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr3, this.m_LanguageAbbreviation);
-      FifaEnvironment.Language.SetCountryString(this.Id, Language.ECountryStringType.Abbr2, this.m_ISOCountryCode);
     }
 
     public override string ToString()
