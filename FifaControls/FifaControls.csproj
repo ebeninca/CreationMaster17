@@ -158,6 +158,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)CreationMaster15\bin\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

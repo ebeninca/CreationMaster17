@@ -4,9 +4,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31BADB8E-6894-485A-B3F2-39D813D1B1E9}</ProjectGuid>
+    <ProjectGuid>{B43581D8-ED3D-4B4C-AFF2-4195BC331AE9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>CreationMaster15</AssemblyName>
+    <AssemblyName>CreationMaster17</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <FileAlignment>512</FileAlignment>
@@ -161,7 +161,9 @@
     <EmbeddedResource Include="BallForm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CompetitionForm.resx" />
+    <EmbeddedResource Include="CompetitionForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="CountryForm.resx" />
     <EmbeddedResource Include="FormationForm.resx" />
     <EmbeddedResource Include="GlovesForm.resx" />
