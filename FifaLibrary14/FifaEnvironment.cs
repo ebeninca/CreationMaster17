@@ -11,36 +11,36 @@ namespace FifaLibrary
 {
   public class FifaEnvironment
   {
-    private static ToolStripStatusLabel m_Status = (ToolStripStatusLabel) null;
-    private static string m_GameKey = (string) null;
-    private static Language m_Language = (Language) null;
+    private static ToolStripStatusLabel m_Status = (ToolStripStatusLabel)null;
+    private static string m_GameKey = (string)null;
+    private static Language m_Language = (Language)null;
     private static bool m_NeedToSaveMiniHeads = false;
-    private static CountryList s_CountryList = (CountryList) null;
-    private static LeagueList s_LeagueList = (LeagueList) null;
-    private static TeamList s_TeamList = (TeamList) null;
-    private static FreeAgentList s_FreeAgentList = (FreeAgentList) null;
-    private static PlayerList s_PlayerList = (PlayerList) null;
-    private static PlayerNames s_OriginalPlayerNamesList = (PlayerNames) null;
-    private static PlayerNames s_PlayerNamesList = (PlayerNames) null;
-    private static NameDictionary s_NameDictionary = (NameDictionary) null;
-    private static CareerFirstNameList s_CareerFirstNameList = (CareerFirstNameList) null;
-    private static CareerLastNameList s_CareerLastNameList = (CareerLastNameList) null;
-    private static CareerCommonNameList s_CareerCommonNameList = (CareerCommonNameList) null;
-    private static StadiumList s_StadiumList = (StadiumList) null;
-    private static RefereeList s_RefereeList = (RefereeList) null;
-    private static KitList s_KitList = (KitList) null;
-    private static CompobjList s_CompetitionObjects = (CompobjList) null;
-    private static FormationList s_FormationList = (FormationList) null;
-    private static FormationList s_GenericFormationList = (FormationList) null;
-    private static RoleList s_RoleList = (RoleList) null;
-    private static BallList s_BallList = (BallList) null;
-    private static AdboardList s_AdboardList = (AdboardList) null;
-    private static ShoesList s_ShoesList = (ShoesList) null;
-    private static GkGlovesList s_GkGlovesList = (GkGlovesList) null;
-    private static NetList s_NetList = (NetList) null;
-    private static MowingPatternList s_MowingPatternList = (MowingPatternList) null;
-    private static NumberFontList s_NumberFontList = (NumberFontList) null;
-    private static NameFontList s_NameFontList = (NameFontList) null;
+    private static CountryList s_CountryList = (CountryList)null;
+    private static LeagueList s_LeagueList = (LeagueList)null;
+    private static TeamList s_TeamList = (TeamList)null;
+    private static FreeAgentList s_FreeAgentList = (FreeAgentList)null;
+    private static PlayerList s_PlayerList = (PlayerList)null;
+    private static PlayerNames s_OriginalPlayerNamesList = (PlayerNames)null;
+    private static PlayerNames s_PlayerNamesList = (PlayerNames)null;
+    private static NameDictionary s_NameDictionary = (NameDictionary)null;
+    private static CareerFirstNameList s_CareerFirstNameList = (CareerFirstNameList)null;
+    private static CareerLastNameList s_CareerLastNameList = (CareerLastNameList)null;
+    private static CareerCommonNameList s_CareerCommonNameList = (CareerCommonNameList)null;
+    private static StadiumList s_StadiumList = (StadiumList)null;
+    private static RefereeList s_RefereeList = (RefereeList)null;
+    private static KitList s_KitList = (KitList)null;
+    private static CompobjList s_CompetitionObjects = (CompobjList)null;
+    private static FormationList s_FormationList = (FormationList)null;
+    private static FormationList s_GenericFormationList = (FormationList)null;
+    private static RoleList s_RoleList = (RoleList)null;
+    private static BallList s_BallList = (BallList)null;
+    private static AdboardList s_AdboardList = (AdboardList)null;
+    private static ShoesList s_ShoesList = (ShoesList)null;
+    private static GkGlovesList s_GkGlovesList = (GkGlovesList)null;
+    private static NetList s_NetList = (NetList)null;
+    private static MowingPatternList s_MowingPatternList = (MowingPatternList)null;
+    private static NumberFontList s_NumberFontList = (NumberFontList)null;
+    private static NameFontList s_NameFontList = (NameFontList)null;
     private static FifaFat m_FifaFat;
     private static CareerFile m_CareerFile;
     private static string m_CareerFileName;
@@ -558,9 +558,9 @@ namespace FifaLibrary
         FifaEnvironment.m_UserMessages = new UserMessage();
       if (FifaEnvironment.m_UserOptions == null)
         FifaEnvironment.m_UserOptions = new UserOptions();
-      FifaEnvironment.m_FifaFat = (FifaFat) null;
-      FifaEnvironment.m_FifaDb = (DbFile) null;
-      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.m_FifaFat = (FifaFat)null;
+      FifaEnvironment.m_FifaDb = (DbFile)null;
+      FifaEnvironment.m_LangDb = (DbFile)null;
       FifaEnvironment.InitializeLaunchFolder();
       FifaEnvironment.m_Year = 14;
       FifaEnvironment.m_GameKey = RegistryInfo.GetFifaKey(FifaEnvironment.m_Year);
@@ -586,15 +586,15 @@ namespace FifaLibrary
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
       if (!Directory.Exists(FifaEnvironment.m_ExportFolder))
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
-      FifaEnvironment.s_NameFontList = (NameFontList) null;
-      FifaEnvironment.s_NumberFontList = (NumberFontList) null;
-      FifaEnvironment.s_MowingPatternList = (MowingPatternList) null;
-      FifaEnvironment.s_NetList = (NetList) null;
-      FifaEnvironment.s_GkGlovesList = (GkGlovesList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
-      FifaEnvironment.s_AdboardList = (AdboardList) null;
-      FifaEnvironment.s_BallList = (BallList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
+      FifaEnvironment.s_NameFontList = (NameFontList)null;
+      FifaEnvironment.s_NumberFontList = (NumberFontList)null;
+      FifaEnvironment.s_MowingPatternList = (MowingPatternList)null;
+      FifaEnvironment.s_NetList = (NetList)null;
+      FifaEnvironment.s_GkGlovesList = (GkGlovesList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
+      FifaEnvironment.s_AdboardList = (AdboardList)null;
+      FifaEnvironment.s_BallList = (BallList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
       return true;
     }
 
@@ -604,9 +604,9 @@ namespace FifaLibrary
         FifaEnvironment.m_UserMessages = new UserMessage();
       if (FifaEnvironment.m_UserOptions == null)
         FifaEnvironment.m_UserOptions = new UserOptions();
-      FifaEnvironment.m_FifaFat = (FifaFat) null;
-      FifaEnvironment.m_FifaDb = (DbFile) null;
-      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.m_FifaFat = (FifaFat)null;
+      FifaEnvironment.m_FifaDb = (DbFile)null;
+      FifaEnvironment.m_LangDb = (DbFile)null;
       FifaEnvironment.InitializeLaunchFolder();
       FifaEnvironment.m_Year = 15;
       FifaEnvironment.m_GameKey = RegistryInfo.GetFifaKey(FifaEnvironment.m_Year);
@@ -632,15 +632,15 @@ namespace FifaLibrary
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
       if (!Directory.Exists(FifaEnvironment.m_ExportFolder))
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
-      FifaEnvironment.s_NameFontList = (NameFontList) null;
-      FifaEnvironment.s_NumberFontList = (NumberFontList) null;
-      FifaEnvironment.s_MowingPatternList = (MowingPatternList) null;
-      FifaEnvironment.s_NetList = (NetList) null;
-      FifaEnvironment.s_GkGlovesList = (GkGlovesList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
-      FifaEnvironment.s_AdboardList = (AdboardList) null;
-      FifaEnvironment.s_BallList = (BallList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
+      FifaEnvironment.s_NameFontList = (NameFontList)null;
+      FifaEnvironment.s_NumberFontList = (NumberFontList)null;
+      FifaEnvironment.s_MowingPatternList = (MowingPatternList)null;
+      FifaEnvironment.s_NetList = (NetList)null;
+      FifaEnvironment.s_GkGlovesList = (GkGlovesList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
+      FifaEnvironment.s_AdboardList = (AdboardList)null;
+      FifaEnvironment.s_BallList = (BallList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
       return true;
     }
 
@@ -650,9 +650,9 @@ namespace FifaLibrary
         FifaEnvironment.m_UserMessages = new UserMessage();
       if (FifaEnvironment.m_UserOptions == null)
         FifaEnvironment.m_UserOptions = new UserOptions();
-      FifaEnvironment.m_FifaFat = (FifaFat) null;
-      FifaEnvironment.m_FifaDb = (DbFile) null;
-      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.m_FifaFat = (FifaFat)null;
+      FifaEnvironment.m_FifaDb = (DbFile)null;
+      FifaEnvironment.m_LangDb = (DbFile)null;
       FifaEnvironment.InitializeLaunchFolder();
       FifaEnvironment.m_Year = 17;
       FifaEnvironment.m_GameKey = RegistryInfo.GetFifaKey(FifaEnvironment.m_Year);
@@ -678,15 +678,15 @@ namespace FifaLibrary
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
       if (!Directory.Exists(FifaEnvironment.m_ExportFolder))
         Directory.CreateDirectory(FifaEnvironment.m_TempFolder);
-      FifaEnvironment.s_NameFontList = (NameFontList) null;
-      FifaEnvironment.s_NumberFontList = (NumberFontList) null;
-      FifaEnvironment.s_MowingPatternList = (MowingPatternList) null;
-      FifaEnvironment.s_NetList = (NetList) null;
-      FifaEnvironment.s_GkGlovesList = (GkGlovesList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
-      FifaEnvironment.s_AdboardList = (AdboardList) null;
-      FifaEnvironment.s_BallList = (BallList) null;
-      FifaEnvironment.s_ShoesList = (ShoesList) null;
+      FifaEnvironment.s_NameFontList = (NameFontList)null;
+      FifaEnvironment.s_NumberFontList = (NumberFontList)null;
+      FifaEnvironment.s_MowingPatternList = (MowingPatternList)null;
+      FifaEnvironment.s_NetList = (NetList)null;
+      FifaEnvironment.s_GkGlovesList = (GkGlovesList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
+      FifaEnvironment.s_AdboardList = (AdboardList)null;
+      FifaEnvironment.s_BallList = (BallList)null;
+      FifaEnvironment.s_ShoesList = (ShoesList)null;
       return true;
     }
 
@@ -781,10 +781,10 @@ namespace FifaLibrary
         FifaEnvironment.s_TeamList.Clear();
       if (FifaEnvironment.s_CompetitionObjects != null)
         FifaEnvironment.s_CompetitionObjects.Clear();
-      FifaEnvironment.m_FifaDb = (DbFile) null;
-      FifaEnvironment.m_CareerFile = (CareerFile) null;
-      FifaEnvironment.m_FifaFat = (FifaFat) null;
-      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.m_FifaDb = (DbFile)null;
+      FifaEnvironment.m_CareerFile = (CareerFile)null;
+      FifaEnvironment.m_FifaFat = (FifaFat)null;
+      FifaEnvironment.m_LangDb = (DbFile)null;
     }
 
     public static bool Open(ToolStripStatusLabel statusBar)
@@ -822,10 +822,10 @@ namespace FifaLibrary
         if (!FifaEnvironment.OpenLangDb())
           return false;
       }
-      FifaEnvironment.m_OriginalFifaDb = FifaEnvironment.m_Year != 14 ? 
-                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaDbPartialFileName, 
-                FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaXmlPartialFileName) : 
-                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaDbPartialFileName, 
+      FifaEnvironment.m_OriginalFifaDb = FifaEnvironment.m_Year != 14 ?
+                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaDbPartialFileName,
+                FifaEnvironment.m_LaunchDir + "\\Templates\\" + FifaEnvironment.m_FifaXmlPartialFileName) :
+                new DbFile(FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaDbPartialFileName,
                 FifaEnvironment.m_LaunchDir + "\\Templates\\2014\\" + FifaEnvironment.m_FifaXmlPartialFileName);
       FifaEnvironment.ExtractCompetitionFiles();
       if (FifaEnvironment.m_Status != null)
@@ -834,6 +834,7 @@ namespace FifaLibrary
         FifaEnvironment.m_Status.GetCurrentParent().Refresh();
       }
       FifaEnvironment.LoadLists();
+
       if (FifaEnvironment.m_Status != null)
       {
         FifaEnvironment.m_Status.Text = "Ready";
@@ -869,16 +870,24 @@ namespace FifaLibrary
         FifaEnvironment.m_Status.GetCurrentParent().Refresh();
       }
       //FifaEnvironment.m_FifaFat.Save();
+
+      //Saving in FrostyEditor 1.0.6.2 format (fbproject)
+      string selectedAssetPath = "Data\\ui\\imgAssets\\crest50x50\\dark\\I1667.DDS";
+      string selectedAssetName = "I1667.DDS";
+      byte[] bufferModAsset = null;
+
+      //App.AssetManager.ModifyCustomAsset("legacy", selectedAssetName, bufferModAsset);
+
       return true;
     }
 
     public static bool OpenFat()
     {
-      FifaEnvironment.m_FifaFat = (FifaFat) null;
+      FifaEnvironment.m_FifaFat = (FifaFat)null;
       FifaEnvironment.m_FifaFat = FifaFat.Create(FifaEnvironment.m_GameDir);
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10003);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10003);
         return false;
       }
       FifaEnvironment.m_FifaFat.SaveOption = FifaFat.EFifaFatSaveOption.SaveOnCommand;
@@ -970,12 +979,12 @@ namespace FifaLibrary
 
     public static bool OpenFifaDb()
     {
-      FifaEnvironment.m_FifaDb = (DbFile) null;
+      FifaEnvironment.m_FifaDb = (DbFile)null;
       if (FifaEnvironment.m_FifaDbFileName != null && FifaEnvironment.m_FifaXmlFileName != null && (File.Exists(FifaEnvironment.m_FifaDbFileName) && File.Exists(FifaEnvironment.m_FifaXmlFileName)))
         FifaEnvironment.m_FifaDb = new DbFile(FifaEnvironment.m_FifaDbFileName, FifaEnvironment.m_FifaXmlFileName);
       if (FifaEnvironment.m_FifaDb == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10000);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10000);
         return false;
       }
       if (FifaEnvironment.m_Year == 12)
@@ -1008,7 +1017,7 @@ namespace FifaLibrary
 
     public static bool OpenLangDb()
     {
-      FifaEnvironment.m_LangDb = (DbFile) null;
+      FifaEnvironment.m_LangDb = (DbFile)null;
       if (FifaEnvironment.m_LangDbFileName != null && FifaEnvironment.m_LangXmlFileName != null && (File.Exists(FifaEnvironment.m_LangDbFileName) && File.Exists(FifaEnvironment.m_LangXmlFileName)))
         FifaEnvironment.m_LangDb = new DbFile(FifaEnvironment.m_LangDbFileName, FifaEnvironment.m_LangXmlFileName);
       if (FifaEnvironment.m_LangDb != null)
@@ -1030,11 +1039,24 @@ namespace FifaLibrary
       FifaEnvironment.m_LangDb.SaveDb(FifaEnvironment.m_LangDbFileName);
     }
 
+    public static Bitmap[] GetBitmaps(string[] pngFileNameList)
+    {
+      if (pngFileNameList == null)
+        return null;
+
+      Bitmap[] bmpFiles = new Bitmap[pngFileNameList.Length];
+      for (int index = 0; index < pngFileNameList.Length; ++index)
+      {
+        bmpFiles[index] = new Bitmap(FifaFat.GamePath + pngFileNameList[index]);
+      }
+      return bmpFiles;
+    }
+
     public static Rx3File GetRx3FromZdata(string rx3FileName, bool verbose)
     {
       if (FifaEnvironment.m_FifaFat == null)
-        return (Rx3File) null;
-      Rx3File rx3File = (Rx3File) null;
+        return (Rx3File)null;
+      Rx3File rx3File = (Rx3File)null;
       FifaFile archivedFile = FifaEnvironment.m_FifaFat.GetArchivedFile(rx3FileName);
       if (archivedFile != null)
       {
@@ -1060,8 +1082,8 @@ namespace FifaLibrary
       }
       if (rx3File != null || !verbose)
         return rx3File;
-      int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(3000, rx3FileName, true);
-      return (Rx3File) null;
+      int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(3000, rx3FileName, true);
+      return (Rx3File)null;
     }
 
     public static Rx3File GetRx3FromZdata(string rx3FileName)
@@ -1072,8 +1094,8 @@ namespace FifaLibrary
     public static KitFile GetKitFromZdata(string rx3FileName)
     {
       if (FifaEnvironment.m_FifaFat == null)
-        return (KitFile) null;
-      KitFile kitFile = (KitFile) null;
+        return (KitFile)null;
+      KitFile kitFile = (KitFile)null;
       FifaFile archivedFile = FifaEnvironment.m_FifaFat.GetArchivedFile(rx3FileName);
       if (archivedFile != null)
       {
@@ -1099,8 +1121,8 @@ namespace FifaLibrary
       }
       if (kitFile != null)
         return kitFile;
-      int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(3000, rx3FileName, true);
-      return (KitFile) null;
+      int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(3000, rx3FileName, true);
+      return (KitFile)null;
     }
 
     public static bool IsFilePresent(string fileName)
@@ -1112,28 +1134,29 @@ namespace FifaLibrary
     {
       Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata(rx3FileName);
       if (rx3FromZdata == null)
-        return (Bitmap) null;
-      return rx3FromZdata.Images.Length > imageIndex && imageIndex >= 0 ? rx3FromZdata.Images[imageIndex].GetBitmap() : (Bitmap) null;
+        return (Bitmap)null;
+      return rx3FromZdata.Images.Length > imageIndex && imageIndex >= 0 ? rx3FromZdata.Images[imageIndex].GetBitmap() : (Bitmap)null;
     }
 
-    public static Bitmap[] GetBmpsFromRx3(string rx3FileName)
+    public static Bitmap[] GetBmpsFromRx3(string FileNameList)
     {
-      Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata(rx3FileName);
+
+      Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata(FileNameList);
       if (rx3FromZdata == null)
-        return (Bitmap[]) null;
-      return rx3FromZdata.Images != null && rx3FromZdata.Images.Length > 0 ? rx3FromZdata.GetBitmaps() : (Bitmap[]) null;
+        return (Bitmap[])null;
+      return rx3FromZdata.Images != null && rx3FromZdata.Images.Length > 0 ? rx3FromZdata.GetBitmaps() : (Bitmap[])null;
     }
 
     public static Bitmap[] GetBitmapsFromRx3File(string rx3FileName)
     {
       if (rx3FileName == null)
-        return (Bitmap[]) null;
+        return (Bitmap[])null;
       if (!File.Exists(rx3FileName))
-        return (Bitmap[]) null;
+        return (Bitmap[])null;
       Rx3File rx3File = new Rx3File();
       if (!rx3File.Load(rx3FileName))
-        return (Bitmap[]) null;
-      return rx3File.Images.Length > 0 ? rx3File.GetBitmaps() : (Bitmap[]) null;
+        return (Bitmap[])null;
+      return rx3File.Images.Length > 0 ? rx3File.GetBitmaps() : (Bitmap[])null;
     }
 
     public static Bitmap[] GetKitFromRx3(string rx3FileName, out float[] positions)
@@ -1141,19 +1164,19 @@ namespace FifaLibrary
       KitFile kitFromZdata = FifaEnvironment.GetKitFromZdata(rx3FileName);
       if (kitFromZdata == null)
       {
-        positions = (float[]) null;
-        return (Bitmap[]) null;
+        positions = (float[])null;
+        return (Bitmap[])null;
       }
       positions = kitFromZdata.Positions;
-      return kitFromZdata.Images.Length > 0 ? kitFromZdata.GetBitmaps() : (Bitmap[]) null;
+      return kitFromZdata.Images.Length > 0 ? kitFromZdata.GetBitmaps() : (Bitmap[])null;
     }
 
     public static Bitmap GetBmpFromRx3(string rx3FileName, bool verbose)
     {
       Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata(rx3FileName, verbose);
       if (rx3FromZdata == null)
-        return (Bitmap) null;
-      return rx3FromZdata.Images.Length > 0 ? rx3FromZdata.Images[0].GetBitmap() : (Bitmap) null;
+        return (Bitmap)null;
+      return rx3FromZdata.Images.Length > 0 ? rx3FromZdata.Images[0].GetBitmap() : (Bitmap)null;
     }
 
     public static Bitmap GetBmpFromRx3(string rx3FileName)
@@ -1165,38 +1188,38 @@ namespace FifaLibrary
     {
       FifaBigFile bigFromZdata = FifaEnvironment.GetBigFromZdata(bigFileName);
       if (bigFromZdata == null)
-        return (Bitmap) null;
+        return (Bitmap)null;
       FifaFile firstDds = bigFromZdata.GetFirstDds();
-      return firstDds == null ? (Bitmap) null : new DdsFile(firstDds).GetBitmap();
+      return firstDds == null ? (Bitmap)null : new DdsFile(firstDds).GetBitmap();
     }
 
     public static Bitmap GetDdsArtasset(string ddsFileName)
     {
       FifaFile fileFromZdata = FifaEnvironment.GetFileFromZdata(ddsFileName);
       if (fileFromZdata == null)
-        return (Bitmap) null;
+        return (Bitmap)null;
       DdsFile ddsFile = new DdsFile(fileFromZdata);
-      return fileFromZdata == null ? (Bitmap) null : ddsFile.GetBitmap();
+      return fileFromZdata == null ? (Bitmap)null : ddsFile.GetBitmap();
     }
 
     public static Bitmap GetBitmapFromDdsFile(string ddsFileName)
     {
       if (ddsFileName == null)
-        return (Bitmap) null;
-      return !File.Exists(ddsFileName) ? (Bitmap) null : new DdsFile(ddsFileName).GetBitmap();
+        return (Bitmap)null;
+      return !File.Exists(ddsFileName) ? (Bitmap)null : new DdsFile(ddsFileName).GetBitmap();
     }
 
     public static Bitmap GetBitmapFromBigFile(string bigFileName)
     {
       if (bigFileName == null)
-        return (Bitmap) null;
+        return (Bitmap)null;
       if (!File.Exists(bigFileName))
-        return (Bitmap) null;
+        return (Bitmap)null;
       FifaBigFile fifaBigFile = new FifaBigFile(bigFileName);
       if (fifaBigFile == null)
-        return (Bitmap) null;
+        return (Bitmap)null;
       FifaFile firstDds = fifaBigFile.GetFirstDds();
-      return firstDds == null ? (Bitmap) null : new DdsFile(firstDds).GetBitmap();
+      return firstDds == null ? (Bitmap)null : new DdsFile(firstDds).GetBitmap();
     }
 
     public static Bitmap Get2dHead(string ddsFileName)
@@ -1207,8 +1230,8 @@ namespace FifaLibrary
     private static FifaBigFile GetBigFromZdata(string bigFileName)
     {
       if (FifaEnvironment.m_FifaFat == null)
-        return (FifaBigFile) null;
-      FifaBigFile fifaBigFile = (FifaBigFile) null;
+        return (FifaBigFile)null;
+      FifaBigFile fifaBigFile = (FifaBigFile)null;
       FifaFile archivedFile = FifaEnvironment.m_FifaFat.GetArchivedFile(bigFileName);
       if (archivedFile != null)
       {
@@ -1224,8 +1247,8 @@ namespace FifaLibrary
       }
       if (fifaBigFile != null)
         return fifaBigFile;
-      int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(3000, bigFileName, true);
-      return (FifaBigFile) null;
+      int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(3000, bigFileName, true);
+      return (FifaBigFile)null;
     }
 
     public static bool SetArtasset(string templateBigName, string ddsName, int id, Bitmap bitmap)
@@ -1304,7 +1327,7 @@ namespace FifaLibrary
       int id,
       Bitmap bitmap)
     {
-      string format = (string) null;
+      string format = (string)null;
       Path.GetDirectoryName(templateBigName);
       string newBigFileName = templateBigName.Replace("#", id.ToString(format)).Replace("2014_", "");
       return FifaEnvironment.CreateAssetFromTemplate(templateBigName, ddsName, newBigFileName, bitmap);
@@ -1316,7 +1339,7 @@ namespace FifaLibrary
       int[] ids,
       Bitmap bitmap)
     {
-      string format = (string) null;
+      string format = (string)null;
       Path.GetDirectoryName(templateBigName);
       string newBigFileName = templateBigName.Replace("#", ids[0].ToString(format)).Replace("%", ids[1].ToString(format));
       return FifaEnvironment.CreateAssetFromTemplate(templateBigName, ddsName, newBigFileName, bitmap);
@@ -1345,37 +1368,37 @@ namespace FifaLibrary
       string str2 = FifaEnvironment.m_LaunchDir + "\\Templates\\" + newBigFileName;
       if (!File.Exists(str1))
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5026);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5026);
+        return (string)null;
       }
       File.Copy(str1, str2, true);
       FifaBigFile fifaBigFile = new FifaBigFile(str2);
       if (fifaBigFile == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       fifaBigFile.LoadArchivedFiles();
       FifaFile archivedFile = fifaBigFile.GetArchivedFile(ddsName, true);
       if (archivedFile == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       if (archivedFile.IsCompressed)
         archivedFile.Decompress();
       DdsFile ddsFile = new DdsFile(archivedFile);
       if (ddsFile == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       ddsFile.ReplaceBitmap(bitmap);
       BinaryWriter writer = archivedFile.GetWriter();
       if (writer == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       ddsFile.Save(writer);
       archivedFile.ReleaseWriter(writer);
@@ -1397,21 +1420,21 @@ namespace FifaLibrary
       Bitmap[] bitmaps)
     {
       if (ddsNames.Length != bitmaps.Length)
-        return (string) null;
+        return (string)null;
       string directoryName = Path.GetDirectoryName(templateBigName);
       string str1 = FifaEnvironment.m_LaunchDir + "\\Templates\\" + templateBigName;
       string str2 = FifaEnvironment.m_LaunchDir + "\\Templates\\" + newBigFileName;
       if (!File.Exists(str1))
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5026);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5026);
+        return (string)null;
       }
       File.Copy(str1, str2, true);
       FifaBigFile fifaBigFile = new FifaBigFile(str2);
       if (fifaBigFile == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       fifaBigFile.LoadArchivedFiles();
       for (int index = 0; index < ddsNames.Length; ++index)
@@ -1458,7 +1481,7 @@ namespace FifaLibrary
       Bitmap bitmap,
       string[] format)
     {
-      int[] ids = new int[2]{ id, 0 };
+      int[] ids = new int[2] { id, 0 };
       return FifaEnvironment.CreateDdsAssetFromTemplate(templateDdsName, ids, bitmap, format);
     }
 
@@ -1483,21 +1506,21 @@ namespace FifaLibrary
       Bitmap bitmap)
     {
       if (bitmap == null)
-        return (string) null;
+        return (string)null;
       string directoryName = Path.GetDirectoryName(templateDdsName);
       string str1 = FifaEnvironment.m_LaunchDir + "\\Templates\\" + templateDdsName;
       string str2 = FifaEnvironment.m_LaunchDir + "\\Templates\\" + newDdsFileName;
       if (!File.Exists(str1))
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5026);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5026);
+        return (string)null;
       }
       File.Copy(str1, str2, true);
       DdsFile ddsFile = new DdsFile(str2);
       if (ddsFile == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5027);
-        return (string) null;
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5027);
+        return (string)null;
       }
       ddsFile.ReplaceBitmap(bitmap);
       ddsFile.Save(str2);
@@ -1519,12 +1542,12 @@ namespace FifaLibrary
     public static FifaFile GetFileFromZdata(string fileName)
     {
       if (FifaEnvironment.m_FifaFat == null || fileName == null)
-        return (FifaFile) null;
+        return (FifaFile)null;
       FifaFile archivedFile = FifaEnvironment.m_FifaFat.GetArchivedFile(fileName);
       if (archivedFile != null)
         return archivedFile;
       string path = FifaEnvironment.m_GameDir + fileName;
-      return File.Exists(path) ? new FifaFile(path, false) : (FifaFile) null;
+      return File.Exists(path) ? new FifaFile(path, false) : (FifaFile)null;
     }
 
     public static bool ExportFileFromZdata(string fileName, string path)
@@ -1544,7 +1567,7 @@ namespace FifaLibrary
         File.Copy(str1, str2, true);
         return true;
       }
-      int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(1028, " " + fileName, true);
+      int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(1028, " " + fileName, true);
       return flag;
     }
 
@@ -1560,7 +1583,7 @@ namespace FifaLibrary
           File.Copy(str, destFileName, true);
         return true;
       }
-      int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(1028, " " + fileName, true);
+      int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(1028, " " + fileName, true);
       return false;
     }
 
@@ -1568,7 +1591,7 @@ namespace FifaLibrary
     {
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -1595,12 +1618,12 @@ namespace FifaLibrary
         return false;
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       string sourceFileName = FifaEnvironment.m_LaunchDir + "\\Templates\\" + templateRx3Name;
@@ -1639,7 +1662,7 @@ namespace FifaLibrary
       kitFile.Load(str3);
       if (kitFile.Images.Length != bitmaps.Length)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5025);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5025);
         return false;
       }
       kitFile.ReplaceBitmaps(bitmaps);
@@ -1648,7 +1671,7 @@ namespace FifaLibrary
       bool flag = FifaEnvironment.ImportFileIntoZdataAs(str3, archivedName, true, ECompressionMode.Chunkzip);
       if (!flag)
       {
-        int num1 = (int) FifaEnvironment.m_UserMessages.ShowMessage(10007);
+        int num1 = (int)FifaEnvironment.m_UserMessages.ShowMessage(10007);
       }
       return flag;
     }
@@ -1659,12 +1682,12 @@ namespace FifaLibrary
         return false;
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       string str = FifaEnvironment.m_GameDir + stadiumRx3Name;
@@ -1674,7 +1697,7 @@ namespace FifaLibrary
       rx3File.Load(str);
       if (rx3File.Images.Length != bitmaps.Length)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5025);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5025);
         return false;
       }
       rx3File.ReplaceBitmaps(bitmaps);
@@ -1693,12 +1716,12 @@ namespace FifaLibrary
         return false;
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       string sourceFileName = FifaEnvironment.m_LaunchDir + "\\Templates\\" + templateRx3Name;
@@ -1713,7 +1736,7 @@ namespace FifaLibrary
       bool flag = FifaEnvironment.ImportFileIntoZdataAs(str, rx3FileName, true, compressionMode);
       if (!flag)
       {
-        int num1 = (int) FifaEnvironment.m_UserMessages.ShowMessage(10007);
+        int num1 = (int)FifaEnvironment.m_UserMessages.ShowMessage(10007);
       }
       return flag;
     }
@@ -1729,12 +1752,12 @@ namespace FifaLibrary
         return false;
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       string sourceFileName = FifaEnvironment.m_LaunchDir + "\\Templates\\" + templateRx3Name;
@@ -1761,7 +1784,7 @@ namespace FifaLibrary
       rx3File.Load(str);
       if (rx3File.Images.Length != bitmaps.Length)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5025);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5025);
         return false;
       }
       rx3File.ReplaceBitmaps(bitmaps);
@@ -1770,7 +1793,7 @@ namespace FifaLibrary
       bool flag = FifaEnvironment.ImportFileIntoZdataAs(str, archivedName, true, compressionMode);
       if (!flag)
       {
-        int num1 = (int) FifaEnvironment.m_UserMessages.ShowMessage(10007);
+        int num1 = (int)FifaEnvironment.m_UserMessages.ShowMessage(10007);
       }
       return flag;
     }
@@ -1781,7 +1804,7 @@ namespace FifaLibrary
       Bitmap[] bitmaps,
       ECompressionMode compressionMode)
     {
-      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures) null);
+      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures)null);
     }
 
     public static bool ImportBmpsIntoZdata(
@@ -1790,9 +1813,9 @@ namespace FifaLibrary
       Bitmap bitmap,
       ECompressionMode compressionMode)
     {
-      Bitmap[] bitmaps = new Bitmap[1]{ bitmap };
-      int[] ids = new int[1]{ id };
-      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures) null);
+      Bitmap[] bitmaps = new Bitmap[1] { bitmap };
+      int[] ids = new int[1] { id };
+      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures)null);
     }
 
     public static bool ImportBmpsIntoZdata(
@@ -1802,8 +1825,8 @@ namespace FifaLibrary
       ECompressionMode compressionMode,
       Rx3Signatures signatures)
     {
-      Bitmap[] bitmaps = new Bitmap[1]{ bitmap };
-      int[] ids = new int[1]{ id };
+      Bitmap[] bitmaps = new Bitmap[1] { bitmap };
+      int[] ids = new int[1] { id };
       return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, signatures);
     }
 
@@ -1813,8 +1836,8 @@ namespace FifaLibrary
       Bitmap[] bitmaps,
       ECompressionMode compressionMode)
     {
-      int[] ids = new int[1]{ id };
-      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures) null);
+      int[] ids = new int[1] { id };
+      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures)null);
     }
 
     public static bool ImportBmpsIntoZdata(
@@ -1824,7 +1847,7 @@ namespace FifaLibrary
       ECompressionMode compressionMode,
       Rx3Signatures signatures)
     {
-      int[] ids = new int[1]{ id };
+      int[] ids = new int[1] { id };
       return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, signatures);
     }
 
@@ -1834,8 +1857,8 @@ namespace FifaLibrary
       Bitmap bitmap,
       ECompressionMode compressionMode)
     {
-      Bitmap[] bitmaps = new Bitmap[1]{ bitmap };
-      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures) null);
+      Bitmap[] bitmaps = new Bitmap[1] { bitmap };
+      return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, (Rx3Signatures)null);
     }
 
     public static bool ImportBmpsIntoZdata(
@@ -1845,7 +1868,7 @@ namespace FifaLibrary
       ECompressionMode compressionMode,
       Rx3Signatures signatures)
     {
-      Bitmap[] bitmaps = new Bitmap[1]{ bitmap };
+      Bitmap[] bitmaps = new Bitmap[1] { bitmap };
       return FifaEnvironment.ImportBmpsIntoZdata(templateRx3Name, ids, bitmaps, compressionMode, signatures);
     }
 
@@ -1855,7 +1878,7 @@ namespace FifaLibrary
       bool delete,
       ECompressionMode compressionMode)
     {
-      return FifaEnvironment.ImportFileIntoZdataAs(fileName, archivedName, delete, compressionMode, (Rx3Signatures) null);
+      return FifaEnvironment.ImportFileIntoZdataAs(fileName, archivedName, delete, compressionMode, (Rx3Signatures)null);
     }
 
     public static bool ImportFileIntoZdataAs(
@@ -1869,26 +1892,26 @@ namespace FifaLibrary
       archivedName = archivedName.Replace('\\', '/');
       if (fileName == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10010);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10010);
         return false;
       }
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         if (delete)
           File.Delete(fileName);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         if (delete)
           File.Delete(fileName);
         return false;
       }
       if (!File.Exists(fileName))
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10011);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10011);
         return false;
       }
       if (!FifaEnvironment.m_UserOptions.m_SaveZdataInFolder)
@@ -1901,7 +1924,7 @@ namespace FifaLibrary
       if (signatures != null)
       {
         FileStream fileStream = new FileStream(str, FileMode.Open, FileAccess.ReadWrite);
-        BinaryWriter w = new BinaryWriter((Stream) fileStream);
+        BinaryWriter w = new BinaryWriter((Stream)fileStream);
         signatures.Save(w);
         w.Close();
         fileStream.Close();
@@ -1918,26 +1941,26 @@ namespace FifaLibrary
       archivedName = archivedName.Replace('\\', '/');
       if (fileName == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10010);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10010);
         return false;
       }
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         if (delete)
           File.Delete(fileName);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         if (delete)
           File.Delete(fileName);
         return false;
       }
       if (!File.Exists(fileName))
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10011);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10011);
         return false;
       }
       if (!FifaEnvironment.m_UserOptions.m_SaveZdataInFolder)
@@ -1957,17 +1980,17 @@ namespace FifaLibrary
     {
       if (fileName == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10010);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10010);
         return false;
       }
       if (!FifaEnvironment.m_UserOptions.m_SaveZdata)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5035);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5035);
         return false;
       }
       if (FifaEnvironment.m_FifaFat == null)
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10002);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10002);
         return false;
       }
       string path = FifaEnvironment.m_GameDir + fileName;
@@ -2014,7 +2037,7 @@ namespace FifaLibrary
         {
           for (int y = bitmap.Height - 1; y >= 0; --y)
           {
-            if (bitmap.GetPixel(x, y).A < (byte) 192)
+            if (bitmap.GetPixel(x, y).A < (byte)192)
               bitmap.SetPixel(x, y, pixel);
           }
         }
@@ -2025,7 +2048,7 @@ namespace FifaLibrary
       }
       else
       {
-        int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5034);
+        int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5034);
         return false;
       }
       bitmap.Save(saveFileDialog.FileName, format);
@@ -2043,7 +2066,7 @@ namespace FifaLibrary
       {
         case DialogResult.Cancel:
         case DialogResult.No:
-          return (Bitmap) null;
+          return (Bitmap)null;
         default:
           OpenFileDialog openFileDialog = new OpenFileDialog();
           openFileDialog.CheckFileExists = true;
@@ -2056,15 +2079,15 @@ namespace FifaLibrary
           if (openFileDialog.ShowDialog() != DialogResult.OK)
           {
             openFileDialog.Dispose();
-            return (Bitmap) null;
+            return (Bitmap)null;
           }
           string fileName = openFileDialog.FileName;
           openFileDialog.Dispose();
           Bitmap bitmap1 = new Bitmap(fileName);
           if (bitmap1 == null)
           {
-            int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(10006);
-            return (Bitmap) null;
+            int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(10006);
+            return (Bitmap)null;
           }
           if (bitmap1.Width != width || bitmap1.Height != height)
           {
@@ -2081,8 +2104,8 @@ namespace FifaLibrary
             }
             if (bitmap1.Width != width || bitmap1.Height != height)
             {
-              int num = (int) FifaEnvironment.m_UserMessages.ShowMessage(5015);
-              return (Bitmap) null;
+              int num = (int)FifaEnvironment.m_UserMessages.ShowMessage(5015);
+              return (Bitmap)null;
             }
           }
           if (transparentMode == 0 || !(Path.GetExtension(fileName).ToLower() == ".bmp"))
@@ -2111,7 +2134,7 @@ namespace FifaLibrary
       {
         case DialogResult.Cancel:
         case DialogResult.No:
-          return (string) null;
+          return (string)null;
         default:
           OpenFileDialog openFileDialog = new OpenFileDialog();
           openFileDialog.CheckFileExists = true;
@@ -2123,7 +2146,7 @@ namespace FifaLibrary
           if (openFileDialog.ShowDialog() != DialogResult.OK)
           {
             openFileDialog.Dispose();
-            return (string) null;
+            return (string)null;
           }
           string fileName = openFileDialog.FileName;
           path = Path.GetFullPath(fileName);
@@ -2138,7 +2161,7 @@ namespace FifaLibrary
       {
         case DialogResult.Cancel:
         case DialogResult.No:
-          return (string) null;
+          return (string)null;
         default:
           OpenFileDialog openFileDialog = new OpenFileDialog();
           openFileDialog.CheckFileExists = true;
@@ -2150,7 +2173,7 @@ namespace FifaLibrary
           if (openFileDialog.ShowDialog() != DialogResult.OK)
           {
             openFileDialog.Dispose();
-            return (string) null;
+            return (string)null;
           }
           string fileName = openFileDialog.FileName;
           path = Path.GetFullPath(fileName);
@@ -2164,27 +2187,27 @@ namespace FifaLibrary
       FifaFat fifaFat = FifaEnvironment.m_FifaFat;
       if (FifaEnvironment.m_FifaDb == null)
         return;
-      if ((fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects)0)
         FifaEnvironment.s_RoleList = new RoleList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaFormation) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaFormation) != (EFifaObjects)0)
       {
         FifaEnvironment.s_FormationList = new FormationList(FifaEnvironment.m_FifaDb);
         FifaEnvironment.s_GenericFormationList = new FormationList();
-        foreach (Formation formation in (ArrayList) FifaEnvironment.s_FormationList)
+        foreach (Formation formation in (ArrayList)FifaEnvironment.s_FormationList)
         {
           if (formation.IsGeneric())
-            FifaEnvironment.s_GenericFormationList.Add((object) formation);
+            FifaEnvironment.s_GenericFormationList.Add((object)formation);
         }
       }
-      if ((fifaObjects & EFifaObjects.FifaCountry) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaCountry) != (EFifaObjects)0)
         FifaEnvironment.s_CountryList = new CountryList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaKit) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaKit) != (EFifaObjects)0)
         FifaEnvironment.s_KitList = new KitList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaReferee) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaReferee) != (EFifaObjects)0)
         FifaEnvironment.s_RefereeList = new RefereeList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaLeague) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaLeague) != (EFifaObjects)0)
         FifaEnvironment.s_LeagueList = new LeagueList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaTeam) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaTeam) != (EFifaObjects)0)
       {
         FifaEnvironment.s_TeamList = new TeamList(FifaEnvironment.m_FifaDb);
         FifaEnvironment.s_FreeAgentList = new FreeAgentList();
@@ -2205,7 +2228,7 @@ namespace FifaLibrary
         FifaEnvironment.s_LeagueList.LinkCountry(FifaEnvironment.s_CountryList);
       if (FifaEnvironment.s_LeagueList != null && FifaEnvironment.s_BallList != null)
         FifaEnvironment.s_LeagueList.LinkBall(FifaEnvironment.s_BallList);
-      if ((fifaObjects & EFifaObjects.FifaPlayer) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaPlayer) != (EFifaObjects)0)
       {
         FifaEnvironment.s_PlayerNamesList = new PlayerNames(FifaEnvironment.m_FifaDb);
         FifaEnvironment.s_OriginalPlayerNamesList = new PlayerNames(FifaEnvironment.m_OriginalFifaDb);
@@ -2233,7 +2256,7 @@ namespace FifaLibrary
         FifaEnvironment.s_TeamList.LinkFormation(FifaEnvironment.s_FormationList);
         FifaEnvironment.s_FormationList.LinkTeam(FifaEnvironment.s_TeamList);
       }
-      if ((fifaObjects & EFifaObjects.FifaStadium) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaStadium) != (EFifaObjects)0)
         FifaEnvironment.s_StadiumList = new StadiumList(FifaEnvironment.m_FifaDb);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_StadiumList != null)
       {
@@ -2244,12 +2267,14 @@ namespace FifaLibrary
         FifaEnvironment.s_StadiumList.LinkCountry(FifaEnvironment.s_CountryList);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_LeagueList != null)
         FifaEnvironment.s_TeamList.LinkLeague(FifaEnvironment.s_LeagueList);
-      if ((fifaObjects & EFifaObjects.FifaTournament) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaTournament) != (EFifaObjects)0)
         FifaEnvironment.s_CompetitionObjects = new CompobjList(FifaEnvironment.m_GameDir, FifaEnvironment.m_FifaDb);
+
+      //if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
+      //  FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
       if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
-        FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
-      /*if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null && FifaEnvironment.s_CompetitionObjects != null)
-        FifaEnvironment.s_CountryList.LinkNationalTeam(FifaEnvironment.s_TeamList);*/
+        FifaEnvironment.s_CountryList.LinkTeam(FifaEnvironment.s_TeamList);
+
       if (FifaEnvironment.s_CompetitionObjects == null)
         return;
       FifaEnvironment.s_CompetitionObjects.Link();
@@ -2257,7 +2282,7 @@ namespace FifaLibrary
 
     public static void LoadLists()
     {
-      FifaEnvironment.LoadLists((EFifaObjects) (4096 | 2048 | 128 | 1 | 256 | 16384 | 65536 | 262144 | 2 | 32768 | 8 | 32 | 1024 | 8192 | 131072 | 512 | 16 | 4 | 64 | 524288 | 8388608 | 16777216));
+      FifaEnvironment.LoadLists((EFifaObjects)(4096 | 2048 | 128 | 1 | 256 | 16384 | 65536 | 262144 | 2 | 32768 | 8 | 32 | 1024 | 8192 | 131072 | 512 | 16 | 4 | 64 | 524288 | 8388608 | 16777216));
     }
 
     public static void SaveLists()
@@ -2299,21 +2324,21 @@ namespace FifaLibrary
 
     public static void SaveLists(EFifaObjects fifaObjects)
     {
-      if (FifaEnvironment.s_RoleList != null && (fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_RoleList != null && (fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects)0)
         FifaEnvironment.s_RoleList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_FormationList != null && (fifaObjects & EFifaObjects.FifaFormation) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_FormationList != null && (fifaObjects & EFifaObjects.FifaFormation) != (EFifaObjects)0)
         FifaEnvironment.s_FormationList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_CountryList != null && (fifaObjects & EFifaObjects.FifaCountry) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_CountryList != null && (fifaObjects & EFifaObjects.FifaCountry) != (EFifaObjects)0)
         FifaEnvironment.s_CountryList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_KitList != null && (fifaObjects & EFifaObjects.FifaKit) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_KitList != null && (fifaObjects & EFifaObjects.FifaKit) != (EFifaObjects)0)
         FifaEnvironment.s_KitList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_RefereeList != null && (fifaObjects & EFifaObjects.FifaReferee) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_RefereeList != null && (fifaObjects & EFifaObjects.FifaReferee) != (EFifaObjects)0)
         FifaEnvironment.s_RefereeList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_LeagueList != null && (fifaObjects & EFifaObjects.FifaLeague) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_LeagueList != null && (fifaObjects & EFifaObjects.FifaLeague) != (EFifaObjects)0)
         FifaEnvironment.s_LeagueList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_TeamList != null && (fifaObjects & EFifaObjects.FifaTeam) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_TeamList != null && (fifaObjects & EFifaObjects.FifaTeam) != (EFifaObjects)0)
         FifaEnvironment.s_TeamList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_PlayerList != null && (fifaObjects & EFifaObjects.FifaPlayer) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_PlayerList != null && (fifaObjects & EFifaObjects.FifaPlayer) != (EFifaObjects)0)
       {
         FifaEnvironment.s_PlayerNamesList.ClearUsedFlags();
         FifaEnvironment.s_PlayerList.Save(FifaEnvironment.m_FifaDb);
@@ -2323,13 +2348,13 @@ namespace FifaLibrary
         FifaEnvironment.s_PlayerNamesList.Save(FifaEnvironment.m_FifaDb);
         FifaEnvironment.s_NameDictionary.Save(FifaEnvironment.m_FifaDb);
       }
-      if (FifaEnvironment.s_StadiumList != null && (fifaObjects & EFifaObjects.FifaStadium) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_StadiumList != null && (fifaObjects & EFifaObjects.FifaStadium) != (EFifaObjects)0)
         FifaEnvironment.s_StadiumList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_CompetitionObjects != null && (fifaObjects & EFifaObjects.FifaTournament) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_CompetitionObjects != null && (fifaObjects & EFifaObjects.FifaTournament) != (EFifaObjects)0)
         FifaEnvironment.s_CompetitionObjects.Save(FifaEnvironment.m_GameDir, FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_BallList != null && (fifaObjects & EFifaObjects.FifaBall) != (EFifaObjects) 0)
+      if (FifaEnvironment.s_BallList != null && (fifaObjects & EFifaObjects.FifaBall) != (EFifaObjects)0)
         FifaEnvironment.s_BallList.Save(FifaEnvironment.m_FifaDb);
-      if (FifaEnvironment.s_ShoesList == null || (fifaObjects & EFifaObjects.FifaShoes) == (EFifaObjects) 0)
+      if (FifaEnvironment.s_ShoesList == null || (fifaObjects & EFifaObjects.FifaShoes) == (EFifaObjects)0)
         return;
       FifaEnvironment.s_ShoesList.Save(FifaEnvironment.m_FifaDb);
     }
@@ -2345,9 +2370,9 @@ namespace FifaLibrary
     {
       ArrayList arrayList = new ArrayList();
       if (arrayList.Count == 0)
-        arrayList.Add((object) "No missed files found.");
+        arrayList.Add((object)"No missed files found.");
       else
-        arrayList.Add((object) (arrayList.Count.ToString() + " missed files found."));
+        arrayList.Add((object)(arrayList.Count.ToString() + " missed files found."));
       return arrayList;
     }
 
@@ -2356,9 +2381,9 @@ namespace FifaLibrary
       FifaFat fifaFat = FifaEnvironment.m_FifaFat;
       if (FifaEnvironment.m_CareerFile == null)
         return;
-      if ((fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaRole) != (EFifaObjects)0)
         FifaEnvironment.s_RoleList = new RoleList(FifaEnvironment.m_FifaDb);
-      if ((fifaObjects & EFifaObjects.FifaLeague) == (EFifaObjects) 0)
+      if ((fifaObjects & EFifaObjects.FifaLeague) == (EFifaObjects)0)
         return;
       FifaEnvironment.s_LeagueList = new LeagueList(FifaEnvironment.m_FifaDb);
     }

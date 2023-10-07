@@ -135,6 +135,7 @@ namespace FifaLibrary
     private int m_matchdayattackrating;
     private int m_countryid_IfNationalTeam;
     public int m_countryid_IfRowTeam;
+    public int m_countryid_IfLeagueTeam;
     private Country m_Country;
     private int m_leagueid;
     private League m_League;
@@ -1140,7 +1141,7 @@ namespace FifaLibrary
       }
     }
 
-    
+
 
     public Roster Roster
     {
@@ -1152,56 +1153,87 @@ namespace FifaLibrary
 
     public Country Country
     {
-      get
-      {
-        return this.m_Country;
-      }
+      get => this.m_Country;
       set
       {
-        if (this.IsNationalTeam)
+        if (value == this.m_Country)
+          return;
+        if (this.IsNationalTeam())
         {
-          if (this.m_Country == value)
-            return;
           if (this.m_Country != null)
-            this.m_Country.NationalTeam = (Team) null;
+            this.m_Country.NationalTeam = (Team)null;
+          value.SetNationalTeam(this, this.Id);
+          this.SetCountryAsNationalTeam(value);
         }
-        if (value != null)
+        else if (value != null)
         {
-          this.m_Country = value;
-          this.m_countryid_IfRowTeam = this.m_Country.Id;
+          if (this.m_League != null)
+          {
+            if (value.Id == this.m_League.Country.Id)
+              this.SetCountryAsLeagueTeam(value);
+            else
+              this.SetCountryAsRowTeam(value);
+          }
+          else
+            this.SetCountryAsRowTeam(value);
         }
+        else if (this.m_League != null)
+          this.SetCountryAsLeagueTeam(this.m_League.Country);
         else
-        {
-          this.m_Country = value;
-          this.m_countryid_IfRowTeam = 0;
-        }
+          this.ClearCountry();
       }
     }
 
-    public void SetAsNationalTeam(Country country)
+    public void SetCountryAsNationalTeam(Country country)
     {
       this.m_Country = country;
       this.m_countryid_IfNationalTeam = country.Id;
       this.m_countryid_IfRowTeam = 0;
+      this.m_countryid_IfLeagueTeam = 0;
     }
-
-    public void UnsetAsNationalTeam(int nationalTeamId)
+    private void SetCountryAsRowTeam(Country country)
     {
-      this.m_countryid_IfRowTeam = this.m_countryid_IfNationalTeam;
+      if (country == null)
+        return;
+      this.m_Country = country;
       this.m_countryid_IfNationalTeam = 0;
+      this.m_countryid_IfRowTeam = country.Id;
+      this.m_countryid_IfLeagueTeam = 0;
     }
 
-    public bool IsNationalTeam
+    private void UnsetAsNationalTeam()
     {
-      get
-      { 
-        return this.m_countryid_IfNationalTeam != 0;
+      if (this.m_League != null && this.m_League.Country != null && this.m_Country == this.m_League.Country)
+        this.SetCountryAsLeagueTeam(this.m_Country);
+      this.SetCountryAsRowTeam(this.m_Country);
+    }
+
+    private void ClearCountry()
+    {
+      this.m_Country = (Country)null;
+      this.m_countryid_IfNationalTeam = 0;
+      this.m_countryid_IfRowTeam = 0;
+      this.m_countryid_IfLeagueTeam = 0;
+    }
+
+    public bool IsNationalTeam() => this.m_countryid_IfNationalTeam != 0;
+
+    public bool NationalTeam
+    {
+      get => this.IsNationalTeam();
+      set
+      {
+        if (value)
+          this.SetAsNationalTeam(this.m_Country);
+        else
+          this.UnsetAsNationalTeam();
       }
     }
+    private void SetAsNationalTeam(Country country) => this.SetCountryAsNationalTeam(country);
 
     public bool IsClub()
     {
-      return !this.IsNationalTeam && this.Id != 111072 && (this.Id != 111205 && this.Id != 112190) && this.Id != 111596 && this.Id != 111592;
+      return !this.IsNationalTeam() && this.Id != 111072 && (this.Id != 111205 && this.Id != 112190) && this.Id != 111596 && this.Id != 111592;
     }
 
     public League League
@@ -1235,7 +1267,7 @@ namespace FifaLibrary
       {
         if (value == null)
         {
-          this.m_PrevLeague = (League) null;
+          this.m_PrevLeague = (League)null;
           this.m_prevleagueid = 0;
         }
         else
@@ -1651,34 +1683,34 @@ namespace FifaLibrary
       this.m_teamname = this.m_TeamNameFull;
       this.m_balltype = 1;
       this.m_adboardid = 1;
-      this.m_Stadium = (Stadium) null;
+      this.m_Stadium = (Stadium)null;
       this.m_stadiumid = 0;
       this.m_genericbanner = false;
       this.m_jerseytype = 1;
       this.m_physioid_primary = 1;
       this.m_physioid_secondary = 2;
-      this.m_teamcolor1r = (int) byte.MaxValue;
-      this.m_teamcolor1g = (int) byte.MaxValue;
-      this.m_teamcolor1b = (int) byte.MaxValue;
+      this.m_teamcolor1r = (int)byte.MaxValue;
+      this.m_teamcolor1g = (int)byte.MaxValue;
+      this.m_teamcolor1b = (int)byte.MaxValue;
       this.m_teamcolor2r = 0;
       this.m_teamcolor2g = 0;
       this.m_teamcolor2b = 0;
       this.m_teamcolor3r = 128;
       this.m_teamcolor3g = 128;
       this.m_teamcolor3b = 128;
-      this.m_TeamColor1 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor1r, this.m_teamcolor1g, this.m_teamcolor1b);
-      this.m_TeamColor2 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor2r, this.m_teamcolor2g, this.m_teamcolor2b);
-      this.m_TeamColor3 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor3r, this.m_teamcolor3g, this.m_teamcolor3b);
+      this.m_TeamColor1 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor1r, this.m_teamcolor1g, this.m_teamcolor1b);
+      this.m_TeamColor2 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor2r, this.m_teamcolor2g, this.m_teamcolor2b);
+      this.m_TeamColor3 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor3r, this.m_teamcolor3g, this.m_teamcolor3b);
       this.m_form = 0;
       this.m_managerid = 8105;
-      this.m_stadiumcustomname = (string) null;
-      this.m_ManagerSurname = (string) null;
-      this.m_ManagerFirstName = (string) null;
+      this.m_stadiumcustomname = (string)null;
+      this.m_ManagerSurname = (string)null;
+      this.m_ManagerFirstName = (string)null;
       this.m_fancrowdhairskintexturecode = 0;
       this.m_stafftracksuitcolorcode = 0;
       for (int index = 0; index < 10; ++index)
         this.m_teamkitidList[index] = -1;
-      this.m_RivalTeam = (Team) null;
+      this.m_RivalTeam = (Team)null;
       this.m_rivalteam = 1;
       this.m_assetid = this.Id;
       this.m_transferbudget = 1000000;
@@ -1704,12 +1736,12 @@ namespace FifaLibrary
       this.m_longkicktakerid = 1;
       this.m_leftcornerkicktakerid = 1;
       this.m_rightcornerkicktakerid = 1;
-      this.PlayerCaptain = (Player) null;
-      this.PlayerPenalty = (Player) null;
-      this.PlayerFreeKick = (Player) null;
-      this.PlayerLongKick = (Player) null;
-      this.PlayerLeftCorner = (Player) null;
-      this.PlayerRightCorner = (Player) null;
+      this.PlayerCaptain = (Player)null;
+      this.PlayerPenalty = (Player)null;
+      this.PlayerFreeKick = (Player)null;
+      this.PlayerLongKick = (Player)null;
+      this.PlayerLeftCorner = (Player)null;
+      this.PlayerRightCorner = (Player)null;
       this.m_numtransfersin = 0;
       this.m_genericint2 = -1;
       this.m_genericint1 = -1;
@@ -1731,11 +1763,11 @@ namespace FifaLibrary
       this.m_ethnicity = 2;
       this.m_personalityid = 0;
       this.m_countryid_IfNationalTeam = 0;
-      this.m_Country = (Country) null;
+      this.m_Country = (Country)null;
       this.m_leagueid = 0;
-      this.m_League = (League) null;
+      this.m_League = (League)null;
       this.m_prevleagueid = 0;
-      this.m_PrevLeague = (League) null;
+      this.m_PrevLeague = (League)null;
       this.m_champion = false;
       this.m_previousyeartableposition = 1;
       this.m_currenttableposition = 1;
@@ -1837,9 +1869,9 @@ namespace FifaLibrary
       this.m_teamcolor3r = r.GetAndCheckIntField(FI.teams_teamcolor3r);
       this.m_teamcolor3g = r.GetAndCheckIntField(FI.teams_teamcolor3g);
       this.m_teamcolor3b = r.GetAndCheckIntField(FI.teams_teamcolor3b);
-      this.m_TeamColor1 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor1r, this.m_teamcolor1g, this.m_teamcolor1b);
-      this.m_TeamColor2 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor2r, this.m_teamcolor2g, this.m_teamcolor2b);
-      this.m_TeamColor3 = Color.FromArgb((int) byte.MaxValue, this.m_teamcolor3r, this.m_teamcolor3g, this.m_teamcolor3b);
+      this.m_TeamColor1 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor1r, this.m_teamcolor1g, this.m_teamcolor1b);
+      this.m_TeamColor2 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor2r, this.m_teamcolor2g, this.m_teamcolor2b);
+      this.m_TeamColor3 = Color.FromArgb((int)byte.MaxValue, this.m_teamcolor3r, this.m_teamcolor3g, this.m_teamcolor3b);
       this.m_form = r.GetAndCheckIntField(FI.teams_form);
       this.m_latitude = r.GetAndCheckIntField(FI.teams_latitude);
       this.m_longitude = r.GetAndCheckIntField(FI.teams_longitude);
@@ -1984,7 +2016,7 @@ namespace FifaLibrary
     {
       if (ballList == null)
         return;
-      this.m_Ball = (Ball) ballList.SearchId(this.m_balltype);
+      this.m_Ball = (Ball)ballList.SearchId(this.m_balltype);
     }
 
     public void LinkKits(KitList kitList)
@@ -1994,7 +2026,7 @@ namespace FifaLibrary
       for (int index = 0; index < this.m_teamkitidList.Length; ++index)
       {
         if (this.m_teamkitidList[index] >= 0)
-          this.m_KitList.Add((object) (Kit) kitList.SearchId(this.m_teamkitidList[index]));
+          this.m_KitList.Add((object)(Kit)kitList.SearchId(this.m_teamkitidList[index]));
       }
     }
 
@@ -2002,65 +2034,84 @@ namespace FifaLibrary
     {
       if (stadiumList == null)
         return;
-      this.m_Stadium = (Stadium) stadiumList.SearchId(this.m_stadiumid);
+      this.m_Stadium = (Stadium)stadiumList.SearchId(this.m_stadiumid);
     }
 
     public void LinkTeam(TeamList teamList)
     {
       if (teamList == null)
         return;
-      this.m_RivalTeam = (Team) teamList.SearchId(this.m_rivalteam);
+      this.m_RivalTeam = (Team)teamList.SearchId(this.m_rivalteam);
     }
 
     public void LinkCountry(CountryList countryList)
     {
       if (countryList == null)
         return;
-      if (this.m_countryid_IfNationalTeam == 0)
+      if (this.IsNationalTeam())
       {
-        if (this.m_countryid_IfRowTeam != 0)
-        {
-          this.m_Country = (Country) countryList.SearchId(this.m_countryid_IfRowTeam);
-        }
-        else
-        {
-          if (this.m_League == null || this.m_League.Country == null)
-            return;
-          this.m_Country = this.m_League.Country;
-          this.m_countryid_IfRowTeam = this.m_League.Country.Id;
-        }
+        this.m_Country = (Country)countryList.SearchId(this.m_countryid_IfNationalTeam);
+        if (this.m_Country == null || this.IsFemale())
+          return;
+        this.m_Country.SetNationalTeam(this, this.Id);
       }
-      //else
-      //  this.m_Country = (Country) countryList.SearchId(this.m_countryid_IfNationalTeam);
+      else if (this.IsRowTeam())
+      {
+        this.m_Country = (Country)countryList.SearchId(this.m_countryid_IfRowTeam);
+      }
+      else
+      {
+        if (this.m_League == null || this.m_League.Country == null)
+          return;
+        this.SetCountryAsLeagueTeam(this.m_League.Country);
+      }
+    }
+
+    public bool IsFemale()
+    {
+      bool flag = false;
+      if (this.m_Roster != null && this.m_Roster.Count > 0)
+        flag = this.m_Roster.GetBestPlayer().Player.Female;
+      return flag;
+    }
+
+    public bool IsRowTeam() => !this.IsNationalTeam() && this.m_countryid_IfRowTeam > 0 && this.m_countryid_IfRowTeam != this.m_countryid_IfLeagueTeam;
+
+    private void SetCountryAsLeagueTeam(Country country)
+    {
+      this.m_Country = country;
+      this.m_countryid_IfNationalTeam = 0;
+      this.m_countryid_IfRowTeam = 0;
+      this.m_countryid_IfLeagueTeam = country.Id;
     }
 
     public void LinkFormation(FormationList formationList)
     {
       if (formationList == null)
         return;
-      this.m_Formation = (Formation) formationList.SearchId(this.m_formationid);
+      this.m_Formation = (Formation)formationList.SearchId(this.m_formationid);
     }
 
     public void LinkPlayer(PlayerList playerList)
     {
       if (playerList == null)
         return;
-      this.PlayerCaptain = (Player) playerList.SearchId(this.m_captainid);
-      this.PlayerFreeKick = (Player) playerList.SearchId(this.m_freekicktakerid);
-      this.PlayerLeftFreeKick = (Player) playerList.SearchId(this.m_leftfreekicktakerid);
-      this.PlayerRightFreeKick = (Player) playerList.SearchId(this.m_rightfreekicktakerid);
-      this.PlayerLongKick = (Player) playerList.SearchId(this.m_longkicktakerid);
-      this.PlayerPenalty = (Player) playerList.SearchId(this.m_penaltytakerid);
-      this.PlayerLeftCorner = (Player) playerList.SearchId(this.m_leftcornerkicktakerid);
-      this.PlayerRightCorner = (Player) playerList.SearchId(this.m_rightcornerkicktakerid);
+      this.PlayerCaptain = (Player)playerList.SearchId(this.m_captainid);
+      this.PlayerFreeKick = (Player)playerList.SearchId(this.m_freekicktakerid);
+      this.PlayerLeftFreeKick = (Player)playerList.SearchId(this.m_leftfreekicktakerid);
+      this.PlayerRightFreeKick = (Player)playerList.SearchId(this.m_rightfreekicktakerid);
+      this.PlayerLongKick = (Player)playerList.SearchId(this.m_longkicktakerid);
+      this.PlayerPenalty = (Player)playerList.SearchId(this.m_penaltytakerid);
+      this.PlayerLeftCorner = (Player)playerList.SearchId(this.m_leftcornerkicktakerid);
+      this.PlayerRightCorner = (Player)playerList.SearchId(this.m_rightcornerkicktakerid);
     }
 
     public void LinkLeague(LeagueList leagueList)
     {
       if (leagueList == null)
         return;
-      this.m_League = (League) leagueList.SearchId(this.m_leagueid);
-      this.m_PrevLeague = (League) leagueList.SearchId(this.m_prevleagueid);
+      this.m_League = (League)leagueList.SearchId(this.m_leagueid);
+      this.m_PrevLeague = (League)leagueList.SearchId(this.m_prevleagueid);
     }
 
     public bool IsPlayingInLeague(League league)
@@ -2080,15 +2131,15 @@ namespace FifaLibrary
       r.IntField[FI.teams_fancrowdhairskintexturecode] = this.m_fancrowdhairskintexturecode;
       r.IntField[FI.teams_physioid_primary] = this.m_physioid_primary;
       r.IntField[FI.teams_physioid_secondary] = this.m_physioid_secondary;
-      this.m_teamcolor1r = (int) this.m_TeamColor1.R;
-      this.m_teamcolor1g = (int) this.m_TeamColor1.G;
-      this.m_teamcolor1b = (int) this.m_TeamColor1.B;
-      this.m_teamcolor2r = (int) this.m_TeamColor2.R;
-      this.m_teamcolor2g = (int) this.m_TeamColor2.G;
-      this.m_teamcolor2b = (int) this.m_TeamColor2.B;
-      this.m_teamcolor3r = (int) this.m_TeamColor3.R;
-      this.m_teamcolor3g = (int) this.m_TeamColor3.G;
-      this.m_teamcolor3b = (int) this.m_TeamColor3.B;
+      this.m_teamcolor1r = (int)this.m_TeamColor1.R;
+      this.m_teamcolor1g = (int)this.m_TeamColor1.G;
+      this.m_teamcolor1b = (int)this.m_TeamColor1.B;
+      this.m_teamcolor2r = (int)this.m_TeamColor2.R;
+      this.m_teamcolor2g = (int)this.m_TeamColor2.G;
+      this.m_teamcolor2b = (int)this.m_TeamColor2.B;
+      this.m_teamcolor3r = (int)this.m_TeamColor3.R;
+      this.m_teamcolor3g = (int)this.m_TeamColor3.G;
+      this.m_teamcolor3b = (int)this.m_TeamColor3.B;
       r.IntField[FI.teams_teamcolor1r] = this.m_teamcolor1r;
       r.IntField[FI.teams_teamcolor1g] = this.m_teamcolor1g;
       r.IntField[FI.teams_teamcolor1b] = this.m_teamcolor1b;
@@ -2199,48 +2250,48 @@ namespace FifaLibrary
       r.IntField[FI.defaultteamdata_defteamwidth] = this.m_defteamwidth;
       if (this.m_Formation == null)
         return;
-      r.FloatField[FI.defaultteamdata_offset0x] = (float) this.m_Formation.PlayingRoles[0].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset0y] = (float) this.m_Formation.PlayingRoles[0].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset0x] = (float)this.m_Formation.PlayingRoles[0].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset0y] = (float)this.m_Formation.PlayingRoles[0].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction0] = this.m_Formation.PlayingRoles[0].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position0] = this.m_Formation.PlayingRoles[0].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset1x] = (float) this.m_Formation.PlayingRoles[1].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset1y] = (float) this.m_Formation.PlayingRoles[1].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset1x] = (float)this.m_Formation.PlayingRoles[1].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset1y] = (float)this.m_Formation.PlayingRoles[1].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction1] = this.m_Formation.PlayingRoles[1].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position1] = this.m_Formation.PlayingRoles[1].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset2x] = (float) this.m_Formation.PlayingRoles[2].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset2y] = (float) this.m_Formation.PlayingRoles[2].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset2x] = (float)this.m_Formation.PlayingRoles[2].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset2y] = (float)this.m_Formation.PlayingRoles[2].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction2] = this.m_Formation.PlayingRoles[2].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position2] = this.m_Formation.PlayingRoles[2].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset3x] = (float) this.m_Formation.PlayingRoles[3].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset3y] = (float) this.m_Formation.PlayingRoles[3].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset3x] = (float)this.m_Formation.PlayingRoles[3].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset3y] = (float)this.m_Formation.PlayingRoles[3].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction3] = this.m_Formation.PlayingRoles[3].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position3] = this.m_Formation.PlayingRoles[3].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset4x] = (float) this.m_Formation.PlayingRoles[4].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset4y] = (float) this.m_Formation.PlayingRoles[4].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset4x] = (float)this.m_Formation.PlayingRoles[4].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset4y] = (float)this.m_Formation.PlayingRoles[4].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction4] = this.m_Formation.PlayingRoles[4].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position4] = this.m_Formation.PlayingRoles[4].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset5x] = (float) this.m_Formation.PlayingRoles[5].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset5y] = (float) this.m_Formation.PlayingRoles[5].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset5x] = (float)this.m_Formation.PlayingRoles[5].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset5y] = (float)this.m_Formation.PlayingRoles[5].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction5] = this.m_Formation.PlayingRoles[5].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position5] = this.m_Formation.PlayingRoles[5].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset6x] = (float) this.m_Formation.PlayingRoles[6].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset6y] = (float) this.m_Formation.PlayingRoles[6].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset6x] = (float)this.m_Formation.PlayingRoles[6].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset6y] = (float)this.m_Formation.PlayingRoles[6].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction6] = this.m_Formation.PlayingRoles[6].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position6] = this.m_Formation.PlayingRoles[6].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset7x] = (float) this.m_Formation.PlayingRoles[7].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset7y] = (float) this.m_Formation.PlayingRoles[7].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset7x] = (float)this.m_Formation.PlayingRoles[7].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset7y] = (float)this.m_Formation.PlayingRoles[7].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction7] = this.m_Formation.PlayingRoles[7].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position7] = this.m_Formation.PlayingRoles[7].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset8x] = (float) this.m_Formation.PlayingRoles[8].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset8y] = (float) this.m_Formation.PlayingRoles[8].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset8x] = (float)this.m_Formation.PlayingRoles[8].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset8y] = (float)this.m_Formation.PlayingRoles[8].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction8] = this.m_Formation.PlayingRoles[8].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position8] = this.m_Formation.PlayingRoles[8].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset9x] = (float) this.m_Formation.PlayingRoles[9].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset9y] = (float) this.m_Formation.PlayingRoles[9].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset9x] = (float)this.m_Formation.PlayingRoles[9].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset9y] = (float)this.m_Formation.PlayingRoles[9].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction9] = this.m_Formation.PlayingRoles[9].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position9] = this.m_Formation.PlayingRoles[9].Role.Id;
-      r.FloatField[FI.defaultteamdata_offset10x] = (float) this.m_Formation.PlayingRoles[10].OffsetX / 100f;
-      r.FloatField[FI.defaultteamdata_offset10y] = (float) this.m_Formation.PlayingRoles[10].OffsetY / 100f;
+      r.FloatField[FI.defaultteamdata_offset10x] = (float)this.m_Formation.PlayingRoles[10].OffsetX / 100f;
+      r.FloatField[FI.defaultteamdata_offset10y] = (float)this.m_Formation.PlayingRoles[10].OffsetY / 100f;
       //r.IntField[FI.defaultteamdata_playerinstruction10] = this.m_Formation.PlayingRoles[10].PlayerInstruction;
       r.IntField[FI.defaultteamdata_position10] = this.m_Formation.PlayingRoles[10].Role.Id;
     }
@@ -2265,48 +2316,48 @@ namespace FifaLibrary
       r.IntField[FI.default_teamsheets_defteamwidth] = this.m_defteamwidth;
       if (this.m_Formation != null)
       {
-        r.FloatField[FI.default_teamsheets_offset0x] = (float) this.m_Formation.PlayingRoles[0].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset0y] = (float) this.m_Formation.PlayingRoles[0].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset0x] = (float)this.m_Formation.PlayingRoles[0].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset0y] = (float)this.m_Formation.PlayingRoles[0].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction0] = this.m_Formation.PlayingRoles[0].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position0] = this.m_Formation.PlayingRoles[0].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset1x] = (float) this.m_Formation.PlayingRoles[1].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset1y] = (float) this.m_Formation.PlayingRoles[1].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset1x] = (float)this.m_Formation.PlayingRoles[1].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset1y] = (float)this.m_Formation.PlayingRoles[1].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction1] = this.m_Formation.PlayingRoles[1].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position1] = this.m_Formation.PlayingRoles[1].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset2x] = (float) this.m_Formation.PlayingRoles[2].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset2y] = (float) this.m_Formation.PlayingRoles[2].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset2x] = (float)this.m_Formation.PlayingRoles[2].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset2y] = (float)this.m_Formation.PlayingRoles[2].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction2] = this.m_Formation.PlayingRoles[2].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position2] = this.m_Formation.PlayingRoles[2].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset3x] = (float) this.m_Formation.PlayingRoles[3].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset3y] = (float) this.m_Formation.PlayingRoles[3].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset3x] = (float)this.m_Formation.PlayingRoles[3].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset3y] = (float)this.m_Formation.PlayingRoles[3].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction3] = this.m_Formation.PlayingRoles[3].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position3] = this.m_Formation.PlayingRoles[3].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset4x] = (float) this.m_Formation.PlayingRoles[4].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset4y] = (float) this.m_Formation.PlayingRoles[4].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset4x] = (float)this.m_Formation.PlayingRoles[4].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset4y] = (float)this.m_Formation.PlayingRoles[4].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction4] = this.m_Formation.PlayingRoles[4].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position4] = this.m_Formation.PlayingRoles[4].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset5x] = (float) this.m_Formation.PlayingRoles[5].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset5y] = (float) this.m_Formation.PlayingRoles[5].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset5x] = (float)this.m_Formation.PlayingRoles[5].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset5y] = (float)this.m_Formation.PlayingRoles[5].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction5] = this.m_Formation.PlayingRoles[5].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position5] = this.m_Formation.PlayingRoles[5].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset6x] = (float) this.m_Formation.PlayingRoles[6].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset6y] = (float) this.m_Formation.PlayingRoles[6].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset6x] = (float)this.m_Formation.PlayingRoles[6].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset6y] = (float)this.m_Formation.PlayingRoles[6].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction6] = this.m_Formation.PlayingRoles[6].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position6] = this.m_Formation.PlayingRoles[6].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset7x] = (float) this.m_Formation.PlayingRoles[7].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset7y] = (float) this.m_Formation.PlayingRoles[7].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset7x] = (float)this.m_Formation.PlayingRoles[7].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset7y] = (float)this.m_Formation.PlayingRoles[7].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction7] = this.m_Formation.PlayingRoles[7].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position7] = this.m_Formation.PlayingRoles[7].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset8x] = (float) this.m_Formation.PlayingRoles[8].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset8y] = (float) this.m_Formation.PlayingRoles[8].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset8x] = (float)this.m_Formation.PlayingRoles[8].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset8y] = (float)this.m_Formation.PlayingRoles[8].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction8] = this.m_Formation.PlayingRoles[8].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position8] = this.m_Formation.PlayingRoles[8].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset9x] = (float) this.m_Formation.PlayingRoles[9].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset9y] = (float) this.m_Formation.PlayingRoles[9].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset9x] = (float)this.m_Formation.PlayingRoles[9].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset9y] = (float)this.m_Formation.PlayingRoles[9].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction9] = this.m_Formation.PlayingRoles[9].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position9] = this.m_Formation.PlayingRoles[9].Role.Id;
-        r.FloatField[FI.default_teamsheets_offset10x] = (float) this.m_Formation.PlayingRoles[10].OffsetX / 100f;
-        r.FloatField[FI.default_teamsheets_offset10y] = (float) this.m_Formation.PlayingRoles[10].OffsetY / 100f;
+        r.FloatField[FI.default_teamsheets_offset10x] = (float)this.m_Formation.PlayingRoles[10].OffsetX / 100f;
+        r.FloatField[FI.default_teamsheets_offset10y] = (float)this.m_Formation.PlayingRoles[10].OffsetY / 100f;
         //r.IntField[FI.default_teamsheets_playerinstruction10] = this.m_Formation.PlayingRoles[10].PlayerInstruction;
         r.IntField[FI.default_teamsheets_position10] = this.m_Formation.PlayingRoles[10].Role.Id;
       }
@@ -2365,9 +2416,9 @@ namespace FifaLibrary
       };
       for (int index = 0; index < numArray.Length; ++index)
       {
-        TeamPlayer teamPlayer = (TeamPlayer) null;
+        TeamPlayer teamPlayer = (TeamPlayer)null;
         if (index < this.m_Roster.Count)
-          teamPlayer = (TeamPlayer) this.m_Roster[index];
+          teamPlayer = (TeamPlayer)this.m_Roster[index];
         r.IntField[numArray[index]] = teamPlayer == null || teamPlayer.Player == null ? -1 : teamPlayer.Player.Id;
       }
     }
@@ -2770,11 +2821,11 @@ namespace FifaLibrary
 
     public void RemoveTeamPlayer(TeamPlayer teamPlayer)
     {
-      this.m_Roster.Remove((object) teamPlayer);
+      this.m_Roster.Remove((object)teamPlayer);
       teamPlayer.Player.NotPlayFor(this);
       if (teamPlayer.position < 28)
       {
-        this.AssignRoleToSubstitute((ERole) teamPlayer.position);
+        this.AssignRoleToSubstitute((ERole)teamPlayer.position);
         this.AssignBench();
       }
       else if (teamPlayer.position == 28)
@@ -2818,9 +2869,9 @@ namespace FifaLibrary
         if (bestPlayer != null)
         {
           ERole erole = bestPlayer.Player.ChooseRole(availableRoles, nRoles);
-          bestPlayer.position = (int) erole;
-          roster.Add((object) bestPlayer);
-          this.m_Roster.Remove((object) bestPlayer);
+          bestPlayer.position = (int)erole;
+          roster.Add((object)bestPlayer);
+          this.m_Roster.Remove((object)bestPlayer);
           for (int index2 = 0; index2 < nRoles; ++index2)
           {
             if (erole == availableRoles[index2])
@@ -2840,9 +2891,9 @@ namespace FifaLibrary
         TeamPlayer roleBestPlayer = this.m_Roster.GetRoleBestPlayer(requestedRole);
         if (roleBestPlayer != null)
         {
-          roleBestPlayer.position = (int) requestedRole;
-          roster.Add((object) roleBestPlayer);
-          this.m_Roster.Remove((object) roleBestPlayer);
+          roleBestPlayer.position = (int)requestedRole;
+          roster.Add((object)roleBestPlayer);
+          this.m_Roster.Remove((object)roleBestPlayer);
         }
         else
           break;
@@ -2853,8 +2904,8 @@ namespace FifaLibrary
         if (bestPlayer != null)
         {
           bestPlayer.position = 28;
-          roster.Add((object) bestPlayer);
-          this.m_Roster.Remove((object) bestPlayer);
+          roster.Add((object)bestPlayer);
+          this.m_Roster.Remove((object)bestPlayer);
         }
         else
           break;
@@ -2865,14 +2916,14 @@ namespace FifaLibrary
         if (bestPlayer != null)
         {
           bestPlayer.position = 29;
-          roster.Add((object) bestPlayer);
-          this.m_Roster.Remove((object) bestPlayer);
+          roster.Add((object)bestPlayer);
+          this.m_Roster.Remove((object)bestPlayer);
         }
         else
           break;
       }
-      foreach (TeamPlayer teamPlayer in (ArrayList) roster)
-        this.m_Roster.Add((object) teamPlayer);
+      foreach (TeamPlayer teamPlayer in (ArrayList)roster)
+        this.m_Roster.Add((object)teamPlayer);
     }
 
     public void AssignTitolarToRoles(Formation formation)
@@ -2888,9 +2939,9 @@ namespace FifaLibrary
         if (bestTitolar != null)
         {
           ERole erole = bestTitolar.Player.ChooseRole(availableRoles, nRoles);
-          bestTitolar.position = (int) erole;
-          roster.Add((object) bestTitolar);
-          this.m_Roster.Remove((object) bestTitolar);
+          bestTitolar.position = (int)erole;
+          roster.Add((object)bestTitolar);
+          this.m_Roster.Remove((object)bestTitolar);
           for (int index2 = 0; index2 < nRoles; ++index2)
           {
             if (erole == availableRoles[index2])
@@ -2904,15 +2955,15 @@ namespace FifaLibrary
         else
           break;
       }
-      foreach (TeamPlayer teamPlayer in (ArrayList) roster)
-        this.m_Roster.Add((object) teamPlayer);
+      foreach (TeamPlayer teamPlayer in (ArrayList)roster)
+        this.m_Roster.Add((object)teamPlayer);
     }
 
     public void AssignRoleToSubstitute(ERole role)
     {
       int num = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer2 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer2 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer2.position >= 28)
         {
@@ -2926,20 +2977,20 @@ namespace FifaLibrary
       }
       if (teamPlayer1 == null)
         return;
-      teamPlayer1.position = (int) role;
+      teamPlayer1.position = (int)role;
     }
 
     public void AssignBench()
     {
       int num = 0;
-      foreach (TeamPlayer teamPlayer in (ArrayList) this.m_Roster)
+      foreach (TeamPlayer teamPlayer in (ArrayList)this.m_Roster)
       {
         if (teamPlayer.position == 28)
           ++num;
       }
       for (int index = num; index < 7; ++index)
       {
-        foreach (TeamPlayer teamPlayer in (ArrayList) this.m_Roster)
+        foreach (TeamPlayer teamPlayer in (ArrayList)this.m_Roster)
         {
           if (teamPlayer.position == 29)
           {
@@ -2953,8 +3004,8 @@ namespace FifaLibrary
     public void AssignCaptain()
     {
       int num = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer2 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer2 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer2.position < 28)
         {
@@ -2975,8 +3026,8 @@ namespace FifaLibrary
     public void AssignPenalty()
     {
       int num = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer2 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer2 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer2.position < 28)
         {
@@ -2998,9 +3049,9 @@ namespace FifaLibrary
     {
       int num1 = -1;
       int num2 = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      TeamPlayer teamPlayer2 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer3 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      TeamPlayer teamPlayer2 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer3 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer3.position < 28)
         {
@@ -3036,8 +3087,8 @@ namespace FifaLibrary
     public void AssignLeftCorner()
     {
       int num = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer2 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer2 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer2.position < 28)
         {
@@ -3058,8 +3109,8 @@ namespace FifaLibrary
     public void AssignRightCorner()
     {
       int num = -1;
-      TeamPlayer teamPlayer1 = (TeamPlayer) null;
-      foreach (TeamPlayer teamPlayer2 in (ArrayList) this.m_Roster)
+      TeamPlayer teamPlayer1 = (TeamPlayer)null;
+      foreach (TeamPlayer teamPlayer2 in (ArrayList)this.m_Roster)
       {
         if (teamPlayer2.position < 28)
         {
@@ -3082,7 +3133,7 @@ namespace FifaLibrary
       teamPlayer.position = 29;
       teamPlayer.m_jerseynumber = this.m_Roster.GetFreeNumber();
       teamPlayer.Team = this;
-      this.m_Roster.Add((object) teamPlayer);
+      this.m_Roster.Add((object)teamPlayer);
       teamPlayer.Player.PlayFor(this);
     }
 

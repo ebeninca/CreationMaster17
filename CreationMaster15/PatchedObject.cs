@@ -1487,7 +1487,7 @@ namespace CreationMaster
             usedObject.Load(record);
             if (PatchedObject.s_TeamCrossReferenceRequired)
               usedObject.NationalTeamId = MainForm.m_PatchLoaderForm.CrossReference("Team", usedObject.NationalTeamId);
-            usedObject.LinkNationalTeam(FifaEnvironment.Teams);
+            usedObject.LinkTeam(FifaEnvironment.Teams);
             break;
           }
         }
@@ -1593,7 +1593,7 @@ namespace CreationMaster
       Ball usedObject = (Ball) this.GetUsedObject();
       if (usedObject == null)
         return;
-      string str1 = Ball.BallTextureFileName(this.m_Id);
+      string str1 = Ball.BallTextureFileNameList(this.m_Id)[0];
       string str2 = MainForm.m_PatchLoaderForm.m_TempFolder + "\\" + str1;
       if (File.Exists(str2))
         usedObject.SetBallTextures(str2);

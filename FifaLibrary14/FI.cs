@@ -1013,6 +1013,8 @@ namespace FifaLibrary
     public static int players_runningcode1 = -1;
     public static int players_preferredposition4 = -1;
     public static int players_volleys = -1;
+    public static int players_gender = -1;
+    public static int players_emotion = -1;
     public static int players_accessorycolourcode2 = -1;
     public static int players_facialhaircolorcode = -1;
     public static int playernames_name = -1;
@@ -5785,6 +5787,8 @@ namespace FifaLibrary
         FI.players_runningcode1 = table14.TableDescriptor.GetFieldIndex("runningcode1");
         FI.players_preferredposition4 = table14.TableDescriptor.GetFieldIndex("preferredposition4");
         FI.players_volleys = table14.TableDescriptor.GetFieldIndex("volleys");
+        FI.players_gender = table14.TableDescriptor.GetFieldIndex("gender");
+        FI.players_emotion = table14.TableDescriptor.GetFieldIndex("emotion");
         FI.players_accessorycolourcode2 = table14.TableDescriptor.GetFieldIndex("accessorycolourcode2");
         FI.players_facialhaircolorcode = table14.TableDescriptor.GetFieldIndex("facialhaircolorcode");
       }

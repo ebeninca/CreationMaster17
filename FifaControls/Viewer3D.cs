@@ -63,17 +63,21 @@ namespace FifaControls
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            this.AutoScaleDimensions = new SizeF(6f, 13f);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.Gray;
-            this.BorderStyle = BorderStyle.Fixed3D;
+            // 
+            // Viewer3D
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gray;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Name = "Viewer3D";
-            this.Size = new Size(305, 284);
-            this.DoubleClick += new EventHandler(this.Viewer3D_DoubleClick);
-            this.MouseDown += new MouseEventHandler(this.Viewer3D_MouseDown);
-            this.MouseMove += new MouseEventHandler(this.Viewer3D_MouseMove);
-            this.MouseUp += new MouseEventHandler(this.Viewer3D_MouseUp);
+            this.Size = new System.Drawing.Size(305, 284);
+            this.DoubleClick += new System.EventHandler(this.Viewer3D_DoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Viewer3D_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Viewer3D_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Viewer3D_MouseUp);
             this.ResumeLayout(false);
+
         }
 
         public bool[] ZbufferRenderState
@@ -463,7 +467,7 @@ namespace FifaControls
                         {
                             this.m_Device.Material = this.m_Materials[index];
                             this.m_Device.SetTexture(0, (BaseTexture)this.m_Textures[index]);
-                            
+
                             this.m_Meshes[index].DrawSubset(0);
                         }
                     }

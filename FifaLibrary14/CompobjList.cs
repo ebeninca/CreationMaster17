@@ -520,9 +520,12 @@ namespace FifaLibrary
 
             country.Level = int32_1;
             Team nationalTeam = (Team)FifaEnvironment.Teams.SearchId(nationalTeamId);
-            country.NationalTeamId = nationalTeamId;
-            country.NationalTeam = nationalTeam;
-            nationalTeam.FillFromCountry(country);
+            if (nationalTeam != null)
+            {
+              country.NationalTeamId = nationalTeamId;
+              country.NationalTeam = nationalTeam;
+              nationalTeam.FillFromCountry(country);
+            }
           }
         }
       }

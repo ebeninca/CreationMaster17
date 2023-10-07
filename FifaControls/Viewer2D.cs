@@ -46,139 +46,176 @@ namespace FifaControls
 
     private void InitializeComponent()
     {
-      this.components = (IContainer) new Container();
-      ComponentResourceManager resources = new ComponentResourceManager(typeof (Viewer2D));
-      this.picture = new PictureBox();
-      this.contextMenuStrip = new ContextMenuStrip(this.components);
-      this.importImageToolStripMenuItem = new ToolStripMenuItem();
-      this.exportImageToolStripMenuItem = new ToolStripMenuItem();
-      this.removeToolStripMenuItem = new ToolStripMenuItem();
-      this.toolStrip = new ToolStrip();
-      this.buttonShow = new ToolStripButton();
-      this.buttonImportImage = new ToolStripButton();
-      this.buttonExportImage = new ToolStripButton();
-      this.buttonFullSize = new ToolStripButton();
-      this.buttonRemove = new ToolStripButton();
-      this.textSize = new ToolStripTextBox();
-      this.openFileDialog = new OpenFileDialog();
-      ((ISupportInitialize) this.picture).BeginInit();
-      this.contextMenuStrip.SuspendLayout();
-      this.toolStrip.SuspendLayout();
-      this.SuspendLayout();
-      this.picture.BackColor = SystemColors.Control;
-      this.picture.BackgroundImageLayout = ImageLayout.None;
-      this.picture.BorderStyle = BorderStyle.FixedSingle;
-      this.picture.ContextMenuStrip = this.contextMenuStrip;
-      this.picture.Dock = DockStyle.Fill;
-      this.picture.Location = new Point(0, 0);
-      this.picture.Name = "picture";
-      this.picture.Size = new Size(197, 187);
-      this.picture.TabIndex = 0;
-      this.picture.TabStop = false;
-      this.contextMenuStrip.Items.AddRange(new ToolStripItem[3]
-      {
-        (ToolStripItem) this.importImageToolStripMenuItem,
-        (ToolStripItem) this.exportImageToolStripMenuItem,
-        (ToolStripItem) this.removeToolStripMenuItem
-      });
-      this.contextMenuStrip.Name = "contextMenuStrip";
-      this.contextMenuStrip.Size = new Size(147, 70);
-      this.importImageToolStripMenuItem.Image = (Image) resources.GetObject("importImageToolStripMenuItem.Image");
-      this.importImageToolStripMenuItem.ImageTransparentColor = Color.Fuchsia;
-      this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
-      this.importImageToolStripMenuItem.Size = new Size(146, 22);
-      this.importImageToolStripMenuItem.Text = "Import Image";
-      this.importImageToolStripMenuItem.Click += new EventHandler(this.buttonImportImage_Click);
-      this.exportImageToolStripMenuItem.Image = (Image) resources.GetObject("exportImageToolStripMenuItem.Image");
-      this.exportImageToolStripMenuItem.ImageTransparentColor = Color.Fuchsia;
-      this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-      this.exportImageToolStripMenuItem.Size = new Size(146, 22);
-      this.exportImageToolStripMenuItem.Text = "Export Image";
-      this.exportImageToolStripMenuItem.Click += new EventHandler(this.buttonExportImage_Click);
-      this.removeToolStripMenuItem.Image = (Image) resources.GetObject("removeToolStripMenuItem.Image");
-      this.removeToolStripMenuItem.ImageTransparentColor = Color.Fuchsia;
-      this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-      this.removeToolStripMenuItem.Size = new Size(146, 22);
-      this.removeToolStripMenuItem.Text = "Remove";
-      this.removeToolStripMenuItem.Click += new EventHandler(this.buttonRemove_Click);
-      this.toolStrip.Dock = DockStyle.Bottom;
-      this.toolStrip.GripStyle = ToolStripGripStyle.Hidden;
-      this.toolStrip.Items.AddRange(new ToolStripItem[6]
-      {
-        (ToolStripItem) this.buttonShow,
-        (ToolStripItem) this.buttonImportImage,
-        (ToolStripItem) this.buttonExportImage,
-        (ToolStripItem) this.buttonFullSize,
-        (ToolStripItem) this.buttonRemove,
-        (ToolStripItem) this.textSize
-      });
-      this.toolStrip.Location = new Point(0, 187);
-      this.toolStrip.Name = "toolStrip";
-      this.toolStrip.Size = new Size(197, 25);
-      this.toolStrip.TabIndex = 2;
-      this.toolStrip.Text = "toolStrip1";
-      this.buttonShow.Checked = true;
-      this.buttonShow.CheckOnClick = true;
-      this.buttonShow.CheckState = CheckState.Checked;
-      this.buttonShow.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonShow.Image = (Image) resources.GetObject("buttonShow.Image");
-      this.buttonShow.ImageTransparentColor = Color.Magenta;
-      this.buttonShow.Name = "buttonShow";
-      this.buttonShow.Size = new Size(23, 22);
-      this.buttonShow.Text = "Show / Hide";
-      this.buttonShow.Click += new EventHandler(this.buttonShow_Click);
-      this.buttonImportImage.AutoSize = false;
-      this.buttonImportImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonImportImage.Image = (Image) resources.GetObject("buttonImportImage.Image");
-      this.buttonImportImage.ImageTransparentColor = Color.Magenta;
-      this.buttonImportImage.Name = "buttonImportImage";
-      this.buttonImportImage.Size = new Size(20, 22);
-      this.buttonImportImage.Text = "Import Image";
-      this.buttonImportImage.Click += new EventHandler(this.buttonImportImage_Click);
-      this.buttonExportImage.AutoSize = false;
-      this.buttonExportImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonExportImage.Image = (Image) resources.GetObject("buttonExportImage.Image");
-      this.buttonExportImage.ImageTransparentColor = Color.Magenta;
-      this.buttonExportImage.Name = "buttonExportImage";
-      this.buttonExportImage.Size = new Size(20, 22);
-      this.buttonExportImage.Text = "Export Image";
-      this.buttonExportImage.Click += new EventHandler(this.buttonExportImage_Click);
-      this.buttonFullSize.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonFullSize.Image = (Image) resources.GetObject("buttonFullSize.Image");
-      this.buttonFullSize.ImageTransparentColor = Color.Magenta;
-      this.buttonFullSize.Name = "buttonFullSize";
-      this.buttonFullSize.Size = new Size(23, 22);
-      this.buttonFullSize.Text = "View Full Size";
-      this.buttonFullSize.Visible = false;
-      this.buttonFullSize.Click += new EventHandler(this.buttonFullSize_Click);
-      this.buttonRemove.AutoSize = false;
-      this.buttonRemove.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonRemove.Image = (Image) resources.GetObject("buttonRemove.Image");
-      this.buttonRemove.ImageTransparentColor = Color.Magenta;
-      this.buttonRemove.Name = "buttonRemove";
-      this.buttonRemove.Size = new Size(20, 22);
-      this.buttonRemove.Text = "Remove";
-      this.buttonRemove.Visible = false;
-      this.buttonRemove.Click += new EventHandler(this.buttonRemove_Click);
-      this.textSize.BackColor = Color.White;
-      this.textSize.Name = "textSize";
-      this.textSize.ReadOnly = true;
-      this.textSize.Size = new Size(65, 25);
-      this.textSize.Text = "1024 x 1024";
-      this.textSize.TextBoxTextAlign = HorizontalAlignment.Center;
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.BackColor = Color.Transparent;
-      this.Controls.Add((Control) this.picture);
-      this.Controls.Add((Control) this.toolStrip);
-      this.Name = "Viewer2D";
-      this.Size = new Size(197, 212);
-      ((ISupportInitialize) this.picture).EndInit();
-      this.contextMenuStrip.ResumeLayout(false);
-      this.toolStrip.ResumeLayout(false);
-      this.toolStrip.PerformLayout();
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Viewer2D));
+            this.picture = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.buttonShow = new System.Windows.Forms.ToolStripButton();
+            this.buttonImportImage = new System.Windows.Forms.ToolStripButton();
+            this.buttonExportImage = new System.Windows.Forms.ToolStripButton();
+            this.buttonFullSize = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemove = new System.Windows.Forms.ToolStripButton();
+            this.textSize = new System.Windows.Forms.ToolStripTextBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
+            this.toolStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // picture
+            // 
+            this.picture.BackColor = System.Drawing.SystemColors.Control;
+            this.picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picture.ContextMenuStrip = this.contextMenuStrip;
+            this.picture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picture.Location = new System.Drawing.Point(0, 0);
+            this.picture.Name = "picture";
+            this.picture.Size = new System.Drawing.Size(197, 187);
+            this.picture.TabIndex = 0;
+            this.picture.TabStop = false;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importImageToolStripMenuItem,
+            this.exportImageToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(147, 70);
+            // 
+            // importImageToolStripMenuItem
+            // 
+            this.importImageToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importImageToolStripMenuItem.Image")));
+            this.importImageToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
+            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.importImageToolStripMenuItem.Text = "Import Image";
+            this.importImageToolStripMenuItem.Click += new System.EventHandler(this.buttonImportImage_Click);
+            // 
+            // exportImageToolStripMenuItem
+            // 
+            this.exportImageToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportImageToolStripMenuItem.Image")));
+            this.exportImageToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exportImageToolStripMenuItem.Text = "Export Image";
+            this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.buttonExportImage_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeToolStripMenuItem.Image")));
+            this.removeToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // toolStrip
+            // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonShow,
+            this.buttonImportImage,
+            this.buttonExportImage,
+            this.buttonFullSize,
+            this.buttonRemove,
+            this.textSize});
+            this.toolStrip.Location = new System.Drawing.Point(0, 187);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(197, 25);
+            this.toolStrip.TabIndex = 2;
+            this.toolStrip.Text = "toolStrip1";
+            // 
+            // buttonShow
+            // 
+            this.buttonShow.Checked = true;
+            this.buttonShow.CheckOnClick = true;
+            this.buttonShow.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.buttonShow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShow.Image = ((System.Drawing.Image)(resources.GetObject("buttonShow.Image")));
+            this.buttonShow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonShow.Name = "buttonShow";
+            this.buttonShow.Size = new System.Drawing.Size(23, 22);
+            this.buttonShow.Text = "Show / Hide";
+            this.buttonShow.Click += new System.EventHandler(this.buttonShow_Click);
+            // 
+            // buttonImportImage
+            // 
+            this.buttonImportImage.AutoSize = false;
+            this.buttonImportImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonImportImage.Image = ((System.Drawing.Image)(resources.GetObject("buttonImportImage.Image")));
+            this.buttonImportImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonImportImage.Name = "buttonImportImage";
+            this.buttonImportImage.Size = new System.Drawing.Size(20, 22);
+            this.buttonImportImage.Text = "Import Image";
+            this.buttonImportImage.Click += new System.EventHandler(this.buttonImportImage_Click);
+            // 
+            // buttonExportImage
+            // 
+            this.buttonExportImage.AutoSize = false;
+            this.buttonExportImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonExportImage.Image = ((System.Drawing.Image)(resources.GetObject("buttonExportImage.Image")));
+            this.buttonExportImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonExportImage.Name = "buttonExportImage";
+            this.buttonExportImage.Size = new System.Drawing.Size(20, 22);
+            this.buttonExportImage.Text = "Export Image";
+            this.buttonExportImage.Click += new System.EventHandler(this.buttonExportImage_Click);
+            // 
+            // buttonFullSize
+            // 
+            this.buttonFullSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFullSize.Image = ((System.Drawing.Image)(resources.GetObject("buttonFullSize.Image")));
+            this.buttonFullSize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFullSize.Name = "buttonFullSize";
+            this.buttonFullSize.Size = new System.Drawing.Size(23, 22);
+            this.buttonFullSize.Text = "View Full Size";
+            this.buttonFullSize.Visible = false;
+            this.buttonFullSize.Click += new System.EventHandler(this.buttonFullSize_Click);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.AutoSize = false;
+            this.buttonRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemove.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemove.Image")));
+            this.buttonRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(20, 22);
+            this.buttonRemove.Text = "Remove";
+            this.buttonRemove.Visible = false;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // textSize
+            // 
+            this.textSize.BackColor = System.Drawing.Color.White;
+            this.textSize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textSize.Name = "textSize";
+            this.textSize.ReadOnly = true;
+            this.textSize.Size = new System.Drawing.Size(65, 25);
+            this.textSize.Text = "1024 x 1024";
+            this.textSize.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Viewer2D
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.picture);
+            this.Controls.Add(this.toolStrip);
+            this.Name = "Viewer2D";
+            this.Size = new System.Drawing.Size(197, 212);
+            ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
 
     [Category("User")]

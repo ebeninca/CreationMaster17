@@ -2310,7 +2310,7 @@ namespace CreationMaster
         {
           if (this.radioBallTexture.Checked)
           {
-            this.ShowRx3File(this.m_TempFolder + "\\" + Ball.BallTextureFileName(int32));
+            this.ShowRx3File(this.m_TempFolder + "\\" + Ball.BallTextureFileNameList(int32)[0]);
           }
           else
           {

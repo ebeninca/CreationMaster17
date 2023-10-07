@@ -137,19 +137,20 @@ namespace FifaLibrary
       return this.m_LanguageName;
     }
 
-    public static string BallTextureFileName(int ballId)
+    public static string[] BallTextureFileNameList(int ballId)
     {
-      return "data/sceneassets/ball/ball_" + ballId.ToString() + "_textures.rx3";
+      string BallPath = "Content/Character/ball/ball_" + ballId.ToString() + "/ball_" + ballId.ToString();
+      return new string[] { BallPath + "_color.png", BallPath + "_coeff.png", BallPath + "_normal.png" };
     }
 
     public string BallTextureFileName()
     {
-      return Ball.BallTextureFileName(this.Id);
+      return Ball.BallTextureFileNameList(this.Id)[0];
     }
 
     public static Bitmap GetBallTexture(int ballId)
     {
-      return FifaEnvironment.GetBmpFromRx3(Ball.BallTextureFileName(ballId), 0);
+      return FifaEnvironment.GetBmpFromRx3(Ball.BallTextureFileNameList(ballId)[0], 0);
     }
 
     public Bitmap GetBallTexture()
@@ -159,7 +160,7 @@ namespace FifaLibrary
 
     public static Bitmap[] GetBallTextures(int ballId)
     {
-      return FifaEnvironment.GetBmpsFromRx3(Ball.BallTextureFileName(ballId));
+      return FifaEnvironment.GetBitmaps(Ball.BallTextureFileNameList(ballId));
     }
 
     public Bitmap[] GetBallTextures()
@@ -169,13 +170,13 @@ namespace FifaLibrary
 
     public static string BallTextureTemplateFileName()
     {
-      return FifaEnvironment.Year == 14 ? "data\\sceneassets\\ball\\2014_ball_#_textures.rx3" : "data\\sceneassets\\ball\\ball_#_textures.rx3";
+      return "Content\\Character\\ball\\ball_#\ball_#_color.png";
     }
 
     public static bool SetBallTextures(int ballId, Bitmap[] bitmaps)
     {
       for (int index = 1; index < bitmaps.Length; ++index)
-        bitmaps[index] = (Bitmap) null;
+        bitmaps[index] = (Bitmap)null;
       return FifaEnvironment.ImportBmpsIntoZdata(Ball.BallTextureTemplateFileName(), ballId, bitmaps, ECompressionMode.Chunkzip);
     }
 
@@ -186,7 +187,7 @@ namespace FifaLibrary
 
     public static bool SetBallTextures(int ballId, string rx3FileName)
     {
-      return FifaEnvironment.ImportFileIntoZdataAs(rx3FileName, Ball.BallTextureFileName(ballId), false, ECompressionMode.Chunkzip);
+      return FifaEnvironment.ImportFileIntoZdataAs(rx3FileName, Ball.BallTextureFileNameList(ballId)[0], false, ECompressionMode.Chunkzip);
     }
 
     public bool SetBallTextures(string srcFileName)
@@ -263,7 +264,8 @@ namespace FifaLibrary
 
     public static string BallModelFileName(int ballId)
     {
-      return "data/sceneassets/ball/ball_" + ballId.ToString() + ".rx3";
+      return "Content/Character/ball/ball_" + ballId.ToString() + "/ball_" + ballId.ToString() + ".rx3";
+      //return "Content/Character/ball/ball_" + ballId.ToString() + "/ball_" + ballId.ToString() + "_mesh.fbx";
     }
 
     public string BallModelFileName()
@@ -273,7 +275,7 @@ namespace FifaLibrary
 
     public static string BallModelTemplateFileName()
     {
-      return "data/sceneassets/ball/ball_#.rx3";
+      return "Content/Character/ball/ball_#/bal_#_color.png";
     }
 
     public static Rx3File GetBallModel(int ballId)
@@ -288,7 +290,7 @@ namespace FifaLibrary
 
     public static bool SetBallModel(int ballId, string rx3FileName)
     {
-      return FifaEnvironment.ImportFileIntoZdataAs(rx3FileName, Ball.BallModelFileName(ballId), false, ECompressionMode.Chunkzip, (Rx3Signatures) null);
+      return FifaEnvironment.ImportFileIntoZdataAs(rx3FileName, Ball.BallModelFileName(ballId), false, ECompressionMode.Chunkzip, (Rx3Signatures)null);
     }
 
     public bool SetBallModel(string srcFileName)
@@ -311,18 +313,18 @@ namespace FifaLibrary
 
     public override IdObject Clone(int newId)
     {
-      Ball ball = (Ball) base.Clone(newId);
+      Ball ball = (Ball)base.Clone(newId);
       if (ball != null)
       {
         ball.Name = "Ball n." + newId.ToString();
-        FifaEnvironment.CloneIntoZdata(Ball.BallTextureFileName(this.Id), Ball.BallTextureFileName(newId));
+        FifaEnvironment.CloneIntoZdata(Ball.BallTextureFileNameList(this.Id)[0], Ball.BallTextureFileNameList(newId)[0]);
         FifaEnvironment.CloneIntoZdata(Ball.BallModelFileName(this.Id), Ball.BallModelFileName(newId));
         if (FifaEnvironment.Year == 14)
           FifaEnvironment.CloneIntoZdata(Ball.BallPictureBigFileName(this.Id), Ball.BallPictureBigFileName(newId));
         else
           FifaEnvironment.CloneIntoZdata(Ball.BallDdsFileName(this.Id), Ball.BallDdsFileName(newId));
       }
-      return (IdObject) ball;
+      return (IdObject)ball;
     }
   }
 }

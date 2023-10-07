@@ -965,7 +965,7 @@ namespace CreationMaster
             if (text == "Ball")
             {
               this.CheckAndExport(Ball.BallModelFileName(int32));
-              this.CheckAndExport(Ball.BallTextureFileName(int32));
+              this.CheckAndExport(Ball.BallTextureFileNameList(int32)[0]);
               if (FifaEnvironment.Year == 14)
                 this.CheckAndExport(Ball.BallPictureBigFileName(int32));
               else

@@ -712,7 +712,7 @@ namespace FifaLibrary
     {
       foreach (Team playingTeam in (ArrayList) this.m_PlayingTeams)
       {
-        if (playingTeam.IsNationalTeam)
+        if (playingTeam.NationalTeam)
           return true;
       }
       return false;

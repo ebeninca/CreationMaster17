@@ -390,34 +390,30 @@ namespace FifaLibrary
       r.IntField[FI.audionation_ReactionsRegionIndex] = this.m_ReactionsRegionIndex;
     }
 
-    public void LinkNationalTeam(TeamList teamList)
+    public void LinkTeam(TeamList teamList)
     {
       if (teamList == null)
         return;
-      foreach (Team team in (ArrayList)teamList)
-      { 
-        if (team.Id == this.m_NationalTeamId)
-        {
-          this.m_NationalTeam = team;
-          this.m_NationalTeamId = team.Id;
-          break;
-        }
-      }
-
+      this.m_NationalTeam = (Team)teamList.SearchId(this.m_NationalTeamId);
+      //Team nationalTeam = this.m_NationalTeam;
     }
 
     public void SetNationalTeam(Team nationalTeam, int nationalTeamId)
     {
       if (nationalTeam != null)
         nationalTeamId = nationalTeam.Id;
-      if (nationalTeamId == -1)
+      if (nationalTeamId <= 0)
         nationalTeam = (Team)null;
-      this.m_NationalTeam?.UnsetAsNationalTeam(nationalTeamId);
+      Team nationalTeam1 = this.m_NationalTeam;
+      int nationalTeamId1 = this.m_NationalTeamId;
+      if (nationalTeam1 != null)
+        nationalTeam1.NationalTeam = false;
       this.m_NationalTeam = nationalTeam;
       this.m_NationalTeamId = nationalTeamId;
       if (this.m_NationalTeam == null)
         return;
-      this.m_NationalTeam.SetAsNationalTeam(this);
+      this.m_NationalTeam.Country = this;
+      this.m_NationalTeam.NationalTeam = true;
     }
 
     public void SaveCountry(Record r)

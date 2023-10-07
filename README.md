@@ -1,4 +1,22 @@
-# Creation Master 17 Legacy #
+# Creation Master 17 #
+
+Thanks to Rinaldo and Damian Wolf for the CM15 source code
+
+https://bitbucket.org/fifa-tools/cm15/src/master/
+
+## Project Structure
+
+The Unity 3dRender project is incorporated in this project, so you can build at once the entire application in Visual Studio 2019.
+
+Installation modules needed in VS2019:
+- .NET desktop development
+- Desktop development with C++
+
+If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, clone this repository: <asdsfsf>
+
+In this case you will need the extra module:
+- Game development with Unity
+
 
 ## Pendencias
 
@@ -35,13 +53,22 @@
 +1699,standings_sort,H2HGOALSFOR
  
  ```
-- Bench at FIFA Level
 - FIFA DB IS SMALLER AFTER SAVING FOR THE FIRST TIME, LOSS OF DATA?
 - 3D MODELS ON MULTIPLE SCREENS, TRY BALL FIRST, SEEMS TO BE THE EASIEST
 
+110930
+
 ## Modifications
 
+v006
+- Basic Ball 3D Render working with Unity executable
+
+v005
+- Link between Country and National Team
+- Support for Male/Female and Emotions on player creation.
+
 v004
+- Bench and Yellows at FIFA level
 - Changed the link between country and team, now using Internationals.txt
 - Fixed "Regional Cup Target" bug
 - League/Trophy id max = 9999

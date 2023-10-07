@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--Project was exported from assembly: C:\Program Files (x86)\Fifa Master\Creation Master 15\CreationMaster15.exe-->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,11 +7,13 @@
     <ProjectGuid>{31BADB8E-6894-485A-B3F2-39D813D1B1E9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>CreationMaster15</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <FileAlignment>512</FileAlignment>
     <RootNamespace>CreationMaster</RootNamespace>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -36,6 +38,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -45,15 +50,26 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>fifa17.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.3D, Version=23.8.0.0, Culture=neutral, PublicKeyToken=f071c641d0b4582b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.3D.23.8.0\lib\net45\Aspose.3D.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.DirectX.Direct3D" />
+    <Reference Include="MonoGame.Framework, Version=3.8.0.1641, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\lib\net452\MonoGame.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -67,6 +83,7 @@
     <Compile Include="BallForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="UgcForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,20 +151,25 @@
     <Compile Include="AudioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Properties\Resources.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AudioForm.resx" />
-    <EmbeddedResource Include="BallForm.resx" />
+    <EmbeddedResource Include="AudioForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BallForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="CompetitionForm.resx" />
     <EmbeddedResource Include="CountryForm.resx" />
     <EmbeddedResource Include="FormationForm.resx" />
     <EmbeddedResource Include="GlovesForm.resx" />
     <EmbeddedResource Include="KitForm.resx" />
     <EmbeddedResource Include="LeagueForm.resx" />
-    <EmbeddedResource Include="MainForm.resx" />
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManagerForm.resx" />
     <EmbeddedResource Include="ModifyHairColor.resx" />
     <EmbeddedResource Include="NewspapersForm.resx" />
@@ -178,7 +200,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FIFA17.ico" />
     <Content Include="icon.ico" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Resources\buttonTv.Image.png" />
     <None Include="Resources\buttonStadium.Image.png" />
     <None Include="Resources\buttonSponsor.Image.png" />
@@ -204,9 +229,20 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E</PreBuildEvent>
   </PropertyGroup>
 </Project>

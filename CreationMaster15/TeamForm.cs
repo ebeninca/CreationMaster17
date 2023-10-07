@@ -299,7 +299,7 @@ namespace CreationMaster
     private Label m_DraggedLabel;
     private int m_BoundLeft;
     private int m_BoundTop;
-    private CheckBox checkNationalTeam;
+    private CheckBox checkIsNationalTeam;
     private Label label4;
     private TextBox textBoxAbbreviation;
     private bool m_LockUserChanges;
@@ -325,9 +325,11 @@ namespace CreationMaster
       this.viewer2DCrest16 = new FifaControls.Viewer2D();
       this.viewer2DCrest32 = new FifaControls.Viewer2D();
       this.groupBoxName = new System.Windows.Forms.GroupBox();
+      this.label4 = new System.Windows.Forms.Label();
+      this.textBoxAbbreviation = new System.Windows.Forms.TextBox();
+      this.teamBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.label3 = new System.Windows.Forms.Label();
       this.textTeamName7 = new System.Windows.Forms.TextBox();
-      this.teamBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.textScoreBoardName = new System.Windows.Forms.TextBox();
       this.textDatabaseTeamName = new System.Windows.Forms.TextBox();
       this.textFullTeamName = new System.Windows.Forms.TextBox();
@@ -350,7 +352,7 @@ namespace CreationMaster
       this.textBox2 = new System.Windows.Forms.TextBox();
       this.label16 = new System.Windows.Forms.Label();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
-      this.checkNationalTeam = new System.Windows.Forms.CheckBox();
+      this.checkIsNationalTeam = new System.Windows.Forms.CheckBox();
       this.labelProbObjective = new System.Windows.Forms.Label();
       this.labelMaxObjective = new System.Windows.Forms.Label();
       this.comboProbObjective = new System.Windows.Forms.ComboBox();
@@ -584,8 +586,6 @@ namespace CreationMaster
       this.formationListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.ballListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.prevLeagueListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.label4 = new System.Windows.Forms.Label();
-      this.textBoxAbbreviation = new System.Windows.Forms.TextBox();
       this.tableEditTeam.SuspendLayout();
       this.pageTeamGeneric.SuspendLayout();
       this.flowPanelTeamGeneric.SuspendLayout();
@@ -824,6 +824,30 @@ namespace CreationMaster
       this.groupBoxName.TabStop = false;
       this.groupBoxName.Text = "Name";
       // 
+      // label4
+      // 
+      this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.label4.Location = new System.Drawing.Point(4, 131);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(88, 20);
+      this.label4.TabIndex = 58;
+      this.label4.Text = "Abbreviation";
+      this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.toolTip.SetToolTip(this.label4, "Double click to fill automatically");
+      // 
+      // textBoxAbbreviation
+      // 
+      this.textBoxAbbreviation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true));
+      this.textBoxAbbreviation.Location = new System.Drawing.Point(98, 131);
+      this.textBoxAbbreviation.Name = "textBoxAbbreviation";
+      this.textBoxAbbreviation.Size = new System.Drawing.Size(160, 20);
+      this.textBoxAbbreviation.TabIndex = 57;
+      // 
+      // teamBindingSource
+      // 
+      this.teamBindingSource.DataSource = typeof(FifaLibrary.Team);
+      // 
       // label3
       // 
       this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -846,10 +870,6 @@ namespace CreationMaster
       this.textTeamName7.Size = new System.Drawing.Size(160, 20);
       this.textTeamName7.TabIndex = 4;
       this.textTeamName7.TextChanged += new System.EventHandler(this.textTeamName7_TextChanged);
-      // 
-      // teamBindingSource
-      // 
-      this.teamBindingSource.DataSource = typeof(FifaLibrary.Team);
       // 
       // textScoreBoardName
       // 
@@ -1060,7 +1080,7 @@ namespace CreationMaster
       // 
       // groupBox3
       // 
-      this.groupBox3.Controls.Add(this.checkNationalTeam);
+      this.groupBox3.Controls.Add(this.checkIsNationalTeam);
       this.groupBox3.Controls.Add(this.labelProbObjective);
       this.groupBox3.Controls.Add(this.labelMaxObjective);
       this.groupBox3.Controls.Add(this.comboProbObjective);
@@ -1096,18 +1116,18 @@ namespace CreationMaster
       this.groupBox3.TabStop = false;
       this.groupBox3.Text = "Info";
       // 
-      // checkNationalTeam
+      // checkIsNationalTeam
       // 
-      this.checkNationalTeam.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.teamBindingSource, "IsNationalTeam", true));
-      this.checkNationalTeam.Location = new System.Drawing.Point(-4, 128);
-      this.checkNationalTeam.Name = "checkNationalTeam";
-      this.checkNationalTeam.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-      this.checkNationalTeam.Size = new System.Drawing.Size(116, 16);
-      this.checkNationalTeam.TabIndex = 155;
-      this.checkNationalTeam.Text = "Is National Team           ";
-      this.checkNationalTeam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.checkNationalTeam.UseVisualStyleBackColor = true;
-      this.checkNationalTeam.CheckedChanged += new System.EventHandler(this.checkNationalTeam_CheckedChanged);
+      this.checkIsNationalTeam.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.teamBindingSource, "NationalTeam", true));
+      this.checkIsNationalTeam.Location = new System.Drawing.Point(-4, 128);
+      this.checkIsNationalTeam.Name = "checkIsNationalTeam";
+      this.checkIsNationalTeam.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkIsNationalTeam.Size = new System.Drawing.Size(116, 16);
+      this.checkIsNationalTeam.TabIndex = 155;
+      this.checkIsNationalTeam.Text = "Is National Team           ";
+      this.checkIsNationalTeam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.checkIsNationalTeam.UseVisualStyleBackColor = true;
+      this.checkIsNationalTeam.CheckedChanged += new System.EventHandler(this.checkNationalTeam_CheckedChanged);
       // 
       // labelProbObjective
       // 
@@ -4624,26 +4644,6 @@ namespace CreationMaster
       // 
       this.prevLeagueListBindingSource.DataSource = typeof(FifaLibrary.LeagueList);
       // 
-      // label4
-      // 
-      this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-      this.label4.Location = new System.Drawing.Point(4, 131);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(88, 20);
-      this.label4.TabIndex = 58;
-      this.label4.Text = "Abbreviation";
-      this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.toolTip.SetToolTip(this.label4, "Double click to fill automatically");
-      // 
-      // textBoxAbbreviation
-      // 
-      this.textBoxAbbreviation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true));
-      this.textBoxAbbreviation.Location = new System.Drawing.Point(98, 131);
-      this.textBoxAbbreviation.Name = "textBoxAbbreviation";
-      this.textBoxAbbreviation.Size = new System.Drawing.Size(160, 20);
-      this.textBoxAbbreviation.TabIndex = 57;
-      // 
       // TeamForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4914,7 +4914,7 @@ namespace CreationMaster
 
     private Team SelectTeam(object sender, object obj)
     {
-      Team team = (Team) obj;
+      Team team = (Team)obj;
       this.Refresh();
       this.LoadTeam(team);
       return team;
@@ -4927,11 +4927,11 @@ namespace CreationMaster
       {
         if (dialogResult == DialogResult.OK)
         {
-          int num = (int) FifaEnvironment.UserMessages.ShowMessage(5060, this.m_NewIdCreator.NewId);
+          int num = (int)FifaEnvironment.UserMessages.ShowMessage(5060, this.m_NewIdCreator.NewId);
         }
-        return (Team) null;
+        return (Team)null;
       }
-      Team newObject = (Team) this.m_NewIdCreator.NewObject;
+      Team newObject = (Team)this.m_NewIdCreator.NewObject;
       if (this.m_NewIdCreator.NewName != null && newObject != null)
       {
         newObject.TeamNameFull = this.m_NewIdCreator.NewName;
@@ -4940,8 +4940,8 @@ namespace CreationMaster
         newObject.TeamNameAbbr10 = newObject.TeamNameFull.Length <= 10 ? newObject.TeamNameFull : newObject.TeamNameFull.Substring(0, 10);
         newObject.TeamNameAbbr3 = newObject.TeamNameFull.Length <= 3 ? newObject.TeamNameFull : newObject.TeamNameFull.Substring(0, 3).ToUpper();
       }
-      Formation formation = (Formation) null;
-      foreach (Formation genericFormation in (ArrayList) FifaEnvironment.GenericFormations)
+      Formation formation = (Formation)null;
+      foreach (Formation genericFormation in (ArrayList)FifaEnvironment.GenericFormations)
       {
         if (genericFormation.Name.StartsWith("4-4-2"))
         {
@@ -4950,7 +4950,7 @@ namespace CreationMaster
         }
       }
       if (formation == null)
-        formation = (Formation) FifaEnvironment.GenericFormations[0];
+        formation = (Formation)FifaEnvironment.GenericFormations[0];
       if (formation != null)
       {
         newObject.Formation = formation;
@@ -4973,7 +4973,7 @@ namespace CreationMaster
           TeamPlayer[] teamPlayerArray = new TeamPlayer[32];
           for (int index = 0; index < 32; ++index)
           {
-            Player newId = (Player) FifaEnvironment.Players.CreateNewId();
+            Player newId = (Player)FifaEnvironment.Players.CreateNewId();
             if (newId != null)
             {
               if (this.m_CurrentTeam.Country != null)
@@ -4998,25 +4998,25 @@ namespace CreationMaster
 
     private Team DeleteTeam(object sender, object obj)
     {
-      Team team = (Team) obj;
+      Team team = (Team)obj;
       switch (FifaEnvironment.UserMessages.ShowMessage(30))
       {
         case DialogResult.Cancel:
         case DialogResult.No:
-          foreach (IdObject kit in (ArrayList) team.m_KitList)
+          foreach (IdObject kit in (ArrayList)team.m_KitList)
             FifaEnvironment.Kits.RemoveId(kit);
           if (team.League != null)
             team.League.RemoveTeam(team);
           FifaEnvironment.Teams.DeleteTeam(team);
-          this.m_CurrentTeam = (Team) null;
-          return (Team) null;
+          this.m_CurrentTeam = (Team)null;
+          return (Team)null;
         default:
           IEnumerator enumerator = team.Roster.GetEnumerator();
           try
           {
             while (enumerator.MoveNext())
             {
-              TeamPlayer current = (TeamPlayer) enumerator.Current;
+              TeamPlayer current = (TeamPlayer)enumerator.Current;
               if (current.Player.m_PlayingForTeams.Count <= 1)
                 FifaEnvironment.Players.RemoveId(current.Player.Id);
               else
@@ -5041,7 +5041,7 @@ namespace CreationMaster
 
     public void ReloadTeam(Team team)
     {
-      this.m_CurrentTeam = (Team) null;
+      this.m_CurrentTeam = (Team)null;
       this.LoadTeam(team);
     }
 
@@ -5050,15 +5050,16 @@ namespace CreationMaster
       if (!this.m_IsLoaded || this.m_CurrentTeam == team && this.m_CurrentPage == this.tableEditTeam.SelectedTab)
         return;
       this.m_CurrentTeam = team;
-      this.teamBindingSource.DataSource = (object) this.m_CurrentTeam;
+      this.teamBindingSource.DataSource = (object)this.m_CurrentTeam;
       this.UpdateCurrentPage();
       GC.Collect();
     }
 
     public void LoadGenericPage()
     {
-      this.numericTeamId.Value = (Decimal) this.m_CurrentTeam.Id;
-      this.comboRivalTeam.SelectedItem = (object) this.m_CurrentTeam.RivalTeam;
+      this.numericTeamId.Value = (Decimal)this.m_CurrentTeam.Id;
+      this.comboRivalTeam.SelectedItem = (object)this.m_CurrentTeam.RivalTeam;
+      this.checkIsNationalTeam.Checked = this.m_CurrentTeam.NationalTeam;
       this.comboObjective.SelectedIndex = this.m_CurrentTeam.objective;
       this.comboMaxOnjective.SelectedIndex = this.m_CurrentTeam.highestpossible;
       this.comboProbObjective.SelectedIndex = this.m_CurrentTeam.highestprobable;
@@ -5067,13 +5068,20 @@ namespace CreationMaster
       this.viewer2DCrest50.CurrentBitmap = this.m_CurrentTeam.GetCrest50();
       this.viewer2DCrest32.CurrentBitmap = this.m_CurrentTeam.GetCrest32();
       this.viewer2DCrest16.CurrentBitmap = this.m_CurrentTeam.GetCrest16();
+      if (this.m_CurrentTeam.Stadium == null)
+        this.comboStadiums.Text = string.Empty;
+      if (this.m_CurrentTeam.Country == null)
+        this.comboTeamCountry.Text = string.Empty;
+      if (this.m_CurrentTeam.League != null)
+        return;
+      this.comboTeamLeague.Text = string.Empty;
     }
 
     public void LoadAdboardPage()
     {
       if (this.m_CurrentTeam == null)
       {
-        this.viewer2DAdboards_0.CurrentBitmap = (Bitmap) null;
+        this.viewer2DAdboards_0.CurrentBitmap = (Bitmap)null;
       }
       else
       {
@@ -5081,7 +5089,7 @@ namespace CreationMaster
         this.viewer2DAdboards_0.CurrentBitmap = this.m_CurrentTeam.GetAdboard();
         this.checkHasSpecificAdboard.Checked = this.m_CurrentTeam.HasSpecifiAdboard;
         this.numericAdboards.Enabled = !this.m_CurrentTeam.HasSpecifiAdboard;
-        this.numericAdboards.Value = (Decimal) this.m_CurrentTeam.adboardid;
+        this.numericAdboards.Value = (Decimal)this.m_CurrentTeam.adboardid;
         this.m_LockUserChanges = false;
       }
     }
@@ -5099,14 +5107,14 @@ namespace CreationMaster
     {
       this.InitListViewTeamPlayers(this.m_CurrentTeam.Roster);
       this.m_CurrentFormation = this.m_CurrentTeam.Formation;
-      this.m_BackupSpecificFormation = (Formation) null;
+      this.m_BackupSpecificFormation = (Formation)null;
       if (this.m_CurrentFormation == null)
         return;
       this.m_LockUserChanges = true;
       if (this.m_CurrentFormation.IsGeneric())
       {
         this.radioUseGenericFormation.Checked = true;
-        this.comboGenericFormations.SelectedItem = (object) this.m_CurrentFormation;
+        this.comboGenericFormations.SelectedItem = (object)this.m_CurrentFormation;
       }
       else
         this.radioUseSpecificFormation.Checked = true;
@@ -5118,29 +5126,29 @@ namespace CreationMaster
 
     public void Preset()
     {
-      this.m_NewIdCreator.IdList = (IdArrayList) FifaEnvironment.Teams;
+      this.m_NewIdCreator.IdList = (IdArrayList)FifaEnvironment.Teams;
       this.pickUpControl.FilterValues = new IdArrayList[3]
       {
         (IdArrayList) null,
         (IdArrayList) FifaEnvironment.Leagues,
         (IdArrayList) FifaEnvironment.Countries
       };
-      this.numericBall.Maximum = (Decimal) FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_balltype];
-      this.numericAdboards.Maximum = (Decimal) FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_adboardid];
-      this.numericTeamId.Maximum = (Decimal) FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_teamid];
-      this.teamListBindingSource.DataSource = (object) FifaEnvironment.Teams;
-      this.comboRivalTeam.DataSource = (object) this.teamListBindingSource;
+      this.numericBall.Maximum = (Decimal)FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_balltype];
+      this.numericAdboards.Maximum = (Decimal)FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_adboardid];
+      this.numericTeamId.Maximum = (Decimal)FifaEnvironment.FifaDb.Table[TI.teams].TableDescriptor.MaxValues[FI.teams_teamid];
+      this.teamListBindingSource.DataSource = (object)FifaEnvironment.Teams;
+      this.comboRivalTeam.DataSource = (object)this.teamListBindingSource;
       this.teamListBindingSource.ResetBindings(false);
-      this.stadiumListBindingSource.DataSource = (object) FifaEnvironment.Stadiums;
-      this.comboStadiums.DataSource = (object) this.stadiumListBindingSource;
+      this.stadiumListBindingSource.DataSource = (object)FifaEnvironment.Stadiums;
+      this.comboStadiums.DataSource = (object)this.stadiumListBindingSource;
       this.stadiumListBindingSource.ResetBindings(false);
-      this.countryListBindingSource.DataSource = (object) FifaEnvironment.Countries;
-      this.comboTeamCountry.DataSource = (object) this.countryListBindingSource;
+      this.countryListBindingSource.DataSource = (object)FifaEnvironment.Countries;
+      this.comboTeamCountry.DataSource = (object)this.countryListBindingSource;
       this.countryListBindingSource.ResetBindings(false);
-      this.leagueListBindingSource.DataSource = (object) FifaEnvironment.Leagues;
-      this.prevLeagueListBindingSource.DataSource = (object) FifaEnvironment.Leagues;
-      this.comboTeamLeague.DataSource = (object) this.leagueListBindingSource;
-      this.comboPrevLeague.DataSource = (object) this.prevLeagueListBindingSource;
+      this.leagueListBindingSource.DataSource = (object)FifaEnvironment.Leagues;
+      this.prevLeagueListBindingSource.DataSource = (object)FifaEnvironment.Leagues;
+      this.comboTeamLeague.DataSource = (object)this.leagueListBindingSource;
+      this.comboPrevLeague.DataSource = (object)this.prevLeagueListBindingSource;
       this.leagueListBindingSource.ResetBindings(false);
       this.prevLeagueListBindingSource.ResetBindings(false);
       this.pickUpAvailablePlayers.FilterValues = new IdArrayList[5]
@@ -5153,12 +5161,12 @@ namespace CreationMaster
       };
       this.pickUpAvailablePlayers.comboFilterValue.Width = 300;
       this.comboGenericFormations.Items.Clear();
-      foreach (Formation formation in (ArrayList) FifaEnvironment.Formations)
+      foreach (Formation formation in (ArrayList)FifaEnvironment.Formations)
       {
         if (formation.IsGeneric() && formation.formations_issweeper == 0)
-          this.comboGenericFormations.Items.Add((object) formation);
+          this.comboGenericFormations.Items.Add((object)formation);
       }
-      this.pickUpControl.ObjectList = (IdArrayList) FifaEnvironment.Teams;
+      this.pickUpControl.ObjectList = (IdArrayList)FifaEnvironment.Teams;
       this.labelRightFreeKickText.Visible = FifaEnvironment.Year > 14;
       this.labelLeftFreeKickText.Visible = FifaEnvironment.Year > 14;
       this.labelLeftFreeKick.Visible = FifaEnvironment.Year > 14;
@@ -5182,16 +5190,16 @@ namespace CreationMaster
 
     private void numericTeamId_ValueChanged(object sender, EventArgs e)
     {
-      int num1 = (int) this.numericTeamId.Value;
+      int num1 = (int)this.numericTeamId.Value;
       if (num1 == this.m_CurrentTeam.Id)
         return;
       if (FifaEnvironment.Teams.SearchId(num1) == null)
       {
-        FifaEnvironment.Teams.ChangeId((IdObject) this.m_CurrentTeam, num1);
+        FifaEnvironment.Teams.ChangeId((IdObject)this.m_CurrentTeam, num1);
         this.m_CurrentTeam.assetid = num1;
         this.m_CurrentTeam.m_KitList = new KitList();
         this.m_CurrentTeam.LinkKits(FifaEnvironment.Kits);
-        foreach (Kit kit in (ArrayList) this.m_CurrentTeam.m_KitList)
+        foreach (Kit kit in (ArrayList)this.m_CurrentTeam.m_KitList)
           kit.Team = this.m_CurrentTeam;
         if (this.m_CurrentFormation != null)
           this.m_CurrentFormation.Team = this.m_CurrentTeam;
@@ -5200,8 +5208,8 @@ namespace CreationMaster
       }
       else
       {
-        int num2 = (int) FifaEnvironment.UserMessages.ShowMessage(1015);
-        this.numericTeamId.Value = (Decimal) this.m_CurrentTeam.Id;
+        int num2 = (int)FifaEnvironment.UserMessages.ShowMessage(1015);
+        this.numericTeamId.Value = (Decimal)this.m_CurrentTeam.Id;
       }
     }
 
@@ -5210,16 +5218,16 @@ namespace CreationMaster
       int newId = FifaEnvironment.Teams.GetNewId();
       if (newId == -1)
       {
-        int num = (int) FifaEnvironment.UserMessages.ShowMessage(5050);
+        int num = (int)FifaEnvironment.UserMessages.ShowMessage(5050);
       }
       else
-        this.numericTeamId.Value = (Decimal) newId;
+        this.numericTeamId.Value = (Decimal)newId;
     }
 
     private void pictureTeamPrimColor_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureTeamPrimColor.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureTeamPrimColor.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor1 = this.colorDialog.Color;
     }
@@ -5227,7 +5235,7 @@ namespace CreationMaster
     private void pictureTeamSecColor_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureTeamSecColor.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureTeamSecColor.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor2 = this.colorDialog.Color;
     }
@@ -5235,7 +5243,7 @@ namespace CreationMaster
     private void pictureTeamTerColor_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureTeamTerColor.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureTeamTerColor.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor3 = this.colorDialog.Color;
     }
@@ -5246,11 +5254,11 @@ namespace CreationMaster
         return;
       if (this.m_CurrentTeam == null)
       {
-        this.viewer2DAdboards_0.CurrentBitmap = (Bitmap) null;
+        this.viewer2DAdboards_0.CurrentBitmap = (Bitmap)null;
       }
       else
       {
-        this.m_CurrentTeam.adboardid = (int) this.numericAdboards.Value;
+        this.m_CurrentTeam.adboardid = (int)this.numericAdboards.Value;
         this.viewer2DAdboards_0.CurrentBitmap = this.m_CurrentTeam.GetAdboard();
       }
     }
@@ -5261,10 +5269,10 @@ namespace CreationMaster
       this.listViewTeamPlayers.Items.Clear();
       for (int index = 0; index < roster.Count; ++index)
       {
-        TeamPlayer teamPlayer = (TeamPlayer) roster[index];
+        TeamPlayer teamPlayer = (TeamPlayer)roster[index];
         this.listViewTeamPlayers.Items.Add(new ListViewItem(FifaUtil.PadBlanks(teamPlayer.m_jerseynumber.ToString(), 2))
         {
-          Tag = (object) teamPlayer,
+          Tag = (object)teamPlayer,
           SubItems = {
             teamPlayer.Player.Name,
             teamPlayer.Player.firstname,
@@ -5280,7 +5288,7 @@ namespace CreationMaster
       }
       else
       {
-        this.m_CurrentTeamPlayer = (TeamPlayer) null;
+        this.m_CurrentTeamPlayer = (TeamPlayer)null;
         this.CleanRosterTeamPlayer();
       }
       this.listViewTeamPlayers.EndUpdate();
@@ -5293,16 +5301,16 @@ namespace CreationMaster
       this.m_AvailablePlayerLocked = true;
       bool flag = true;
       IComparer listViewItemSorter = this.listViewPlayersAvailable.ListViewItemSorter;
-      this.listViewPlayersAvailable.ListViewItemSorter = (IComparer) null;
+      this.listViewPlayersAvailable.ListViewItemSorter = (IComparer)null;
       this.listViewPlayersAvailable.BeginUpdate();
       this.listViewPlayersAvailable.Items.Clear();
       for (int index = 0; index < FifaEnvironment.Players.Count; ++index)
       {
-        Player player = (Player) FifaEnvironment.Players[index];
+        Player player = (Player)FifaEnvironment.Players[index];
         if ((!flag || player.Id < 400000 || player.Id >= 500000) && ((!showFreeAgents || player.m_PlayingForTeams.Count <= 0) && (team == null || player.IsPlayingFor(team))) && (country == null || player.Country == country))
         {
           ListViewItem listViewItem = new ListViewItem(player.Name);
-          listViewItem.Tag = (object) player;
+          listViewItem.Tag = (object)player;
           listViewItem.SubItems.Add(player.firstname);
           string roleAcronym = player.GetRoleAcronym();
           listViewItem.SubItems.Add(roleAcronym);
@@ -5325,17 +5333,17 @@ namespace CreationMaster
         return;
       this.m_AvailablePlayerLocked = true;
       IComparer listViewItemSorter = this.listViewPlayersAvailable.ListViewItemSorter;
-      this.listViewPlayersAvailable.ListViewItemSorter = (IComparer) null;
+      this.listViewPlayersAvailable.ListViewItemSorter = (IComparer)null;
       this.listViewPlayersAvailable.BeginUpdate();
       this.listViewPlayersAvailable.Items.Clear();
-      PlayerList playerList = (PlayerList) FifaEnvironment.Players.Filter(filterObject);
+      PlayerList playerList = (PlayerList)FifaEnvironment.Players.Filter(filterObject);
       for (int index = 0; index < playerList.Count; ++index)
       {
-        Player player = (Player) playerList[index];
+        Player player = (Player)playerList[index];
         if (player.Id <= 400000 || !excludeYoung)
         {
           ListViewItem listViewItem = new ListViewItem(player.Name);
-          listViewItem.Tag = (object) player;
+          listViewItem.Tag = (object)player;
           listViewItem.SubItems.Add(player.firstname);
           string roleAcronym = player.GetRoleAcronym();
           listViewItem.SubItems.Add(roleAcronym);
@@ -5390,13 +5398,13 @@ namespace CreationMaster
       this.comboRosterNumber.Items.Clear();
       this.comboRosterNumber.Text = string.Empty;
       this.numericRosterYear.Value = new Decimal(2014);
-      this.viewer2DPhoto.CurrentBitmap = (Bitmap) null;
+      this.viewer2DPhoto.CurrentBitmap = (Bitmap)null;
       this.labelTeamPlayerStars.ImageIndex = 0;
     }
 
     private void buttonTransferFrom_Click(object sender, EventArgs e)
     {
-      Team team = (Team) null;
+      Team team = (Team)null;
       if (this.m_CurrentAvailableTeam != null)
       {
         team = this.m_CurrentAvailableTeam;
@@ -5405,8 +5413,8 @@ namespace CreationMaster
       {
         for (int index = 0; index < this.m_CurrentAvailablePlayer.m_PlayingForTeams.Count; ++index)
         {
-          Team playingForTeam = (Team) this.m_CurrentAvailablePlayer.m_PlayingForTeams[index];
-          if (!playingForTeam.IsNationalTeam)
+          Team playingForTeam = (Team)this.m_CurrentAvailablePlayer.m_PlayingForTeams[index];
+          if (!playingForTeam.IsNationalTeam())
           {
             team = playingForTeam;
             break;
@@ -5418,7 +5426,7 @@ namespace CreationMaster
       this.InitListViewTeamPlayers(this.m_CurrentTeam.Roster);
       this.InitVisualFormation(this.m_CurrentTeam.Roster);
       if (this.m_CurrentAvailableTeam != null)
-        this.InitListViewPlayersAvailable((IdObject) this.m_CurrentAvailableTeam, false);
+        this.InitListViewPlayersAvailable((IdObject)this.m_CurrentAvailableTeam, false);
       this.EnableRosterButtons();
     }
 
@@ -5442,20 +5450,20 @@ namespace CreationMaster
     {
       if (this.listViewTeamPlayers.SelectedItems.Count <= 0)
         return;
-      TeamPlayer tag = (TeamPlayer) this.listViewTeamPlayers.SelectedItems[0].Tag;
+      TeamPlayer tag = (TeamPlayer)this.listViewTeamPlayers.SelectedItems[0].Tag;
       if (tag == null)
         return;
       Player player = tag.Player;
       if (player == null)
         return;
-      MainForm.CM.JumpTo((IdObject) player);
+      MainForm.CM.JumpTo((IdObject)player);
     }
 
     private void listViewTeamPlayers_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (this.listViewTeamPlayers.SelectedItems.Count <= 0)
         return;
-      TeamPlayer tag = (TeamPlayer) this.listViewTeamPlayers.SelectedItems[0].Tag;
+      TeamPlayer tag = (TeamPlayer)this.listViewTeamPlayers.SelectedItems[0].Tag;
       if (this.m_CurrentTeamPlayer == tag)
         return;
       this.m_ChangeNumberFlag = false;
@@ -5463,11 +5471,11 @@ namespace CreationMaster
       if (this.m_CurrentTeamPlayer != null)
       {
         this.comboRosterNumber.Items.Clear();
-        this.comboRosterNumber.Items.Add((object) this.m_CurrentTeamPlayer.m_jerseynumber.ToString());
-        this.comboRosterNumber.Items.AddRange((object[]) this.m_CurrentTeam.Roster.GetFreeNumbers());
+        this.comboRosterNumber.Items.Add((object)this.m_CurrentTeamPlayer.m_jerseynumber.ToString());
+        this.comboRosterNumber.Items.AddRange((object[])this.m_CurrentTeam.Roster.GetFreeNumbers());
         this.comboRosterNumber.SelectedIndex = 0;
         this.labelRosterName.Text = this.m_CurrentTeamPlayer.Player.Name;
-        this.numericRosterYear.Value = (Decimal) this.m_CurrentTeamPlayer.Player.contractvaliduntil;
+        this.numericRosterYear.Value = (Decimal)this.m_CurrentTeamPlayer.Player.contractvaliduntil;
         this.dateJoiningDate.Value = this.m_CurrentTeamPlayer.Player.joindate;
         this.viewer2DPhoto.CurrentBitmap = this.m_CurrentTeamPlayer.Player.GetPhoto();
         int num = (this.m_CurrentTeamPlayer.Player.GetAverageRoleAttribute() - 45) / 5;
@@ -5491,7 +5499,7 @@ namespace CreationMaster
       this.m_CurrentTeam.RemoveTeamPlayer(this.m_CurrentTeamPlayer);
       this.m_CurrentAvailableTeam.AddTeamPlayer(this.m_CurrentTeamPlayer);
       this.InitListViewTeamPlayers(this.m_CurrentTeam.Roster);
-      this.InitListViewPlayersAvailable(this.m_CurrentAvailableTeam, (Country) null, false);
+      this.InitListViewPlayersAvailable(this.m_CurrentAvailableTeam, (Country)null, false);
       this.EnableRosterButtons();
       this.InitVisualFormation(this.m_CurrentTeam.Roster);
     }
@@ -5499,29 +5507,29 @@ namespace CreationMaster
     private Team AvailablePlayersFilterChanged(object sender, object obj)
     {
       if (this.m_AvailablePlayerLocked)
-        return (Team) null;
-      this.m_CurrentAvailableTeam = (Team) null;
+        return (Team)null;
+      this.m_CurrentAvailableTeam = (Team)null;
       if (obj != null && obj.GetType().Name == "Team")
-        this.m_CurrentAvailableTeam = (Team) obj;
-      this.InitListViewPlayersAvailable((IdObject) obj, false);
-      return (Team) null;
+        this.m_CurrentAvailableTeam = (Team)obj;
+      this.InitListViewPlayersAvailable((IdObject)obj, false);
+      return (Team)null;
     }
 
     private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
     {
-      ListView listView = (ListView) sender;
+      ListView listView = (ListView)sender;
       SortOrder sortOrder = listView.Sorting != SortOrder.Ascending ? SortOrder.Ascending : SortOrder.Descending;
       listView.Sorting = sortOrder;
-      listView.ListViewItemSorter = (IComparer) new ListViewItemComparer(e.Column, sortOrder);
+      listView.ListViewItemSorter = (IComparer)new ListViewItemComparer(e.Column, sortOrder);
     }
 
     private void listViewPlayersAvailable_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (this.listViewPlayersAvailable.SelectedItems.Count < 1)
         return;
-      this.m_CurrentAvailablePlayer = (Player) this.listViewPlayersAvailable.SelectedItems[0].Tag;
+      this.m_CurrentAvailablePlayer = (Player)this.listViewPlayersAvailable.SelectedItems[0].Tag;
       this.labelRosterNameFrom.Text = this.m_CurrentAvailablePlayer.Name;
-      this.pictureAvailablePlayer.Image = (Image) this.m_CurrentAvailablePlayer.GetPhoto();
+      this.pictureAvailablePlayer.Image = (Image)this.m_CurrentAvailablePlayer.GetPhoto();
       int num = (this.m_CurrentAvailablePlayer.GetAverageRoleAttribute() - 45) / 5;
       if (num < 0)
         num = 0;
@@ -5535,54 +5543,54 @@ namespace CreationMaster
     {
       if (this.listViewPlayersAvailable.SelectedItems.Count <= 0)
         return;
-      Player tag = (Player) this.listViewPlayersAvailable.SelectedItems[0].Tag;
+      Player tag = (Player)this.listViewPlayersAvailable.SelectedItems[0].Tag;
       if (tag == null)
         return;
-      MainForm.CM.JumpTo((IdObject) tag);
+      MainForm.CM.JumpTo((IdObject)tag);
     }
 
     private void numericBall_ValueChanged(object sender, EventArgs e)
     {
       if (this.m_CurrentTeam == null)
         return;
-      this.m_CurrentTeam.balltype = (int) this.numericBall.Value;
-      this.pictureBall.BackgroundImage = (Image) Ball.GetBallPicture(this.m_CurrentTeam.balltype);
+      this.m_CurrentTeam.balltype = (int)this.numericBall.Value;
+      this.pictureBall.BackgroundImage = (Image)Ball.GetBallPicture(this.m_CurrentTeam.balltype);
     }
 
     private void labelTeamCountry_DoubleClick(object sender, EventArgs e)
     {
       if (this.m_CurrentTeam.Country == null)
         return;
-      MainForm.CM.JumpTo((IdObject) this.m_CurrentTeam.Country);
+      MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.Country);
     }
 
     private void labelTeamLeague_DoubleClick(object sender, EventArgs e)
     {
       if (this.m_CurrentTeam.League == null)
         return;
-      MainForm.CM.JumpTo((IdObject) this.m_CurrentTeam.League);
+      MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.League);
     }
 
     private void labelTeamStadium_DoubleClick(object sender, EventArgs e)
     {
       if (this.m_CurrentTeam.Stadium == null)
         return;
-      MainForm.CM.JumpTo((IdObject) this.m_CurrentTeam.Stadium);
+      MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.Stadium);
     }
 
     private void labelOpponent_DoubleClick(object sender, EventArgs e)
     {
       if (this.m_CurrentTeam.RivalTeam == null)
         return;
-      MainForm.CM.JumpTo((IdObject) this.m_CurrentTeam.RivalTeam);
+      MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.RivalTeam);
     }
 
     private void labelBall_DoubleClick(object sender, EventArgs e)
     {
-      Ball ball = (Ball) FifaEnvironment.Balls.SearchId(this.m_CurrentTeam.balltype);
+      Ball ball = (Ball)FifaEnvironment.Balls.SearchId(this.m_CurrentTeam.balltype);
       if (ball == null)
         return;
-      MainForm.CM.JumpTo((IdObject) ball);
+      MainForm.CM.JumpTo((IdObject)ball);
     }
 
     private void comboRosterNumber_SelectedIndexChanged(object sender, EventArgs e)
@@ -5590,7 +5598,7 @@ namespace CreationMaster
       if (!this.m_ChangeNumberFlag)
         return;
       this.m_ChangeNumberFlag = false;
-      string selectedItem = (string) this.comboRosterNumber.SelectedItem;
+      string selectedItem = (string)this.comboRosterNumber.SelectedItem;
       this.m_CurrentTeamPlayer.m_jerseynumber = Convert.ToInt32(selectedItem);
       this.listViewTeamPlayers.SelectedItems[0].SubItems[0] = new ListViewItem.ListViewSubItem(this.listViewTeamPlayers.SelectedItems[0], selectedItem);
       this.m_ChangeNumberFlag = true;
@@ -5600,7 +5608,7 @@ namespace CreationMaster
     {
       if (this.m_CurrentTeamPlayer == null)
         return;
-      this.m_CurrentTeamPlayer.Player.contractvaliduntil = (int) this.numericRosterYear.Value;
+      this.m_CurrentTeamPlayer.Player.contractvaliduntil = (int)this.numericRosterYear.Value;
       this.listViewTeamPlayers.SelectedItems[0].SubItems[3] = new ListViewItem.ListViewSubItem(this.listViewTeamPlayers.SelectedItems[0], this.m_CurrentTeamPlayer.Player.contractvaliduntil.ToString());
     }
 
@@ -5737,208 +5745,208 @@ namespace CreationMaster
         this.labelPos33U.Visible = false;
       }
       this.labelPos0.Text = this.labelPos1.Text = this.labelPos2.Text = this.labelPos3.Text = this.labelPos4.Text = this.labelPos5.Text = this.labelPos6.Text = this.labelPos7.Text = this.labelPos8.Text = this.labelPos9.Text = this.labelPos10.Text = this.labelPos11.Text = this.labelPos12.Text = this.labelPos13.Text = this.labelPos14.Text = this.labelPos15.Text = this.labelPos16.Text = this.labelPos17.Text = this.labelPos18.Text = this.labelPos19.Text = this.labelPos20.Text = this.labelPos21.Text = this.labelPos22.Text = this.labelPos23.Text = this.labelPos24.Text = this.labelPos25.Text = this.labelPos26.Text = this.labelPos27.Text = this.labelPos32A.Text = this.labelPos32B.Text = this.labelPos32C.Text = this.labelPos32D.Text = this.labelPos32E.Text = this.labelPos32F.Text = this.labelPos32G.Text = this.labelPos33A.Text = this.labelPos33B.Text = this.labelPos33C.Text = this.labelPos33D.Text = this.labelPos33E.Text = this.labelPos33F.Text = this.labelPos33G.Text = this.labelPos33H.Text = this.labelPos33I.Text = this.labelPos33J.Text = this.labelPos33K.Text = this.labelPos33L.Text = this.labelPos33M.Text = this.labelPos33N.Text = this.labelPos33O.Text = this.labelPos33P.Text = this.labelPos33Q.Text = this.labelPos33R.Text = this.labelPos33S.Text = this.labelPos33T.Text = this.labelPos33U.Text = "______";
-      this.labelPos0.Tag = (object) new TeamPlayer(ERole.Goalkeeper);
-      this.labelPos1.Tag = (object) new TeamPlayer(ERole.Sweeper);
-      this.labelPos2.Tag = (object) new TeamPlayer(ERole.Right_Wing_Back);
-      this.labelPos3.Tag = (object) new TeamPlayer(ERole.Right_Back);
-      this.labelPos4.Tag = (object) new TeamPlayer(ERole.Right_Central_Back);
-      this.labelPos5.Tag = (object) new TeamPlayer(ERole.Central_Back);
-      this.labelPos6.Tag = (object) new TeamPlayer(ERole.Left_Central_Back);
-      this.labelPos7.Tag = (object) new TeamPlayer(ERole.Left_Back);
-      this.labelPos8.Tag = (object) new TeamPlayer(ERole.Left_Wing_Back);
-      this.labelPos9.Tag = (object) new TeamPlayer(ERole.Right_Defensive_Midfielder);
-      this.labelPos10.Tag = (object) new TeamPlayer(ERole.Central_Defensive_Midfielder);
-      this.labelPos11.Tag = (object) new TeamPlayer(ERole.Left_Defensive_Midfielder);
-      this.labelPos12.Tag = (object) new TeamPlayer(ERole.Right_Midfielder);
-      this.labelPos13.Tag = (object) new TeamPlayer(ERole.Right_Central_Midfielder);
-      this.labelPos14.Tag = (object) new TeamPlayer(ERole.Central_Midfielder);
-      this.labelPos15.Tag = (object) new TeamPlayer(ERole.Left_Central_Midfielder);
-      this.labelPos16.Tag = (object) new TeamPlayer(ERole.Left_Midfielder);
-      this.labelPos17.Tag = (object) new TeamPlayer(ERole.Right_Advanced_Midfielder);
-      this.labelPos18.Tag = (object) new TeamPlayer(ERole.Central_Advanced_Midfielder);
-      this.labelPos19.Tag = (object) new TeamPlayer(ERole.Left_Advanced_Midfielder);
-      this.labelPos20.Tag = (object) new TeamPlayer(ERole.Right_Forward);
-      this.labelPos21.Tag = (object) new TeamPlayer(ERole.Central_Forward);
-      this.labelPos22.Tag = (object) new TeamPlayer(ERole.Left_Forward);
-      this.labelPos23.Tag = (object) new TeamPlayer(ERole.Right_Wing);
-      this.labelPos24.Tag = (object) new TeamPlayer(ERole.Right_Striker);
-      this.labelPos25.Tag = (object) new TeamPlayer(ERole.Central_Striker);
-      this.labelPos26.Tag = (object) new TeamPlayer(ERole.Left_Striker);
-      this.labelPos27.Tag = (object) new TeamPlayer(ERole.Left_Wing);
-      this.labelPos32A.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32B.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32C.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32D.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32E.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32F.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos32G.Tag = (object) new TeamPlayer(ERole.Substitute);
-      this.labelPos33A.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33B.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33C.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33D.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33E.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33F.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33G.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33H.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33I.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33J.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33K.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33L.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33M.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33N.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33O.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33P.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33Q.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33R.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33S.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33T.Tag = (object) new TeamPlayer(ERole.Tribune);
-      this.labelPos33U.Tag = (object) new TeamPlayer(ERole.Tribune);
+      this.labelPos0.Tag = (object)new TeamPlayer(ERole.Goalkeeper);
+      this.labelPos1.Tag = (object)new TeamPlayer(ERole.Sweeper);
+      this.labelPos2.Tag = (object)new TeamPlayer(ERole.Right_Wing_Back);
+      this.labelPos3.Tag = (object)new TeamPlayer(ERole.Right_Back);
+      this.labelPos4.Tag = (object)new TeamPlayer(ERole.Right_Central_Back);
+      this.labelPos5.Tag = (object)new TeamPlayer(ERole.Central_Back);
+      this.labelPos6.Tag = (object)new TeamPlayer(ERole.Left_Central_Back);
+      this.labelPos7.Tag = (object)new TeamPlayer(ERole.Left_Back);
+      this.labelPos8.Tag = (object)new TeamPlayer(ERole.Left_Wing_Back);
+      this.labelPos9.Tag = (object)new TeamPlayer(ERole.Right_Defensive_Midfielder);
+      this.labelPos10.Tag = (object)new TeamPlayer(ERole.Central_Defensive_Midfielder);
+      this.labelPos11.Tag = (object)new TeamPlayer(ERole.Left_Defensive_Midfielder);
+      this.labelPos12.Tag = (object)new TeamPlayer(ERole.Right_Midfielder);
+      this.labelPos13.Tag = (object)new TeamPlayer(ERole.Right_Central_Midfielder);
+      this.labelPos14.Tag = (object)new TeamPlayer(ERole.Central_Midfielder);
+      this.labelPos15.Tag = (object)new TeamPlayer(ERole.Left_Central_Midfielder);
+      this.labelPos16.Tag = (object)new TeamPlayer(ERole.Left_Midfielder);
+      this.labelPos17.Tag = (object)new TeamPlayer(ERole.Right_Advanced_Midfielder);
+      this.labelPos18.Tag = (object)new TeamPlayer(ERole.Central_Advanced_Midfielder);
+      this.labelPos19.Tag = (object)new TeamPlayer(ERole.Left_Advanced_Midfielder);
+      this.labelPos20.Tag = (object)new TeamPlayer(ERole.Right_Forward);
+      this.labelPos21.Tag = (object)new TeamPlayer(ERole.Central_Forward);
+      this.labelPos22.Tag = (object)new TeamPlayer(ERole.Left_Forward);
+      this.labelPos23.Tag = (object)new TeamPlayer(ERole.Right_Wing);
+      this.labelPos24.Tag = (object)new TeamPlayer(ERole.Right_Striker);
+      this.labelPos25.Tag = (object)new TeamPlayer(ERole.Central_Striker);
+      this.labelPos26.Tag = (object)new TeamPlayer(ERole.Left_Striker);
+      this.labelPos27.Tag = (object)new TeamPlayer(ERole.Left_Wing);
+      this.labelPos32A.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32B.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32C.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32D.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32E.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32F.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos32G.Tag = (object)new TeamPlayer(ERole.Substitute);
+      this.labelPos33A.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33B.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33C.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33D.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33E.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33F.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33G.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33H.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33I.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33J.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33K.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33L.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33M.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33N.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33O.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33P.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33Q.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33R.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33S.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33T.Tag = (object)new TeamPlayer(ERole.Tribune);
+      this.labelPos33U.Tag = (object)new TeamPlayer(ERole.Tribune);
       int num1 = 0;
       int num2 = 0;
       for (int index = 0; index < roster.Count; ++index)
       {
-        TeamPlayer teamPlayer = (TeamPlayer) roster[index];
+        TeamPlayer teamPlayer = (TeamPlayer)roster[index];
         switch (teamPlayer.position)
         {
           case 0:
             this.labelPos0.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos0.Visible = true;
-            this.labelPos0.Tag = (object) teamPlayer;
+            this.labelPos0.Tag = (object)teamPlayer;
             break;
           case 1:
             this.labelPos1.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos1.Visible = true;
-            this.labelPos1.Tag = (object) teamPlayer;
+            this.labelPos1.Tag = (object)teamPlayer;
             break;
           case 2:
             this.labelPos2.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos2.Visible = true;
-            this.labelPos2.Tag = (object) teamPlayer;
+            this.labelPos2.Tag = (object)teamPlayer;
             break;
           case 3:
             this.labelPos3.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos3.Visible = true;
-            this.labelPos3.Tag = (object) teamPlayer;
+            this.labelPos3.Tag = (object)teamPlayer;
             break;
           case 4:
             this.labelPos4.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos4.Visible = true;
-            this.labelPos4.Tag = (object) teamPlayer;
+            this.labelPos4.Tag = (object)teamPlayer;
             break;
           case 5:
             this.labelPos5.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos5.Visible = true;
-            this.labelPos5.Tag = (object) teamPlayer;
+            this.labelPos5.Tag = (object)teamPlayer;
             break;
           case 6:
             this.labelPos6.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos6.Visible = true;
-            this.labelPos6.Tag = (object) teamPlayer;
+            this.labelPos6.Tag = (object)teamPlayer;
             break;
           case 7:
             this.labelPos7.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos7.Visible = true;
-            this.labelPos7.Tag = (object) teamPlayer;
+            this.labelPos7.Tag = (object)teamPlayer;
             break;
           case 8:
             this.labelPos8.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos8.Visible = true;
-            this.labelPos8.Tag = (object) teamPlayer;
+            this.labelPos8.Tag = (object)teamPlayer;
             break;
           case 9:
             this.labelPos9.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos9.Visible = true;
-            this.labelPos9.Tag = (object) teamPlayer;
+            this.labelPos9.Tag = (object)teamPlayer;
             break;
           case 10:
             this.labelPos10.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos10.Visible = true;
-            this.labelPos10.Tag = (object) teamPlayer;
+            this.labelPos10.Tag = (object)teamPlayer;
             break;
           case 11:
             this.labelPos11.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos11.Visible = true;
-            this.labelPos11.Tag = (object) teamPlayer;
+            this.labelPos11.Tag = (object)teamPlayer;
             break;
           case 12:
             this.labelPos12.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos12.Visible = true;
-            this.labelPos12.Tag = (object) teamPlayer;
+            this.labelPos12.Tag = (object)teamPlayer;
             break;
           case 13:
             this.labelPos13.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos13.Visible = true;
-            this.labelPos13.Tag = (object) teamPlayer;
+            this.labelPos13.Tag = (object)teamPlayer;
             break;
           case 14:
             this.labelPos14.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos14.Visible = true;
-            this.labelPos14.Tag = (object) teamPlayer;
+            this.labelPos14.Tag = (object)teamPlayer;
             break;
           case 15:
             this.labelPos15.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos15.Visible = true;
-            this.labelPos15.Tag = (object) teamPlayer;
+            this.labelPos15.Tag = (object)teamPlayer;
             break;
           case 16:
             this.labelPos16.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos16.Visible = true;
-            this.labelPos16.Tag = (object) teamPlayer;
+            this.labelPos16.Tag = (object)teamPlayer;
             break;
           case 17:
             this.labelPos17.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos17.Visible = true;
-            this.labelPos17.Tag = (object) teamPlayer;
+            this.labelPos17.Tag = (object)teamPlayer;
             break;
           case 18:
             this.labelPos18.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos18.Visible = true;
-            this.labelPos18.Tag = (object) teamPlayer;
+            this.labelPos18.Tag = (object)teamPlayer;
             break;
           case 19:
             this.labelPos19.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos19.Visible = true;
-            this.labelPos19.Tag = (object) teamPlayer;
+            this.labelPos19.Tag = (object)teamPlayer;
             break;
           case 20:
             this.labelPos20.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos20.Visible = true;
-            this.labelPos20.Tag = (object) teamPlayer;
+            this.labelPos20.Tag = (object)teamPlayer;
             break;
           case 21:
             this.labelPos21.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos21.Visible = true;
-            this.labelPos21.Tag = (object) teamPlayer;
+            this.labelPos21.Tag = (object)teamPlayer;
             break;
           case 22:
             this.labelPos22.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos22.Visible = true;
-            this.labelPos22.Tag = (object) teamPlayer;
+            this.labelPos22.Tag = (object)teamPlayer;
             break;
           case 23:
             this.labelPos23.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos23.Visible = true;
-            this.labelPos23.Tag = (object) teamPlayer;
+            this.labelPos23.Tag = (object)teamPlayer;
             break;
           case 24:
             this.labelPos24.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos24.Visible = true;
-            this.labelPos24.Tag = (object) teamPlayer;
+            this.labelPos24.Tag = (object)teamPlayer;
             break;
           case 25:
             this.labelPos25.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos25.Visible = true;
-            this.labelPos25.Tag = (object) teamPlayer;
+            this.labelPos25.Tag = (object)teamPlayer;
             break;
           case 26:
             this.labelPos26.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos26.Visible = true;
-            this.labelPos26.Tag = (object) teamPlayer;
+            this.labelPos26.Tag = (object)teamPlayer;
             break;
           case 27:
             this.labelPos27.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
             this.labelPos27.Visible = true;
-            this.labelPos27.Tag = (object) teamPlayer;
+            this.labelPos27.Tag = (object)teamPlayer;
             break;
           case 28:
             switch (num1)
@@ -5946,37 +5954,37 @@ namespace CreationMaster
               case 0:
                 this.labelPos32A.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32A.Visible = true;
-                this.labelPos32A.Tag = (object) teamPlayer;
+                this.labelPos32A.Tag = (object)teamPlayer;
                 break;
               case 1:
                 this.labelPos32B.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32B.Visible = true;
-                this.labelPos32B.Tag = (object) teamPlayer;
+                this.labelPos32B.Tag = (object)teamPlayer;
                 break;
               case 2:
                 this.labelPos32C.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32C.Visible = true;
-                this.labelPos32C.Tag = (object) teamPlayer;
+                this.labelPos32C.Tag = (object)teamPlayer;
                 break;
               case 3:
                 this.labelPos32D.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32D.Visible = true;
-                this.labelPos32D.Tag = (object) teamPlayer;
+                this.labelPos32D.Tag = (object)teamPlayer;
                 break;
               case 4:
                 this.labelPos32E.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32E.Visible = true;
-                this.labelPos32E.Tag = (object) teamPlayer;
+                this.labelPos32E.Tag = (object)teamPlayer;
                 break;
               case 5:
                 this.labelPos32F.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32F.Visible = true;
-                this.labelPos32F.Tag = (object) teamPlayer;
+                this.labelPos32F.Tag = (object)teamPlayer;
                 break;
               case 6:
                 this.labelPos32G.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos32G.Visible = true;
-                this.labelPos32G.Tag = (object) teamPlayer;
+                this.labelPos32G.Tag = (object)teamPlayer;
                 break;
               case 7:
                 teamPlayer.position = 29;
@@ -5992,110 +6000,110 @@ namespace CreationMaster
               case 0:
                 this.labelPos33A.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33A.Visible = true;
-                this.labelPos33A.Tag = (object) teamPlayer;
+                this.labelPos33A.Tag = (object)teamPlayer;
                 break;
               case 1:
                 this.labelPos33B.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33B.Visible = true;
-                this.labelPos33B.Tag = (object) teamPlayer;
+                this.labelPos33B.Tag = (object)teamPlayer;
                 break;
               case 2:
                 this.labelPos33C.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33C.Visible = true;
-                this.labelPos33C.Tag = (object) teamPlayer;
+                this.labelPos33C.Tag = (object)teamPlayer;
                 break;
               case 3:
                 this.labelPos33D.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33D.Visible = true;
-                this.labelPos33D.Tag = (object) teamPlayer;
+                this.labelPos33D.Tag = (object)teamPlayer;
                 break;
               case 4:
                 this.labelPos33E.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33E.Visible = true;
-                this.labelPos33E.Tag = (object) teamPlayer;
+                this.labelPos33E.Tag = (object)teamPlayer;
                 break;
               case 5:
                 this.labelPos33F.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33F.Visible = true;
-                this.labelPos33F.Tag = (object) teamPlayer;
+                this.labelPos33F.Tag = (object)teamPlayer;
                 break;
               case 6:
                 this.labelPos33G.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33G.Visible = true;
-                this.labelPos33G.Tag = (object) teamPlayer;
+                this.labelPos33G.Tag = (object)teamPlayer;
                 break;
               case 7:
                 this.labelPos33H.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33H.Visible = true;
-                this.labelPos33H.Tag = (object) teamPlayer;
+                this.labelPos33H.Tag = (object)teamPlayer;
                 break;
               case 8:
                 this.labelPos33I.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33I.Visible = true;
-                this.labelPos33I.Tag = (object) teamPlayer;
+                this.labelPos33I.Tag = (object)teamPlayer;
                 break;
               case 9:
                 this.labelPos33J.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33J.Visible = true;
-                this.labelPos33J.Tag = (object) teamPlayer;
+                this.labelPos33J.Tag = (object)teamPlayer;
                 break;
               case 10:
                 this.labelPos33K.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33K.Visible = true;
-                this.labelPos33K.Tag = (object) teamPlayer;
+                this.labelPos33K.Tag = (object)teamPlayer;
                 break;
               case 11:
                 this.labelPos33L.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33L.Visible = true;
-                this.labelPos33L.Tag = (object) teamPlayer;
+                this.labelPos33L.Tag = (object)teamPlayer;
                 break;
               case 12:
                 this.labelPos33M.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33M.Visible = true;
-                this.labelPos33M.Tag = (object) teamPlayer;
+                this.labelPos33M.Tag = (object)teamPlayer;
                 break;
               case 13:
                 this.labelPos33N.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33N.Visible = true;
-                this.labelPos33N.Tag = (object) teamPlayer;
+                this.labelPos33N.Tag = (object)teamPlayer;
                 break;
               case 14:
                 this.labelPos33O.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33O.Visible = true;
-                this.labelPos33O.Tag = (object) teamPlayer;
+                this.labelPos33O.Tag = (object)teamPlayer;
                 break;
               case 15:
                 this.labelPos33P.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33P.Visible = true;
-                this.labelPos33P.Tag = (object) teamPlayer;
+                this.labelPos33P.Tag = (object)teamPlayer;
                 break;
               case 16:
                 this.labelPos33Q.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33Q.Visible = true;
-                this.labelPos33Q.Tag = (object) teamPlayer;
+                this.labelPos33Q.Tag = (object)teamPlayer;
                 break;
               case 17:
                 this.labelPos33R.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33R.Visible = true;
-                this.labelPos33R.Tag = (object) teamPlayer;
+                this.labelPos33R.Tag = (object)teamPlayer;
                 break;
               case 18:
                 this.labelPos33S.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33S.Visible = true;
-                this.labelPos33S.Tag = (object) teamPlayer;
+                this.labelPos33S.Tag = (object)teamPlayer;
                 break;
               case 19:
                 this.labelPos33T.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33T.Visible = true;
-                this.labelPos33T.Tag = (object) teamPlayer;
+                this.labelPos33T.Tag = (object)teamPlayer;
                 break;
               case 20:
                 this.labelPos33U.Text = teamPlayer.m_jerseynumber.ToString() + "\n" + teamPlayer.Player.Name;
                 this.labelPos33U.Visible = true;
-                this.labelPos33U.Tag = (object) teamPlayer;
+                this.labelPos33U.Tag = (object)teamPlayer;
                 break;
               default:
-                int num3 = (int) FifaEnvironment.UserMessages.ShowMessage(5021);
+                int num3 = (int)FifaEnvironment.UserMessages.ShowMessage(5021);
                 break;
             }
             ++num2;
@@ -6153,8 +6161,8 @@ namespace CreationMaster
 
     private void labelSpecial_DragDrop(object sender, DragEventArgs e)
     {
-      Label label = (Label) sender;
-      TeamPlayer tag = (TeamPlayer) this.m_DraggedLabel.Tag;
+      Label label = (Label)sender;
+      TeamPlayer tag = (TeamPlayer)this.m_DraggedLabel.Tag;
       label.Text = tag.Player.Name;
       if (label == this.labelCaptain)
       {
@@ -6202,13 +6210,13 @@ namespace CreationMaster
 
     private void labelPos_MouseDown(object sender, MouseEventArgs e)
     {
-      Label label = (Label) sender;
+      Label label = (Label)sender;
       if (label.Text == "______")
         return;
       this.m_DraggedLabel = label;
       if (this.listViewTeamPlayers.SelectedItems.Count > 0)
         this.listViewTeamPlayers.SelectedItems[0].Selected = false;
-      TeamPlayer tag = (TeamPlayer) this.m_DraggedLabel.Tag;
+      TeamPlayer tag = (TeamPlayer)this.m_DraggedLabel.Tag;
       for (int index = 0; index < this.listViewTeamPlayers.Items.Count; ++index)
       {
         ListViewItem listViewItem = this.listViewTeamPlayers.Items[index];
@@ -6218,23 +6226,23 @@ namespace CreationMaster
           break;
         }
       }
-      int num = (int) this.m_DraggedLabel.DoDragDrop((object) this.m_DraggedLabel.Text, DragDropEffects.Copy | DragDropEffects.Move);
+      int num = (int)this.m_DraggedLabel.DoDragDrop((object)this.m_DraggedLabel.Text, DragDropEffects.Copy | DragDropEffects.Move);
     }
 
     private void labelPos_DragDrop(object sender, DragEventArgs e)
     {
-      Label label = (Label) sender;
-      TeamPlayer tag1 = (TeamPlayer) this.m_DraggedLabel.Tag;
+      Label label = (Label)sender;
+      TeamPlayer tag1 = (TeamPlayer)this.m_DraggedLabel.Tag;
       string text = this.m_DraggedLabel.Text;
       this.m_DraggedLabel.Text = label.Text;
       label.Text = text;
-      TeamPlayer tag2 = (TeamPlayer) label.Tag;
+      TeamPlayer tag2 = (TeamPlayer)label.Tag;
       int position = tag1.position;
       tag1.position = tag2.position;
       tag2.position = position;
       TeamPlayer teamPlayer = tag1;
-      this.m_DraggedLabel.Tag = (object) tag2;
-      label.Tag = (object) teamPlayer;
+      this.m_DraggedLabel.Tag = (object)tag2;
+      label.Tag = (object)teamPlayer;
     }
 
     private void labelPos_DragEnter(object sender, DragEventArgs e)
@@ -6244,10 +6252,10 @@ namespace CreationMaster
 
     private void listViewRoster_ColumnClick(object sender, ColumnClickEventArgs e)
     {
-      ListView listView = (ListView) sender;
+      ListView listView = (ListView)sender;
       SortOrder sortOrder = listView.Sorting != SortOrder.Ascending ? SortOrder.Ascending : SortOrder.Descending;
       listView.Sorting = sortOrder;
-      listView.ListViewItemSorter = (IComparer) new ListViewItemComparer(e.Column, sortOrder);
+      listView.ListViewItemSorter = (IComparer)new ListViewItemComparer(e.Column, sortOrder);
     }
 
     private void radioUseSpecificFormation_CheckedChanged(object sender, EventArgs e)
@@ -6257,7 +6265,7 @@ namespace CreationMaster
       int newId = FifaEnvironment.Formations.GetNewId();
       if (newId < 0)
       {
-        int num = (int) FifaEnvironment.UserMessages.ShowMessage(5043);
+        int num = (int)FifaEnvironment.UserMessages.ShowMessage(5043);
         this.radioUseGenericFormation.Checked = true;
       }
       else
@@ -6265,8 +6273,8 @@ namespace CreationMaster
         Formation formation1 = this.m_BackupSpecificFormation == null ? this.m_CurrentFormation : this.m_BackupSpecificFormation;
         if (formation1 == null)
           return;
-        Formation formation2 = (Formation) formation1.Clone(newId);
-        FifaEnvironment.Formations.InsertId((IdObject) formation2);
+        Formation formation2 = (Formation)formation1.Clone(newId);
+        FifaEnvironment.Formations.InsertId((IdObject)formation2);
         this.m_CurrentTeam.Formation = formation2;
         this.m_CurrentFormation = formation2;
         this.m_CurrentTeam.formationid = formation2.Id;
@@ -6287,11 +6295,11 @@ namespace CreationMaster
         if (this.m_CurrentFormation != null && !this.m_CurrentFormation.IsGeneric())
         {
           this.m_BackupSpecificFormation = this.m_CurrentFormation;
-          FifaEnvironment.Formations.RemoveId((IdObject) this.m_CurrentFormation);
+          FifaEnvironment.Formations.RemoveId((IdObject)this.m_CurrentFormation);
         }
         if (this.comboGenericFormations.SelectedIndex < 0)
           this.comboGenericFormations.SelectedIndex = 0;
-        Formation selectedItem = (Formation) this.comboGenericFormations.SelectedItem;
+        Formation selectedItem = (Formation)this.comboGenericFormations.SelectedItem;
         this.m_CurrentTeam.Formation = selectedItem;
         this.m_CurrentFormation = selectedItem;
         this.m_CurrentTeam.formationid = selectedItem.Id;
@@ -6306,7 +6314,7 @@ namespace CreationMaster
     {
       if (this.m_LockUserChanges || this.comboGenericFormations.SelectedIndex < 0)
         return;
-      Formation selectedItem = (Formation) this.comboGenericFormations.SelectedItem;
+      Formation selectedItem = (Formation)this.comboGenericFormations.SelectedItem;
       if (selectedItem == null || selectedItem == this.m_CurrentTeam.Formation)
         return;
       this.m_CurrentTeam.Formation = selectedItem;
@@ -6434,15 +6442,15 @@ namespace CreationMaster
 
     private EPlayingDirection ClickToAttackRole(EventArgs e)
     {
-      int x = ((MouseEventArgs) e).X;
-      int y = ((MouseEventArgs) e).Y;
+      int x = ((MouseEventArgs)e).X;
+      int y = ((MouseEventArgs)e).Y;
       return x >= 16 ? (x >= 32 ? (y >= 16 ? (y >= 32 ? EPlayingDirection.DiagonalLeft : EPlayingDirection.Left) : EPlayingDirection.Left) : (y >= 16 ? (y >= 32 ? EPlayingDirection.Stright : EPlayingDirection.Standing) : EPlayingDirection.Standing)) : (y >= 16 ? (y >= 32 ? EPlayingDirection.DiagonalRight : EPlayingDirection.Right) : EPlayingDirection.Right);
     }
 
     private EPlayingDirection ClickToDefenseRole(EventArgs e)
     {
-      int x = ((MouseEventArgs) e).X;
-      int y = ((MouseEventArgs) e).Y;
+      int x = ((MouseEventArgs)e).X;
+      int y = ((MouseEventArgs)e).Y;
       return x >= 16 ? (x >= 32 ? (y >= 16 ? (y >= 32 ? EPlayingDirection.Left : EPlayingDirection.Left) : EPlayingDirection.DiagonalLeft) : (y >= 16 ? (y >= 32 ? EPlayingDirection.Standing : EPlayingDirection.Standing) : EPlayingDirection.Stright)) : (y >= 16 ? (y >= 32 ? EPlayingDirection.Right : EPlayingDirection.Right) : EPlayingDirection.DiagonalRight);
     }
 
@@ -6516,7 +6524,7 @@ namespace CreationMaster
     {
       if (this.m_CurrentTeam == null)
         return;
-      Team selectedItem = (Team) this.comboRivalTeam.SelectedItem;
+      Team selectedItem = (Team)this.comboRivalTeam.SelectedItem;
       if (selectedItem == this.m_CurrentTeam.RivalTeam)
         return;
       this.m_CurrentTeam.RivalTeam = selectedItem;
@@ -6546,7 +6554,7 @@ namespace CreationMaster
     private void buttonTeamPlayerPlus_Click(object sender, EventArgs e)
     {
       int selectedIndex = this.listViewTeamPlayers.SelectedIndices[0];
-      foreach (TeamPlayer teamPlayer in (ArrayList) this.m_CurrentTeam.Roster)
+      foreach (TeamPlayer teamPlayer in (ArrayList)this.m_CurrentTeam.Roster)
         teamPlayer.Player.ChangeSkills(1);
       this.LoadRosterPage();
       if (selectedIndex < 0)
@@ -6557,7 +6565,7 @@ namespace CreationMaster
     private void buttonTeamPlayerMinus_Click(object sender, EventArgs e)
     {
       int selectedIndex = this.listViewTeamPlayers.SelectedIndices[0];
-      foreach (TeamPlayer teamPlayer in (ArrayList) this.m_CurrentTeam.Roster)
+      foreach (TeamPlayer teamPlayer in (ArrayList)this.m_CurrentTeam.Roster)
         teamPlayer.Player.ChangeSkills(-1);
       this.LoadRosterPage();
       if (selectedIndex < 0)
@@ -6570,7 +6578,7 @@ namespace CreationMaster
       if (this.m_CurrentTeam == null || this.m_CurrentTeam.Roster == null)
         return;
       int selectedIndex = this.listViewTeamPlayers.SelectedIndices[0];
-      foreach (TeamPlayer teamPlayer in (ArrayList) this.m_CurrentTeam.Roster)
+      foreach (TeamPlayer teamPlayer in (ArrayList)this.m_CurrentTeam.Roster)
         ++teamPlayer.Player.contractvaliduntil;
       this.LoadRosterPage();
       if (selectedIndex < 0)
@@ -6583,7 +6591,7 @@ namespace CreationMaster
       if (this.m_CurrentTeam == null || this.m_CurrentTeam.Roster == null)
         return;
       int selectedIndex = this.listViewTeamPlayers.SelectedIndices[0];
-      foreach (TeamPlayer teamPlayer in (ArrayList) this.m_CurrentTeam.Roster)
+      foreach (TeamPlayer teamPlayer in (ArrayList)this.m_CurrentTeam.Roster)
         --teamPlayer.Player.contractvaliduntil;
       this.LoadRosterPage();
       if (selectedIndex < 0)
@@ -6593,8 +6601,8 @@ namespace CreationMaster
 
     private void labelFlag1_Click(object sender, EventArgs e)
     {
-      Label label = (Label) sender;
-      MouseEventArgs mouseEventArgs = (MouseEventArgs) e;
+      Label label = (Label)sender;
+      MouseEventArgs mouseEventArgs = (MouseEventArgs)e;
       if (mouseEventArgs.Button == MouseButtons.Left)
       {
         if (label.ImageIndex == label.ImageList.Images.Count - 1)
@@ -6616,7 +6624,7 @@ namespace CreationMaster
     private void pictureFlagRed_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureFlagRed.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureFlagRed.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor1 = this.colorDialog.Color;
     }
@@ -6624,7 +6632,7 @@ namespace CreationMaster
     private void pictureFlagGreen_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureFlagGreen.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureFlagGreen.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor2 = this.colorDialog.Color;
     }
@@ -6632,7 +6640,7 @@ namespace CreationMaster
     private void pictureFlagBlue_Click(object sender, EventArgs e)
     {
       this.colorDialog.Color = this.pictureFlagBlue.BackColor;
-      int num = (int) this.colorDialog.ShowDialog();
+      int num = (int)this.colorDialog.ShowDialog();
       this.pictureFlagBlue.BackColor = this.colorDialog.Color;
       this.m_CurrentTeam.TeamColor3 = this.colorDialog.Color;
     }
@@ -6699,7 +6707,7 @@ namespace CreationMaster
     {
       if (this.m_CurrentTeam.Formation == null)
         return;
-      MainForm.CM.JumpTo((IdObject) this.m_CurrentTeam.Formation);
+      MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.Formation);
     }
 
     private void labelStandardTeamName_DoubleClick(object sender, EventArgs e)
@@ -6728,26 +6736,41 @@ namespace CreationMaster
     {
       if (this.m_LockUserChanges)
         return;
-      this.m_CurrentTeam.latitude = (int) this.numericLatitude.Value;
+      this.m_CurrentTeam.latitude = (int)this.numericLatitude.Value;
     }
 
     private void numericLongitude_ValueChanged(object sender, EventArgs e)
     {
       if (this.m_LockUserChanges)
         return;
-      this.m_CurrentTeam.longitude = (int) this.numericLongitude.Value;
+      this.m_CurrentTeam.longitude = (int)this.numericLongitude.Value;
     }
 
     private void numericUtcOffset_ValueChanged(object sender, EventArgs e)
     {
       if (this.m_LockUserChanges)
         return;
-      this.m_CurrentTeam.utcoffset = (int) this.numericUtcOffset.Value;
+      this.m_CurrentTeam.utcoffset = (int)this.numericUtcOffset.Value;
     }
 
     private void checkNationalTeam_CheckedChanged(object sender, EventArgs e)
     {
-
+      if (this.m_CurrentTeam == null || this.m_LockUserChanges)
+        return;
+      if (this.checkIsNationalTeam.Checked)
+      {
+        this.m_CurrentTeam.NationalTeam = true;
+        if (this.m_CurrentTeam.Country == null || this.m_CurrentTeam.IsFemale())
+          return;
+        this.m_CurrentTeam.Country.SetNationalTeam(this.m_CurrentTeam, this.m_CurrentTeam.Id);
+      }
+      else
+      {
+        this.m_CurrentTeam.NationalTeam = false;
+        if (this.m_CurrentTeam.Country == null || this.m_CurrentTeam.IsFemale())
+          return;
+        this.m_CurrentTeam.Country.SetNationalTeam((Team)null, 0);
+      }
     }
   }
 }

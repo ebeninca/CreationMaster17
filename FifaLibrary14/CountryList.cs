@@ -7,12 +7,12 @@ namespace FifaLibrary
   public class CountryList : IdArrayList
   {
     public CountryList()
-      : base(typeof (Country))
+      : base(typeof(Country))
     {
     }
 
     public CountryList(DbFile fifaDbFile)
-      : base(typeof (Country))
+      : base(typeof(Country))
     {
       this.Load(fifaDbFile);
     }
@@ -33,33 +33,33 @@ namespace FifaLibrary
       this.Clear();
       for (int index = 0; index < t.NRecords; ++index)
         countryArray[index] = new Country(t.Records[index]);
-      this.AddRange((ICollection) countryArray);
+      this.AddRange((ICollection)countryArray);
       this.SortId();
     }
 
     public void DeleteCountry(Country country)
     {
-      this.RemoveId((IdObject) country);
+      this.RemoveId((IdObject)country);
     }
 
     public Country SearchCountry(int countryid)
     {
-      return (Country) this.SearchId(countryid);
+      return (Country)this.SearchId(countryid);
     }
 
     public Country SearchNationalTeamId(int nationalTeamId)
     {
       if (nationalTeamId == 3145)
-        return (Country) this.SearchId(34);
+        return (Country)this.SearchId(34);
       if (nationalTeamId == 1800)
-        return (Country) null;
+        return (Country)null;
       for (int index = 0; index < this.Count; ++index)
       {
-        Country country = (Country) this[index];
+        Country country = (Country)this[index];
         if (nationalTeamId == country.NationalTeamId)
           return country;
       }
-      return (Country) null;
+      return (Country)null;
     }
 
     public void Save(DbFile fifaDbFile)
@@ -67,7 +67,7 @@ namespace FifaLibrary
       Table table = fifaDbFile.Table[TI.nations];
       table.ResizeRecords(this.Count);
       int index = 0;
-      foreach (Country country in (ArrayList) this)
+      foreach (Country country in (ArrayList)this)
       {
         Record record = table.Records[index];
         country.SaveCountry(record);
@@ -80,25 +80,25 @@ namespace FifaLibrary
     {
       for (int index = 0; index < t.NRecords; ++index)
       {
-        Country country = (Country) this.SearchId(t.Records[index].IntField[FI.audionation_nationid]);
+        Country country = (Country)this.SearchId(t.Records[index].IntField[FI.audionation_nationid]);
       }
     }
 
     public Country FitCountry(string name, int id)
     {
       string lower = name.ToLower();
-      foreach (Country country in (ArrayList) this)
+      foreach (Country country in (ArrayList)this)
       {
         if (country.Fit(lower, id))
           return country;
       }
-      return (Country) null;
+      return (Country)null;
     }
 
-    public void LinkNationalTeam(TeamList teamList)
+    public void LinkTeam(TeamList teamList)
     {
-      foreach (Country country in (ArrayList) this)
-        country.LinkNationalTeam(teamList);
+      foreach (Country country in (ArrayList)this)
+        country.LinkTeam(teamList);
     }
   }
 }
