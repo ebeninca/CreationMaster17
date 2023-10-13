@@ -158,6 +158,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>echo F|xcopy /Y /I /E "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)" &amp;&amp; ^
+echo F|xcopy /S /Q /Y /F "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\Release\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

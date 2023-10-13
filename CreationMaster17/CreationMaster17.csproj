@@ -243,6 +243,9 @@
     <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E</PreBuildEvent>
+    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; ^
+xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)Release\3dRender\" /Y /I /E &amp;&amp; ^
+xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E &amp;&amp; ^
+xcopy "$(ProjectDir)Templates\" "$(TargetDir)Release\Templates\" /Y /I /E</PreBuildEvent>
   </PropertyGroup>
 </Project>
