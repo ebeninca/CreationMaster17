@@ -144,128 +144,128 @@ namespace CreationMaster
 
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      this.menuStrip = new System.Windows.Forms.MenuStrip();
-      this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenFifa15 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenLang15 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenFifa14 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenLang14 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenAll = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuReopen = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuSave = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuClose = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenDebug = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuTools = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuEnableAllMessages = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOptions = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuRegenerate = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuExpandDatabase = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuRemoveKidProtection = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuCleanFAT = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuRemoveAllLongTeamNames = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuAlignLanguageDB = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuMinimizeNamesTable = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuPreserveOriginalNames = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuPatch = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuCreatePatch = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuLoadPatch = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuUgc = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuImportUgc = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuImportUgcWothKits = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuImportUgcKits = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuImportUgcPlayers = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuUpdateDB = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOnlineDBFifa14 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOnlineDBFifa15 = new System.Windows.Forms.ToolStripMenuItem();
-      this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuHelpCms = new System.Windows.Forms.ToolStripMenuItem();
-      this.genericToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.adboardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.ballsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.bootsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.countryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.fontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.formationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.leaguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.stadiumsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.tournamentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.statusStrip = new System.Windows.Forms.StatusStrip();
-      this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
-      this.statusBar = new System.Windows.Forms.ToolStripStatusLabel();
-      this.splitVert = new System.Windows.Forms.SplitContainer();
-      this.splitHoriz = new System.Windows.Forms.SplitContainer();
-      this.panelMain = new System.Windows.Forms.Panel();
-      this.panelBottom = new System.Windows.Forms.Panel();
-      this.toolStripBottom = new System.Windows.Forms.ToolStrip();
-      this.buttonShowBottom = new System.Windows.Forms.ToolStripButton();
-      this.buttonHideBottom = new System.Windows.Forms.ToolStripButton();
-      this.stripLabelBottom = new System.Windows.Forms.ToolStripLabel();
-      this.panelRight = new System.Windows.Forms.Panel();
-      this.toolStripRight = new System.Windows.Forms.ToolStrip();
-      this.buttonShowRight = new System.Windows.Forms.ToolStripButton();
-      this.buttonHideRight = new System.Windows.Forms.ToolStripButton();
-      this.stripLabelRight = new System.Windows.Forms.ToolStripLabel();
-      this.toolStripMain = new System.Windows.Forms.ToolStrip();
-      this.buttonCountry = new System.Windows.Forms.ToolStripButton();
-      this.buttonLeague = new System.Windows.Forms.ToolStripButton();
-      this.buttonTeam = new System.Windows.Forms.ToolStripButton();
-      this.buttonKit = new System.Windows.Forms.ToolStripButton();
-      this.buttonPlayer = new System.Windows.Forms.ToolStripButton();
-      this.buttonStadium = new System.Windows.Forms.ToolStripButton();
-      this.buttonTournament = new System.Windows.Forms.ToolStripButton();
-      this.buttonReferee = new System.Windows.Forms.ToolStripButton();
-      this.buttonBall = new System.Windows.Forms.ToolStripButton();
-      this.buttonShoes = new System.Windows.Forms.ToolStripButton();
-      this.buttonManager = new System.Windows.Forms.ToolStripButton();
-      this.buttonFormation = new System.Windows.Forms.ToolStripButton();
-      this.buttonSponsor = new System.Windows.Forms.ToolStripButton();
-      this.buttonTv = new System.Windows.Forms.ToolStripButton();
-      this.buttonNewspaper = new System.Windows.Forms.ToolStripButton();
-      this.buttonGloves = new System.Windows.Forms.ToolStripButton();
-      this.buttonAudio = new System.Windows.Forms.ToolStripButton();
-      this.openFifaDialog = new System.Windows.Forms.OpenFileDialog();
-      this.openLangDialog = new System.Windows.Forms.OpenFileDialog();
-      this.browserDialog = new System.Windows.Forms.FolderBrowserDialog();
-      this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-      this.menuStrip.SuspendLayout();
-      this.statusStrip.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.splitVert)).BeginInit();
-      this.splitVert.Panel1.SuspendLayout();
-      this.splitVert.Panel2.SuspendLayout();
-      this.splitVert.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.splitHoriz)).BeginInit();
-      this.splitHoriz.Panel1.SuspendLayout();
-      this.splitHoriz.Panel2.SuspendLayout();
-      this.splitHoriz.SuspendLayout();
-      this.toolStripBottom.SuspendLayout();
-      this.toolStripRight.SuspendLayout();
-      this.toolStripMain.SuspendLayout();
-      this.SuspendLayout();
-      // 
-      // menuStrip
-      // 
-      this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenFifa15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenLang15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenFifa14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenLang14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReopen = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuEnableAllMessages = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRegenerate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExpandDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRemoveKidProtection = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCleanFAT = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRemoveAllLongTeamNames = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAlignLanguageDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMinimizeNamesTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPreserveOriginalNames = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCreatePatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLoadPatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUgc = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImportUgc = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImportUgcWothKits = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImportUgcKits = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImportUgcPlayers = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUpdateDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOnlineDBFifa14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOnlineDBFifa15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHelpCms = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adboardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ballsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bootsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.countryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leaguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stadiumsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tournamentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusBar = new System.Windows.Forms.ToolStripStatusLabel();
+            this.splitVert = new System.Windows.Forms.SplitContainer();
+            this.splitHoriz = new System.Windows.Forms.SplitContainer();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.toolStripBottom = new System.Windows.Forms.ToolStrip();
+            this.buttonShowBottom = new System.Windows.Forms.ToolStripButton();
+            this.buttonHideBottom = new System.Windows.Forms.ToolStripButton();
+            this.stripLabelBottom = new System.Windows.Forms.ToolStripLabel();
+            this.panelRight = new System.Windows.Forms.Panel();
+            this.toolStripRight = new System.Windows.Forms.ToolStrip();
+            this.buttonShowRight = new System.Windows.Forms.ToolStripButton();
+            this.buttonHideRight = new System.Windows.Forms.ToolStripButton();
+            this.stripLabelRight = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.buttonCountry = new System.Windows.Forms.ToolStripButton();
+            this.buttonLeague = new System.Windows.Forms.ToolStripButton();
+            this.buttonTeam = new System.Windows.Forms.ToolStripButton();
+            this.buttonKit = new System.Windows.Forms.ToolStripButton();
+            this.buttonPlayer = new System.Windows.Forms.ToolStripButton();
+            this.buttonStadium = new System.Windows.Forms.ToolStripButton();
+            this.buttonTournament = new System.Windows.Forms.ToolStripButton();
+            this.buttonReferee = new System.Windows.Forms.ToolStripButton();
+            this.buttonBall = new System.Windows.Forms.ToolStripButton();
+            this.buttonShoes = new System.Windows.Forms.ToolStripButton();
+            this.buttonManager = new System.Windows.Forms.ToolStripButton();
+            this.buttonFormation = new System.Windows.Forms.ToolStripButton();
+            this.buttonSponsor = new System.Windows.Forms.ToolStripButton();
+            this.buttonTv = new System.Windows.Forms.ToolStripButton();
+            this.buttonNewspaper = new System.Windows.Forms.ToolStripButton();
+            this.buttonGloves = new System.Windows.Forms.ToolStripButton();
+            this.buttonAudio = new System.Windows.Forms.ToolStripButton();
+            this.openFifaDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openLangDialog = new System.Windows.Forms.OpenFileDialog();
+            this.browserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.menuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitVert)).BeginInit();
+            this.splitVert.Panel1.SuspendLayout();
+            this.splitVert.Panel2.SuspendLayout();
+            this.splitVert.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitHoriz)).BeginInit();
+            this.splitHoriz.Panel1.SuspendLayout();
+            this.splitHoriz.Panel2.SuspendLayout();
+            this.splitHoriz.SuspendLayout();
+            this.toolStripBottom.SuspendLayout();
+            this.toolStripRight.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile,
             this.menuTools,
             this.menuPatch,
             this.menuUgc,
             this.menuUpdateDB,
             this.helpToolStripMenuItem});
-      this.menuStrip.Location = new System.Drawing.Point(0, 0);
-      this.menuStrip.Name = "menuStrip";
-      this.menuStrip.Size = new System.Drawing.Size(1384, 24);
-      this.menuStrip.TabIndex = 0;
-      this.menuStrip.Text = "menuStrip1";
-      // 
-      // menuFile
-      // 
-      this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1384, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // menuFile
+            // 
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuOpenFifa15,
             this.menuOpenLang15,
             this.menuOpenFifa14,
@@ -276,99 +276,99 @@ namespace CreationMaster
             this.menuClose,
             this.menuExit,
             this.menuOpenDebug});
-      this.menuFile.Name = "menuFile";
-      this.menuFile.Size = new System.Drawing.Size(37, 20);
-      this.menuFile.Text = "File";
-      // 
-      // menuOpenFifa15
-      // 
-      this.menuOpenFifa15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa15.Image")));
-      this.menuOpenFifa15.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuOpenFifa15.Name = "menuOpenFifa15";
-      this.menuOpenFifa15.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenFifa15.Text = "Open - FIFA 15";
-      this.menuOpenFifa15.Click += new System.EventHandler(this.menuOpenFifa15Demo_Click);
-      // 
-      // menuOpenLang15
-      // 
-      this.menuOpenLang15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang15.Image")));
-      this.menuOpenLang15.Name = "menuOpenLang15";
-      this.menuOpenLang15.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenLang15.Text = "Open - Select lan.db";
-      this.menuOpenLang15.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-      // 
-      // menuOpenFifa14
-      // 
-      this.menuOpenFifa14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa14.Image")));
-      this.menuOpenFifa14.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuOpenFifa14.Name = "menuOpenFifa14";
-      this.menuOpenFifa14.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenFifa14.Text = "Open - FIFA 14";
-      this.menuOpenFifa14.Click += new System.EventHandler(this.menuOpenFifa_Click);
-      // 
-      // menuOpenLang14
-      // 
-      this.menuOpenLang14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang14.Image")));
-      this.menuOpenLang14.Name = "menuOpenLang14";
-      this.menuOpenLang14.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenLang14.Text = "Open - Select lan.db";
-      this.menuOpenLang14.Click += new System.EventHandler(this.openSelectLandbToolStripMenuItem_Click);
-      // 
-      // menuOpenAll
-      // 
-      this.menuOpenAll.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenAll.Image")));
-      this.menuOpenAll.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuOpenAll.Name = "menuOpenAll";
-      this.menuOpenAll.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenAll.Text = "Open - Select all";
-      this.menuOpenAll.Click += new System.EventHandler(this.openSelectAllToolStripMenuItem_Click);
-      // 
-      // menuReopen
-      // 
-      this.menuReopen.Name = "menuReopen";
-      this.menuReopen.Size = new System.Drawing.Size(181, 22);
-      this.menuReopen.Text = "Open - Recent";
-      this.menuReopen.Click += new System.EventHandler(this.menuReopen_Click);
-      // 
-      // menuSave
-      // 
-      this.menuSave.Enabled = false;
-      this.menuSave.Image = ((System.Drawing.Image)(resources.GetObject("menuSave.Image")));
-      this.menuSave.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuSave.Name = "menuSave";
-      this.menuSave.Size = new System.Drawing.Size(181, 22);
-      this.menuSave.Text = "Save";
-      this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
-      // 
-      // menuClose
-      // 
-      this.menuClose.Enabled = false;
-      this.menuClose.Image = ((System.Drawing.Image)(resources.GetObject("menuClose.Image")));
-      this.menuClose.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuClose.Name = "menuClose";
-      this.menuClose.Size = new System.Drawing.Size(181, 22);
-      this.menuClose.Text = "Close";
-      this.menuClose.Click += new System.EventHandler(this.menuClose_Click);
-      // 
-      // menuExit
-      // 
-      this.menuExit.Image = ((System.Drawing.Image)(resources.GetObject("menuExit.Image")));
-      this.menuExit.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuExit.Name = "menuExit";
-      this.menuExit.Size = new System.Drawing.Size(181, 22);
-      this.menuExit.Text = "Exit";
-      this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
-      // 
-      // menuOpenDebug
-      // 
-      this.menuOpenDebug.Name = "menuOpenDebug";
-      this.menuOpenDebug.Size = new System.Drawing.Size(181, 22);
-      this.menuOpenDebug.Text = "Open - Demo";
-      this.menuOpenDebug.Visible = false;
-      // 
-      // menuTools
-      // 
-      this.menuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(37, 20);
+            this.menuFile.Text = "File";
+            // 
+            // menuOpenFifa15
+            // 
+            this.menuOpenFifa15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa15.Image")));
+            this.menuOpenFifa15.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuOpenFifa15.Name = "menuOpenFifa15";
+            this.menuOpenFifa15.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenFifa15.Text = "Open - FIFA 15";
+            this.menuOpenFifa15.Click += new System.EventHandler(this.menuOpenFifa15Demo_Click);
+            // 
+            // menuOpenLang15
+            // 
+            this.menuOpenLang15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang15.Image")));
+            this.menuOpenLang15.Name = "menuOpenLang15";
+            this.menuOpenLang15.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenLang15.Text = "Open - Select lan.db";
+            this.menuOpenLang15.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // menuOpenFifa14
+            // 
+            this.menuOpenFifa14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa14.Image")));
+            this.menuOpenFifa14.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuOpenFifa14.Name = "menuOpenFifa14";
+            this.menuOpenFifa14.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenFifa14.Text = "Open - FIFA 14";
+            this.menuOpenFifa14.Click += new System.EventHandler(this.menuOpenFifa_Click);
+            // 
+            // menuOpenLang14
+            // 
+            this.menuOpenLang14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang14.Image")));
+            this.menuOpenLang14.Name = "menuOpenLang14";
+            this.menuOpenLang14.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenLang14.Text = "Open - Select lan.db";
+            this.menuOpenLang14.Click += new System.EventHandler(this.openSelectLandbToolStripMenuItem_Click);
+            // 
+            // menuOpenAll
+            // 
+            this.menuOpenAll.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenAll.Image")));
+            this.menuOpenAll.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuOpenAll.Name = "menuOpenAll";
+            this.menuOpenAll.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenAll.Text = "Open - Select all";
+            this.menuOpenAll.Click += new System.EventHandler(this.openSelectAllToolStripMenuItem_Click);
+            // 
+            // menuReopen
+            // 
+            this.menuReopen.Name = "menuReopen";
+            this.menuReopen.Size = new System.Drawing.Size(181, 22);
+            this.menuReopen.Text = "Open - Recent";
+            this.menuReopen.Click += new System.EventHandler(this.menuReopen_Click);
+            // 
+            // menuSave
+            // 
+            this.menuSave.Enabled = false;
+            this.menuSave.Image = ((System.Drawing.Image)(resources.GetObject("menuSave.Image")));
+            this.menuSave.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuSave.Name = "menuSave";
+            this.menuSave.Size = new System.Drawing.Size(181, 22);
+            this.menuSave.Text = "Save";
+            this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
+            // 
+            // menuClose
+            // 
+            this.menuClose.Enabled = false;
+            this.menuClose.Image = ((System.Drawing.Image)(resources.GetObject("menuClose.Image")));
+            this.menuClose.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuClose.Name = "menuClose";
+            this.menuClose.Size = new System.Drawing.Size(181, 22);
+            this.menuClose.Text = "Close";
+            this.menuClose.Click += new System.EventHandler(this.menuClose_Click);
+            // 
+            // menuExit
+            // 
+            this.menuExit.Image = ((System.Drawing.Image)(resources.GetObject("menuExit.Image")));
+            this.menuExit.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuExit.Name = "menuExit";
+            this.menuExit.Size = new System.Drawing.Size(181, 22);
+            this.menuExit.Text = "Exit";
+            this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+            // 
+            // menuOpenDebug
+            // 
+            this.menuOpenDebug.Name = "menuOpenDebug";
+            this.menuOpenDebug.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenDebug.Text = "Open - Demo";
+            this.menuOpenDebug.Visible = false;
+            // 
+            // menuTools
+            // 
+            this.menuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuEnableAllMessages,
             this.menuOptions,
             this.menuRegenerate,
@@ -379,223 +379,223 @@ namespace CreationMaster
             this.menuAlignLanguageDB,
             this.menuMinimizeNamesTable,
             this.menuPreserveOriginalNames});
-      this.menuTools.Name = "menuTools";
-      this.menuTools.Size = new System.Drawing.Size(46, 20);
-      this.menuTools.Text = "Tools";
-      // 
-      // menuEnableAllMessages
-      // 
-      this.menuEnableAllMessages.Image = ((System.Drawing.Image)(resources.GetObject("menuEnableAllMessages.Image")));
-      this.menuEnableAllMessages.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuEnableAllMessages.Name = "menuEnableAllMessages";
-      this.menuEnableAllMessages.Size = new System.Drawing.Size(238, 22);
-      this.menuEnableAllMessages.Text = "Enable all messages";
-      this.menuEnableAllMessages.Click += new System.EventHandler(this.menuEnableAllMessages_Click);
-      // 
-      // menuOptions
-      // 
-      this.menuOptions.Image = ((System.Drawing.Image)(resources.GetObject("menuOptions.Image")));
-      this.menuOptions.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuOptions.Name = "menuOptions";
-      this.menuOptions.Size = new System.Drawing.Size(238, 22);
-      this.menuOptions.Text = "Options";
-      this.menuOptions.Visible = false;
-      this.menuOptions.Click += new System.EventHandler(this.menuOptions_Click);
-      // 
-      // menuRegenerate
-      // 
-      this.menuRegenerate.Image = ((System.Drawing.Image)(resources.GetObject("menuRegenerate.Image")));
-      this.menuRegenerate.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuRegenerate.Name = "menuRegenerate";
-      this.menuRegenerate.Size = new System.Drawing.Size(238, 22);
-      this.menuRegenerate.Text = "Regenerate BH";
-      this.menuRegenerate.Click += new System.EventHandler(this.menuRegenerate_Click);
-      // 
-      // menuExpandDatabase
-      // 
-      this.menuExpandDatabase.Image = ((System.Drawing.Image)(resources.GetObject("menuExpandDatabase.Image")));
-      this.menuExpandDatabase.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuExpandDatabase.Name = "menuExpandDatabase";
-      this.menuExpandDatabase.Size = new System.Drawing.Size(238, 22);
-      this.menuExpandDatabase.Text = "Expand Database";
-      this.menuExpandDatabase.Click += new System.EventHandler(this.menuExpandDatabase_Click);
-      // 
-      // menuRemoveKidProtection
-      // 
-      this.menuRemoveKidProtection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.menuRemoveKidProtection.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.menuRemoveKidProtection.Name = "menuRemoveKidProtection";
-      this.menuRemoveKidProtection.Size = new System.Drawing.Size(238, 22);
-      this.menuRemoveKidProtection.Text = "Remove \"Kid Protection\" Kits";
-      this.menuRemoveKidProtection.Visible = false;
-      this.menuRemoveKidProtection.Click += new System.EventHandler(this.menuRemoveKidProtection_Click);
-      // 
-      // menuCleanFAT
-      // 
-      this.menuCleanFAT.Image = ((System.Drawing.Image)(resources.GetObject("menuCleanFAT.Image")));
-      this.menuCleanFAT.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuCleanFAT.Name = "menuCleanFAT";
-      this.menuCleanFAT.Size = new System.Drawing.Size(238, 22);
-      this.menuCleanFAT.Text = "Clean FAT";
-      this.menuCleanFAT.Visible = false;
-      this.menuCleanFAT.Click += new System.EventHandler(this.menuCleanFAT_Click);
-      // 
-      // menuRemoveAllLongTeamNames
-      // 
-      this.menuRemoveAllLongTeamNames.Name = "menuRemoveAllLongTeamNames";
-      this.menuRemoveAllLongTeamNames.Size = new System.Drawing.Size(238, 22);
-      this.menuRemoveAllLongTeamNames.Text = "Remove All Long Team Names";
-      this.menuRemoveAllLongTeamNames.Visible = false;
-      this.menuRemoveAllLongTeamNames.Click += new System.EventHandler(this.removeAllLongTeamNames_Click);
-      // 
-      // menuAlignLanguageDB
-      // 
-      this.menuAlignLanguageDB.Name = "menuAlignLanguageDB";
-      this.menuAlignLanguageDB.Size = new System.Drawing.Size(238, 22);
-      this.menuAlignLanguageDB.Text = "Align Language DB";
-      this.menuAlignLanguageDB.Click += new System.EventHandler(this.menuAlignLanguageDB_Click);
-      // 
-      // menuMinimizeNamesTable
-      // 
-      this.menuMinimizeNamesTable.Name = "menuMinimizeNamesTable";
-      this.menuMinimizeNamesTable.Size = new System.Drawing.Size(238, 22);
-      this.menuMinimizeNamesTable.Text = "Minimize Player Names Table";
-      this.menuMinimizeNamesTable.ToolTipText = "Reserve more room in the player names table for created players but makes the dat" +
-    "abase not compatible with online gaming . ";
-      this.menuMinimizeNamesTable.Click += new System.EventHandler(this.minimizeNamesTableToolStripMenuItem_Click);
-      // 
-      // menuPreserveOriginalNames
-      // 
-      this.menuPreserveOriginalNames.Name = "menuPreserveOriginalNames";
-      this.menuPreserveOriginalNames.Size = new System.Drawing.Size(238, 22);
-      this.menuPreserveOriginalNames.Text = "Preserve Original Player Names";
-      this.menuPreserveOriginalNames.ToolTipText = "Preserve all the names originally present in the player names table, in this way " +
-    "the database will be compatible with online gaming but the space of names for ne" +
-    "w players will be reduced. ";
-      this.menuPreserveOriginalNames.Click += new System.EventHandler(this.menuPreserveOriginalNames_Click);
-      // 
-      // menuPatch
-      // 
-      this.menuPatch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuTools.Name = "menuTools";
+            this.menuTools.Size = new System.Drawing.Size(46, 20);
+            this.menuTools.Text = "Tools";
+            // 
+            // menuEnableAllMessages
+            // 
+            this.menuEnableAllMessages.Image = ((System.Drawing.Image)(resources.GetObject("menuEnableAllMessages.Image")));
+            this.menuEnableAllMessages.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuEnableAllMessages.Name = "menuEnableAllMessages";
+            this.menuEnableAllMessages.Size = new System.Drawing.Size(238, 22);
+            this.menuEnableAllMessages.Text = "Enable all messages";
+            this.menuEnableAllMessages.Click += new System.EventHandler(this.menuEnableAllMessages_Click);
+            // 
+            // menuOptions
+            // 
+            this.menuOptions.Image = ((System.Drawing.Image)(resources.GetObject("menuOptions.Image")));
+            this.menuOptions.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuOptions.Name = "menuOptions";
+            this.menuOptions.Size = new System.Drawing.Size(238, 22);
+            this.menuOptions.Text = "Options";
+            this.menuOptions.Visible = false;
+            this.menuOptions.Click += new System.EventHandler(this.menuOptions_Click);
+            // 
+            // menuRegenerate
+            // 
+            this.menuRegenerate.Image = ((System.Drawing.Image)(resources.GetObject("menuRegenerate.Image")));
+            this.menuRegenerate.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuRegenerate.Name = "menuRegenerate";
+            this.menuRegenerate.Size = new System.Drawing.Size(238, 22);
+            this.menuRegenerate.Text = "Regenerate BH";
+            this.menuRegenerate.Click += new System.EventHandler(this.menuRegenerate_Click);
+            // 
+            // menuExpandDatabase
+            // 
+            this.menuExpandDatabase.Image = ((System.Drawing.Image)(resources.GetObject("menuExpandDatabase.Image")));
+            this.menuExpandDatabase.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuExpandDatabase.Name = "menuExpandDatabase";
+            this.menuExpandDatabase.Size = new System.Drawing.Size(238, 22);
+            this.menuExpandDatabase.Text = "Expand Database";
+            this.menuExpandDatabase.Click += new System.EventHandler(this.menuExpandDatabase_Click);
+            // 
+            // menuRemoveKidProtection
+            // 
+            this.menuRemoveKidProtection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.menuRemoveKidProtection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.menuRemoveKidProtection.Name = "menuRemoveKidProtection";
+            this.menuRemoveKidProtection.Size = new System.Drawing.Size(238, 22);
+            this.menuRemoveKidProtection.Text = "Remove \"Kid Protection\" Kits";
+            this.menuRemoveKidProtection.Visible = false;
+            this.menuRemoveKidProtection.Click += new System.EventHandler(this.menuRemoveKidProtection_Click);
+            // 
+            // menuCleanFAT
+            // 
+            this.menuCleanFAT.Image = ((System.Drawing.Image)(resources.GetObject("menuCleanFAT.Image")));
+            this.menuCleanFAT.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuCleanFAT.Name = "menuCleanFAT";
+            this.menuCleanFAT.Size = new System.Drawing.Size(238, 22);
+            this.menuCleanFAT.Text = "Clean FAT";
+            this.menuCleanFAT.Visible = false;
+            this.menuCleanFAT.Click += new System.EventHandler(this.menuCleanFAT_Click);
+            // 
+            // menuRemoveAllLongTeamNames
+            // 
+            this.menuRemoveAllLongTeamNames.Name = "menuRemoveAllLongTeamNames";
+            this.menuRemoveAllLongTeamNames.Size = new System.Drawing.Size(238, 22);
+            this.menuRemoveAllLongTeamNames.Text = "Remove All Long Team Names";
+            this.menuRemoveAllLongTeamNames.Visible = false;
+            this.menuRemoveAllLongTeamNames.Click += new System.EventHandler(this.removeAllLongTeamNames_Click);
+            // 
+            // menuAlignLanguageDB
+            // 
+            this.menuAlignLanguageDB.Name = "menuAlignLanguageDB";
+            this.menuAlignLanguageDB.Size = new System.Drawing.Size(238, 22);
+            this.menuAlignLanguageDB.Text = "Align Language DB";
+            this.menuAlignLanguageDB.Click += new System.EventHandler(this.menuAlignLanguageDB_Click);
+            // 
+            // menuMinimizeNamesTable
+            // 
+            this.menuMinimizeNamesTable.Name = "menuMinimizeNamesTable";
+            this.menuMinimizeNamesTable.Size = new System.Drawing.Size(238, 22);
+            this.menuMinimizeNamesTable.Text = "Minimize Player Names Table";
+            this.menuMinimizeNamesTable.ToolTipText = "Reserve more room in the player names table for created players but makes the dat" +
+          "abase not compatible with online gaming . ";
+            this.menuMinimizeNamesTable.Click += new System.EventHandler(this.minimizeNamesTableToolStripMenuItem_Click);
+            // 
+            // menuPreserveOriginalNames
+            // 
+            this.menuPreserveOriginalNames.Name = "menuPreserveOriginalNames";
+            this.menuPreserveOriginalNames.Size = new System.Drawing.Size(238, 22);
+            this.menuPreserveOriginalNames.Text = "Preserve Original Player Names";
+            this.menuPreserveOriginalNames.ToolTipText = "Preserve all the names originally present in the player names table, in this way " +
+          "the database will be compatible with online gaming but the space of names for ne" +
+          "w players will be reduced. ";
+            this.menuPreserveOriginalNames.Click += new System.EventHandler(this.menuPreserveOriginalNames_Click);
+            // 
+            // menuPatch
+            // 
+            this.menuPatch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCreatePatch,
             this.menuLoadPatch});
-      this.menuPatch.Name = "menuPatch";
-      this.menuPatch.Size = new System.Drawing.Size(49, 20);
-      this.menuPatch.Text = "Patch";
-      // 
-      // menuCreatePatch
-      // 
-      this.menuCreatePatch.Image = ((System.Drawing.Image)(resources.GetObject("menuCreatePatch.Image")));
-      this.menuCreatePatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuCreatePatch.Name = "menuCreatePatch";
-      this.menuCreatePatch.Size = new System.Drawing.Size(108, 22);
-      this.menuCreatePatch.Text = "Create";
-      this.menuCreatePatch.Click += new System.EventHandler(this.menuCreatePatch_Click);
-      // 
-      // menuLoadPatch
-      // 
-      this.menuLoadPatch.Image = ((System.Drawing.Image)(resources.GetObject("menuLoadPatch.Image")));
-      this.menuLoadPatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuLoadPatch.Name = "menuLoadPatch";
-      this.menuLoadPatch.Size = new System.Drawing.Size(108, 22);
-      this.menuLoadPatch.Text = "Load";
-      this.menuLoadPatch.Click += new System.EventHandler(this.menuLoadPatch_Click);
-      // 
-      // menuUgc
-      // 
-      this.menuUgc.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPatch.Name = "menuPatch";
+            this.menuPatch.Size = new System.Drawing.Size(49, 20);
+            this.menuPatch.Text = "Patch";
+            // 
+            // menuCreatePatch
+            // 
+            this.menuCreatePatch.Image = ((System.Drawing.Image)(resources.GetObject("menuCreatePatch.Image")));
+            this.menuCreatePatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuCreatePatch.Name = "menuCreatePatch";
+            this.menuCreatePatch.Size = new System.Drawing.Size(108, 22);
+            this.menuCreatePatch.Text = "Create";
+            this.menuCreatePatch.Click += new System.EventHandler(this.menuCreatePatch_Click);
+            // 
+            // menuLoadPatch
+            // 
+            this.menuLoadPatch.Image = ((System.Drawing.Image)(resources.GetObject("menuLoadPatch.Image")));
+            this.menuLoadPatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuLoadPatch.Name = "menuLoadPatch";
+            this.menuLoadPatch.Size = new System.Drawing.Size(108, 22);
+            this.menuLoadPatch.Text = "Load";
+            this.menuLoadPatch.Click += new System.EventHandler(this.menuLoadPatch_Click);
+            // 
+            // menuUgc
+            // 
+            this.menuUgc.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuImportUgc,
             this.menuImportUgcWothKits,
             this.menuImportUgcKits,
             this.menuImportUgcPlayers});
-      this.menuUgc.Name = "menuUgc";
-      this.menuUgc.Size = new System.Drawing.Size(81, 20);
-      this.menuUgc.Text = "UG Content";
-      // 
-      // menuImportUgc
-      // 
-      this.menuImportUgc.Image = ((System.Drawing.Image)(resources.GetObject("menuImportUgc.Image")));
-      this.menuImportUgc.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuImportUgc.Name = "menuImportUgc";
-      this.menuImportUgc.Size = new System.Drawing.Size(176, 22);
-      this.menuImportUgc.Text = "Import DB only";
-      this.menuImportUgc.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
-      // 
-      // menuImportUgcWothKits
-      // 
-      this.menuImportUgcWothKits.Name = "menuImportUgcWothKits";
-      this.menuImportUgcWothKits.Size = new System.Drawing.Size(176, 22);
-      this.menuImportUgcWothKits.Text = "Import DB and KITS";
-      this.menuImportUgcWothKits.Click += new System.EventHandler(this.importDBAndKITSToolStripMenuItem_Click);
-      // 
-      // menuImportUgcKits
-      // 
-      this.menuImportUgcKits.Name = "menuImportUgcKits";
-      this.menuImportUgcKits.Size = new System.Drawing.Size(176, 22);
-      this.menuImportUgcKits.Text = "Import KITS only";
-      this.menuImportUgcKits.Click += new System.EventHandler(this.importKITSOmlyToolStripMenuItem_Click);
-      // 
-      // menuImportUgcPlayers
-      // 
-      this.menuImportUgcPlayers.Name = "menuImportUgcPlayers";
-      this.menuImportUgcPlayers.Size = new System.Drawing.Size(176, 22);
-      this.menuImportUgcPlayers.Text = "Import Players only";
-      this.menuImportUgcPlayers.Click += new System.EventHandler(this.menuImportUgcPlayers_Click);
-      // 
-      // menuUpdateDB
-      // 
-      this.menuUpdateDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuUgc.Name = "menuUgc";
+            this.menuUgc.Size = new System.Drawing.Size(81, 20);
+            this.menuUgc.Text = "UG Content";
+            // 
+            // menuImportUgc
+            // 
+            this.menuImportUgc.Image = ((System.Drawing.Image)(resources.GetObject("menuImportUgc.Image")));
+            this.menuImportUgc.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuImportUgc.Name = "menuImportUgc";
+            this.menuImportUgc.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgc.Text = "Import DB only";
+            this.menuImportUgc.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // menuImportUgcWothKits
+            // 
+            this.menuImportUgcWothKits.Name = "menuImportUgcWothKits";
+            this.menuImportUgcWothKits.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcWothKits.Text = "Import DB and KITS";
+            this.menuImportUgcWothKits.Click += new System.EventHandler(this.importDBAndKITSToolStripMenuItem_Click);
+            // 
+            // menuImportUgcKits
+            // 
+            this.menuImportUgcKits.Name = "menuImportUgcKits";
+            this.menuImportUgcKits.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcKits.Text = "Import KITS only";
+            this.menuImportUgcKits.Click += new System.EventHandler(this.importKITSOmlyToolStripMenuItem_Click);
+            // 
+            // menuImportUgcPlayers
+            // 
+            this.menuImportUgcPlayers.Name = "menuImportUgcPlayers";
+            this.menuImportUgcPlayers.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcPlayers.Text = "Import Players only";
+            this.menuImportUgcPlayers.Click += new System.EventHandler(this.menuImportUgcPlayers_Click);
+            // 
+            // menuUpdateDB
+            // 
+            this.menuUpdateDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuOnlineDBFifa14,
             this.menuOnlineDBFifa15});
-      this.menuUpdateDB.Name = "menuUpdateDB";
-      this.menuUpdateDB.Size = new System.Drawing.Size(98, 20);
-      this.menuUpdateDB.Text = "Update Rosters";
-      // 
-      // menuOnlineDBFifa14
-      // 
-      this.menuOnlineDBFifa14.Name = "menuOnlineDBFifa14";
-      this.menuOnlineDBFifa14.Size = new System.Drawing.Size(167, 22);
-      this.menuOnlineDBFifa14.Text = "Online DB FIFA 14";
-      this.menuOnlineDBFifa14.Click += new System.EventHandler(this.menuOnlineDBFifa14_Click);
-      // 
-      // menuOnlineDBFifa15
-      // 
-      this.menuOnlineDBFifa15.Name = "menuOnlineDBFifa15";
-      this.menuOnlineDBFifa15.Size = new System.Drawing.Size(167, 22);
-      this.menuOnlineDBFifa15.Text = "Online DB FIFA 15";
-      this.menuOnlineDBFifa15.Click += new System.EventHandler(this.menuOnlineDBFifa15_Click);
-      // 
-      // helpToolStripMenuItem
-      // 
-      this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuUpdateDB.Name = "menuUpdateDB";
+            this.menuUpdateDB.Size = new System.Drawing.Size(98, 20);
+            this.menuUpdateDB.Text = "Update Rosters";
+            // 
+            // menuOnlineDBFifa14
+            // 
+            this.menuOnlineDBFifa14.Name = "menuOnlineDBFifa14";
+            this.menuOnlineDBFifa14.Size = new System.Drawing.Size(167, 22);
+            this.menuOnlineDBFifa14.Text = "Online DB FIFA 14";
+            this.menuOnlineDBFifa14.Click += new System.EventHandler(this.menuOnlineDBFifa14_Click);
+            // 
+            // menuOnlineDBFifa15
+            // 
+            this.menuOnlineDBFifa15.Name = "menuOnlineDBFifa15";
+            this.menuOnlineDBFifa15.Size = new System.Drawing.Size(167, 22);
+            this.menuOnlineDBFifa15.Text = "Online DB FIFA 15";
+            this.menuOnlineDBFifa15.Click += new System.EventHandler(this.menuOnlineDBFifa15_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuHelp,
             this.menuAbout,
             this.menuHelpCms});
-      this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-      this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-      this.helpToolStripMenuItem.Text = "Help";
-      // 
-      // menuHelp
-      // 
-      this.menuHelp.Image = ((System.Drawing.Image)(resources.GetObject("menuHelp.Image")));
-      this.menuHelp.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuHelp.Name = "menuHelp";
-      this.menuHelp.Size = new System.Drawing.Size(107, 22);
-      this.menuHelp.Text = "Help";
-      this.menuHelp.Click += new System.EventHandler(this.menuHelp_Click);
-      // 
-      // menuAbout
-      // 
-      this.menuAbout.Image = ((System.Drawing.Image)(resources.GetObject("menuAbout.Image")));
-      this.menuAbout.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-      this.menuAbout.Name = "menuAbout";
-      this.menuAbout.Size = new System.Drawing.Size(107, 22);
-      this.menuAbout.Text = "About";
-      this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
-      // 
-      // menuHelpCms
-      // 
-      this.menuHelpCms.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // menuHelp
+            // 
+            this.menuHelp.Image = ((System.Drawing.Image)(resources.GetObject("menuHelp.Image")));
+            this.menuHelp.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuHelp.Name = "menuHelp";
+            this.menuHelp.Size = new System.Drawing.Size(107, 22);
+            this.menuHelp.Text = "Help";
+            this.menuHelp.Click += new System.EventHandler(this.menuHelp_Click);
+            // 
+            // menuAbout
+            // 
+            this.menuAbout.Image = ((System.Drawing.Image)(resources.GetObject("menuAbout.Image")));
+            this.menuAbout.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.menuAbout.Name = "menuAbout";
+            this.menuAbout.Size = new System.Drawing.Size(107, 22);
+            this.menuAbout.Text = "About";
+            this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
+            // 
+            // menuHelpCms
+            // 
+            this.menuHelpCms.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.genericToolStripMenuItem,
             this.adboardsToolStripMenuItem,
             this.ballsToolStripMenuItem,
@@ -607,275 +607,275 @@ namespace CreationMaster
             this.stadiumsToolStripMenuItem,
             this.teamsToolStripMenuItem,
             this.tournamentsToolStripMenuItem});
-      this.menuHelpCms.Name = "menuHelpCms";
-      this.menuHelpCms.Size = new System.Drawing.Size(107, 22);
-      this.menuHelpCms.Text = "CMS";
-      this.menuHelpCms.Visible = false;
-      // 
-      // genericToolStripMenuItem
-      // 
-      this.genericToolStripMenuItem.Name = "genericToolStripMenuItem";
-      this.genericToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.genericToolStripMenuItem.Text = "Generic";
-      this.genericToolStripMenuItem.Click += new System.EventHandler(this.menuHelpCms_Click);
-      // 
-      // adboardsToolStripMenuItem
-      // 
-      this.adboardsToolStripMenuItem.Name = "adboardsToolStripMenuItem";
-      this.adboardsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.adboardsToolStripMenuItem.Text = "Adboards";
-      this.adboardsToolStripMenuItem.Click += new System.EventHandler(this.adboardsToolStripMenuItem_Click);
-      // 
-      // ballsToolStripMenuItem
-      // 
-      this.ballsToolStripMenuItem.Name = "ballsToolStripMenuItem";
-      this.ballsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.ballsToolStripMenuItem.Text = "Balls";
-      this.ballsToolStripMenuItem.Click += new System.EventHandler(this.ballsToolStripMenuItem_Click);
-      // 
-      // bootsToolStripMenuItem
-      // 
-      this.bootsToolStripMenuItem.Name = "bootsToolStripMenuItem";
-      this.bootsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.bootsToolStripMenuItem.Text = "Boots";
-      this.bootsToolStripMenuItem.Click += new System.EventHandler(this.bootsToolStripMenuItem_Click);
-      // 
-      // countryToolStripMenuItem
-      // 
-      this.countryToolStripMenuItem.Name = "countryToolStripMenuItem";
-      this.countryToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.countryToolStripMenuItem.Text = "Country";
-      this.countryToolStripMenuItem.Click += new System.EventHandler(this.countryToolStripMenuItem_Click);
-      // 
-      // fontsToolStripMenuItem
-      // 
-      this.fontsToolStripMenuItem.Name = "fontsToolStripMenuItem";
-      this.fontsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.fontsToolStripMenuItem.Text = "Fonts";
-      this.fontsToolStripMenuItem.Click += new System.EventHandler(this.fontsToolStripMenuItem_Click);
-      // 
-      // formationsToolStripMenuItem
-      // 
-      this.formationsToolStripMenuItem.Name = "formationsToolStripMenuItem";
-      this.formationsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.formationsToolStripMenuItem.Text = "Formations";
-      this.formationsToolStripMenuItem.Click += new System.EventHandler(this.formationsToolStripMenuItem_Click);
-      // 
-      // leaguesToolStripMenuItem
-      // 
-      this.leaguesToolStripMenuItem.Name = "leaguesToolStripMenuItem";
-      this.leaguesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.leaguesToolStripMenuItem.Text = "Leagues";
-      this.leaguesToolStripMenuItem.Click += new System.EventHandler(this.leaguesToolStripMenuItem_Click);
-      // 
-      // stadiumsToolStripMenuItem
-      // 
-      this.stadiumsToolStripMenuItem.Name = "stadiumsToolStripMenuItem";
-      this.stadiumsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.stadiumsToolStripMenuItem.Text = "Stadiums";
-      this.stadiumsToolStripMenuItem.Click += new System.EventHandler(this.stadiumsToolStripMenuItem_Click);
-      // 
-      // teamsToolStripMenuItem
-      // 
-      this.teamsToolStripMenuItem.Name = "teamsToolStripMenuItem";
-      this.teamsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.teamsToolStripMenuItem.Text = "Teams";
-      this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
-      // 
-      // tournamentsToolStripMenuItem
-      // 
-      this.tournamentsToolStripMenuItem.Name = "tournamentsToolStripMenuItem";
-      this.tournamentsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.tournamentsToolStripMenuItem.Text = "Tournaments";
-      this.tournamentsToolStripMenuItem.Click += new System.EventHandler(this.tournamentsToolStripMenuItem_Click);
-      // 
-      // statusStrip
-      // 
-      this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuHelpCms.Name = "menuHelpCms";
+            this.menuHelpCms.Size = new System.Drawing.Size(107, 22);
+            this.menuHelpCms.Text = "CMS";
+            this.menuHelpCms.Visible = false;
+            // 
+            // genericToolStripMenuItem
+            // 
+            this.genericToolStripMenuItem.Name = "genericToolStripMenuItem";
+            this.genericToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.genericToolStripMenuItem.Text = "Generic";
+            this.genericToolStripMenuItem.Click += new System.EventHandler(this.menuHelpCms_Click);
+            // 
+            // adboardsToolStripMenuItem
+            // 
+            this.adboardsToolStripMenuItem.Name = "adboardsToolStripMenuItem";
+            this.adboardsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.adboardsToolStripMenuItem.Text = "Adboards";
+            this.adboardsToolStripMenuItem.Click += new System.EventHandler(this.adboardsToolStripMenuItem_Click);
+            // 
+            // ballsToolStripMenuItem
+            // 
+            this.ballsToolStripMenuItem.Name = "ballsToolStripMenuItem";
+            this.ballsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.ballsToolStripMenuItem.Text = "Balls";
+            this.ballsToolStripMenuItem.Click += new System.EventHandler(this.ballsToolStripMenuItem_Click);
+            // 
+            // bootsToolStripMenuItem
+            // 
+            this.bootsToolStripMenuItem.Name = "bootsToolStripMenuItem";
+            this.bootsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.bootsToolStripMenuItem.Text = "Boots";
+            this.bootsToolStripMenuItem.Click += new System.EventHandler(this.bootsToolStripMenuItem_Click);
+            // 
+            // countryToolStripMenuItem
+            // 
+            this.countryToolStripMenuItem.Name = "countryToolStripMenuItem";
+            this.countryToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.countryToolStripMenuItem.Text = "Country";
+            this.countryToolStripMenuItem.Click += new System.EventHandler(this.countryToolStripMenuItem_Click);
+            // 
+            // fontsToolStripMenuItem
+            // 
+            this.fontsToolStripMenuItem.Name = "fontsToolStripMenuItem";
+            this.fontsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.fontsToolStripMenuItem.Text = "Fonts";
+            this.fontsToolStripMenuItem.Click += new System.EventHandler(this.fontsToolStripMenuItem_Click);
+            // 
+            // formationsToolStripMenuItem
+            // 
+            this.formationsToolStripMenuItem.Name = "formationsToolStripMenuItem";
+            this.formationsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.formationsToolStripMenuItem.Text = "Formations";
+            this.formationsToolStripMenuItem.Click += new System.EventHandler(this.formationsToolStripMenuItem_Click);
+            // 
+            // leaguesToolStripMenuItem
+            // 
+            this.leaguesToolStripMenuItem.Name = "leaguesToolStripMenuItem";
+            this.leaguesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.leaguesToolStripMenuItem.Text = "Leagues";
+            this.leaguesToolStripMenuItem.Click += new System.EventHandler(this.leaguesToolStripMenuItem_Click);
+            // 
+            // stadiumsToolStripMenuItem
+            // 
+            this.stadiumsToolStripMenuItem.Name = "stadiumsToolStripMenuItem";
+            this.stadiumsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.stadiumsToolStripMenuItem.Text = "Stadiums";
+            this.stadiumsToolStripMenuItem.Click += new System.EventHandler(this.stadiumsToolStripMenuItem_Click);
+            // 
+            // teamsToolStripMenuItem
+            // 
+            this.teamsToolStripMenuItem.Name = "teamsToolStripMenuItem";
+            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.teamsToolStripMenuItem.Text = "Teams";
+            this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
+            // 
+            // tournamentsToolStripMenuItem
+            // 
+            this.tournamentsToolStripMenuItem.Name = "tournamentsToolStripMenuItem";
+            this.tournamentsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.tournamentsToolStripMenuItem.Text = "Tournaments";
+            this.tournamentsToolStripMenuItem.Click += new System.EventHandler(this.tournamentsToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.statusBar});
-      this.statusStrip.Location = new System.Drawing.Point(0, 859);
-      this.statusStrip.Name = "statusStrip";
-      this.statusStrip.Size = new System.Drawing.Size(1384, 22);
-      this.statusStrip.TabIndex = 1;
-      this.statusStrip.Text = "statusStrip1";
-      // 
-      // progressBar
-      // 
-      this.progressBar.Name = "progressBar";
-      this.progressBar.Size = new System.Drawing.Size(100, 16);
-      this.progressBar.Visible = false;
-      // 
-      // statusBar
-      // 
-      this.statusBar.Name = "statusBar";
-      this.statusBar.Size = new System.Drawing.Size(39, 17);
-      this.statusBar.Text = "Ready";
-      // 
-      // splitVert
-      // 
-      this.splitVert.BackColor = System.Drawing.Color.Blue;
-      this.splitVert.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitVert.Enabled = false;
-      this.splitVert.IsSplitterFixed = true;
-      this.splitVert.Location = new System.Drawing.Point(0, 79);
-      this.splitVert.Name = "splitVert";
-      // 
-      // splitVert.Panel1
-      // 
-      this.splitVert.Panel1.Controls.Add(this.splitHoriz);
-      // 
-      // splitVert.Panel2
-      // 
-      this.splitVert.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.splitVert.Panel2.Controls.Add(this.panelRight);
-      this.splitVert.Panel2.Controls.Add(this.toolStripRight);
-      this.splitVert.Size = new System.Drawing.Size(1384, 780);
-      this.splitVert.SplitterDistance = 1355;
-      this.splitVert.SplitterWidth = 2;
-      this.splitVert.TabIndex = 2;
-      // 
-      // splitHoriz
-      // 
-      this.splitHoriz.BackColor = System.Drawing.Color.Blue;
-      this.splitHoriz.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitHoriz.IsSplitterFixed = true;
-      this.splitHoriz.Location = new System.Drawing.Point(0, 0);
-      this.splitHoriz.Name = "splitHoriz";
-      this.splitHoriz.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // splitHoriz.Panel1
-      // 
-      this.splitHoriz.Panel1.BackColor = System.Drawing.SystemColors.Control;
-      this.splitHoriz.Panel1.Controls.Add(this.panelMain);
-      // 
-      // splitHoriz.Panel2
-      // 
-      this.splitHoriz.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.splitHoriz.Panel2.Controls.Add(this.panelBottom);
-      this.splitHoriz.Panel2.Controls.Add(this.toolStripBottom);
-      this.splitHoriz.Size = new System.Drawing.Size(1355, 780);
-      this.splitHoriz.SplitterDistance = 750;
-      this.splitHoriz.SplitterWidth = 2;
-      this.splitHoriz.TabIndex = 0;
-      // 
-      // panelMain
-      // 
-      this.panelMain.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.panelMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-      this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMain.Location = new System.Drawing.Point(0, 0);
-      this.panelMain.Name = "panelMain";
-      this.panelMain.Size = new System.Drawing.Size(1355, 750);
-      this.panelMain.TabIndex = 1;
-      // 
-      // panelBottom
-      // 
-      this.panelBottom.AutoScroll = true;
-      this.panelBottom.AutoSize = true;
-      this.panelBottom.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.panelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelBottom.Location = new System.Drawing.Point(0, 25);
-      this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1355, 3);
-      this.panelBottom.TabIndex = 1;
-      // 
-      // toolStripBottom
-      // 
-      this.toolStripBottom.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-      this.toolStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip.Location = new System.Drawing.Point(0, 859);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1384, 22);
+            this.statusStrip.TabIndex = 1;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
+            this.progressBar.Visible = false;
+            // 
+            // statusBar
+            // 
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(39, 17);
+            this.statusBar.Text = "Ready";
+            // 
+            // splitVert
+            // 
+            this.splitVert.BackColor = System.Drawing.Color.Blue;
+            this.splitVert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitVert.Enabled = false;
+            this.splitVert.IsSplitterFixed = true;
+            this.splitVert.Location = new System.Drawing.Point(0, 79);
+            this.splitVert.Name = "splitVert";
+            // 
+            // splitVert.Panel1
+            // 
+            this.splitVert.Panel1.Controls.Add(this.splitHoriz);
+            // 
+            // splitVert.Panel2
+            // 
+            this.splitVert.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.splitVert.Panel2.Controls.Add(this.panelRight);
+            this.splitVert.Panel2.Controls.Add(this.toolStripRight);
+            this.splitVert.Size = new System.Drawing.Size(1384, 780);
+            this.splitVert.SplitterDistance = 1355;
+            this.splitVert.SplitterWidth = 2;
+            this.splitVert.TabIndex = 2;
+            // 
+            // splitHoriz
+            // 
+            this.splitHoriz.BackColor = System.Drawing.Color.Blue;
+            this.splitHoriz.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitHoriz.IsSplitterFixed = true;
+            this.splitHoriz.Location = new System.Drawing.Point(0, 0);
+            this.splitHoriz.Name = "splitHoriz";
+            this.splitHoriz.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitHoriz.Panel1
+            // 
+            this.splitHoriz.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitHoriz.Panel1.Controls.Add(this.panelMain);
+            // 
+            // splitHoriz.Panel2
+            // 
+            this.splitHoriz.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.splitHoriz.Panel2.Controls.Add(this.panelBottom);
+            this.splitHoriz.Panel2.Controls.Add(this.toolStripBottom);
+            this.splitHoriz.Size = new System.Drawing.Size(1355, 780);
+            this.splitHoriz.SplitterDistance = 750;
+            this.splitHoriz.SplitterWidth = 2;
+            this.splitHoriz.TabIndex = 0;
+            // 
+            // panelMain
+            // 
+            this.panelMain.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(1355, 750);
+            this.panelMain.TabIndex = 1;
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.AutoScroll = true;
+            this.panelBottom.AutoSize = true;
+            this.panelBottom.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBottom.Location = new System.Drawing.Point(0, 25);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(1355, 3);
+            this.panelBottom.TabIndex = 1;
+            // 
+            // toolStripBottom
+            // 
+            this.toolStripBottom.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonShowBottom,
             this.buttonHideBottom,
             this.stripLabelBottom});
-      this.toolStripBottom.Location = new System.Drawing.Point(0, 0);
-      this.toolStripBottom.Name = "toolStripBottom";
-      this.toolStripBottom.Size = new System.Drawing.Size(1355, 25);
-      this.toolStripBottom.TabIndex = 0;
-      this.toolStripBottom.Text = "toolBottom";
-      // 
-      // buttonShowBottom
-      // 
-      this.buttonShowBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonShowBottom.Image = ((System.Drawing.Image)(resources.GetObject("buttonShowBottom.Image")));
-      this.buttonShowBottom.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonShowBottom.Name = "buttonShowBottom";
-      this.buttonShowBottom.Size = new System.Drawing.Size(23, 22);
-      this.buttonShowBottom.Text = "show";
-      this.buttonShowBottom.Click += new System.EventHandler(this.buttonShowBottom_Click);
-      // 
-      // buttonHideBottom
-      // 
-      this.buttonHideBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonHideBottom.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideBottom.Image")));
-      this.buttonHideBottom.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonHideBottom.Name = "buttonHideBottom";
-      this.buttonHideBottom.Size = new System.Drawing.Size(23, 22);
-      this.buttonHideBottom.Text = "hide";
-      this.buttonHideBottom.Visible = false;
-      this.buttonHideBottom.Click += new System.EventHandler(this.buttonHideBottom_Click);
-      // 
-      // stripLabelBottom
-      // 
-      this.stripLabelBottom.Name = "stripLabelBottom";
-      this.stripLabelBottom.Size = new System.Drawing.Size(41, 22);
-      this.stripLabelBottom.Text = "Empty";
-      // 
-      // panelRight
-      // 
-      this.panelRight.AutoScroll = true;
-      this.panelRight.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelRight.Location = new System.Drawing.Point(24, 0);
-      this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(3, 780);
-      this.panelRight.TabIndex = 2;
-      // 
-      // toolStripRight
-      // 
-      this.toolStripRight.Dock = System.Windows.Forms.DockStyle.Left;
-      this.toolStripRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-      this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripBottom.Location = new System.Drawing.Point(0, 0);
+            this.toolStripBottom.Name = "toolStripBottom";
+            this.toolStripBottom.Size = new System.Drawing.Size(1355, 25);
+            this.toolStripBottom.TabIndex = 0;
+            this.toolStripBottom.Text = "toolBottom";
+            // 
+            // buttonShowBottom
+            // 
+            this.buttonShowBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShowBottom.Image = ((System.Drawing.Image)(resources.GetObject("buttonShowBottom.Image")));
+            this.buttonShowBottom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonShowBottom.Name = "buttonShowBottom";
+            this.buttonShowBottom.Size = new System.Drawing.Size(23, 22);
+            this.buttonShowBottom.Text = "show";
+            this.buttonShowBottom.Click += new System.EventHandler(this.buttonShowBottom_Click);
+            // 
+            // buttonHideBottom
+            // 
+            this.buttonHideBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonHideBottom.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideBottom.Image")));
+            this.buttonHideBottom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonHideBottom.Name = "buttonHideBottom";
+            this.buttonHideBottom.Size = new System.Drawing.Size(23, 22);
+            this.buttonHideBottom.Text = "hide";
+            this.buttonHideBottom.Visible = false;
+            this.buttonHideBottom.Click += new System.EventHandler(this.buttonHideBottom_Click);
+            // 
+            // stripLabelBottom
+            // 
+            this.stripLabelBottom.Name = "stripLabelBottom";
+            this.stripLabelBottom.Size = new System.Drawing.Size(41, 22);
+            this.stripLabelBottom.Text = "Empty";
+            // 
+            // panelRight
+            // 
+            this.panelRight.AutoScroll = true;
+            this.panelRight.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRight.Location = new System.Drawing.Point(24, 0);
+            this.panelRight.Name = "panelRight";
+            this.panelRight.Size = new System.Drawing.Size(3, 780);
+            this.panelRight.TabIndex = 2;
+            // 
+            // toolStripRight
+            // 
+            this.toolStripRight.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStripRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonShowRight,
             this.buttonHideRight,
             this.stripLabelRight});
-      this.toolStripRight.Location = new System.Drawing.Point(0, 0);
-      this.toolStripRight.Name = "toolStripRight";
-      this.toolStripRight.Size = new System.Drawing.Size(24, 780);
-      this.toolStripRight.TabIndex = 1;
-      this.toolStripRight.Text = "toolBottom";
-      // 
-      // buttonShowRight
-      // 
-      this.buttonShowRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonShowRight.Image = ((System.Drawing.Image)(resources.GetObject("buttonShowRight.Image")));
-      this.buttonShowRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonShowRight.Name = "buttonShowRight";
-      this.buttonShowRight.Size = new System.Drawing.Size(21, 20);
-      this.buttonShowRight.Text = "show";
-      this.buttonShowRight.Click += new System.EventHandler(this.buttonShowRight_Click);
-      // 
-      // buttonHideRight
-      // 
-      this.buttonHideRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonHideRight.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideRight.Image")));
-      this.buttonHideRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonHideRight.Name = "buttonHideRight";
-      this.buttonHideRight.Size = new System.Drawing.Size(21, 20);
-      this.buttonHideRight.Text = "hide";
-      this.buttonHideRight.Visible = false;
-      this.buttonHideRight.Click += new System.EventHandler(this.buttonHideRight_Click);
-      // 
-      // stripLabelRight
-      // 
-      this.stripLabelRight.Name = "stripLabelRight";
-      this.stripLabelRight.Size = new System.Drawing.Size(21, 41);
-      this.stripLabelRight.Text = "Empty";
-      this.stripLabelRight.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-      // 
-      // toolStripMain
-      // 
-      this.toolStripMain.Enabled = false;
-      this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripRight.Location = new System.Drawing.Point(0, 0);
+            this.toolStripRight.Name = "toolStripRight";
+            this.toolStripRight.Size = new System.Drawing.Size(24, 780);
+            this.toolStripRight.TabIndex = 1;
+            this.toolStripRight.Text = "toolBottom";
+            // 
+            // buttonShowRight
+            // 
+            this.buttonShowRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShowRight.Image = ((System.Drawing.Image)(resources.GetObject("buttonShowRight.Image")));
+            this.buttonShowRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonShowRight.Name = "buttonShowRight";
+            this.buttonShowRight.Size = new System.Drawing.Size(21, 20);
+            this.buttonShowRight.Text = "show";
+            this.buttonShowRight.Click += new System.EventHandler(this.buttonShowRight_Click);
+            // 
+            // buttonHideRight
+            // 
+            this.buttonHideRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonHideRight.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideRight.Image")));
+            this.buttonHideRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonHideRight.Name = "buttonHideRight";
+            this.buttonHideRight.Size = new System.Drawing.Size(21, 20);
+            this.buttonHideRight.Text = "hide";
+            this.buttonHideRight.Visible = false;
+            this.buttonHideRight.Click += new System.EventHandler(this.buttonHideRight_Click);
+            // 
+            // stripLabelRight
+            // 
+            this.stripLabelRight.Name = "stripLabelRight";
+            this.stripLabelRight.Size = new System.Drawing.Size(21, 41);
+            this.stripLabelRight.Text = "Empty";
+            this.stripLabelRight.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            // 
+            // toolStripMain
+            // 
+            this.toolStripMain.Enabled = false;
+            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonCountry,
             this.buttonLeague,
             this.buttonTeam,
@@ -893,244 +893,244 @@ namespace CreationMaster
             this.buttonNewspaper,
             this.buttonGloves,
             this.buttonAudio});
-      this.toolStripMain.Location = new System.Drawing.Point(0, 24);
-      this.toolStripMain.Name = "toolStripMain";
-      this.toolStripMain.Size = new System.Drawing.Size(1384, 55);
-      this.toolStripMain.TabIndex = 0;
-      this.toolStripMain.Text = "toolStripMain";
-      this.toolTip.SetToolTip(this.toolStripMain, "Click and use Shift, Ctrl and Alt keys to activate a different window");
-      // 
-      // buttonCountry
-      // 
-      this.buttonCountry.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonCountry.Image = ((System.Drawing.Image)(resources.GetObject("buttonCountry.Image")));
-      this.buttonCountry.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonCountry.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonCountry.Name = "buttonCountry";
-      this.buttonCountry.Size = new System.Drawing.Size(52, 52);
-      this.buttonCountry.Text = "Country";
-      this.buttonCountry.ToolTipText = "Country";
-      this.buttonCountry.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonLeague
-      // 
-      this.buttonLeague.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonLeague.Image = ((System.Drawing.Image)(resources.GetObject("buttonLeague.Image")));
-      this.buttonLeague.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonLeague.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonLeague.Name = "buttonLeague";
-      this.buttonLeague.Size = new System.Drawing.Size(52, 52);
-      this.buttonLeague.Text = "League";
-      this.buttonLeague.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonTeam
-      // 
-      this.buttonTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonTeam.Image = ((System.Drawing.Image)(resources.GetObject("buttonTeam.Image")));
-      this.buttonTeam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonTeam.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonTeam.Name = "buttonTeam";
-      this.buttonTeam.Size = new System.Drawing.Size(52, 52);
-      this.buttonTeam.Text = "Team";
-      this.buttonTeam.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonKit
-      // 
-      this.buttonKit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonKit.Image = ((System.Drawing.Image)(resources.GetObject("buttonKit.Image")));
-      this.buttonKit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonKit.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonKit.Name = "buttonKit";
-      this.buttonKit.Size = new System.Drawing.Size(47, 52);
-      this.buttonKit.Text = "Kits";
-      this.buttonKit.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonPlayer
-      // 
-      this.buttonPlayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonPlayer.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlayer.Image")));
-      this.buttonPlayer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonPlayer.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonPlayer.Name = "buttonPlayer";
-      this.buttonPlayer.Size = new System.Drawing.Size(52, 52);
-      this.buttonPlayer.Text = "Player";
-      this.buttonPlayer.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonStadium
-      // 
-      this.buttonStadium.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonStadium.Image = ((System.Drawing.Image)(resources.GetObject("buttonStadium.Image")));
-      this.buttonStadium.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonStadium.ImageTransparentColor = System.Drawing.Color.White;
-      this.buttonStadium.Name = "buttonStadium";
-      this.buttonStadium.Size = new System.Drawing.Size(52, 52);
-      this.buttonStadium.Text = "Stadium";
-      this.buttonStadium.ToolTipText = "Stadium";
-      this.buttonStadium.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonTournament
-      // 
-      this.buttonTournament.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonTournament.Image = ((System.Drawing.Image)(resources.GetObject("buttonTournament.Image")));
-      this.buttonTournament.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonTournament.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonTournament.Name = "buttonTournament";
-      this.buttonTournament.Size = new System.Drawing.Size(52, 52);
-      this.buttonTournament.Text = "Tournament in Manager Mode";
-      this.buttonTournament.ToolTipText = "Tournament";
-      this.buttonTournament.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonReferee
-      // 
-      this.buttonReferee.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonReferee.Image = ((System.Drawing.Image)(resources.GetObject("buttonReferee.Image")));
-      this.buttonReferee.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonReferee.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonReferee.Name = "buttonReferee";
-      this.buttonReferee.Size = new System.Drawing.Size(52, 52);
-      this.buttonReferee.Text = "Referee";
-      this.buttonReferee.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonBall
-      // 
-      this.buttonBall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonBall.Image = ((System.Drawing.Image)(resources.GetObject("buttonBall.Image")));
-      this.buttonBall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonBall.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonBall.Name = "buttonBall";
-      this.buttonBall.Size = new System.Drawing.Size(52, 52);
-      this.buttonBall.Text = "Ball";
-      this.buttonBall.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonShoes
-      // 
-      this.buttonShoes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonShoes.Image = ((System.Drawing.Image)(resources.GetObject("buttonShoes.Image")));
-      this.buttonShoes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonShoes.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonShoes.Name = "buttonShoes";
-      this.buttonShoes.Size = new System.Drawing.Size(52, 52);
-      this.buttonShoes.Text = "Boots";
-      this.buttonShoes.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonManager
-      // 
-      this.buttonManager.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonManager.Image = ((System.Drawing.Image)(resources.GetObject("buttonManager.Image")));
-      this.buttonManager.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonManager.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonManager.Name = "buttonManager";
-      this.buttonManager.Size = new System.Drawing.Size(52, 52);
-      this.buttonManager.Text = "Manager";
-      this.buttonManager.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonFormation
-      // 
-      this.buttonFormation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonFormation.Image = ((System.Drawing.Image)(resources.GetObject("buttonFormation.Image")));
-      this.buttonFormation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonFormation.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonFormation.Name = "buttonFormation";
-      this.buttonFormation.Size = new System.Drawing.Size(52, 52);
-      this.buttonFormation.Text = "Generic Formations";
-      this.buttonFormation.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonSponsor
-      // 
-      this.buttonSponsor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonSponsor.Image = ((System.Drawing.Image)(resources.GetObject("buttonSponsor.Image")));
-      this.buttonSponsor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonSponsor.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonSponsor.Name = "buttonSponsor";
-      this.buttonSponsor.Size = new System.Drawing.Size(52, 52);
-      this.buttonSponsor.Text = "Sponsor";
-      this.buttonSponsor.Visible = false;
-      this.buttonSponsor.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonTv
-      // 
-      this.buttonTv.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonTv.Image = ((System.Drawing.Image)(resources.GetObject("buttonTv.Image")));
-      this.buttonTv.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonTv.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonTv.Name = "buttonTv";
-      this.buttonTv.Size = new System.Drawing.Size(52, 52);
-      this.buttonTv.Text = "TV";
-      this.buttonTv.Visible = false;
-      this.buttonTv.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonNewspaper
-      // 
-      this.buttonNewspaper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonNewspaper.Image = ((System.Drawing.Image)(resources.GetObject("buttonNewspaper.Image")));
-      this.buttonNewspaper.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonNewspaper.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonNewspaper.Name = "buttonNewspaper";
-      this.buttonNewspaper.Size = new System.Drawing.Size(52, 52);
-      this.buttonNewspaper.Text = "Newspaper";
-      this.buttonNewspaper.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonGloves
-      // 
-      this.buttonGloves.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonGloves.Image = ((System.Drawing.Image)(resources.GetObject("buttonGloves.Image")));
-      this.buttonGloves.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonGloves.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonGloves.Name = "buttonGloves";
-      this.buttonGloves.Size = new System.Drawing.Size(52, 52);
-      this.buttonGloves.Text = "Gloves and accessories";
-      this.buttonGloves.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // buttonAudio
-      // 
-      this.buttonAudio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.buttonAudio.Image = ((System.Drawing.Image)(resources.GetObject("buttonAudio.Image")));
-      this.buttonAudio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.buttonAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.buttonAudio.Name = "buttonAudio";
-      this.buttonAudio.Size = new System.Drawing.Size(52, 52);
-      this.buttonAudio.Text = "Audio";
-      this.buttonAudio.Click += new System.EventHandler(this.buttonMain_Click);
-      // 
-      // MainForm
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1384, 881);
-      this.Controls.Add(this.splitVert);
-      this.Controls.Add(this.statusStrip);
-      this.Controls.Add(this.toolStripMain);
-      this.Controls.Add(this.menuStrip);
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.IsMdiContainer = true;
-      this.MainMenuStrip = this.menuStrip;
-      this.MinimumSize = new System.Drawing.Size(200, 200);
-      this.Name = "MainForm";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Creation Master 17 Legacy (2023.10)";
-      this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
-      this.menuStrip.ResumeLayout(false);
-      this.menuStrip.PerformLayout();
-      this.statusStrip.ResumeLayout(false);
-      this.statusStrip.PerformLayout();
-      this.splitVert.Panel1.ResumeLayout(false);
-      this.splitVert.Panel2.ResumeLayout(false);
-      this.splitVert.Panel2.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.splitVert)).EndInit();
-      this.splitVert.ResumeLayout(false);
-      this.splitHoriz.Panel1.ResumeLayout(false);
-      this.splitHoriz.Panel2.ResumeLayout(false);
-      this.splitHoriz.Panel2.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.splitHoriz)).EndInit();
-      this.splitHoriz.ResumeLayout(false);
-      this.toolStripBottom.ResumeLayout(false);
-      this.toolStripBottom.PerformLayout();
-      this.toolStripRight.ResumeLayout(false);
-      this.toolStripRight.PerformLayout();
-      this.toolStripMain.ResumeLayout(false);
-      this.toolStripMain.PerformLayout();
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.toolStripMain.Location = new System.Drawing.Point(0, 24);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(1384, 55);
+            this.toolStripMain.TabIndex = 0;
+            this.toolStripMain.Text = "toolStripMain";
+            this.toolTip.SetToolTip(this.toolStripMain, "Click and use Shift, Ctrl and Alt keys to activate a different window");
+            // 
+            // buttonCountry
+            // 
+            this.buttonCountry.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonCountry.Image = ((System.Drawing.Image)(resources.GetObject("buttonCountry.Image")));
+            this.buttonCountry.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonCountry.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCountry.Name = "buttonCountry";
+            this.buttonCountry.Size = new System.Drawing.Size(52, 52);
+            this.buttonCountry.Text = "Country";
+            this.buttonCountry.ToolTipText = "Country";
+            this.buttonCountry.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonLeague
+            // 
+            this.buttonLeague.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonLeague.Image = ((System.Drawing.Image)(resources.GetObject("buttonLeague.Image")));
+            this.buttonLeague.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonLeague.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonLeague.Name = "buttonLeague";
+            this.buttonLeague.Size = new System.Drawing.Size(52, 52);
+            this.buttonLeague.Text = "League";
+            this.buttonLeague.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonTeam
+            // 
+            this.buttonTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonTeam.Image = ((System.Drawing.Image)(resources.GetObject("buttonTeam.Image")));
+            this.buttonTeam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonTeam.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonTeam.Name = "buttonTeam";
+            this.buttonTeam.Size = new System.Drawing.Size(52, 52);
+            this.buttonTeam.Text = "Team";
+            this.buttonTeam.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonKit
+            // 
+            this.buttonKit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonKit.Image = ((System.Drawing.Image)(resources.GetObject("buttonKit.Image")));
+            this.buttonKit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonKit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonKit.Name = "buttonKit";
+            this.buttonKit.Size = new System.Drawing.Size(47, 52);
+            this.buttonKit.Text = "Kits";
+            this.buttonKit.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonPlayer
+            // 
+            this.buttonPlayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPlayer.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlayer.Image")));
+            this.buttonPlayer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonPlayer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPlayer.Name = "buttonPlayer";
+            this.buttonPlayer.Size = new System.Drawing.Size(52, 52);
+            this.buttonPlayer.Text = "Player";
+            this.buttonPlayer.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonStadium
+            // 
+            this.buttonStadium.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonStadium.Image = ((System.Drawing.Image)(resources.GetObject("buttonStadium.Image")));
+            this.buttonStadium.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonStadium.ImageTransparentColor = System.Drawing.Color.White;
+            this.buttonStadium.Name = "buttonStadium";
+            this.buttonStadium.Size = new System.Drawing.Size(52, 52);
+            this.buttonStadium.Text = "Stadium";
+            this.buttonStadium.ToolTipText = "Stadium";
+            this.buttonStadium.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonTournament
+            // 
+            this.buttonTournament.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonTournament.Image = ((System.Drawing.Image)(resources.GetObject("buttonTournament.Image")));
+            this.buttonTournament.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonTournament.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonTournament.Name = "buttonTournament";
+            this.buttonTournament.Size = new System.Drawing.Size(52, 52);
+            this.buttonTournament.Text = "Tournament in Manager Mode";
+            this.buttonTournament.ToolTipText = "Tournament";
+            this.buttonTournament.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonReferee
+            // 
+            this.buttonReferee.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonReferee.Image = ((System.Drawing.Image)(resources.GetObject("buttonReferee.Image")));
+            this.buttonReferee.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonReferee.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonReferee.Name = "buttonReferee";
+            this.buttonReferee.Size = new System.Drawing.Size(52, 52);
+            this.buttonReferee.Text = "Referee";
+            this.buttonReferee.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonBall
+            // 
+            this.buttonBall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBall.Image = ((System.Drawing.Image)(resources.GetObject("buttonBall.Image")));
+            this.buttonBall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBall.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBall.Name = "buttonBall";
+            this.buttonBall.Size = new System.Drawing.Size(52, 52);
+            this.buttonBall.Text = "Ball";
+            this.buttonBall.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonShoes
+            // 
+            this.buttonShoes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShoes.Image = ((System.Drawing.Image)(resources.GetObject("buttonShoes.Image")));
+            this.buttonShoes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonShoes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonShoes.Name = "buttonShoes";
+            this.buttonShoes.Size = new System.Drawing.Size(52, 52);
+            this.buttonShoes.Text = "Boots";
+            this.buttonShoes.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonManager
+            // 
+            this.buttonManager.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonManager.Image = ((System.Drawing.Image)(resources.GetObject("buttonManager.Image")));
+            this.buttonManager.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonManager.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonManager.Name = "buttonManager";
+            this.buttonManager.Size = new System.Drawing.Size(52, 52);
+            this.buttonManager.Text = "Manager";
+            this.buttonManager.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonFormation
+            // 
+            this.buttonFormation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFormation.Image = ((System.Drawing.Image)(resources.GetObject("buttonFormation.Image")));
+            this.buttonFormation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFormation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFormation.Name = "buttonFormation";
+            this.buttonFormation.Size = new System.Drawing.Size(52, 52);
+            this.buttonFormation.Text = "Generic Formations";
+            this.buttonFormation.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonSponsor
+            // 
+            this.buttonSponsor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonSponsor.Image = ((System.Drawing.Image)(resources.GetObject("buttonSponsor.Image")));
+            this.buttonSponsor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonSponsor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSponsor.Name = "buttonSponsor";
+            this.buttonSponsor.Size = new System.Drawing.Size(52, 52);
+            this.buttonSponsor.Text = "Sponsor";
+            this.buttonSponsor.Visible = false;
+            this.buttonSponsor.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonTv
+            // 
+            this.buttonTv.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonTv.Image = ((System.Drawing.Image)(resources.GetObject("buttonTv.Image")));
+            this.buttonTv.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonTv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonTv.Name = "buttonTv";
+            this.buttonTv.Size = new System.Drawing.Size(52, 52);
+            this.buttonTv.Text = "TV";
+            this.buttonTv.Visible = false;
+            this.buttonTv.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonNewspaper
+            // 
+            this.buttonNewspaper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonNewspaper.Image = ((System.Drawing.Image)(resources.GetObject("buttonNewspaper.Image")));
+            this.buttonNewspaper.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonNewspaper.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonNewspaper.Name = "buttonNewspaper";
+            this.buttonNewspaper.Size = new System.Drawing.Size(52, 52);
+            this.buttonNewspaper.Text = "Newspaper";
+            this.buttonNewspaper.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonGloves
+            // 
+            this.buttonGloves.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonGloves.Image = ((System.Drawing.Image)(resources.GetObject("buttonGloves.Image")));
+            this.buttonGloves.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonGloves.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonGloves.Name = "buttonGloves";
+            this.buttonGloves.Size = new System.Drawing.Size(52, 52);
+            this.buttonGloves.Text = "Gloves and accessories";
+            this.buttonGloves.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // buttonAudio
+            // 
+            this.buttonAudio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonAudio.Image = ((System.Drawing.Image)(resources.GetObject("buttonAudio.Image")));
+            this.buttonAudio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAudio.Name = "buttonAudio";
+            this.buttonAudio.Size = new System.Drawing.Size(52, 52);
+            this.buttonAudio.Text = "Audio";
+            this.buttonAudio.Click += new System.EventHandler(this.buttonMain_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1384, 881);
+            this.Controls.Add(this.splitVert);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.toolStripMain);
+            this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(200, 200);
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Creation Master 17 Legacy (2023.10)";
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.splitVert.Panel1.ResumeLayout(false);
+            this.splitVert.Panel2.ResumeLayout(false);
+            this.splitVert.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitVert)).EndInit();
+            this.splitVert.ResumeLayout(false);
+            this.splitHoriz.Panel1.ResumeLayout(false);
+            this.splitHoriz.Panel2.ResumeLayout(false);
+            this.splitHoriz.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitHoriz)).EndInit();
+            this.splitHoriz.ResumeLayout(false);
+            this.toolStripBottom.ResumeLayout(false);
+            this.toolStripBottom.PerformLayout();
+            this.toolStripRight.ResumeLayout(false);
+            this.toolStripRight.PerformLayout();
+            this.toolStripMain.ResumeLayout(false);
+            this.toolStripMain.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

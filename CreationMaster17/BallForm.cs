@@ -4,29 +4,16 @@ using FifaControls;
 using FifaLibrary;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace CreationMaster
 {
     public class BallForm : Form
     {
-        //internal delegate int WindowEnumProc(IntPtr hwnd, IntPtr lparam);
-        //[DllImport("user32.dll")]
-        //internal static extern bool EnumChildWindows(IntPtr hwnd, WindowEnumProc func, IntPtr lParam);
-
-        [DllImport("user32.dll")]
-        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-
-        private Process process3dRender;
-        //private IntPtr unityHWND = IntPtr.Zero;
-
-        //private static extern int EnumChildWindows(int hWnd, EnumWindowsProc ewp, int lParam);
-        //public delegate bool EnumWindowsProc(int hWnd, int lParam);
-
         private NewIdCreator m_NewIdCreator = new NewIdCreator();
         private string m_BallCurrentFolder = FifaEnvironment.ExportFolder;
         private Ball m_CurrentBall;
@@ -53,7 +40,7 @@ namespace CreationMaster
         private TextBox textBox1;
         private Label labelId;
         private ToolStripButton buttonCamera;
-        private Panel viewer3D;
+        private FbxViewer3D fbxViewer3D;
         private CheckBox checkBox1;
 
         public BallForm()
@@ -113,77 +100,45 @@ namespace CreationMaster
 
         private void LoadBall(Ball ball)
         {
+            fbxViewer3D.Focus();
             if (!this.m_IsLoaded || this.m_CurrentBall == ball)
                 return;
+
             this.m_CurrentBall = ball;
             this.ballBindingSource.DataSource = (object)this.m_CurrentBall;
-            this.multiViewer2DTextures.Bitmaps = this.m_CurrentBall.GetBallTextures();
-            this.viewer2DBallPicture.CurrentBitmap = this.m_CurrentBall.GetBallPicture();
+
+            try
+            {
+                this.multiViewer2DTextures.Bitmaps = this.m_CurrentBall.GetBallTextures();
+                this.viewer2DBallPicture.CurrentBitmap = this.m_CurrentBall.GetBallPicture();
+            }
+            catch (Exception e)
+            {
+                FifaEnvironment.UserMessages.ShowMessage(3000, e.Message, true, this);
+                return;
+            }
+
+            if (this.multiViewer2DTextures.Bitmaps == null || this.viewer2DBallPicture.CurrentBitmap == null)
+                return;
+
             this.Show3DBall();
             GC.Collect();
         }
 
         public void Show3DBall()
         {
-            if (process3dRender != null)
-            {
-                process3dRender.Kill();
-                process3dRender = null;
-            }
-
             if (!this.buttonShow3DModel.Checked)
             {
-                //this.viewer3D.ShowEmpty();
-                this.viewer3D.Controls.Clear();
-                this.viewer3D.Refresh();
+                fbxViewer3D.ShowEmpty();
+                return;
             }
-            else
-            {
-                Bitmap[] ballTextures = this.m_CurrentBall.GetBallTextures();
-                Bitmap textureBitmap = (Bitmap)null;
-                if (ballTextures != null)
-                    textureBitmap = GraphicUtil.EmbossBitmap(ballTextures[0], ballTextures[1]);
 
-                string ballpath = FifaEnvironment.GameDir + "Content\\Character\\ball\\ball_" + this.m_CurrentBall.Id.ToString() + "\\ball_" + this.m_CurrentBall.Id.ToString();
+            fbxViewer3D.Textures = this.multiViewer2DTextures.Bitmaps;
+            fbxViewer3D.FilesPath = FifaEnvironment.GameDir + "Content\\Character\\ball\\ball_" + this.m_CurrentBall.Id.ToString() + "\\ball_" + this.m_CurrentBall.Id.ToString();
+            fbxViewer3D.ObjectId = this.m_CurrentBall.Id;
+            fbxViewer3D.ObjectType = FbxViewer3D.ObjectTypeServerPort.Ball;
 
-                textureBitmap.Save(ballpath + "_emboss.png", ImageFormat.Png);
-
-                //Rx3File ballModel = this.m_CurrentBall.GetBallModel();
-                //if (textureBitmap == null || ballModel == null)
-                if (textureBitmap == null)
-                {
-                    //this.viewer3D.Clean(1);
-                    this.viewer3D.Controls.Clear();
-                    this.viewer3D.Refresh();
-                }
-                else
-                {
-                    //Rx3IndexArray.TriangleListType = Rx3IndexArray.ETriangleListType.InvertEven;
-                    //Model3D model3D = new Model3D(ballModel.Rx3IndexArrays[0], ballModel.Rx3VertexArrays[0], textureBitmap);
-                    //this.viewer3D.Clean(1);
-                    //this.viewer3D.SetMesh(0, model3D);
-                    //this.viewer3D.Render();
-
-                    //Start embedded Unity Application
-                    process3dRender = new Process();
-                    process3dRender.StartInfo.FileName = Application.StartupPath + "\\3dRender\\Fbx3dRenderSmall.exe";
-                    process3dRender.StartInfo.Arguments = "-parentHWND " + this.viewer3D.Handle.ToInt32() + " " + Environment.CommandLine + " ";
-                    process3dRender.StartInfo.Arguments += "-mesh \"" + ballpath + "_mesh.fbx\" ";
-                    process3dRender.StartInfo.Arguments += "-color \"" + ballpath + "_color.png\" ";
-                    process3dRender.StartInfo.Arguments += "-coeff \"" + ballpath + "_coeff.png\" ";
-                    process3dRender.StartInfo.Arguments += "-normal \"" + ballpath + "_normal.png\" ";
-                    process3dRender.StartInfo.Arguments += "-emboss \"" + ballpath + "_emboss.png\" ";
-                    process3dRender.StartInfo.UseShellExecute = true;
-                    process3dRender.StartInfo.CreateNoWindow = true;
-
-                    process3dRender.Start();
-                    process3dRender.WaitForInputIdle();
-
-                    //Embed Unity Application into this Application
-                    //EnumChildWindows(this.viewer3D.Handle, WindowEnum, IntPtr.Zero);
-                    SetParent(process3dRender.MainWindowHandle, this.viewer3D.Handle);
-                }
-            }
+            fbxViewer3D.Render();
         }
 
         private bool ImportImageBallPicture(object sender, Bitmap bitmap)
@@ -312,161 +267,9 @@ namespace CreationMaster
             this.pickUpControl.SwitchObject((IdObject)this.m_CurrentBall);
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            private int _Left;
-            private int _Top;
-            private int _Right;
-            private int _Bottom;
-
-            public RECT(RECT Rectangle) : this(Rectangle.Left, Rectangle.Top, Rectangle.Right, Rectangle.Bottom)
-            {
-            }
-            public RECT(int Left, int Top, int Right, int Bottom)
-            {
-                _Left = Left;
-                _Top = Top;
-                _Right = Right;
-                _Bottom = Bottom;
-            }
-
-            public int X
-            {
-                get { return _Left; }
-                set { _Left = value; }
-            }
-            public int Y
-            {
-                get { return _Top; }
-                set { _Top = value; }
-            }
-            public int Left
-            {
-                get { return _Left; }
-                set { _Left = value; }
-            }
-            public int Top
-            {
-                get { return _Top; }
-                set { _Top = value; }
-            }
-            public int Right
-            {
-                get { return _Right; }
-                set { _Right = value; }
-            }
-            public int Bottom
-            {
-                get { return _Bottom; }
-                set { _Bottom = value; }
-            }
-            public int Height
-            {
-                get { return _Bottom - _Top; }
-                set { _Bottom = value + _Top; }
-            }
-            public int Width
-            {
-                get { return _Right - _Left; }
-                set { _Right = value + _Left; }
-            }
-            public Point Location
-            {
-                get { return new Point(Left, Top); }
-                set
-                {
-                    _Left = value.X;
-                    _Top = value.Y;
-                }
-            }
-            public Size Size
-            {
-                get { return new Size(Width, Height); }
-                set
-                {
-                    _Right = value.Width + _Left;
-                    _Bottom = value.Height + _Top;
-                }
-            }
-
-            public static implicit operator Rectangle(RECT Rectangle)
-            {
-                return new Rectangle(Rectangle.Left, Rectangle.Top, Rectangle.Width, Rectangle.Height);
-            }
-            public static implicit operator RECT(Rectangle Rectangle)
-            {
-                return new RECT(Rectangle.Left, Rectangle.Top, Rectangle.Right, Rectangle.Bottom);
-            }
-            public static bool operator ==(RECT Rectangle1, RECT Rectangle2)
-            {
-                return Rectangle1.Equals(Rectangle2);
-            }
-            public static bool operator !=(RECT Rectangle1, RECT Rectangle2)
-            {
-                return !Rectangle1.Equals(Rectangle2);
-            }
-
-            public override string ToString()
-            {
-                return "{Left: " + _Left + "; " + "Top: " + _Top + "; Right: " + _Right + "; Bottom: " + _Bottom + "}";
-            }
-
-            public override int GetHashCode()
-            {
-                return ToString().GetHashCode();
-            }
-
-            public bool Equals(RECT Rectangle)
-            {
-                return Rectangle.Left == _Left && Rectangle.Top == _Top && Rectangle.Right == _Right && Rectangle.Bottom == _Bottom;
-            }
-
-            public override bool Equals(object Object)
-            {
-                if (Object is RECT)
-                {
-                    return Equals((RECT)Object);
-                }
-                else if (Object is Rectangle)
-                {
-                    return Equals(new RECT((Rectangle)Object));
-                }
-
-                return false;
-            }
-        }
-
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-        [DllImport("user32.dll")]
-        public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
-
-        public static Bitmap PrintWindow(IntPtr hwnd)
-        {
-            RECT rc;
-            GetWindowRect(hwnd, out rc);
-            int PW_CLIENTONLY = 0x1; int PW_RENDERFULLCONTENT = 0x2;
-
-            Bitmap bmp = new Bitmap(rc.Width, rc.Height, PixelFormat.Format32bppArgb);
-            Graphics gfxBmp = Graphics.FromImage(bmp);
-            IntPtr hdcBitmap = gfxBmp.GetHdc();
-
-            PrintWindow(hwnd, hdcBitmap, PW_CLIENTONLY | PW_RENDERFULLCONTENT);
-
-            gfxBmp.ReleaseHdc(hdcBitmap);
-            gfxBmp.Dispose();
-
-            return bmp;
-        }
-
         private void buttonCamera_Click(object sender, EventArgs e)
         {
-
-            Bitmap bitmap1 = PrintWindow(this.viewer3D.Handle);
-            //Bitmap bitmap1 = PrintWindow(process3dRender.MainWindowHandle);
-            //bmp.Save("c:\\tmp\\test.png", ImageFormat.Png);
-            //Bitmap bitmap1 = null;//this.viewer3D.Photo();
+            Bitmap bitmap1 = fbxViewer3D.Photo();
 
             int height1 = bitmap1.Height;
             int width1 = bitmap1.Width;
@@ -497,7 +300,7 @@ namespace CreationMaster
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BallForm));
             this.group3D = new System.Windows.Forms.GroupBox();
-            this.viewer3D = new System.Windows.Forms.Panel();
+            this.fbxViewer3D = new FifaControls.FbxViewer3D();
             this.toolNear3D = new System.Windows.Forms.ToolStrip();
             this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -538,7 +341,7 @@ namespace CreationMaster
             // 
             // group3D
             // 
-            this.group3D.Controls.Add(this.viewer3D);
+            this.group3D.Controls.Add(this.fbxViewer3D);
             this.group3D.Controls.Add(this.toolNear3D);
             this.group3D.Dock = System.Windows.Forms.DockStyle.Fill;
             this.group3D.Location = new System.Drawing.Point(0, 0);
@@ -548,16 +351,20 @@ namespace CreationMaster
             this.group3D.TabStop = false;
             this.group3D.Text = "3D Model";
             // 
-            // viewer3D
+            // fbxViewer3D
             // 
-            this.viewer3D.AutoSize = true;
-            this.viewer3D.BackColor = System.Drawing.Color.Gray;
-            this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewer3D.Location = new System.Drawing.Point(3, 16);
-            this.viewer3D.Name = "viewer3D";
-            this.viewer3D.Size = new System.Drawing.Size(827, 514);
-            this.viewer3D.TabIndex = 3;
+            this.fbxViewer3D.AmbientColor = System.Drawing.Color.Gray;
+            this.fbxViewer3D.AutoSize = true;
+            this.fbxViewer3D.BackColor = System.Drawing.Color.Gray;
+            this.fbxViewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fbxViewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fbxViewer3D.FilesPath = null;
+            this.fbxViewer3D.Location = new System.Drawing.Point(3, 16);
+            this.fbxViewer3D.Name = "fbxViewer3D";
+            this.fbxViewer3D.ObjectId = -1;
+            this.fbxViewer3D.Size = new System.Drawing.Size(827, 514);
+            this.fbxViewer3D.TabIndex = 3;
+            this.fbxViewer3D.Textures = null;
             // 
             // toolNear3D
             // 

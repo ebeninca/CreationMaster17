@@ -54,13 +54,13 @@ In this case you will need the extra module:
  
  ```
 - FIFA DB IS SMALLER AFTER SAVING FOR THE FIRST TIME, LOSS OF DATA?
-- 3D MODELS ON MULTIPLE SCREENS, TRY BALL FIRST, SEEMS TO BE THE EASIEST
-
-110930
+- COLORS OF NUMBERS IN KITS IN GAME ARE WRONG
 
 ## Changelog
 
 v006
+- Visual adjustements in Ball form
+- Communication with 3D Render via TCP
 - Basic Ball 3D Render working with Unity executable
 
 v005

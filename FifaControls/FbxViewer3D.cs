@@ -3,11 +3,16 @@
 using FifaLibrary;
 using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.IO.Pipes;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace FifaControls
 {
@@ -16,28 +21,43 @@ namespace FifaControls
         private IContainer components;
         private int m_ObjectId = -1;
         private string m_FilesPath;
+        private ObjectTypeServerPort m_ObjectType;
         private string m_XFileMesh;
         private string[] m_Meshes;
         private Bitmap[] m_Textures;
         private Color m_AmbientColor;
-        private Process process3dRender;
+
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
         [DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+        [DllImport("user32.dll")]
+        internal static extern bool EnumChildWindows(IntPtr hwnd, WindowEnumProc func, IntPtr lParam);
 
-        protected override void Dispose(bool disposing)
+        internal delegate int WindowEnumProc(IntPtr hwnd, IntPtr lparam);
+        private Process process3dRender;
+        private IntPtr _unityHWND = IntPtr.Zero;
+
+        private readonly int PW_CLIENTONLY = 0x1;
+        private readonly int PW_RENDERFULLCONTENT = 0x2;
+
+        public Color AmbientColor { get => m_AmbientColor; set => m_AmbientColor = value; }
+        public Bitmap[] Textures { get => m_Textures; set => m_Textures = value; }
+        public int ObjectId { get => m_ObjectId; set => m_ObjectId = value; }
+        public ObjectTypeServerPort ObjectType { get => m_ObjectType; set => m_ObjectType = value; }
+        public string FilesPath { get => m_FilesPath; set => m_FilesPath = value; }
+
+        private NamedPipeClientStream clientStream;
+
+        public FbxViewer3D()
         {
-            if (process3dRender != null)
-            {
-                process3dRender.Kill();
-                process3dRender = null;
-            }
-            if (disposing && this.components != null)
-                this.components.Dispose();
-            base.Dispose(disposing);
+            this.InitializeComponent();
+            this.InitializeGraphics();
         }
 
         private void InitializeComponent()
@@ -49,23 +69,13 @@ namespace FifaControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.m_AmbientColor = Color.DimGray;
+            this.m_AmbientColor = System.Drawing.Color.Gray;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Name = "FbxViewer3D";
-            this.Size = new System.Drawing.Size(712, 492);
+            this.Size = new System.Drawing.Size(774, 416);
+            this.Resize += new System.EventHandler(this.Resize3DWindow);
             this.ResumeLayout(false);
 
-        }
-
-        public Color AmbientColor { get => m_AmbientColor; set => m_AmbientColor = value; }
-        public Bitmap[] Textures { get => m_Textures; set => m_Textures = value; }
-        public int ObjectId { get => m_ObjectId; set => m_ObjectId = value; }
-        public string FilesPath { get => m_FilesPath; set => m_FilesPath = value; }
-
-        public FbxViewer3D()
-        {
-            this.InitializeComponent();
-            this.InitializeGraphics();
         }
 
         public bool InitializeGraphics()
@@ -75,35 +85,34 @@ namespace FifaControls
 
         public void ShowEmpty()
         {
-            this.Controls.Clear();
-            this.Refresh();
-            this.Render();
-        }
-
-        public void Render()
-        {
             if (process3dRender != null)
             {
+                CloseConnection();
                 process3dRender.Kill();
                 process3dRender = null;
             }
 
-            if (this.m_Textures == null || this.m_ObjectId == -1 || this.m_FilesPath == null)
+            this.Controls.Clear();
+            this.Refresh();
+        }
+
+        public void Render()
+        {
+            if (this.m_Textures == null || this.m_ObjectId == -1 || this.m_FilesPath == null || this.m_ObjectType == null)
                 return;
 
-            Bitmap[] ballTextures = this.m_Textures;
             Bitmap textureBitmap = (Bitmap)null;
-            if (ballTextures != null)
-                textureBitmap = GraphicUtil.EmbossBitmap(ballTextures[0], ballTextures[1]);
-
+            textureBitmap = GraphicUtil.EmbossBitmap(this.m_Textures[0], this.m_Textures[1]);
             textureBitmap.Save(this.m_FilesPath + "_emboss.png", ImageFormat.Png);
 
             if (textureBitmap == null)
             {
                 this.Controls.Clear();
                 this.Refresh();
+                return;
             }
-            else
+
+            if (process3dRender == null)
             {
                 //Start embedded Unity Application
                 process3dRender = new Process();
@@ -114,25 +123,80 @@ namespace FifaControls
                 process3dRender.StartInfo.Arguments += "-coeff \"" + this.m_FilesPath + "_coeff.png\" ";
                 process3dRender.StartInfo.Arguments += "-normal \"" + this.m_FilesPath + "_normal.png\" ";
                 process3dRender.StartInfo.Arguments += "-emboss \"" + this.m_FilesPath + "_emboss.png\" ";
+                //ask to start the TCPServer for future communications to render objects
+                process3dRender.StartInfo.Arguments += "-runServer " + (int)this.ObjectType + " ";
+
                 process3dRender.StartInfo.UseShellExecute = true;
-                process3dRender.StartInfo.CreateNoWindow = true;
+                process3dRender.StartInfo.CreateNoWindow = false;
+                process3dRender.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
 
                 process3dRender.Start();
                 process3dRender.WaitForInputIdle();
 
                 SetParent(process3dRender.MainWindowHandle, this.Handle);
+                //needed to make the screen resize work correclty
+                EnumChildWindows(this.Handle, WindowEnum, IntPtr.Zero);
             }
+            else
+            {
+                //reusing the same process just sending a new message
+                ConnectTcpServer();
+                SendMessage();
+            }
+        }
+
+        private int WindowEnum(IntPtr hwnd, IntPtr lparam)
+        {
+            _unityHWND = hwnd;
+            return 0;
+        }
+
+        private TcpClient client;
+        private NetworkStream stream;
+
+        private void ConnectTcpServer()
+        {
+            if (client == null)
+            {
+                client = new TcpClient("localhost", (int)this.ObjectType);
+            }
+            stream = client.GetStream();
+        }
+
+        private void SendMessage()
+        {
+            string data = "-mesh \"" + this.m_FilesPath + "_mesh.fbx\" ";
+            data += "-color \"" + this.m_FilesPath + "_color.png\" ";
+            data += "-coeff \"" + this.m_FilesPath + "_coeff.png\" ";
+            data += "-normal \"" + this.m_FilesPath + "_normal.png\" ";
+            data += "-emboss \"" + this.m_FilesPath + "_emboss.png\" ";
+
+            byte[] messageBytes = Encoding.UTF8.GetBytes(data);
+            stream.Write(messageBytes, 0, messageBytes.Length);
+
+            byte[] buffer = new byte[1024];
+            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+            string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+            Console.WriteLine("TCP RESPONSE >>>" + response);
+        }
+
+        private void CloseConnection()
+        {
+            client?.Close();
+            client = null;
         }
 
         public Bitmap Photo()
         {
             try
             {
-                RECT rc;
-                GetWindowRect(this.Handle, out rc);
-                int PW_CLIENTONLY = 0x1; int PW_RENDERFULLCONTENT = 0x2;
+                RECT rc = new RECT();
+                GetWindowRect(this.Handle, ref rc);
 
-                Bitmap bmp = new Bitmap(rc.Width, rc.Height, PixelFormat.Format32bppArgb);
+                int width = rc.Right - rc.Left;
+                int height = rc.Bottom - rc.Top;
+                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
                 Graphics gfxBmp = Graphics.FromImage(bmp);
                 IntPtr hdcBitmap = gfxBmp.GetHdc();
 
@@ -149,6 +213,35 @@ namespace FifaControls
             }
         }
 
+        private void Resize3DWindow(object sender, EventArgs e)
+        {
+            this.Resize3DWindow();
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
+        public void Resize3DWindow()
+        {
+            if (process3dRender != null)
+            {
+                process3dRender.Refresh();
+                bool success = MoveWindow(_unityHWND, 0, 0, this.Width, this.Height, true);
+                if (!success)
+                {
+                    int err = Marshal.GetLastWin32Error();
+                    Console.WriteLine("ERROR CODE >> " + err);
+                    return;
+                }
+            }
+        }
+
         public void Clean()
         {
             this.m_FilesPath = null;
@@ -156,7 +249,8 @@ namespace FifaControls
             this.m_Textures = null;
             this.m_XFileMesh = null;
             this.m_Meshes = null;
-            this.m_AmbientColor = Color.DimGray;
+            this.BackColor = System.Drawing.Color.Gray;
+            this.m_AmbientColor = System.Drawing.Color.Gray;
 
             if (process3dRender != null)
             {
@@ -165,129 +259,28 @@ namespace FifaControls
             }
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
+        protected override void Dispose(bool disposing)
         {
-            private int _Left;
-            private int _Top;
-            private int _Right;
-            private int _Bottom;
+            if (process3dRender != null)
+            {
+                CloseConnection();
+                process3dRender.Kill();
+                process3dRender = null;
+            }
+            if (disposing && this.components != null)
+                this.components.Dispose();
+            base.Dispose(disposing);
+        }
 
-            public RECT(RECT Rectangle) : this(Rectangle.Left, Rectangle.Top, Rectangle.Right, Rectangle.Bottom)
-            {
-            }
-            public RECT(int Left, int Top, int Right, int Bottom)
-            {
-                _Left = Left;
-                _Top = Top;
-                _Right = Right;
-                _Bottom = Bottom;
-            }
-
-            public int X
-            {
-                get { return _Left; }
-                set { _Left = value; }
-            }
-            public int Y
-            {
-                get { return _Top; }
-                set { _Top = value; }
-            }
-            public int Left
-            {
-                get { return _Left; }
-                set { _Left = value; }
-            }
-            public int Top
-            {
-                get { return _Top; }
-                set { _Top = value; }
-            }
-            public int Right
-            {
-                get { return _Right; }
-                set { _Right = value; }
-            }
-            public int Bottom
-            {
-                get { return _Bottom; }
-                set { _Bottom = value; }
-            }
-            public int Height
-            {
-                get { return _Bottom - _Top; }
-                set { _Bottom = value + _Top; }
-            }
-            public int Width
-            {
-                get { return _Right - _Left; }
-                set { _Right = value + _Left; }
-            }
-            public Point Location
-            {
-                get { return new Point(Left, Top); }
-                set
-                {
-                    _Left = value.X;
-                    _Top = value.Y;
-                }
-            }
-            public Size Size
-            {
-                get { return new Size(Width, Height); }
-                set
-                {
-                    _Right = value.Width + _Left;
-                    _Bottom = value.Height + _Top;
-                }
-            }
-
-            public static implicit operator Rectangle(RECT Rectangle)
-            {
-                return new Rectangle(Rectangle.Left, Rectangle.Top, Rectangle.Width, Rectangle.Height);
-            }
-            public static implicit operator RECT(Rectangle Rectangle)
-            {
-                return new RECT(Rectangle.Left, Rectangle.Top, Rectangle.Right, Rectangle.Bottom);
-            }
-            public static bool operator ==(RECT Rectangle1, RECT Rectangle2)
-            {
-                return Rectangle1.Equals(Rectangle2);
-            }
-            public static bool operator !=(RECT Rectangle1, RECT Rectangle2)
-            {
-                return !Rectangle1.Equals(Rectangle2);
-            }
-
-            public override string ToString()
-            {
-                return "{Left: " + _Left + "; " + "Top: " + _Top + "; Right: " + _Right + "; Bottom: " + _Bottom + "}";
-            }
-
-            public override int GetHashCode()
-            {
-                return ToString().GetHashCode();
-            }
-
-            public bool Equals(RECT Rectangle)
-            {
-                return Rectangle.Left == _Left && Rectangle.Top == _Top && Rectangle.Right == _Right && Rectangle.Bottom == _Bottom;
-            }
-
-            public override bool Equals(object Object)
-            {
-                if (Object is RECT)
-                {
-                    return Equals((RECT)Object);
-                }
-                else if (Object is Rectangle)
-                {
-                    return Equals(new RECT((Rectangle)Object));
-                }
-
-                return false;
-            }
+        public enum ObjectTypeServerPort : Int16
+        {
+            Ball = 7779,
+            Kit = 7778,
+            Shoe = 7777,
+            Face = 7776,
+            Referee = 7775,
+            Manager = 7774,
+            Glove = 7773
         }
     }
 }
