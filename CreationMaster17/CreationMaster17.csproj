@@ -7,7 +7,7 @@
     <ProjectGuid>{B43581D8-ED3D-4B4C-AFF2-4195BC331AE9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>CreationMaster17</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <FileAlignment>512</FileAlignment>
     <RootNamespace>CreationMaster</RootNamespace>
@@ -60,9 +60,6 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.3D, Version=23.8.0.0, Culture=neutral, PublicKeyToken=f071c641d0b4582b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.3D.23.8.0\lib\net45\Aspose.3D.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
