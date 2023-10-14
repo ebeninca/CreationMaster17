@@ -28,12 +28,17 @@ jobs:
         msbuild /t:Rebuild /p:Configuration=Release
         mkdir ./app
         xcopy /s /y .\CreationMaster17\bin\*.* .\app
-
+        
+    - name: Zip app folder
+      run: |
+        7z a -r CreationMaster17.zip ./app
+        mv CreationMaster17.zip app/        
+        
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./app/*
+        files: ./app/CreationMaster17.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
