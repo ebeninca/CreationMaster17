@@ -22,13 +22,16 @@ jobs:
 
     - name: Restore Packages
       run: nuget restore CreationMaster17.sln
-  
-    - name: Build and package
+
+    - name: Create Dirs
       run: |
         mkdir -p ./CreationMaster17/bin/Templates
         mkdir -p ./CreationMaster17/bin/3dRender
-        msbuild /t:Rebuild /p:Configuration=Release
         mkdir ./cm17
+  
+    - name: Build and package
+      run: |
+        msbuild /t:Rebuild /p:Configuration=Release
         xcopy /s /y .\CreationMaster17\bin\*.* .\cm17
         
     - name: Zip app folder
