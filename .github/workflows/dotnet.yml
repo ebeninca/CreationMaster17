@@ -26,7 +26,7 @@ jobs:
   
     - name: Build and package
       run: |
-        msbuild /pre /t:Rebuild /p:Configuration=Release /p:OutDir=.\CreationMaster17\bin
+        msbuild /t:Rebuild /p:Configuration=Release /p:OutDir=.\CreationMaster17\bin
         mkdir ./app
         xcopy /s /y .\CreationMaster17\bin\*.* .\app
 
