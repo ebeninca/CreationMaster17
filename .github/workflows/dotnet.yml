@@ -25,6 +25,8 @@ jobs:
   
     - name: Build and package
       run: |
+        mkdir -p ./CreationMaster17/bin/Templates
+        mkdir -p ./CreationMaster17/bin/3dRender
         msbuild /t:Rebuild /p:Configuration=Release
         mkdir ./cm17
         xcopy /s /y .\CreationMaster17\bin\*.* .\cm17
