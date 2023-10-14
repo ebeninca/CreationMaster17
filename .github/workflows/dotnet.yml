@@ -31,7 +31,7 @@ jobs:
   
     - name: Build and package
       run: |
-        msbuild /t:Rebuild /p:Configuration=Release
+        msbuild /p:BuildInParallel=false /m:1 /t:Rebuild /p:Configuration=Release 
         xcopy /s /y .\CreationMaster17\bin\*.* .\cm17
         
     - name: Zip app folder
