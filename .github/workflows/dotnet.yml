@@ -28,8 +28,6 @@ jobs:
         mkdir -p ./CreationMaster17/bin/Templates
         mkdir -p ./CreationMaster17/bin/3dRender
         mkdir ./cm17
-        tree ./3dRenderBuild
-        tree ./CreationMaster17/Templates
   
     - name: Build and package
       run: |
