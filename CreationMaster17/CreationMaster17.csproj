@@ -226,10 +226,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
