@@ -8,9 +8,9 @@ namespace FifaLibrary
   {
     public static Bitmap s_JerseyWrinkle = (Bitmap) null;
     public static Bitmap s_ShortsWrinkle = (Bitmap) null;
-    public static Model3D[] s_JerseyModel3D = new Model3D[16];
-    public static Model3D s_ShortsModel3D = (Model3D) null;
-    public static Model3D s_SocksModel3D = (Model3D) null;
+    //public static Model3D[] s_JerseyModel3D = new Model3D[16];
+    //public static Model3D s_ShortsModel3D = (Model3D) null;
+    //public static Model3D s_SocksModel3D = (Model3D) null;
     private static Bitmap s_JerseyShadow = (Bitmap) null;
     private static Bitmap s_ShortsShadow = (Bitmap) null;
     private float[] m_Positions = new float[32];
@@ -351,7 +351,7 @@ namespace FifaLibrary
         return;
       Kit.s_JerseyWrinkle = new Bitmap(FifaEnvironment.LaunchDir + "\\Templates\\JerseyBump0.png");
       Kit.s_ShortsWrinkle = new Bitmap(FifaEnvironment.LaunchDir + "\\Templates\\ShortsBump.png");
-      for (int index = 0; index < Kit.s_JerseyModel3D.Length; ++index)
+      /*for (int index = 0; index < Kit.s_JerseyModel3D.Length; ++index)
       {
         Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata("data/sceneassets/body/jersey_1_" + index.ToString() + "_0_0_0_0.rx3");
         Kit.s_JerseyModel3D[index] = new Model3D(rx3FromZdata.Rx3IndexArrays[0], rx3FromZdata.Rx3VertexArrays[0], (Bitmap) null);
@@ -359,7 +359,7 @@ namespace FifaLibrary
       Rx3File rx3FromZdata1 = FifaEnvironment.GetRx3FromZdata("data/sceneassets/body/shorts_1_0.rx3");
       Kit.s_ShortsModel3D = new Model3D(rx3FromZdata1.Rx3IndexArrays[0], rx3FromZdata1.Rx3VertexArrays[0], (Bitmap) null);
       Rx3File rx3FromZdata2 = FifaEnvironment.GetRx3FromZdata("data/sceneassets/body/sock_1_0.rx3");
-      Kit.s_SocksModel3D = new Model3D(rx3FromZdata2.Rx3IndexArrays[0], rx3FromZdata2.Rx3VertexArrays[0], (Bitmap) null);
+      Kit.s_SocksModel3D = new Model3D(rx3FromZdata2.Rx3IndexArrays[0], rx3FromZdata2.Rx3VertexArrays[0], (Bitmap) null);*/
     }
 
     public override string ToString()

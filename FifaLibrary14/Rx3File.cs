@@ -519,7 +519,7 @@ namespace FifaLibrary
                 return false;
             for (int index = 0; index < this.m_Rx3IndexArrays.Length; ++index)
             {
-                Model3D model3D = new Model3D();
+                /*Model3D model3D = new Model3D();
                 model3D.Initialize(this.m_Rx3IndexArrays[index], this.m_Rx3VertexArrays[index]);
                 string path = baseFileName + index.ToString() + ".X";
                 Application.CurrentCulture = new CultureInfo("en-us");
@@ -528,7 +528,7 @@ namespace FifaLibrary
                 w.WriteLine("xof 0303txt 0032");
                 model3D.SaveXFile(w);
                 w.Close();
-                fileStream.Close();
+                fileStream.Close();*/
             }
             return true;
         }

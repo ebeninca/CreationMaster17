@@ -35,8 +35,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.DirectX" />
-    <Reference Include="Microsoft.DirectX.Direct3D" />
     <Reference Include="NAudio, Version=1.7.1.17, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.1\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -65,7 +63,6 @@
     <Compile Include="Frosty\NativeWriter.cs" />
     <Compile Include="Frosty\FrostyProject.cs" />
     <Compile Include="Localization.cs" />
-    <Compile Include="Model3D.cs" />
     <Compile Include="EImageType.cs" />
     <Compile Include="Fsh.cs" />
     <Compile Include="ImageDir.cs" />
@@ -240,8 +237,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F|xcopy /Y /I /E "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)" &amp;&amp; ^
-echo F|xcopy /S /Q /Y /F "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\Release\$(TargetFileName)"
+    <PostBuildEvent>echo F|xcopy /Y /I /E "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

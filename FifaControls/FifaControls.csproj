@@ -35,9 +35,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.DirectX" />
-    <Reference Include="Microsoft.DirectX.Direct3D" />
-    <Reference Include="Microsoft.DirectX.Direct3DX" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -89,9 +86,6 @@
     </Compile>
     <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Viewer3D.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="NewKitCreator.cs">
       <SubType>Form</SubType>
@@ -145,7 +139,6 @@
     <EmbeddedResource Include="ViewCompetitionSetting.resx" />
     <EmbeddedResource Include="Viewer2D.resx" />
     <EmbeddedResource Include="FbxViewer3D.resx" />
-    <EmbeddedResource Include="Viewer3D.resx" />
     <EmbeddedResource Include="ViewQualRule.resx" />
     <EmbeddedResource Include="WeatherForm.resx" />
     <EmbeddedResource Include="WeatherSelector.resx" />
@@ -158,7 +151,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F|xcopy /Y /I /E "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)" &amp;&amp; ^
-echo F|xcopy /S /Q /Y /F "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\Release\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>echo F|xcopy /Y /I /E "$(TargetPath)" "$(SolutionDir)CreationMaster17\bin\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

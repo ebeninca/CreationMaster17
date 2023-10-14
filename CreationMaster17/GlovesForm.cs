@@ -19,7 +19,7 @@ namespace CreationMaster
     private SplitContainer splitContainer1;
     private SplitContainer splitContainer2;
     private MultiViewer2D multiViewer2DGkGloves;
-    private Viewer3D viewer3D;
+    private FbxViewer3D viewer3D;
     private ToolStrip toolNear3D;
     private ToolStripButton buttonShow3DModel;
     private ToolStripSeparator toolStripSeparator1;
@@ -123,17 +123,17 @@ namespace CreationMaster
       {
         Bitmap[] gkGlovesTextures = GkGloves.GetGkGlovesTextures(this.m_CurrentGkGloves.Id);
         Bitmap bitmap = GraphicUtil.EmbossBitmap(gkGlovesTextures[0], gkGlovesTextures[1]);
-        if (bitmap == null || GkGloves.GkGlovesModel == null)
-        {
-          this.viewer3D.Clean(1);
-        }
-        else
-        {
-          GkGloves.GkGlovesModel.TextureBitmap = bitmap;
-          this.viewer3D.Clean(1);
-          this.viewer3D.SetMesh(0, GkGloves.GkGlovesModel);
+        //if (bitmap == null || GkGloves.GkGlovesModel == null)
+       // {
+          //this.viewer3D.Clean(1);
+       // }
+       // else
+       // {
+         // GkGloves.GkGlovesModel.TextureBitmap = bitmap;
+         // this.viewer3D.Clean(1);
+         // this.viewer3D.SetMesh(0, GkGloves.GkGlovesModel);
           this.viewer3D.Render();
-        }
+       // }
       }
     }
 
@@ -189,7 +189,7 @@ namespace CreationMaster
       this.splitContainer1 = new SplitContainer();
       this.multiViewer2DGkGloves = new MultiViewer2D();
       this.splitContainer2 = new SplitContainer();
-      this.viewer3D = new Viewer3D();
+      this.viewer3D = new FbxViewer3D();
       this.toolNear3D = new ToolStrip();
       this.buttonShow3DModel = new ToolStripButton();
       this.toolStripSeparator1 = new ToolStripSeparator();
@@ -236,7 +236,7 @@ namespace CreationMaster
       this.viewer3D.BackColor = Color.Gray;
       this.viewer3D.BorderStyle = BorderStyle.Fixed3D;
       this.viewer3D.Dock = DockStyle.Fill;
-      this.viewer3D.LightDirectionX = 0.0f;
+      /*this.viewer3D.LightDirectionX = 0.0f;
       this.viewer3D.LightDirectionY = 0.0f;
       this.viewer3D.LightDirectionZ = -1f;
       this.viewer3D.LightX = 100f;
@@ -252,7 +252,7 @@ namespace CreationMaster
       this.viewer3D.ViewX = 12f;
       this.viewer3D.ViewY = 110f;
       this.viewer3D.ViewZ = 114.2f;
-      this.viewer3D.ZbufferRenderState = (bool[]) null;
+      this.viewer3D.ZbufferRenderState = (bool[]) null;*/
       this.toolNear3D.Dock = DockStyle.Bottom;
       this.toolNear3D.GripStyle = ToolStripGripStyle.Hidden;
       this.toolNear3D.Items.AddRange(new ToolStripItem[2]

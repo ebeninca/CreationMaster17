@@ -52,7 +52,7 @@ namespace CreationMaster
     private ComboBox comboLeague0;
     private ComboBox comboStyle;
     private Label labelStyle;
-    private Viewer3D viewer3D;
+    private FbxViewer3D viewer3D;
     private ToolStrip tool3D;
     private ToolStripButton buttonShow3DModel;
     private ToolStripSeparator toolStripSeparator1;
@@ -130,7 +130,7 @@ namespace CreationMaster
     public RefereeForm()
     {
       this.InitializeComponent();
-      this.viewer3D.RotationYCoeff = 1f / 1000f;
+      //this.viewer3D.RotationYCoeff = 1f / 1000f;
       this.comboLatinModels.Items.Clear();
       for (int index = 0; index < GenericHead.c_LatinModels.Length; ++index)
         this.comboLatinModels.Items.Add((object)GenericHead.c_LatinModels[index].ToString());
@@ -603,7 +603,7 @@ namespace CreationMaster
         }
         else
         {
-          Player.s_Model3DHead = new Model3D(headModel.Rx3IndexArrays[0], headModel.Rx3VertexArrays[0], faceTexture);
+          /*Player.s_Model3DHead = new Model3D(headModel.Rx3IndexArrays[0], headModel.Rx3VertexArrays[0], faceTexture);
           Player.s_Model3DEyes = new Model3D(headModel.Rx3IndexArrays[1], headModel.Rx3VertexArrays[1], eyesTexture);
           Player.s_Model3DHairPart4 = (Model3D)null;
           Player.s_Model3DHairPart5 = (Model3D)null;
@@ -616,7 +616,7 @@ namespace CreationMaster
           {
             Player.s_Model3DHead = new Model3D(headModel.Rx3IndexArrays[0], headModel.Rx3VertexArrays[0], eyesTexture);
             Player.s_Model3DEyes = new Model3D(headModel.Rx3IndexArrays[1], headModel.Rx3VertexArrays[1], faceTexture);
-          }
+          }*/
           Rx3File hairModel = this.m_CurrentReferee.GetHairModel();
           if (hairModel != null)
           {
@@ -633,9 +633,9 @@ namespace CreationMaster
               GraphicUtil.GetAlfaFromChannel(bitmap2, hairAlfaTexture, 4 - this.m_HairAlfaChannel);
             }
             Rx3IndexArray.TriangleListType = Rx3IndexArray.ETriangleListType.InvertEven;
-            Player.s_Model3DHairPart4 = new Model3D(hairModel.Rx3IndexArrays[0], hairModel.Rx3VertexArrays[0], bitmap1);
-            if (hairModel.Rx3IndexArrays.Length > 1)
-              Player.s_Model3DHairPart5 = new Model3D(hairModel.Rx3IndexArrays[1], hairModel.Rx3VertexArrays[1], bitmap2);
+            //Player.s_Model3DHairPart4 = new Model3D(hairModel.Rx3IndexArrays[0], hairModel.Rx3VertexArrays[0], bitmap1);
+            //if (hairModel.Rx3IndexArrays.Length > 1)
+            //  Player.s_Model3DHairPart5 = new Model3D(hairModel.Rx3IndexArrays[1], hairModel.Rx3VertexArrays[1], bitmap2);
           }
           this.ShowHead3D();
         }
@@ -644,7 +644,7 @@ namespace CreationMaster
 
     private void ShowHead3D()
     {
-      int nMeshes = 2;
+      /*int nMeshes = 2;
       if (Player.s_Model3DHairPart4 != null)
         nMeshes = 3;
       if (Player.s_Model3DHairPart5 != null)
@@ -680,7 +680,7 @@ namespace CreationMaster
         int num4 = meshIndex3 + 1;
         Model3D model3DhairPart5 = Player.s_Model3DHairPart5;
         viewer3D3.SetMesh(meshIndex3, model3DhairPart5, false);
-      }
+      }*/
       this.viewer3D.Render();
     }
 
@@ -1230,7 +1230,7 @@ namespace CreationMaster
       this.comboLeague2 = new ComboBox();
       this.viewer2DPlayerGui = new Viewer2D();
       this.splitContainer2 = new SplitContainer();
-      this.viewer3D = new Viewer3D();
+      this.viewer3D = new FbxViewer3D();
       this.tool3D = new ToolStrip();
       this.buttonShow3DModel = new ToolStripButton();
       this.buttonSwitchRenderingMode = new ToolStripButton();
@@ -1846,7 +1846,7 @@ namespace CreationMaster
       this.viewer3D.BackColor = Color.Gray;
       this.viewer3D.BorderStyle = BorderStyle.Fixed3D;
       this.viewer3D.Dock = DockStyle.Fill;
-      this.viewer3D.LightDirectionX = -0.5f;
+      /*this.viewer3D.LightDirectionX = -0.5f;
       this.viewer3D.LightDirectionY = -0.25f;
       this.viewer3D.LightDirectionZ = -1f;
       this.viewer3D.LightX = 30f;
@@ -1861,7 +1861,7 @@ namespace CreationMaster
       this.viewer3D.ViewX = 0.0f;
       this.viewer3D.ViewY = 171f;
       this.viewer3D.ViewZ = 49f;
-      this.viewer3D.ZbufferRenderState = (bool[])null;
+      this.viewer3D.ZbufferRenderState = (bool[])null;*/
       this.tool3D.Dock = DockStyle.Bottom;
       this.tool3D.GripStyle = ToolStripGripStyle.Hidden;
       this.tool3D.Items.AddRange(new ToolStripItem[4]

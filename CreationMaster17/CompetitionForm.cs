@@ -347,7 +347,7 @@ namespace CreationMaster
     private NumericUpDown numericBall;
     private PictureBox pictureBall;
     private GroupBox group3D;
-    private Viewer3D viewer3D;
+    private FbxViewer3D viewer3D;
     private ToolStrip toolNear3D;
     private ToolStripButton buttonShow3DModel;
     private ToolStripSeparator toolStripSeparator1;
@@ -1769,16 +1769,16 @@ namespace CreationMaster
         Rx3File model = this.m_CurrentTrophy.GetModel();
         if (textureBitmap == null || model == null)
         {
-          this.viewer3D.Clean(1);
+          //this.viewer3D.Clean(1);
         }
         else
         {
           Rx3IndexArray.TriangleListType = Rx3IndexArray.ETriangleListType.InvertEven;
-          this.viewer3D.Clean(model.Rx3VertexArrays.Length);
+          //this.viewer3D.Clean(model.Rx3VertexArrays.Length);
           for (int meshIndex = 0; meshIndex < model.Rx3VertexArrays.Length; ++meshIndex)
           {
-            Model3D model3D = new Model3D(model.Rx3IndexArrays[meshIndex], model.Rx3VertexArrays[meshIndex], textureBitmap);
-            this.viewer3D.SetMesh(meshIndex, model3D);
+            //Model3D model3D = new Model3D(model.Rx3IndexArrays[meshIndex], model.Rx3VertexArrays[meshIndex], textureBitmap);
+            //this.viewer3D.SetMesh(meshIndex, model3D);
           }
           this.viewer3D.Render();
         }
@@ -4956,7 +4956,7 @@ namespace CreationMaster
             this.viewer2DTrophy128 = new FifaControls.Viewer2D();
             this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
             this.group3D = new System.Windows.Forms.GroupBox();
-            this.viewer3D = new FifaControls.Viewer3D();
+            this.viewer3D = new FbxViewer3D();
             this.toolNear3D = new System.Windows.Forms.ToolStrip();
             this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -10058,7 +10058,7 @@ namespace CreationMaster
             this.viewer3D.BackColor = System.Drawing.Color.Gray;
             this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewer3D.LightDirectionX = 0.5F;
+            /*this.viewer3D.LightDirectionX = 0.5F;
             this.viewer3D.LightDirectionY = -0.25F;
             this.viewer3D.LightDirectionZ = -1F;
             this.viewer3D.LightX = -30F;
@@ -10074,7 +10074,7 @@ namespace CreationMaster
             this.viewer3D.ViewX = 0F;
             this.viewer3D.ViewY = 35F;
             this.viewer3D.ViewZ = 105F;
-            this.viewer3D.ZbufferRenderState = null;
+            this.viewer3D.ZbufferRenderState = null;*/
             // 
             // toolNear3D
             // 

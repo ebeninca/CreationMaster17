@@ -1002,7 +1002,7 @@ namespace FifaLibrary
         {
             this.BuildHairPartsTextures();
             Rx3File headModel = this.GetHeadModel();
-            if (this.m_FaceTextureBitmap == null || headModel == null)
+            /*if (this.m_FaceTextureBitmap == null || headModel == null)
                 return false;
             Model3D model3D1 = new Model3D(headModel.Rx3IndexArrays[0], headModel.Rx3VertexArrays[0], this.m_FaceTextureBitmap);
             if (this.m_EyesTextureBitmap == null || headModel == null)
@@ -1011,7 +1011,7 @@ namespace FifaLibrary
             Rx3File hairModel = this.GetHairModel();
             if (this.m_FaceTextureBitmap == null || hairModel == null)
                 return false;
-            Model3D model3D3 = new Model3D(hairModel.Rx3IndexArrays[0], hairModel.Rx3VertexArrays[0], this.m_HairColorTextureBitmap);
+            Model3D model3D3 = new Model3D(hairModel.Rx3IndexArrays[0], hairModel.Rx3VertexArrays[0], this.m_HairColorTextureBitmap);*/
             return true;
         }
 

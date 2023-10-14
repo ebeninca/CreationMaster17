@@ -63,10 +63,6 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.DirectX.Direct3D" />
-    <Reference Include="MonoGame.Framework, Version=3.8.0.1641, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\lib\net452\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -200,10 +196,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FIFA-17.ico" />
-    <Content Include="FIFA17.ico" />
     <Content Include="icon.ico" />
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Resources\buttonTv.Image.png" />
     <None Include="Resources\buttonStadium.Image.png" />
     <None Include="Resources\buttonSponsor.Image.png" />
@@ -235,17 +229,8 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets'))" />
-  </Target>
   <PropertyGroup>
     <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; ^
-xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)Release\3dRender\" /Y /I /E &amp;&amp; ^
-xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E &amp;&amp; ^
-xcopy "$(ProjectDir)Templates\" "$(TargetDir)Release\Templates\" /Y /I /E</PreBuildEvent>
+xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E</PreBuildEvent>
   </PropertyGroup>
 </Project>

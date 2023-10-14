@@ -1,6 +1,6 @@
 ﻿// Original code created by Rinaldo
 
-using Microsoft.DirectX.Direct3D;
+//using Microsoft.DirectX.Direct3D;
 using System.IO;
 
 namespace FifaLibrary
@@ -92,7 +92,7 @@ namespace FifaLibrary
             return true;
         }
 
-        public bool SetVertex(CustomVertex.PositionNormalTextured[] newVertexes)
+        /*public bool SetVertex(CustomVertex.PositionNormalTextured[] newVertexes)
         {
             if (this.m_nVertex != newVertexes.Length)
                 return false;
@@ -103,6 +103,6 @@ namespace FifaLibrary
                 this.m_Vertex[index].Z = newVertexes[index].Z;
             }
             return true;
-        }
+        }*/
     }
 }

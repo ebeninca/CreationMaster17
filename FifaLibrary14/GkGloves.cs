@@ -6,7 +6,7 @@ namespace FifaLibrary
 {
   public class GkGloves : IdObject
   {
-    private static Model3D s_GkGlovesModel;
+    /*private static Model3D s_GkGlovesModel;
 
     public static Model3D GkGlovesModel
     {
@@ -14,22 +14,22 @@ namespace FifaLibrary
       {
         return GkGloves.s_GkGlovesModel;
       }
-    }
+    }*/
 
     public void Set3DModelTexture(Bitmap bitmaps)
     {
-      if (GkGloves.s_GkGlovesModel == null)
-        return;
-      GkGloves.s_GkGlovesModel.TextureBitmap = bitmaps;
+      //if (GkGloves.s_GkGlovesModel == null)
+     //   return;
+     // GkGloves.s_GkGlovesModel.TextureBitmap = bitmaps;
     }
 
     public GkGloves(int gkglovesId)
       : base(gkglovesId)
     {
-      if (GkGloves.s_GkGlovesModel != null)
-        return;
+      //if (GkGloves.s_GkGlovesModel != null)
+       // return;
       Rx3File rx3FromZdata = FifaEnvironment.GetRx3FromZdata(GkGloves.GkGlovesModelFileName(1));
-      GkGloves.s_GkGlovesModel = new Model3D(rx3FromZdata.Rx3IndexArrays[0], rx3FromZdata.Rx3VertexArrays[0], (Bitmap) null);
+      //GkGloves.s_GkGlovesModel = new Model3D(rx3FromZdata.Rx3IndexArrays[0], rx3FromZdata.Rx3VertexArrays[0], (Bitmap) null);
     }
 
     public override string ToString()

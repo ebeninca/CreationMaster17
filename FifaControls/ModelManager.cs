@@ -11,7 +11,7 @@ namespace FifaControls
     {
         private IContainer components;
         private ToolStrip toolStrip1;
-        public Viewer3D viewer;
+        public FbxViewer3D viewer;
         public ToolStripButton buttonShow;
         public ToolStripButton buttonImport;
         public ToolStripButton buttonExport;
@@ -41,7 +41,7 @@ namespace FifaControls
             this.buttonImport = new ToolStripButton();
             this.buttonExport = new ToolStripButton();
             this.buttonRemove = new ToolStripButton();
-            this.viewer = new Viewer3D();
+            this.viewer = new FbxViewer3D();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             this.toolStrip1.Dock = DockStyle.Bottom;
@@ -89,7 +89,7 @@ namespace FifaControls
             this.viewer.BackColor = Color.Gray;
             this.viewer.BorderStyle = BorderStyle.Fixed3D;
             this.viewer.Dock = DockStyle.Fill;
-            this.viewer.LightDirectionZ = 0.0f;
+            /*this.viewer.LightDirectionZ = 0.0f;
             this.viewer.LightX = 0.0f;
             this.viewer.LightY = 100f;
             this.viewer.LightZ = 100f;
@@ -102,7 +102,7 @@ namespace FifaControls
             this.viewer.ViewX = 0.0f;
             this.viewer.ViewY = 100f;
             this.viewer.ViewZ = 100f;
-            this.viewer.ZbufferRenderState = (bool[])null;
+            this.viewer.ZbufferRenderState = (bool[])null;*/
             this.AutoScaleDimensions = new SizeF(6f, 13f);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.Controls.Add((Control)this.viewer);
