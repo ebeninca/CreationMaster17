@@ -15,18 +15,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.1.0
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.2.0
-
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.3.1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
 
     - name: Restore Packages
       run: nuget restore CreationMaster17.sln
   
     - name: Build and package
       run: |
-        msbuild /t:Rebuild /p:Configuration=Release /p:OutDir=.\CreationMaster17\bin
+        msbuild /pre /t:Rebuild /p:Configuration=Release /p:OutDir=.\CreationMaster17\bin
         mkdir ./app
         xcopy /s /y .\CreationMaster17\bin\*.* .\app
 
