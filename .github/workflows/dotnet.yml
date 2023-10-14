@@ -9,6 +9,7 @@ on:
 
 jobs:
   release:
+    permissions: write-all 
     runs-on: windows-2019
 
     steps:
@@ -26,7 +27,7 @@ jobs:
   
     - name: Build and package
       run: |
-        msbuild /t:Rebuild /p:Configuration=Release /p:OutDir=.\CreationMaster17\bin
+        msbuild /t:Rebuild /p:Configuration=Release
         mkdir ./app
         xcopy /s /y .\CreationMaster17\bin\*.* .\app
 

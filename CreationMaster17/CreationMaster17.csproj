@@ -230,7 +230,6 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; ^
-xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E</PreBuildEvent>
+    <PreBuildEvent>xcopy "$(SolutionDir)3dRenderBuild\" "$(TargetDir)3dRender\" /Y /I /E &amp;&amp; xcopy "$(ProjectDir)Templates\" "$(TargetDir)Templates\" /Y /I /E</PreBuildEvent>
   </PropertyGroup>
 </Project>
