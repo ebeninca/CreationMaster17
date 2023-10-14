@@ -226,7 +226,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>robocopy "$(ProjectDir)Templates" "$(TargetDir)Templates" /E /COPY:DAT /PURGE
+    <PostBuildEvent>robocopy /E /COPY:DAT "$(ProjectDir)Templates" "$(TargetDir)Templates" &amp; robocopy /E /COPY:DAT "$(SolutionDir)3dRenderBuild" "$(TargetDir)3dRender"
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
