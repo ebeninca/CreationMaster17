@@ -4956,7 +4956,7 @@ namespace CreationMaster
             this.viewer2DTrophy128 = new FifaControls.Viewer2D();
             this.multiViewer2DTextures = new FifaControls.MultiViewer2D();
             this.group3D = new System.Windows.Forms.GroupBox();
-            this.viewer3D = new FbxViewer3D();
+            this.viewer3D = new FifaControls.FbxViewer3D();
             this.toolNear3D = new System.Windows.Forms.ToolStrip();
             this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -10058,23 +10058,13 @@ namespace CreationMaster
             this.viewer3D.BackColor = System.Drawing.Color.Gray;
             this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-            /*this.viewer3D.LightDirectionX = 0.5F;
-            this.viewer3D.LightDirectionY = -0.25F;
-            this.viewer3D.LightDirectionZ = -1F;
-            this.viewer3D.LightX = -30F;
-            this.viewer3D.LightY = 10F;
-            this.viewer3D.LightZ = 30F;
+            this.viewer3D.FilesPath = null;
             this.viewer3D.Location = new System.Drawing.Point(3, 16);
             this.viewer3D.Name = "viewer3D";
-            this.viewer3D.RotationX = 0F;
-            this.viewer3D.RotationY = 0F;
-            this.viewer3D.RotationYCoeff = 0.01F;
+            this.viewer3D.ObjectId = -1;
             this.viewer3D.Size = new System.Drawing.Size(439, 270);
-            this.viewer3D.TabIndex = 1;
-            this.viewer3D.ViewX = 0F;
-            this.viewer3D.ViewY = 35F;
-            this.viewer3D.ViewZ = 105F;
-            this.viewer3D.ZbufferRenderState = null;*/
+            this.viewer3D.TabIndex = 0;
+            this.viewer3D.Textures = null;
             // 
             // toolNear3D
             // 

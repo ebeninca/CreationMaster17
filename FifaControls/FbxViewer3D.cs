@@ -98,7 +98,8 @@ namespace FifaControls
 
         public void Render()
         {
-            if (this.m_Textures == null || this.m_ObjectId == -1 || this.m_FilesPath == null || this.m_ObjectType == null)
+
+            if (this.m_Textures == null || this.m_ObjectId == -1 || this.m_FilesPath == null)
                 return;
 
             Bitmap textureBitmap = (Bitmap)null;

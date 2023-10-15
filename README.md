@@ -1,20 +1,18 @@
-# Creation Master 17 #
+# Creation Master 17
 
 Thanks to Rinaldo and Damian Wolf for the CM15 source code
 
 https://bitbucket.org/fifa-tools/cm15/src/master/
 
-## Project Structure
+## Project Structure / To Build
 
-The Unity 3dRender project is incorporated in this project, so you can build at once the entire application in Visual Studio 2019.
-
-Installation modules needed in VS2019:
+Installation modules needed in Visual Studio 2019 Community (https://visualstudio.microsoft.com/pt-br/vs/older-downloads/):
 - .NET desktop development
 - Desktop development with C++
 
-If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, clone this repository: <asdsfsf>
+The Unity 3dRender executable is provided in this project, so you can build at once.
 
-In this case you will need the extra module:
+If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this repository: <asdsfsf>. In this case you will need the extra module installed with Visual Studio:
 - Game development with Unity
 
 
@@ -59,6 +57,10 @@ In this case you will need the extra module:
 - FIX TEMPLATE/DB FILES TO BUILD AND RUN CORRECTLY
 
 ## Changelog
+
+v007
+- 3d Render: Opengl before DirectX 12 and 11
+- FbxViewer ServerPort Enum
 
 v006
 - Visual adjustements in Ball form

@@ -362,6 +362,7 @@ namespace CreationMaster
             this.fbxViewer3D.Location = new System.Drawing.Point(3, 16);
             this.fbxViewer3D.Name = "fbxViewer3D";
             this.fbxViewer3D.ObjectId = -1;
+            this.fbxViewer3D.ObjectType = FifaControls.FbxViewer3D.ObjectTypeServerPort.Ball;
             this.fbxViewer3D.Size = new System.Drawing.Size(827, 514);
             this.fbxViewer3D.TabIndex = 3;
             this.fbxViewer3D.Textures = null;
