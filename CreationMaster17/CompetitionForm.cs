@@ -10062,6 +10062,7 @@ namespace CreationMaster
             this.viewer3D.Location = new System.Drawing.Point(3, 16);
             this.viewer3D.Name = "viewer3D";
             this.viewer3D.ObjectId = -1;
+            this.viewer3D.ObjectType = FifaControls.FbxViewer3D.ObjectTypeServerPort.Trophy;
             this.viewer3D.Size = new System.Drawing.Size(439, 270);
             this.viewer3D.TabIndex = 0;
             this.viewer3D.Textures = null;

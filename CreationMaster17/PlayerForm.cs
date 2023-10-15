@@ -411,9 +411,11 @@ namespace CreationMaster
             this.pageInfo = new System.Windows.Forms.TabPage();
             this.flowPanelInfo = new System.Windows.Forms.FlowLayoutPanel();
             this.groupPlayerIdentity = new System.Windows.Forms.GroupBox();
+            this.radioFemale = new System.Windows.Forms.RadioButton();
+            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.radioMale = new System.Windows.Forms.RadioButton();
             this.labelCommonName = new System.Windows.Forms.Label();
             this.textCommonName = new System.Windows.Forms.TextBox();
-            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textJerseyName = new System.Windows.Forms.TextBox();
             this.labelJerseyName = new System.Windows.Forms.Label();
             this.buttonGetId = new System.Windows.Forms.Button();
@@ -553,6 +555,8 @@ namespace CreationMaster
             this.trackBallControl = new System.Windows.Forms.TrackBar();
             this.trackCrossing = new System.Windows.Forms.TrackBar();
             this.groupMental = new System.Windows.Forms.GroupBox();
+            this.numericEmotion = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
             this.comboDefensiveWorkrate = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboAttackWorkRate = new System.Windows.Forms.ComboBox();
@@ -750,10 +754,6 @@ namespace CreationMaster
             this.imageListTabIcons = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pickUpControl = new FifaControls.PickUpControl();
-            this.radioMale = new System.Windows.Forms.RadioButton();
-            this.radioFemale = new System.Windows.Forms.RadioButton();
-            this.numericEmotion = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
             this.tabEditPlayer.SuspendLayout();
             this.pageInfo.SuspendLayout();
             this.flowPanelInfo.SuspendLayout();
@@ -807,6 +807,7 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.trackBallControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackCrossing)).BeginInit();
             this.groupMental.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEmotion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMentalSkills)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackPlayerPositioning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackPotential)).BeginInit();
@@ -858,7 +859,6 @@ namespace CreationMaster
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericEmotion)).BeginInit();
             this.SuspendLayout();
             // 
             // tabEditPlayer
@@ -931,6 +931,35 @@ namespace CreationMaster
             this.groupPlayerIdentity.TabStop = false;
             this.groupPlayerIdentity.Text = "Identity Card";
             // 
+            // radioFemale
+            // 
+            this.radioFemale.AutoSize = true;
+            this.radioFemale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Female", true));
+            this.radioFemale.Location = new System.Drawing.Point(316, 207);
+            this.radioFemale.Name = "radioFemale";
+            this.radioFemale.Size = new System.Drawing.Size(59, 17);
+            this.radioFemale.TabIndex = 163;
+            this.radioFemale.TabStop = true;
+            this.radioFemale.Text = "Female";
+            this.radioFemale.UseVisualStyleBackColor = true;
+            this.radioFemale.CheckedChanged += new System.EventHandler(this.radioFemale_CheckedChanged);
+            // 
+            // playerBindingSource
+            // 
+            this.playerBindingSource.DataSource = typeof(FifaLibrary.Player);
+            // 
+            // radioMale
+            // 
+            this.radioMale.AutoSize = true;
+            this.radioMale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Male", true));
+            this.radioMale.Location = new System.Drawing.Point(259, 207);
+            this.radioMale.Name = "radioMale";
+            this.radioMale.Size = new System.Drawing.Size(48, 17);
+            this.radioMale.TabIndex = 162;
+            this.radioMale.TabStop = true;
+            this.radioMale.Text = "Male";
+            this.radioMale.UseVisualStyleBackColor = true;
+            // 
             // labelCommonName
             // 
             this.labelCommonName.AutoSize = true;
@@ -951,10 +980,6 @@ namespace CreationMaster
             this.textCommonName.TabIndex = 2;
             this.textCommonName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textCommonName.TextChanged += new System.EventHandler(this.textCommonName_TextChanged);
-            // 
-            // playerBindingSource
-            // 
-            this.playerBindingSource.DataSource = typeof(FifaLibrary.Player);
             // 
             // textJerseyName
             // 
@@ -3148,6 +3173,39 @@ namespace CreationMaster
             this.groupMental.TabStop = false;
             this.groupMental.Text = "Mental Skills";
             // 
+            // numericEmotion
+            // 
+            this.numericEmotion.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.playerBindingSource, "emotion", true));
+            this.numericEmotion.Location = new System.Drawing.Point(69, 235);
+            this.numericEmotion.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericEmotion.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericEmotion.Name = "numericEmotion";
+            this.numericEmotion.Size = new System.Drawing.Size(43, 20);
+            this.numericEmotion.TabIndex = 155;
+            this.numericEmotion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericEmotion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 238);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(45, 13);
+            this.label13.TabIndex = 156;
+            this.label13.Text = "Emotion";
+            // 
             // comboDefensiveWorkrate
             // 
             this.comboDefensiveWorkrate.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.playerBindingSource, "defensiveworkrate", true));
@@ -4821,23 +4879,14 @@ namespace CreationMaster
             this.viewer3D.BackColor = System.Drawing.Color.Gray;
             this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
-            /*this.viewer3D.LightDirectionX = -0.5F;
-            this.viewer3D.LightDirectionY = -0.25F;
-            this.viewer3D.LightDirectionZ = -1F;
-            this.viewer3D.LightX = 30F;
-            this.viewer3D.LightY = 180F;
-            this.viewer3D.LightZ = 100F;
+            this.viewer3D.FilesPath = null;
             this.viewer3D.Location = new System.Drawing.Point(0, 0);
             this.viewer3D.Name = "viewer3D";
-            this.viewer3D.RotationX = 6.28F;
-            this.viewer3D.RotationY = 0F;
-            this.viewer3D.RotationYCoeff = 0.01F;
+            this.viewer3D.ObjectId = -1;
+            this.viewer3D.ObjectType = FifaControls.FbxViewer3D.ObjectTypeServerPort.Player;
             this.viewer3D.Size = new System.Drawing.Size(724, 441);
-            this.viewer3D.TabIndex = 3;
-            this.viewer3D.ViewX = 0F;
-            this.viewer3D.ViewY = 171F;
-            this.viewer3D.ViewZ = 49F;
-            this.viewer3D.ZbufferRenderState = null;*/
+            this.viewer3D.TabIndex = 0;
+            this.viewer3D.Textures = null;
             // 
             // tool3D
             // 
@@ -6232,64 +6281,6 @@ namespace CreationMaster
             this.pickUpControl.WizardButtonEnabled = false;
             this.pickUpControl.YoungPlayersEnabled = false;
             // 
-            // radioMale
-            // 
-            this.radioMale.AutoSize = true;
-            this.radioMale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Male", true));
-            this.radioMale.Location = new System.Drawing.Point(259, 207);
-            this.radioMale.Name = "radioMale";
-            this.radioMale.Size = new System.Drawing.Size(48, 17);
-            this.radioMale.TabIndex = 162;
-            this.radioMale.TabStop = true;
-            this.radioMale.Text = "Male";
-            this.radioMale.UseVisualStyleBackColor = true;
-            // 
-            // radioFemale
-            // 
-            this.radioFemale.AutoSize = true;
-            this.radioFemale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Female", true));
-            this.radioFemale.Location = new System.Drawing.Point(316, 207);
-            this.radioFemale.Name = "radioFemale";
-            this.radioFemale.Size = new System.Drawing.Size(59, 17);
-            this.radioFemale.TabIndex = 163;
-            this.radioFemale.TabStop = true;
-            this.radioFemale.Text = "Female";
-            this.radioFemale.UseVisualStyleBackColor = true;
-            this.radioFemale.CheckedChanged += new System.EventHandler(this.radioFemale_CheckedChanged);
-            // 
-            // numericEmotion
-            // 
-            this.numericEmotion.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.playerBindingSource, "emotion", true));
-            this.numericEmotion.Location = new System.Drawing.Point(69, 235);
-            this.numericEmotion.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericEmotion.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericEmotion.Name = "numericEmotion";
-            this.numericEmotion.Size = new System.Drawing.Size(43, 20);
-            this.numericEmotion.TabIndex = 155;
-            this.numericEmotion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericEmotion.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(13, 238);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(45, 13);
-            this.label13.TabIndex = 156;
-            this.label13.Text = "Emotion";
-            // 
             // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6366,6 +6357,7 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.trackCrossing)).EndInit();
             this.groupMental.ResumeLayout(false);
             this.groupMental.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEmotion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMentalSkills)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackPlayerPositioning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackPotential)).EndInit();
@@ -6428,7 +6420,6 @@ namespace CreationMaster
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericEmotion)).EndInit();
             this.ResumeLayout(false);
 
         }

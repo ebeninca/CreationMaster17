@@ -185,134 +185,160 @@ namespace CreationMaster
 
     private void InitializeComponent()
     {
-      ComponentResourceManager resources = new ComponentResourceManager(typeof (GlovesForm));
-      this.splitContainer1 = new SplitContainer();
-      this.multiViewer2DGkGloves = new MultiViewer2D();
-      this.splitContainer2 = new SplitContainer();
-      this.viewer3D = new FbxViewer3D();
-      this.toolNear3D = new ToolStrip();
-      this.buttonShow3DModel = new ToolStripButton();
-      this.toolStripSeparator1 = new ToolStripSeparator();
-      this.pickUpControl = new PickUpControl();
-      this.splitContainer1.BeginInit();
-      this.splitContainer1.Panel1.SuspendLayout();
-      this.splitContainer1.Panel2.SuspendLayout();
-      this.splitContainer1.SuspendLayout();
-      this.splitContainer2.BeginInit();
-      this.splitContainer2.Panel1.SuspendLayout();
-      this.splitContainer2.SuspendLayout();
-      this.toolNear3D.SuspendLayout();
-      this.SuspendLayout();
-      this.splitContainer1.Dock = DockStyle.Fill;
-      this.splitContainer1.Location = new Point(0, 25);
-      this.splitContainer1.Name = "splitContainer1";
-      this.splitContainer1.Panel1.Controls.Add((Control) this.multiViewer2DGkGloves);
-      this.splitContainer1.Panel2.Controls.Add((Control) this.splitContainer2);
-      this.splitContainer1.Size = new Size(1165, 773);
-      this.splitContainer1.SplitterDistance = 516;
-      this.splitContainer1.TabIndex = 1;
-      this.multiViewer2DGkGloves.AutoTransparency = false;
-      this.multiViewer2DGkGloves.Bitmaps = (Bitmap[]) null;
-      this.multiViewer2DGkGloves.CheckBitmapSize = true;
-      this.multiViewer2DGkGloves.FixedSize = false;
-      this.multiViewer2DGkGloves.FullSizeButton = false;
-      this.multiViewer2DGkGloves.LabelText = "Image n.";
-      this.multiViewer2DGkGloves.Location = new Point(3, 6);
-      this.multiViewer2DGkGloves.Name = "multiViewer2DGkGloves";
-      this.multiViewer2DGkGloves.ShowDeleteButton = true;
-      this.multiViewer2DGkGloves.Size = new Size(512, 552);
-      this.multiViewer2DGkGloves.TabIndex = 0;
-      this.multiViewer2DGkGloves.Load += new EventHandler(this.GkGlovesForm_Load);
-      this.splitContainer2.Dock = DockStyle.Fill;
-      this.splitContainer2.Location = new Point(0, 0);
-      this.splitContainer2.Name = "splitContainer2";
-      this.splitContainer2.Orientation = Orientation.Horizontal;
-      this.splitContainer2.Panel1.Controls.Add((Control) this.viewer3D);
-      this.splitContainer2.Panel1.Controls.Add((Control) this.toolNear3D);
-      this.splitContainer2.Size = new Size(645, 773);
-      this.splitContainer2.SplitterDistance = 503;
-      this.splitContainer2.TabIndex = 0;
-      this.viewer3D.AmbientColor = Color.White;
-      this.viewer3D.BackColor = Color.Gray;
-      this.viewer3D.BorderStyle = BorderStyle.Fixed3D;
-      this.viewer3D.Dock = DockStyle.Fill;
-      /*this.viewer3D.LightDirectionX = 0.0f;
-      this.viewer3D.LightDirectionY = 0.0f;
-      this.viewer3D.LightDirectionZ = -1f;
-      this.viewer3D.LightX = 100f;
-      this.viewer3D.LightY = 10f;
-      this.viewer3D.LightZ = 100f;
-      this.viewer3D.Location = new Point(0, 0);
-      this.viewer3D.Name = "viewer3D";
-      this.viewer3D.RotationX = 0.18f;
-      this.viewer3D.RotationY = 0.93f;
-      this.viewer3D.RotationYCoeff = 0.01f;
-      this.viewer3D.Size = new Size(645, 478);
-      this.viewer3D.TabIndex = 3;
-      this.viewer3D.ViewX = 12f;
-      this.viewer3D.ViewY = 110f;
-      this.viewer3D.ViewZ = 114.2f;
-      this.viewer3D.ZbufferRenderState = (bool[]) null;*/
-      this.toolNear3D.Dock = DockStyle.Bottom;
-      this.toolNear3D.GripStyle = ToolStripGripStyle.Hidden;
-      this.toolNear3D.Items.AddRange(new ToolStripItem[2]
-      {
-        (ToolStripItem) this.buttonShow3DModel,
-        (ToolStripItem) this.toolStripSeparator1
-      });
-      this.toolNear3D.Location = new Point(0, 478);
-      this.toolNear3D.Name = "toolNear3D";
-      this.toolNear3D.Size = new Size(645, 25);
-      this.toolNear3D.TabIndex = 4;
-      this.buttonShow3DModel.CheckOnClick = true;
-      this.buttonShow3DModel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-      this.buttonShow3DModel.Image = (Image) resources.GetObject("buttonShow3DModel.Image");
-      this.buttonShow3DModel.ImageTransparentColor = Color.Magenta;
-      this.buttonShow3DModel.Name = "buttonShow3DModel";
-      this.buttonShow3DModel.Size = new Size(23, 22);
-      this.buttonShow3DModel.Text = "Show / Hide";
-      this.buttonShow3DModel.Click += new EventHandler(this.buttonShow3DModel_Click);
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new Size(6, 25);
-      this.pickUpControl.BackColor = SystemColors.Control;
-      this.pickUpControl.CloneButtonEnabled = true;
-      this.pickUpControl.CreateButtonEnabled = false;
-      this.pickUpControl.CurrentIndex = 0;
-      this.pickUpControl.Dock = DockStyle.Top;
-      this.pickUpControl.FilterByList = (string[]) null;
-      this.pickUpControl.FilterEnabled = false;
-      this.pickUpControl.FilterValues = (IdArrayList[]) null;
-      this.pickUpControl.Location = new Point(0, 0);
-      this.pickUpControl.MainSelectionEnabled = true;
-      this.pickUpControl.Name = "pickUpControl";
-      this.pickUpControl.ObjectList = (IdArrayList) null;
-      this.pickUpControl.RefreshButtonEnabled = true;
-      this.pickUpControl.RemoveButtonEnabled = true;
-      this.pickUpControl.SearchEnabled = false;
-      this.pickUpControl.Size = new Size(1165, 25);
-      this.pickUpControl.TabIndex = 0;
-      this.pickUpControl.WizardButtonEnabled = false;
-      this.pickUpControl.YoungPlayersEnabled = false;
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.BackgroundImageLayout = ImageLayout.Center;
-      this.ClientSize = new Size(1165, 798);
-      this.Controls.Add((Control) this.splitContainer1);
-      this.Controls.Add((Control) this.pickUpControl);
-      this.FormBorderStyle = FormBorderStyle.None;
-      this.Name = "GlovesForm";
-      this.Text = "GlovesForm";
-      this.splitContainer1.Panel1.ResumeLayout(false);
-      this.splitContainer1.Panel2.ResumeLayout(false);
-      this.splitContainer1.EndInit();
-      this.splitContainer1.ResumeLayout(false);
-      this.splitContainer2.Panel1.ResumeLayout(false);
-      this.splitContainer2.Panel1.PerformLayout();
-      this.splitContainer2.EndInit();
-      this.splitContainer2.ResumeLayout(false);
-      this.toolNear3D.ResumeLayout(false);
-      this.toolNear3D.PerformLayout();
-      this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlovesForm));
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.multiViewer2DGkGloves = new FifaControls.MultiViewer2D();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.viewer3D = new FifaControls.FbxViewer3D();
+            this.toolNear3D = new System.Windows.Forms.ToolStrip();
+            this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.pickUpControl = new FifaControls.PickUpControl();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.toolNear3D.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.multiViewer2DGkGloves);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(1165, 773);
+            this.splitContainer1.SplitterDistance = 516;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // multiViewer2DGkGloves
+            // 
+            this.multiViewer2DGkGloves.AutoTransparency = false;
+            this.multiViewer2DGkGloves.Bitmaps = null;
+            this.multiViewer2DGkGloves.CheckBitmapSize = true;
+            this.multiViewer2DGkGloves.FixedSize = false;
+            this.multiViewer2DGkGloves.FullSizeButton = false;
+            this.multiViewer2DGkGloves.LabelText = "Image n.";
+            this.multiViewer2DGkGloves.Location = new System.Drawing.Point(3, 6);
+            this.multiViewer2DGkGloves.Name = "multiViewer2DGkGloves";
+            this.multiViewer2DGkGloves.ShowDeleteButton = true;
+            this.multiViewer2DGkGloves.Size = new System.Drawing.Size(512, 552);
+            this.multiViewer2DGkGloves.TabIndex = 0;
+            this.multiViewer2DGkGloves.Load += new System.EventHandler(this.GkGlovesForm_Load);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.viewer3D);
+            this.splitContainer2.Panel1.Controls.Add(this.toolNear3D);
+            this.splitContainer2.Size = new System.Drawing.Size(645, 773);
+            this.splitContainer2.SplitterDistance = 503;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // viewer3D
+            // 
+            this.viewer3D.AmbientColor = System.Drawing.Color.White;
+            this.viewer3D.BackColor = System.Drawing.Color.Gray;
+            this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewer3D.FilesPath = null;
+            this.viewer3D.Location = new System.Drawing.Point(0, 0);
+            this.viewer3D.Name = "viewer3D";
+            this.viewer3D.ObjectId = -1;
+            this.viewer3D.ObjectType = FifaControls.FbxViewer3D.ObjectTypeServerPort.Glove;
+            this.viewer3D.Size = new System.Drawing.Size(645, 478);
+            this.viewer3D.TabIndex = 0;
+            this.viewer3D.Textures = null;
+            // 
+            // toolNear3D
+            // 
+            this.toolNear3D.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolNear3D.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolNear3D.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonShow3DModel,
+            this.toolStripSeparator1});
+            this.toolNear3D.Location = new System.Drawing.Point(0, 478);
+            this.toolNear3D.Name = "toolNear3D";
+            this.toolNear3D.Size = new System.Drawing.Size(645, 25);
+            this.toolNear3D.TabIndex = 4;
+            // 
+            // buttonShow3DModel
+            // 
+            this.buttonShow3DModel.CheckOnClick = true;
+            this.buttonShow3DModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShow3DModel.Image = ((System.Drawing.Image)(resources.GetObject("buttonShow3DModel.Image")));
+            this.buttonShow3DModel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonShow3DModel.Name = "buttonShow3DModel";
+            this.buttonShow3DModel.Size = new System.Drawing.Size(23, 22);
+            this.buttonShow3DModel.Text = "Show / Hide";
+            this.buttonShow3DModel.Click += new System.EventHandler(this.buttonShow3DModel_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // pickUpControl
+            // 
+            this.pickUpControl.BackColor = System.Drawing.SystemColors.Control;
+            this.pickUpControl.CloneButtonEnabled = true;
+            this.pickUpControl.CreateButtonEnabled = false;
+            this.pickUpControl.CurrentIndex = 0;
+            this.pickUpControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pickUpControl.FilterByList = null;
+            this.pickUpControl.FilterEnabled = false;
+            this.pickUpControl.FilterValues = null;
+            this.pickUpControl.Location = new System.Drawing.Point(0, 0);
+            this.pickUpControl.MainSelectionEnabled = true;
+            this.pickUpControl.Name = "pickUpControl";
+            this.pickUpControl.ObjectList = null;
+            this.pickUpControl.RefreshButtonEnabled = true;
+            this.pickUpControl.RemoveButtonEnabled = true;
+            this.pickUpControl.SearchEnabled = false;
+            this.pickUpControl.Size = new System.Drawing.Size(1165, 25);
+            this.pickUpControl.TabIndex = 0;
+            this.pickUpControl.WizardButtonEnabled = false;
+            this.pickUpControl.YoungPlayersEnabled = false;
+            // 
+            // GlovesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(1165, 798);
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.pickUpControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "GlovesForm";
+            this.Text = "GlovesForm";
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.toolNear3D.ResumeLayout(false);
+            this.toolNear3D.PerformLayout();
+            this.ResumeLayout(false);
+
     }
   }
 }

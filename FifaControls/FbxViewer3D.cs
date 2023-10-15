@@ -278,10 +278,11 @@ namespace FifaControls
             Ball = 7779,
             Kit = 7778,
             Shoe = 7777,
-            Face = 7776,
+            Player = 7776,
             Referee = 7775,
             Manager = 7774,
-            Glove = 7773
+            Glove = 7773,
+            Trophy = 7772
         }
     }
 }

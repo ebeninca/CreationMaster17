@@ -281,240 +281,294 @@ namespace CreationMaster
 
         private void InitializeComponent()
         {
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(ShoesForm));
-            this.splitContainer1 = new SplitContainer();
-            this.splitContainer3 = new SplitContainer();
-            this.group3D = new GroupBox();
-            this.viewer3D = new FbxViewer3D();
-            this.tool3DModel = new ToolStrip();
-            this.buttonShow3DModel = new ToolStripButton();
-            this.toolStripSeparator1 = new ToolStripSeparator();
-            this.buttonImport3DModel = new ToolStripButton();
-            this.buttonExport3DModel = new ToolStripButton();
-            this.toolStripSeparator2 = new ToolStripSeparator();
-            this.buttonRemove3DModel = new ToolStripButton();
-            this.panel1 = new Panel();
-            this.textShoesType = new TextBox();
-            this.labelId = new Label();
-            this.textShoesName = new TextBox();
-            this.numericShoesColor = new NumericUpDown();
-            this.label1 = new Label();
-            this.multiViewer2DShoesColor = new MultiViewer2D();
-            this.pickUpControl = new PickUpControl();
-            this.checkIsAvailableInStore = new CheckBox();
-            this.splitContainer1.BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoesForm));
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.group3D = new System.Windows.Forms.GroupBox();
+            this.viewer3D = new FifaControls.FbxViewer3D();
+            this.tool3DModel = new System.Windows.Forms.ToolStrip();
+            this.buttonShow3DModel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonImport3DModel = new System.Windows.Forms.ToolStripButton();
+            this.buttonExport3DModel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonRemove3DModel = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.checkIsAvailableInStore = new System.Windows.Forms.CheckBox();
+            this.textShoesType = new System.Windows.Forms.TextBox();
+            this.labelId = new System.Windows.Forms.Label();
+            this.textShoesName = new System.Windows.Forms.TextBox();
+            this.numericShoesColor = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.multiViewer2DShoesColor = new FifaControls.MultiViewer2D();
+            this.pickUpControl = new FifaControls.PickUpControl();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.splitContainer3.BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.group3D.SuspendLayout();
             this.tool3DModel.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.numericShoesColor.BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericShoesColor)).BeginInit();
             this.SuspendLayout();
-            this.splitContainer1.Dock = DockStyle.Fill;
-            this.splitContainer1.Location = new Point(260, 25);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(260, 25);
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Panel1.Controls.Add((Control)this.splitContainer3);
-            this.splitContainer1.Size = new Size(776, 755);
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer1.Size = new System.Drawing.Size(776, 755);
             this.splitContainer1.SplitterDistance = 685;
             this.splitContainer1.TabIndex = 2;
-            this.splitContainer3.Dock = DockStyle.Fill;
-            this.splitContainer3.Location = new Point(0, 0);
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = Orientation.Horizontal;
-            this.splitContainer3.Panel1.Controls.Add((Control)this.group3D);
-            this.splitContainer3.Size = new Size(685, 755);
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.group3D);
+            this.splitContainer3.Size = new System.Drawing.Size(685, 755);
             this.splitContainer3.SplitterDistance = 586;
             this.splitContainer3.TabIndex = 0;
-            this.group3D.Controls.Add((Control)this.viewer3D);
-            this.group3D.Controls.Add((Control)this.tool3DModel);
-            this.group3D.Dock = DockStyle.Fill;
-            this.group3D.Location = new Point(0, 0);
+            // 
+            // group3D
+            // 
+            this.group3D.Controls.Add(this.viewer3D);
+            this.group3D.Controls.Add(this.tool3DModel);
+            this.group3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.group3D.Location = new System.Drawing.Point(0, 0);
             this.group3D.Name = "group3D";
-            this.group3D.Size = new Size(685, 586);
+            this.group3D.Size = new System.Drawing.Size(685, 586);
             this.group3D.TabIndex = 2;
             this.group3D.TabStop = false;
             this.group3D.Text = "3D Model";
-            this.viewer3D.AmbientColor = Color.DimGray;
-            this.viewer3D.BackColor = Color.Gray;
-            this.viewer3D.BorderStyle = BorderStyle.Fixed3D;
-            this.viewer3D.Dock = DockStyle.Fill;
-            /*this.viewer3D.LightDirectionX = 0.5f;
-            this.viewer3D.LightDirectionY = -0.25f;
-            this.viewer3D.LightDirectionZ = -1f;
-            this.viewer3D.LightX = -30f;
-            this.viewer3D.LightY = 10f;
-            this.viewer3D.LightZ = 50f;
-            this.viewer3D.Location = new Point(3, 16);
+            // 
+            // viewer3D
+            // 
+            this.viewer3D.AmbientColor = System.Drawing.Color.DimGray;
+            this.viewer3D.BackColor = System.Drawing.Color.Gray;
+            this.viewer3D.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.viewer3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewer3D.FilesPath = null;
+            this.viewer3D.Location = new System.Drawing.Point(3, 16);
             this.viewer3D.Name = "viewer3D";
-            this.viewer3D.RotationX = 0.43f;
-            this.viewer3D.RotationY = 0.23f;
-            this.viewer3D.RotationYCoeff = 0.01f;
-            this.viewer3D.Size = new Size(679, 542);
-            this.viewer3D.TabIndex = 1;
-            this.viewer3D.ViewX = 0.0f;
-            this.viewer3D.ViewY = 0.0f;
-            this.viewer3D.ViewZ = 58f;
-            this.viewer3D.ZbufferRenderState = (bool[])null;*/
-            this.tool3DModel.Dock = DockStyle.Bottom;
-            this.tool3DModel.GripStyle = ToolStripGripStyle.Hidden;
-            this.tool3DModel.Items.AddRange(new ToolStripItem[6]
-            {
-        (ToolStripItem) this.buttonShow3DModel,
-        (ToolStripItem) this.toolStripSeparator1,
-        (ToolStripItem) this.buttonImport3DModel,
-        (ToolStripItem) this.buttonExport3DModel,
-        (ToolStripItem) this.toolStripSeparator2,
-        (ToolStripItem) this.buttonRemove3DModel
-            });
-            this.tool3DModel.Location = new Point(3, 558);
+            this.viewer3D.ObjectId = -1;
+            this.viewer3D.ObjectType = FifaControls.FbxViewer3D.ObjectTypeServerPort.Shoe;
+            this.viewer3D.Size = new System.Drawing.Size(679, 542);
+            this.viewer3D.TabIndex = 0;
+            this.viewer3D.Textures = null;
+            // 
+            // tool3DModel
+            // 
+            this.tool3DModel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tool3DModel.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tool3DModel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonShow3DModel,
+            this.toolStripSeparator1,
+            this.buttonImport3DModel,
+            this.buttonExport3DModel,
+            this.toolStripSeparator2,
+            this.buttonRemove3DModel});
+            this.tool3DModel.Location = new System.Drawing.Point(3, 558);
             this.tool3DModel.Name = "tool3DModel";
-            this.tool3DModel.Size = new Size(679, 25);
+            this.tool3DModel.Size = new System.Drawing.Size(679, 25);
             this.tool3DModel.TabIndex = 2;
+            // 
+            // buttonShow3DModel
+            // 
             this.buttonShow3DModel.CheckOnClick = true;
-            this.buttonShow3DModel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.buttonShow3DModel.Image = (Image)resources.GetObject("buttonShow3DModel.Image");
-            this.buttonShow3DModel.ImageTransparentColor = Color.Magenta;
+            this.buttonShow3DModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonShow3DModel.Image = ((System.Drawing.Image)(resources.GetObject("buttonShow3DModel.Image")));
+            this.buttonShow3DModel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonShow3DModel.Name = "buttonShow3DModel";
-            this.buttonShow3DModel.Size = new Size(23, 22);
+            this.buttonShow3DModel.Size = new System.Drawing.Size(23, 22);
             this.buttonShow3DModel.Text = "Show / Hide";
-            this.buttonShow3DModel.Click += new EventHandler(this.buttonShow3DModel_Click);
+            this.buttonShow3DModel.Click += new System.EventHandler(this.buttonShow3DModel_Click);
+            // 
+            // toolStripSeparator1
+            // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new Size(6, 25);
-            this.buttonImport3DModel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.buttonImport3DModel.Image = (Image)resources.GetObject("buttonImport3DModel.Image");
-            this.buttonImport3DModel.ImageTransparentColor = Color.Magenta;
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // buttonImport3DModel
+            // 
+            this.buttonImport3DModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonImport3DModel.Image = ((System.Drawing.Image)(resources.GetObject("buttonImport3DModel.Image")));
+            this.buttonImport3DModel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonImport3DModel.Name = "buttonImport3DModel";
-            this.buttonImport3DModel.Size = new Size(23, 22);
+            this.buttonImport3DModel.Size = new System.Drawing.Size(23, 22);
             this.buttonImport3DModel.Text = "Import 3D Model";
-            this.buttonImport3DModel.Click += new EventHandler(this.buttonImport3DModel_Click);
-            this.buttonExport3DModel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.buttonExport3DModel.Image = (Image)resources.GetObject("buttonExport3DModel.Image");
-            this.buttonExport3DModel.ImageTransparentColor = Color.Magenta;
+            this.buttonImport3DModel.Click += new System.EventHandler(this.buttonImport3DModel_Click);
+            // 
+            // buttonExport3DModel
+            // 
+            this.buttonExport3DModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonExport3DModel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExport3DModel.Image")));
+            this.buttonExport3DModel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonExport3DModel.Name = "buttonExport3DModel";
-            this.buttonExport3DModel.Size = new Size(23, 22);
+            this.buttonExport3DModel.Size = new System.Drawing.Size(23, 22);
             this.buttonExport3DModel.Text = "Export 3D Model";
-            this.buttonExport3DModel.Click += new EventHandler(this.buttonExport3DModel_Click);
+            this.buttonExport3DModel.Click += new System.EventHandler(this.buttonExport3DModel_Click);
+            // 
+            // toolStripSeparator2
+            // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new Size(6, 25);
-            this.buttonRemove3DModel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.buttonRemove3DModel.Image = (Image)resources.GetObject("buttonRemove3DModel.Image");
-            this.buttonRemove3DModel.ImageTransparentColor = Color.Magenta;
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // buttonRemove3DModel
+            // 
+            this.buttonRemove3DModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemove3DModel.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemove3DModel.Image")));
+            this.buttonRemove3DModel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonRemove3DModel.Name = "buttonRemove3DModel";
-            this.buttonRemove3DModel.Size = new Size(23, 22);
+            this.buttonRemove3DModel.Size = new System.Drawing.Size(23, 22);
             this.buttonRemove3DModel.Text = "Remove 3D Model";
-            this.buttonRemove3DModel.Click += new EventHandler(this.buttonRemove3DModel_Click);
-            this.panel1.Controls.Add((Control)this.checkIsAvailableInStore);
-            this.panel1.Controls.Add((Control)this.textShoesType);
-            this.panel1.Controls.Add((Control)this.labelId);
-            this.panel1.Controls.Add((Control)this.textShoesName);
-            this.panel1.Controls.Add((Control)this.numericShoesColor);
-            this.panel1.Controls.Add((Control)this.label1);
-            this.panel1.Controls.Add((Control)this.multiViewer2DShoesColor);
-            this.panel1.Dock = DockStyle.Left;
-            this.panel1.Location = new Point(0, 25);
+            this.buttonRemove3DModel.Click += new System.EventHandler(this.buttonRemove3DModel_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.checkIsAvailableInStore);
+            this.panel1.Controls.Add(this.textShoesType);
+            this.panel1.Controls.Add(this.labelId);
+            this.panel1.Controls.Add(this.textShoesName);
+            this.panel1.Controls.Add(this.numericShoesColor);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.multiViewer2DShoesColor);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new Size(260, 755);
+            this.panel1.Size = new System.Drawing.Size(260, 755);
             this.panel1.TabIndex = 3;
+            // 
+            // checkIsAvailableInStore
+            // 
+            this.checkIsAvailableInStore.AutoSize = true;
+            this.checkIsAvailableInStore.Location = new System.Drawing.Point(139, 365);
+            this.checkIsAvailableInStore.Name = "checkIsAvailableInStore";
+            this.checkIsAvailableInStore.Size = new System.Drawing.Size(80, 17);
+            this.checkIsAvailableInStore.TabIndex = 0;
+            this.checkIsAvailableInStore.Text = "Is Available";
+            this.checkIsAvailableInStore.UseVisualStyleBackColor = true;
+            this.checkIsAvailableInStore.CheckedChanged += new System.EventHandler(this.checkIsAvailableInStore_CheckedChanged);
+            // 
+            // textShoesType
+            // 
             this.textShoesType.Enabled = false;
-            this.textShoesType.Location = new Point(51, 363);
+            this.textShoesType.Location = new System.Drawing.Point(51, 363);
             this.textShoesType.Name = "textShoesType";
-            this.textShoesType.Size = new Size(73, 20);
+            this.textShoesType.Size = new System.Drawing.Size(73, 20);
             this.textShoesType.TabIndex = 65;
-            this.textShoesType.TextAlign = HorizontalAlignment.Center;
+            this.textShoesType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelId
+            // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new Point(10, 366);
+            this.labelId.Location = new System.Drawing.Point(10, 366);
             this.labelId.Name = "labelId";
-            this.labelId.Size = new Size(16, 13);
+            this.labelId.Size = new System.Drawing.Size(16, 13);
             this.labelId.TabIndex = 64;
             this.labelId.Text = "Id";
-            this.labelId.TextAlign = ContentAlignment.MiddleLeft;
-            this.textShoesName.Location = new Point(7, 337);
+            this.labelId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textShoesName
+            // 
+            this.textShoesName.Location = new System.Drawing.Point(7, 337);
             this.textShoesName.Name = "textShoesName";
-            this.textShoesName.Size = new Size(250, 20);
+            this.textShoesName.Size = new System.Drawing.Size(250, 20);
             this.textShoesName.TabIndex = 0;
-            this.textShoesName.TextChanged += new EventHandler(this.textShoesName_TextChanged);
-            this.numericShoesColor.Location = new Point(51, 3);
-            this.numericShoesColor.Maximum = new Decimal(new int[4]
-            {
-        31,
-        0,
-        0,
-        0
-            });
+            this.textShoesName.TextChanged += new System.EventHandler(this.textShoesName_TextChanged);
+            // 
+            // numericShoesColor
+            // 
+            this.numericShoesColor.Location = new System.Drawing.Point(51, 3);
+            this.numericShoesColor.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
             this.numericShoesColor.Name = "numericShoesColor";
-            this.numericShoesColor.Size = new Size(76, 20);
+            this.numericShoesColor.Size = new System.Drawing.Size(76, 20);
             this.numericShoesColor.TabIndex = 63;
-            this.numericShoesColor.TextAlign = HorizontalAlignment.Center;
-            this.numericShoesColor.Value = new Decimal(new int[4]
-            {
-        1,
-        0,
-        0,
-        0
-            });
-            this.numericShoesColor.ValueChanged += new EventHandler(this.numericShoesColor_ValueChanged);
+            this.numericShoesColor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericShoesColor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericShoesColor.ValueChanged += new System.EventHandler(this.numericShoesColor_ValueChanged);
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
-            this.label1.Location = new Point(4, 5);
+            this.label1.Location = new System.Drawing.Point(4, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Color";
+            // 
+            // multiViewer2DShoesColor
+            // 
             this.multiViewer2DShoesColor.AutoTransparency = false;
-            this.multiViewer2DShoesColor.Bitmaps = (Bitmap[])null;
+            this.multiViewer2DShoesColor.Bitmaps = null;
             this.multiViewer2DShoesColor.CheckBitmapSize = true;
             this.multiViewer2DShoesColor.FixedSize = true;
             this.multiViewer2DShoesColor.FullSizeButton = false;
             this.multiViewer2DShoesColor.LabelText = "Texture";
-            this.multiViewer2DShoesColor.Location = new Point(3, 28);
+            this.multiViewer2DShoesColor.Location = new System.Drawing.Point(3, 28);
             this.multiViewer2DShoesColor.Name = "multiViewer2DShoesColor";
             this.multiViewer2DShoesColor.ShowDeleteButton = true;
-            this.multiViewer2DShoesColor.Size = new Size(256, 303);
+            this.multiViewer2DShoesColor.Size = new System.Drawing.Size(256, 303);
             this.multiViewer2DShoesColor.TabIndex = 1;
-            this.pickUpControl.BackColor = SystemColors.Control;
+            // 
+            // pickUpControl
+            // 
+            this.pickUpControl.BackColor = System.Drawing.SystemColors.Control;
             this.pickUpControl.CloneButtonEnabled = true;
             this.pickUpControl.CreateButtonEnabled = false;
             this.pickUpControl.CurrentIndex = 0;
-            this.pickUpControl.Dock = DockStyle.Top;
-            this.pickUpControl.FilterByList = (string[])null;
+            this.pickUpControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pickUpControl.FilterByList = null;
             this.pickUpControl.FilterEnabled = false;
-            this.pickUpControl.FilterValues = (IdArrayList[])null;
-            this.pickUpControl.Location = new Point(0, 0);
+            this.pickUpControl.FilterValues = null;
+            this.pickUpControl.Location = new System.Drawing.Point(0, 0);
             this.pickUpControl.MainSelectionEnabled = true;
             this.pickUpControl.Name = "pickUpControl";
-            this.pickUpControl.ObjectList = (IdArrayList)null;
+            this.pickUpControl.ObjectList = null;
             this.pickUpControl.RefreshButtonEnabled = true;
             this.pickUpControl.RemoveButtonEnabled = true;
             this.pickUpControl.SearchEnabled = false;
-            this.pickUpControl.Size = new Size(1036, 25);
+            this.pickUpControl.Size = new System.Drawing.Size(1036, 25);
             this.pickUpControl.TabIndex = 1;
             this.pickUpControl.WizardButtonEnabled = false;
             this.pickUpControl.YoungPlayersEnabled = false;
-            this.checkIsAvailableInStore.AutoSize = true;
-            this.checkIsAvailableInStore.Location = new Point(139, 365);
-            this.checkIsAvailableInStore.Name = "checkIsAvailableInStore";
-            this.checkIsAvailableInStore.Size = new Size(80, 17);
-            this.checkIsAvailableInStore.TabIndex = 0;
-            this.checkIsAvailableInStore.Text = "Is Available";
-            this.checkIsAvailableInStore.UseVisualStyleBackColor = true;
-            this.checkIsAvailableInStore.CheckedChanged += new EventHandler(this.checkIsAvailableInStore_CheckedChanged);
-            this.AutoScaleDimensions = new SizeF(6f, 13f);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(1036, 780);
-            this.Controls.Add((Control)this.splitContainer1);
-            this.Controls.Add((Control)this.panel1);
-            this.Controls.Add((Control)this.pickUpControl);
-            this.FormBorderStyle = FormBorderStyle.None;
+            // 
+            // ShoesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1036, 780);
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pickUpControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ShoesForm";
             this.Text = "ShoesForm";
-            this.Load += new EventHandler(this.ShoesForm_Load);
+            this.Load += new System.EventHandler(this.ShoesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.group3D.ResumeLayout(false);
             this.group3D.PerformLayout();
@@ -522,8 +576,9 @@ namespace CreationMaster
             this.tool3DModel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.numericShoesColor.EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericShoesColor)).EndInit();
             this.ResumeLayout(false);
+
         }
     }
 }
