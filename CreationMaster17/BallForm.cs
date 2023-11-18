@@ -509,7 +509,7 @@ namespace CreationMaster
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.ballBindingSource, "IsLicensed", true));
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.ballBindingSource, "IsLicensed", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox1.Location = new System.Drawing.Point(9, 76);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -545,7 +545,7 @@ namespace CreationMaster
             // checkIsGenericBall
             // 
             this.checkIsGenericBall.AutoSize = true;
-            this.checkIsGenericBall.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.ballBindingSource, "IsAvailable", true));
+            this.checkIsGenericBall.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.ballBindingSource, "IsAvailable", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkIsGenericBall.Location = new System.Drawing.Point(10, 53);
             this.checkIsGenericBall.Name = "checkIsGenericBall";
             this.checkIsGenericBall.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

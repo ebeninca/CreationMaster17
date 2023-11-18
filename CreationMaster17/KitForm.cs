@@ -10,16 +10,14 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CreationMaster
 {
-  public class KitForm : Form
-  {
-    private static Color[] c_ColorPalette = new Color[20]
+    public class KitForm : Form
     {
+        private static Color[] c_ColorPalette = new Color[20]
+        {
       Color.Transparent,
       Color.White,
       Color.Black,
@@ -40,957 +38,1015 @@ namespace CreationMaster
       Color.Gold,
       Color.OrangeRed,
       Color.ForestGreen
-    };
-    private SolidBrush m_FontBrush = new SolidBrush(Color.Black);
-    private NewKitCreator m_NewKitCreator = new NewKitCreator();
-    private string m_FontnameCurrentFolder = FifaEnvironment.ExportFolder;
-    private float[] m_CopyPosition = new float[32];
-    private PrivateFontCollection m_FontCollection;
-    private Graphics m_FontGraphics;
-    private Kit m_CurrentKit;
-    private bool m_IsLoaded;
-    private bool m_UpdatingLock;
-    private bool m_PositionsLock;
-    private IContainer components;
-    public PickUpControl pickUpControl;
-    private SplitContainer splitContainer1;
-    private SplitContainer splitContainer3;
-    private Viewer2D viewer2DMinikit;
-    private SplitContainer splitContainer2;
-    private SplitContainer splitContainer4;
-    private SplitContainer splitContainer5;
-    private MultiViewer2D multiViewer2DKit;
-    private MultiViewer2D multiViewer2DJerseyNumbers;
-    private MultiViewer2D multiViewer2DShortsNumbers;
-    private GroupBox group3D;
-    private FbxViewer3D viewer3D;
-    private ToolStrip toolNear3D;
-    private ToolStripButton buttonShow3DModel;
-    private ToolStripSeparator toolStripSeparator1;
-    private ToolStripButton buttonCamera;
-    private FlowLayoutPanel flowPanel;
-    private NumericUpDown numericCollar;
-    private GroupBox groupCollar;
-    private Label labelCollar;
-    private BindingSource kitBindingSource;
-    private CheckBox checkHasBackname;
-    private CheckBox checkFrontNumber;
-    private CheckBox checkShortsNumber;
-    private Label labelNameFont;
-    private NumericUpDown numericNameFont;
-    private Label label1;
-    private ComboBox comboNameLayout;
-    private NumericUpDown numericShortsNumberFont;
-    private NumericUpDown numericJerseyNumberFont;
-    private PictureBox pictureNameColor;
-    private ColorDialog colorDialog;
-    private PictureBox pictureJerseyNumberColor;
-    private PictureBox pictureShortsNumberColor;
-    private PictureBox pictureTeamTerColor;
-    private PictureBox pictureTeamPrimColor;
-    private PictureBox pictureTeamSecColor;
-    private GroupBox groupName;
-    private CheckBox checkHasAdvertising;
-    private NumericUpDown numericBottom;
-    private NumericUpDown numericTop;
-    private NumericUpDown numericLeft;
-    private NumericUpDown numericRight;
-    private ComboBox comboKitType;
-    private ComboBox comboTeam;
-    private BindingSource teamListBindingSource;
-    private Label labelKitType;
-    private Label labelTeam;
-    private Label label2;
-    private GroupBox groupPositions;
-    private CheckBox checkLink;
-    private Label label3;
-    private ComboBox comboBox1;
-    private ToolStrip toolStrip3D;
-    private ToolStripButton buttonFrontNumber;
-    private ToolStripButton buttonShortsBadge;
-    private ToolStripButton buttonJerseyBadge;
-    private ToolStripButton buttonShortsNumber;
-    private ToolStripButton buttonBackName;
-    private ToolStripButton buttonBackNumber;
-    private ToolStripButton buttonNameCurvature;
-    private ToolStripButton buttonRefresh3D;
-    private ToolStripButton buttonShowNumbers3D;
-    private FontDialog fontDialog;
-    private ToolStrip toolStripNameFont;
-    private ToolStripButton buttonPreviewNameFont;
-    private ToolStripButton buttonImportNameFont;
-    private ToolStripButton buttonExportNameFont;
-    private ToolStripButton buttonDeleteNameFont;
-    private Process processFontView;
-    private ToolStripButton buttonCopyPositions;
-    private ToolStripButton buttonPastePositions;
-    private FontDialog fontDialog1;
-    private CheckBox checkIsFitting;
-    private ImageList imageListCollar;
-    private Label labelCollarImage;
-    private PictureBox pictureFont;
-    private NumericUpDown numericTeamId;
-    private Label labelTeamId;
-    private Label labelFont;
+        };
+        private SolidBrush m_FontBrush = new SolidBrush(Color.Black);
+        private NewKitCreator m_NewKitCreator = new NewKitCreator();
+        private string m_FontnameCurrentFolder = FifaEnvironment.ExportFolder;
+        private float[] m_CopyPosition = new float[32];
+        private PrivateFontCollection m_FontCollection;
+        private Graphics m_FontGraphics;
+        private Kit m_CurrentKit;
+        private bool m_IsLoaded;
+        private bool m_UpdatingLock;
+        private bool m_PositionsLock;
+        private IContainer components;
+        public PickUpControl pickUpControl;
+        private SplitContainer splitContainer1;
+        private SplitContainer splitContainer3;
+        private Viewer2D viewer2DMinikit;
+        private SplitContainer splitContainer2;
+        private SplitContainer splitContainer4;
+        private SplitContainer splitContainer5;
+        private MultiViewer2D multiViewer2DKit;
+        private MultiViewer2D multiViewer2DJerseyNumbers;
+        private MultiViewer2D multiViewer2DShortsNumbers;
+        private GroupBox group3D;
+        private FbxViewer3D viewer3D;
+        private ToolStrip toolNear3D;
+        private ToolStripButton buttonShow3DModel;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton buttonCamera;
+        private FlowLayoutPanel flowPanel;
+        private NumericUpDown numericCollar;
+        private GroupBox groupCollar;
+        private Label labelCollar;
+        private BindingSource kitBindingSource;
+        private CheckBox checkHasBackname;
+        private CheckBox checkFrontNumber;
+        private CheckBox checkShortsNumber;
+        private Label labelNameFont;
+        private NumericUpDown numericNameFont;
+        private Label label1;
+        private ComboBox comboNameLayout;
+        private NumericUpDown numericShortsNumberFont;
+        private NumericUpDown numericJerseyNumberFont;
+        private PictureBox pictureNameColor;
+        private ColorDialog colorDialog;
+        private PictureBox pictureTeamTerColor;
+        private PictureBox pictureTeamPrimColor;
+        private PictureBox pictureTeamSecColor;
+        private GroupBox groupName;
+        private CheckBox checkHasAdvertising;
+        private NumericUpDown numericBottom;
+        private NumericUpDown numericTop;
+        private NumericUpDown numericLeft;
+        private NumericUpDown numericRight;
+        private ComboBox comboKitType;
+        private ComboBox comboTeam;
+        private BindingSource teamListBindingSource;
+        private Label labelKitType;
+        private Label labelTeam;
+        private Label label2;
+        private GroupBox groupPositions;
+        private CheckBox checkLink;
+        private Label label3;
+        private ComboBox comboBox1;
+        private ToolStrip toolStrip3D;
+        private ToolStripButton buttonFrontNumber;
+        private ToolStripButton buttonShortsBadge;
+        private ToolStripButton buttonJerseyBadge;
+        private ToolStripButton buttonShortsNumber;
+        private ToolStripButton buttonBackName;
+        private ToolStripButton buttonBackNumber;
+        private ToolStripButton buttonNameCurvature;
+        private ToolStripButton buttonRefresh3D;
+        private ToolStripButton buttonShowNumbers3D;
+        private FontDialog fontDialog;
+        private ToolStrip toolStripNameFont;
+        private ToolStripButton buttonPreviewNameFont;
+        private ToolStripButton buttonImportNameFont;
+        private ToolStripButton buttonExportNameFont;
+        private ToolStripButton buttonDeleteNameFont;
+        private Process processFontView;
+        private ToolStripButton buttonCopyPositions;
+        private ToolStripButton buttonPastePositions;
+        private FontDialog fontDialog1;
+        private CheckBox checkIsFitting;
+        private ImageList imageListCollar;
+        private Label labelCollarImage;
+        private PictureBox pictureFont;
+        private NumericUpDown numericTeamId;
+        private Label labelTeamId;
+        private PictureBox pictureJerseyNumberColorPrim;
+        private PictureBox pictureJerseyNumberColorSec;
+        private PictureBox pictureJerseyNumberColorTer;
+        private PictureBox pictureShortsNumberColorPrim;
+        private PictureBox pictureShortsNumberColorSec;
+        private PictureBox pictureShortsNumberColorTer;
+        private CheckBox checkBoxIsEmbargoed;
+        private Label labelFont;
 
-    public KitForm()
-    {
-      this.Visible = false;
-      this.InitializeComponent();
-      this.m_FontGraphics = this.pictureFont.CreateGraphics();
-      this.m_FontGraphics.Clear(Color.White);
-      this.pickUpControl.SelectObject = new PickUpControl.PickUpCallback(this.SelectKit);
-      this.pickUpControl.DeleteObject = new PickUpControl.PickUpCallback(this.DeleteKit);
-      this.pickUpControl.CloneObject = new PickUpControl.PickUpCallback(this.CloneKit);
-      this.pickUpControl.RefreshObject = new PickUpControl.PickUpCallback(this.RefreshKit);
-      this.viewer2DMinikit.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageMinikit);
-      this.viewer2DMinikit.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteMinikit);
-      this.viewer2DMinikit.ButtonStripVisible = true;
-      this.viewer2DMinikit.RemoveButton = true;
-      this.multiViewer2DKit.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3Kit);
-      this.multiViewer2DKit.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3Kit);
-      this.multiViewer2DKit.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsKit);
-      this.multiViewer2DKit.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3Kit);
-      this.multiViewer2DJerseyNumbers.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3JerseyNumbers);
-      this.multiViewer2DJerseyNumbers.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3JerseyNumbers);
-      this.multiViewer2DJerseyNumbers.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsJerseyNumbers);
-      this.multiViewer2DJerseyNumbers.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3JerseyNumbers);
-      this.multiViewer2DJerseyNumbers.ShowDeleteButton = true;
-      this.multiViewer2DShortsNumbers.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3ShortsNumbers);
-      this.multiViewer2DShortsNumbers.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3ShortsNumbers);
-      this.multiViewer2DShortsNumbers.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsShortsNumbers);
-      this.multiViewer2DShortsNumbers.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3ShortsNumbers);
-      this.multiViewer2DShortsNumbers.ShowDeleteButton = true;
-      for (int index = 0; index < 32; ++index)
-        this.m_CopyPosition[index] = 0.0f;
-    }
+        public KitForm()
+        {
+            this.Visible = false;
+            this.InitializeComponent();
+            this.m_FontGraphics = this.pictureFont.CreateGraphics();
+            this.m_FontGraphics.Clear(Color.White);
+            this.pickUpControl.SelectObject = new PickUpControl.PickUpCallback(this.SelectKit);
+            this.pickUpControl.DeleteObject = new PickUpControl.PickUpCallback(this.DeleteKit);
+            this.pickUpControl.CloneObject = new PickUpControl.PickUpCallback(this.CloneKit);
+            this.pickUpControl.RefreshObject = new PickUpControl.PickUpCallback(this.RefreshKit);
+            this.viewer2DMinikit.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageMinikit);
+            this.viewer2DMinikit.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteMinikit);
+            this.viewer2DMinikit.ButtonStripVisible = true;
+            this.viewer2DMinikit.RemoveButton = true;
+            this.multiViewer2DKit.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3Kit);
+            this.multiViewer2DKit.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3Kit);
+            this.multiViewer2DKit.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsKit);
+            this.multiViewer2DKit.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3Kit);
+            this.multiViewer2DJerseyNumbers.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3JerseyNumbers);
+            this.multiViewer2DJerseyNumbers.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3JerseyNumbers);
+            this.multiViewer2DJerseyNumbers.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsJerseyNumbers);
+            this.multiViewer2DJerseyNumbers.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3JerseyNumbers);
+            this.multiViewer2DJerseyNumbers.ShowDeleteButton = true;
+            this.multiViewer2DShortsNumbers.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3ShortsNumbers);
+            this.multiViewer2DShortsNumbers.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3ShortsNumbers);
+            this.multiViewer2DShortsNumbers.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveBitmapsShortsNumbers);
+            this.multiViewer2DShortsNumbers.Rx3DeleteDelegate = new MultiViewer2D.Rx3DeleteHandler(this.DeleteRx3ShortsNumbers);
+            this.multiViewer2DShortsNumbers.ShowDeleteButton = true;
+            for (int index = 0; index < 32; ++index)
+                this.m_CopyPosition[index] = 0.0f;
+        }
 
-    private FontFamily LoadFontFamily(string fileName, out PrivateFontCollection _myFonts)
-    {
-      _myFonts = new PrivateFontCollection();
-      FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-      byte[] buffer = new byte[fileStream.Length];
-      fileStream.Read(buffer, 0, buffer.Length);
-      fileStream.Close();
-      IntPtr memory = Marshal.UnsafeAddrOfPinnedArrayElement((Array)buffer, 0);
-      _myFonts.AddMemoryFont(memory, buffer.Length);
-      return _myFonts.Families[0];
-    }
+        private FontFamily LoadFontFamily(string fileName, out PrivateFontCollection _myFonts)
+        {
+            _myFonts = new PrivateFontCollection();
+            FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            byte[] buffer = new byte[fileStream.Length];
+            fileStream.Read(buffer, 0, buffer.Length);
+            fileStream.Close();
+            IntPtr memory = Marshal.UnsafeAddrOfPinnedArrayElement((Array)buffer, 0);
+            _myFonts.AddMemoryFont(memory, buffer.Length);
+            return _myFonts.Families[0];
+        }
 
-    public void Clean()
-    {
-      this.Visible = false;
-    }
+        public void Clean()
+        {
+            this.Visible = false;
+        }
 
-    public Kit RefreshKit(object sender, object obj)
-    {
-      this.Preset();
-      this.ReloadKit(this.m_CurrentKit);
-      return this.m_CurrentKit;
-    }
+        public Kit RefreshKit(object sender, object obj)
+        {
+            this.Preset();
+            this.ReloadKit(this.m_CurrentKit);
+            return this.m_CurrentKit;
+        }
 
-    public void Preset()
-    {
-      //Kit.Prepare3DModels();
-      this.m_NewKitCreator.SetTeams(FifaEnvironment.Teams);
-      this.m_NewKitCreator.KitList = FifaEnvironment.Kits;
-      Table table = FifaEnvironment.FifaDb.Table[TI.teamkits];
-      this.numericShortsNumberFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_shortsnumberfonttype];
-      this.numericJerseyNumberFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_numberfonttype];
-      this.numericNameFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_jerseynamefonttype];
-      this.pickUpControl.FilterValues = new IdArrayList[4]
-      {
+        public void Preset()
+        {
+            //Kit.Prepare3DModels();
+            this.m_NewKitCreator.SetTeams(FifaEnvironment.Teams);
+            this.m_NewKitCreator.KitList = FifaEnvironment.Kits;
+            Table table = FifaEnvironment.FifaDb.Table[TI.teamkits];
+            this.numericShortsNumberFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_shortsnumberfonttype];
+            this.numericJerseyNumberFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_numberfonttype];
+            this.numericNameFont.Maximum = (Decimal)table.TableDescriptor.MaxValues[FI.teamkits_jerseynamefonttype];
+            this.pickUpControl.FilterValues = new IdArrayList[4]
+            {
         (IdArrayList) null,
         (IdArrayList) FifaEnvironment.Teams,
         (IdArrayList) FifaEnvironment.Leagues,
         (IdArrayList) FifaEnvironment.Countries
-      };
-      this.teamListBindingSource.DataSource = (object)FifaEnvironment.Teams;
-      this.comboTeam.DataSource = (object)this.teamListBindingSource;
-      this.pickUpControl.ObjectList = (IdArrayList)FifaEnvironment.Kits;
-      this.checkIsFitting.Visible = FifaEnvironment.Year > 14;
-    }
-
-    private Kit SelectKit(object sender, object obj)
-    {
-      Kit kit = (Kit)obj;
-      this.LoadKit(kit);
-      return kit;
-    }
-
-    private Kit CloneKit(object sender, object obj)
-    {
-      this.m_NewKitCreator.SetTeams(FifaEnvironment.Teams);
-      this.m_NewKitCreator.SourceKit = this.m_CurrentKit;
-      DialogResult dialogResult = this.m_NewKitCreator.ShowDialog();
-      if (this.m_NewKitCreator.NewKit == null)
-      {
-        if (dialogResult == DialogResult.OK)
-        {
-          int num = (int)FifaEnvironment.UserMessages.ShowMessage(5060, this.m_NewKitCreator.NewId);
+            };
+            this.teamListBindingSource.DataSource = (object)FifaEnvironment.Teams;
+            this.comboTeam.DataSource = (object)this.teamListBindingSource;
+            this.pickUpControl.ObjectList = (IdArrayList)FifaEnvironment.Kits;
+            this.checkIsFitting.Visible = FifaEnvironment.Year > 14;
         }
-        return (Kit)null;
-      }
-      ((Kit)obj).CloneTextures(this.m_NewKitCreator.NewKit);
-      return this.m_NewKitCreator.NewKit;
-    }
 
-    private Kit DeleteKit(object sender, object obj)
-    {
-      FifaEnvironment.Kits.DeleteKit((Kit)obj);
-      this.m_CurrentKit = (Kit)null;
-      return (Kit)null;
-    }
-
-    public void LoadKit(Kit kit)
-    {
-      if (!this.m_IsLoaded || this.m_CurrentKit == kit)
-        return;
-      this.m_UpdatingLock = true;
-      this.m_CurrentKit = kit;
-      this.kitBindingSource.DataSource = (object)this.m_CurrentKit;
-      this.multiViewer2DKit.Bitmaps = this.m_CurrentKit.GetKitTextures();
-      this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor);
-      this.multiViewer2DShortsNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor);
-      this.viewer2DMinikit.CurrentBitmap = this.m_CurrentKit.GetMiniKit();
-      this.pictureJerseyNumberColor.BackColor = KitForm.c_ColorPalette[this.m_CurrentKit.jerseyNumberColor];
-      this.pictureShortsNumberColor.BackColor = KitForm.c_ColorPalette[this.m_CurrentKit.shortsNumberColor];
-      this.labelCollarImage.ImageIndex = kit.jerseyCollar;
-      this.LoadPositions();
-      this.Show3DKit();
-      this.ShowFont();
-      this.m_UpdatingLock = false;
-    }
-
-    public void LoadPositions()
-    {
-      this.m_PositionsLock = true;
-      if (this.m_CurrentKit.Positions == null)
-      {
-        this.EnablePositions(false);
-      }
-      else
-      {
-        if (this.buttonBackName.Checked)
-          this.VerifyAndLoadPositions(12);
-        else if (this.buttonBackNumber.Checked)
-          this.VerifyAndLoadPositions(4);
-        else if (this.buttonNameCurvature.Checked)
+        private Kit SelectKit(object sender, object obj)
         {
-          this.numericLeft.Value = (Decimal)this.m_CurrentKit.Positions[17];
-          this.numericTop.Value = (Decimal)this.m_CurrentKit.Positions[21];
-          this.numericRight.Value = new Decimal(0);
-          this.numericBottom.Value = new Decimal(0);
-          this.EnablePositions(true);
+            Kit kit = (Kit)obj;
+            this.LoadKit(kit);
+            return kit;
         }
-        else if (this.buttonFrontNumber.Checked)
-          this.VerifyAndLoadPositions(8);
-        else if (this.buttonJerseyBadge.Checked)
-          this.VerifyAndLoadPositions(0);
-        else if (this.buttonShortsBadge.Checked)
-          this.VerifyAndLoadPositions(24);
-        else if (this.buttonShortsNumber.Checked)
-          this.VerifyAndLoadPositions(28);
-        else
-          this.EnablePositions(false);
-        this.m_PositionsLock = false;
-      }
-    }
 
-    public void VerifyAndLoadPositions(int startingIndex)
-    {
-      if ((double)this.m_CurrentKit.Positions[startingIndex] < 0.0)
-        this.m_CurrentKit.Positions[startingIndex] = 0.0f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex] > 1.0)
-        this.m_CurrentKit.Positions[startingIndex] = 1f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 1] < 0.0)
-        this.m_CurrentKit.Positions[startingIndex + 1] = 0.0f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 1] > 1.0)
-        this.m_CurrentKit.Positions[startingIndex + 1] = 1f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 2] < 0.0)
-        this.m_CurrentKit.Positions[startingIndex + 2] = 0.0f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 2] > 1.0)
-        this.m_CurrentKit.Positions[startingIndex + 2] = 1f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 3] < 0.0)
-        this.m_CurrentKit.Positions[startingIndex + 3] = 0.0f;
-      if ((double)this.m_CurrentKit.Positions[startingIndex + 3] > 1.0)
-        this.m_CurrentKit.Positions[startingIndex + 3] = 1f;
-      this.numericLeft.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex];
-      this.numericTop.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 1];
-      this.numericRight.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 2];
-      this.numericBottom.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 3];
-      this.EnablePositions(true);
-    }
-
-    public void ChangePositions()
-    {
-      if (this.m_PositionsLock)
-        return;
-      if (!this.multiViewer2DKit.buttonSave.Enabled)
-        this.multiViewer2DKit.buttonSave.Enabled = true;
-      if (this.buttonBackName.Checked)
-      {
-        if (this.checkLink.Checked)
+        private Kit CloneKit(object sender, object obj)
         {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[12];
-          this.m_CurrentKit.Positions[12] += num1;
-          this.m_CurrentKit.Positions[14] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[13];
-          this.m_CurrentKit.Positions[13] += num2;
-          this.m_CurrentKit.Positions[15] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[12] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[13] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[14] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[15] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else if (this.buttonBackNumber.Checked)
-      {
-        if (this.checkLink.Checked)
-        {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[4];
-          this.m_CurrentKit.Positions[4] += num1;
-          this.m_CurrentKit.Positions[6] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[5];
-          this.m_CurrentKit.Positions[5] += num2;
-          this.m_CurrentKit.Positions[7] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[4] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[5] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[6] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[7] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else if (this.buttonNameCurvature.Checked)
-      {
-        this.m_CurrentKit.Positions[17] = (float)this.numericLeft.Value;
-        this.m_CurrentKit.Positions[21] = (float)this.numericTop.Value;
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else if (this.buttonFrontNumber.Checked)
-      {
-        if (this.checkLink.Checked)
-        {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[8];
-          this.m_CurrentKit.Positions[8] += num1;
-          this.m_CurrentKit.Positions[10] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[9];
-          this.m_CurrentKit.Positions[9] += num2;
-          this.m_CurrentKit.Positions[11] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[8] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[9] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[10] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[11] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else if (this.buttonJerseyBadge.Checked)
-      {
-        if (this.checkLink.Checked)
-        {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[0];
-          this.m_CurrentKit.Positions[0] += num1;
-          this.m_CurrentKit.Positions[2] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[1];
-          this.m_CurrentKit.Positions[1] += num2;
-          this.m_CurrentKit.Positions[3] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[0] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[1] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[2] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[3] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else if (this.buttonShortsBadge.Checked)
-      {
-        if (this.checkLink.Checked)
-        {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[24];
-          this.m_CurrentKit.Positions[24] += num1;
-          this.m_CurrentKit.Positions[26] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[25];
-          this.m_CurrentKit.Positions[25] += num2;
-          this.m_CurrentKit.Positions[27] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[24] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[25] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[26] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[27] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-      else
-      {
-        if (!this.buttonShortsNumber.Checked)
-          return;
-        if (this.checkLink.Checked)
-        {
-          float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[28];
-          this.m_CurrentKit.Positions[28] += num1;
-          this.m_CurrentKit.Positions[30] += num1;
-          float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[29];
-          this.m_CurrentKit.Positions[29] += num2;
-          this.m_CurrentKit.Positions[31] += num2;
-        }
-        else
-        {
-          this.m_CurrentKit.Positions[28] = (float)this.numericLeft.Value;
-          this.m_CurrentKit.Positions[29] = (float)this.numericTop.Value;
-          this.m_CurrentKit.Positions[30] = (float)this.numericRight.Value;
-          this.m_CurrentKit.Positions[31] = (float)this.numericBottom.Value;
-        }
-        this.CheckPositions();
-        this.LoadPositions();
-      }
-    }
-
-    public void CheckPositions()
-    {
-      for (int index = 0; index < 32; ++index)
-      {
-        if ((double)this.m_CurrentKit.Positions[index] < 0.0)
-          this.m_CurrentKit.Positions[index] = 0.0f;
-        if ((double)this.m_CurrentKit.Positions[index] > 1.0)
-          this.m_CurrentKit.Positions[index] = 1f;
-      }
-    }
-
-    private void EnablePositions(bool enabled)
-    {
-      if (!enabled)
-      {
-        this.numericLeft.Enabled = enabled;
-        this.numericTop.Enabled = enabled;
-        this.numericRight.Enabled = enabled;
-        this.numericBottom.Enabled = enabled;
-      }
-      else if (this.checkLink.Checked || this.buttonNameCurvature.Checked)
-      {
-        this.numericLeft.Enabled = enabled;
-        this.numericTop.Enabled = enabled;
-        this.numericRight.Enabled = !enabled;
-        this.numericBottom.Enabled = !enabled;
-      }
-      else
-      {
-        this.numericLeft.Enabled = enabled;
-        this.numericTop.Enabled = enabled;
-        this.numericRight.Enabled = enabled;
-        this.numericBottom.Enabled = enabled;
-      }
-    }
-
-    public void ReloadKit(Kit kit)
-    {
-      this.m_CurrentKit = (Kit)null;
-      this.LoadKit(kit);
-    }
-
-    private void KitForm_Load(object sender, EventArgs e)
-    {
-      this.m_IsLoaded = true;
-      this.Preset();
-    }
-
-    private bool ImportImageMinikit(object sender, Bitmap bitmap)
-    {
-      return this.m_CurrentKit.SetMiniKit(bitmap);
-    }
-
-    private bool DeleteMinikit(object sender)
-    {
-      return this.m_CurrentKit.DeleteMiniKit();
-    }
-
-    private bool SaveBitmapsKit(object sender, Bitmap[] bitmaps)
-    {
-      bool flag = this.m_CurrentKit.SetKitTextures(bitmaps);
-      this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool ExportRx3Kit(object sender, string exportDir)
-    {
-      return this.m_CurrentKit.ExportKitTextures(exportDir);
-    }
-
-    private bool ImportRx3Kit(object sender, string rx3FileName)
-    {
-      bool flag = this.m_CurrentKit.ImportKitTextures(rx3FileName);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool DeleteRx3Kit(object sender)
-    {
-      bool flag = this.m_CurrentKit.DeleteKitTextures();
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool SaveBitmapsJerseyNumbers(object sender, Bitmap[] bitmaps)
-    {
-      bool flag = NumberFont.SetNumberFont(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor, bitmaps);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool ExportRx3JerseyNumbers(object sender, string exportDir)
-    {
-      return NumberFont.Export(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor, exportDir);
-    }
-
-    private bool ImportRx3JerseyNumbers(object sender, string rx3FileName)
-    {
-      bool flag = NumberFont.Import(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor, rx3FileName);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool DeleteRx3JerseyNumbers(object sender)
-    {
-      bool flag = NumberFont.Delete(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool SaveBitmapsShortsNumbers(object sender, Bitmap[] bitmaps)
-    {
-      bool flag = NumberFont.SetNumberFont(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor, bitmaps);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool ExportRx3ShortsNumbers(object sender, string exportDir)
-    {
-      return NumberFont.Export(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor, exportDir);
-    }
-
-    private bool ImportRx3ShortsNumbers(object sender, string rx3FileName)
-    {
-      bool flag = NumberFont.Import(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor, rx3FileName);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    private bool DeleteRx3ShortsNumbers(object sender)
-    {
-      bool flag = NumberFont.Delete(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor);
-      if (flag)
-        this.ReloadKit(this.m_CurrentKit);
-      return flag;
-    }
-
-    public void Show3DKit()
-    {
-      if (!this.buttonShow3DModel.Checked)
-      {
-        this.viewer3D.ShowEmpty();
-      }
-      else
-      {
-        Bitmap[] kitTextures = this.m_CurrentKit.GetKitTextures();
-        if (kitTextures == null)
-        {
-          this.viewer3D.ShowEmpty();
-        }
-        else
-        {
-          Cursor.Current = Cursors.WaitCursor;
-          Bitmap bitmap1 = (Bitmap)null;
-          Bitmap bitmap2 = (Bitmap)null;
-          if (kitTextures != null)
-          {
-            bitmap1 = kitTextures[1];
-            bitmap2 = kitTextures[3];
-          }
-          Rectangle destRectangle1 = new Rectangle((int)((double)bitmap2.Width * (double)this.m_CurrentKit.Positions[24]), (int)((double)bitmap2.Height * (double)this.m_CurrentKit.Positions[25]), (int)((double)bitmap2.Width * ((double)this.m_CurrentKit.Positions[26] - (double)this.m_CurrentKit.Positions[24])), (int)((double)bitmap2.Height * ((double)this.m_CurrentKit.Positions[27] - (double)this.m_CurrentKit.Positions[25])));
-          if (destRectangle1.Width > 0 && destRectangle1.Height > 0)
-            bitmap2 = GraphicUtil.Overlap(bitmap2, kitTextures[0], destRectangle1);
-          Rectangle destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[0]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[1]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[2] - (double)this.m_CurrentKit.Positions[0])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[3] - (double)this.m_CurrentKit.Positions[1])));
-          if (destRectangle2.Width > 0 && destRectangle2.Height > 0)
-            bitmap1 = GraphicUtil.Overlap(bitmap1, kitTextures[0], destRectangle2);
-          if (this.buttonShowNumbers3D.Checked && this.m_CurrentKit.jerseyBackName)
-          {
-            Bitmap srcBitmap = new Bitmap(FifaEnvironment.LaunchDir + "\\Templates\\PlayerName.png");
-            if (srcBitmap != null)
+            this.m_NewKitCreator.SetTeams(FifaEnvironment.Teams);
+            this.m_NewKitCreator.SourceKit = this.m_CurrentKit;
+            DialogResult dialogResult = this.m_NewKitCreator.ShowDialog();
+            if (this.m_NewKitCreator.NewKit == null)
             {
-              Bitmap upperBitmap = GraphicUtil.ColorizeWhite(srcBitmap, this.pictureNameColor.BackColor);
-              Rectangle destRectangle3 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[14]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[15]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[12] - (double)this.m_CurrentKit.Positions[14])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[13] - (double)this.m_CurrentKit.Positions[15])));
-              if (destRectangle3.Width > 0 && destRectangle3.Height > 0)
-                bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle3);
+                if (dialogResult == DialogResult.OK)
+                {
+                    int num = (int)FifaEnvironment.UserMessages.ShowMessage(5060, this.m_NewKitCreator.NewId);
+                }
+                return (Kit)null;
             }
-          }
-          if (this.buttonShowNumbers3D.Checked)
-          {
-            if (this.multiViewer2DShortsNumbers.GetCurrentBitmap() != null && this.m_CurrentKit.shortsNumber)
+          ((Kit)obj).CloneTextures(this.m_NewKitCreator.NewKit);
+            return this.m_NewKitCreator.NewKit;
+        }
+
+        private Kit DeleteKit(object sender, object obj)
+        {
+            FifaEnvironment.Kits.DeleteKit((Kit)obj);
+            this.m_CurrentKit = (Kit)null;
+            return (Kit)null;
+        }
+
+        public void LoadKit(Kit kit)
+        {
+            if (!this.m_IsLoaded || this.m_CurrentKit == kit)
+                return;
+            this.m_UpdatingLock = true;
+            this.m_CurrentKit = kit;
+            this.kitBindingSource.DataSource = (object)this.m_CurrentKit;
+            this.multiViewer2DKit.Bitmaps = this.m_CurrentKit.GetKitTextures();
+
+            this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(m_CurrentKit.jerseyNumberFont);
+            //this.multiViewer2DJerseyNumbers.SetBitmaps(NumberFont.GetNumberFont(m_CurrentKit.jerseyNumberFont), m_CurrentKit.JerseyNumberColorPrim, m_CurrentKit.JerseyNumberColorSec, m_CurrentKit.JerseyNumberColorTer);
+
+            this.multiViewer2DShortsNumbers.Bitmaps = NumberFont.GetNumberFont(m_CurrentKit.shortsNumberFont);
+            //this.multiViewer2DShortsNumbers.SetBitmaps(NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont), m_CurrentKit.JerseyNumberColorPrim, m_CurrentKit.JerseyNumberColorSec, m_CurrentKit.JerseyNumberColorTer);
+
+            this.viewer2DMinikit.CurrentBitmap = this.m_CurrentKit.GetMiniKit();
+            this.labelCollarImage.ImageIndex = kit.jerseyCollar;
+            this.LoadPositions();
+            this.Show3DKit();
+            this.ShowFont();
+            this.m_UpdatingLock = false;
+        }
+
+        public void LoadPositions()
+        {
+            this.m_PositionsLock = true;
+            if (this.m_CurrentKit.Positions == null)
             {
-              destRectangle1 = new Rectangle((int)((double)bitmap2.Width * (double)this.m_CurrentKit.Positions[28]), (int)((double)bitmap2.Height * (double)this.m_CurrentKit.Positions[29]), (int)((double)bitmap2.Width * ((double)this.m_CurrentKit.Positions[30] - (double)this.m_CurrentKit.Positions[28])), (int)((double)bitmap2.Height * ((double)this.m_CurrentKit.Positions[31] - (double)this.m_CurrentKit.Positions[29])));
-              Bitmap upperBitmap = (Bitmap)this.multiViewer2DShortsNumbers.GetCurrentBitmap().Clone();
-              if (upperBitmap != null && destRectangle1.Width > 0 && destRectangle1.Height > 0)
-                bitmap2 = GraphicUtil.Overlap(bitmap2, upperBitmap, destRectangle1);
+                this.EnablePositions(false);
             }
-            if (this.multiViewer2DJerseyNumbers.GetCurrentBitmap() != null)
+            else
             {
-              Bitmap upperBitmap = (Bitmap)this.multiViewer2DJerseyNumbers.GetCurrentBitmap().Clone();
-              if (this.m_CurrentKit.jerseyFrontNumber)
-              {
-                destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[8]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[9]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[10] - (double)this.m_CurrentKit.Positions[8])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[11] - (double)this.m_CurrentKit.Positions[9])));
-                if (upperBitmap != null && destRectangle2.Width > 0 && destRectangle2.Height > 0)
-                  bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle2);
-              }
-              destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[6]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[7]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[4] - (double)this.m_CurrentKit.Positions[6])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[5] - (double)this.m_CurrentKit.Positions[7])));
-              if (upperBitmap != null && destRectangle2.Width > 0 && destRectangle2.Height > 0)
-              {
-                upperBitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle2);
-              }
+                if (this.buttonBackName.Checked)
+                    this.VerifyAndLoadPositions(12);
+                else if (this.buttonBackNumber.Checked)
+                    this.VerifyAndLoadPositions(4);
+                else if (this.buttonNameCurvature.Checked)
+                {
+                    this.numericLeft.Value = (Decimal)this.m_CurrentKit.Positions[17];
+                    this.numericTop.Value = (Decimal)this.m_CurrentKit.Positions[21];
+                    this.numericRight.Value = new Decimal(0);
+                    this.numericBottom.Value = new Decimal(0);
+                    this.EnablePositions(true);
+                }
+                else if (this.buttonFrontNumber.Checked)
+                    this.VerifyAndLoadPositions(8);
+                else if (this.buttonJerseyBadge.Checked)
+                    this.VerifyAndLoadPositions(0);
+                else if (this.buttonShortsBadge.Checked)
+                    this.VerifyAndLoadPositions(24);
+                else if (this.buttonShortsNumber.Checked)
+                    this.VerifyAndLoadPositions(28);
+                else
+                    this.EnablePositions(false);
+                this.m_PositionsLock = false;
             }
-          }
-          Bitmap bitmap3 = GraphicUtil.EmbossBitmap(bitmap1, Kit.s_JerseyWrinkle);
-          Bitmap bitmap4 = GraphicUtil.EmbossBitmap(bitmap2, Kit.s_ShortsWrinkle);
-          /*Kit.s_JerseyModel3D[this.m_CurrentKit.jerseyCollar].TextureBitmap = bitmap3;
-          Kit.s_ShortsModel3D.TextureBitmap = bitmap4;
-          Kit.s_SocksModel3D.TextureBitmap = bitmap4;
-          this.viewer3D.Clean(3);
-          this.viewer3D.SetMesh(0, Kit.s_JerseyModel3D[this.m_CurrentKit.jerseyCollar]);
-          this.viewer3D.SetMesh(1, Kit.s_ShortsModel3D);
-          this.viewer3D.SetMesh(2, Kit.s_SocksModel3D);*/
-          this.viewer3D.Render();
-          Cursor.Current = Cursors.Default;
         }
-      }
-    }
 
-    private void buttonShow3DModel_Click(object sender, EventArgs e)
-    {
-      this.Show3DKit();
-    }
-
-    private void numericCollar_ValueChanged(object sender, EventArgs e)
-    {
-      this.m_CurrentKit.jerseyCollar = (int)this.numericCollar.Value;
-      this.labelCollarImage.ImageIndex = this.m_CurrentKit.jerseyCollar;
-    }
-
-    private void pictureNameColor_Click(object sender, EventArgs e)
-    {
-      this.colorDialog.Color = this.pictureNameColor.BackColor;
-      int num = (int)this.colorDialog.ShowDialog();
-      this.pictureNameColor.BackColor = this.colorDialog.Color;
-      this.m_CurrentKit.JerseyNameColor = this.colorDialog.Color;
-    }
-
-    private void pictureJerseyNumberColor_Click(object sender, EventArgs e)
-    {
-      ColorSelector colorSelector = new ColorSelector(KitForm.c_ColorPalette, this.m_CurrentKit.jerseyNumberColor);
-      if (colorSelector.ShowDialog() == DialogResult.OK)
-      {
-        this.m_CurrentKit.jerseyNumberColor = colorSelector.SelectedIndex;
-        this.pictureJerseyNumberColor.BackColor = colorSelector.SelectedColor;
-        if (!this.m_UpdatingLock)
+        public void VerifyAndLoadPositions(int startingIndex)
         {
-          this.m_UpdatingLock = true;
-          this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor);
-          this.m_UpdatingLock = false;
+            if ((double)this.m_CurrentKit.Positions[startingIndex] < 0.0)
+                this.m_CurrentKit.Positions[startingIndex] = 0.0f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex] > 1.0)
+                this.m_CurrentKit.Positions[startingIndex] = 1f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 1] < 0.0)
+                this.m_CurrentKit.Positions[startingIndex + 1] = 0.0f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 1] > 1.0)
+                this.m_CurrentKit.Positions[startingIndex + 1] = 1f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 2] < 0.0)
+                this.m_CurrentKit.Positions[startingIndex + 2] = 0.0f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 2] > 1.0)
+                this.m_CurrentKit.Positions[startingIndex + 2] = 1f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 3] < 0.0)
+                this.m_CurrentKit.Positions[startingIndex + 3] = 0.0f;
+            if ((double)this.m_CurrentKit.Positions[startingIndex + 3] > 1.0)
+                this.m_CurrentKit.Positions[startingIndex + 3] = 1f;
+            this.numericLeft.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex];
+            this.numericTop.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 1];
+            this.numericRight.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 2];
+            this.numericBottom.Value = (Decimal)this.m_CurrentKit.Positions[startingIndex + 3];
+            this.EnablePositions(true);
         }
-      }
-      colorSelector.Dispose();
-    }
 
-    private void pictureShortsNumberColor_Click(object sender, EventArgs e)
-    {
-      ColorSelector colorSelector = new ColorSelector(KitForm.c_ColorPalette, this.m_CurrentKit.shortsNumberColor);
-      if (colorSelector.ShowDialog() == DialogResult.OK)
-      {
-        this.m_CurrentKit.shortsNumberColor = colorSelector.SelectedIndex;
-        this.pictureShortsNumberColor.BackColor = colorSelector.SelectedColor;
-        if (!this.m_UpdatingLock)
+        public void ChangePositions()
         {
-          this.m_UpdatingLock = true;
-          this.multiViewer2DShortsNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor);
-          this.m_UpdatingLock = false;
+            if (this.m_PositionsLock)
+                return;
+            if (!this.multiViewer2DKit.buttonSave.Enabled)
+                this.multiViewer2DKit.buttonSave.Enabled = true;
+            if (this.buttonBackName.Checked)
+            {
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[12];
+                    this.m_CurrentKit.Positions[12] += num1;
+                    this.m_CurrentKit.Positions[14] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[13];
+                    this.m_CurrentKit.Positions[13] += num2;
+                    this.m_CurrentKit.Positions[15] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[12] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[13] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[14] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[15] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else if (this.buttonBackNumber.Checked)
+            {
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[4];
+                    this.m_CurrentKit.Positions[4] += num1;
+                    this.m_CurrentKit.Positions[6] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[5];
+                    this.m_CurrentKit.Positions[5] += num2;
+                    this.m_CurrentKit.Positions[7] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[4] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[5] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[6] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[7] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else if (this.buttonNameCurvature.Checked)
+            {
+                this.m_CurrentKit.Positions[17] = (float)this.numericLeft.Value;
+                this.m_CurrentKit.Positions[21] = (float)this.numericTop.Value;
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else if (this.buttonFrontNumber.Checked)
+            {
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[8];
+                    this.m_CurrentKit.Positions[8] += num1;
+                    this.m_CurrentKit.Positions[10] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[9];
+                    this.m_CurrentKit.Positions[9] += num2;
+                    this.m_CurrentKit.Positions[11] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[8] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[9] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[10] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[11] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else if (this.buttonJerseyBadge.Checked)
+            {
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[0];
+                    this.m_CurrentKit.Positions[0] += num1;
+                    this.m_CurrentKit.Positions[2] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[1];
+                    this.m_CurrentKit.Positions[1] += num2;
+                    this.m_CurrentKit.Positions[3] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[0] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[1] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[2] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[3] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else if (this.buttonShortsBadge.Checked)
+            {
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[24];
+                    this.m_CurrentKit.Positions[24] += num1;
+                    this.m_CurrentKit.Positions[26] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[25];
+                    this.m_CurrentKit.Positions[25] += num2;
+                    this.m_CurrentKit.Positions[27] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[24] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[25] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[26] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[27] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
+            else
+            {
+                if (!this.buttonShortsNumber.Checked)
+                    return;
+                if (this.checkLink.Checked)
+                {
+                    float num1 = (float)this.numericLeft.Value - this.m_CurrentKit.Positions[28];
+                    this.m_CurrentKit.Positions[28] += num1;
+                    this.m_CurrentKit.Positions[30] += num1;
+                    float num2 = (float)this.numericTop.Value - this.m_CurrentKit.Positions[29];
+                    this.m_CurrentKit.Positions[29] += num2;
+                    this.m_CurrentKit.Positions[31] += num2;
+                }
+                else
+                {
+                    this.m_CurrentKit.Positions[28] = (float)this.numericLeft.Value;
+                    this.m_CurrentKit.Positions[29] = (float)this.numericTop.Value;
+                    this.m_CurrentKit.Positions[30] = (float)this.numericRight.Value;
+                    this.m_CurrentKit.Positions[31] = (float)this.numericBottom.Value;
+                }
+                this.CheckPositions();
+                this.LoadPositions();
+            }
         }
-      }
-      colorSelector.Dispose();
-    }
 
-    private void pictureTeamPrimColor_Click(object sender, EventArgs e)
-    {
-      this.colorDialog.Color = this.pictureTeamPrimColor.BackColor;
-      int num = (int)this.colorDialog.ShowDialog();
-      this.pictureTeamPrimColor.BackColor = this.colorDialog.Color;
-      this.m_CurrentKit.TeamColor1 = this.colorDialog.Color;
-    }
-
-    private void pictureTeamSecColor_Click(object sender, EventArgs e)
-    {
-      this.colorDialog.Color = this.pictureTeamSecColor.BackColor;
-      int num = (int)this.colorDialog.ShowDialog();
-      this.pictureTeamSecColor.BackColor = this.colorDialog.Color;
-      this.m_CurrentKit.TeamColor2 = this.colorDialog.Color;
-    }
-
-    private void pictureTeamTerColor_Click(object sender, EventArgs e)
-    {
-      this.colorDialog.Color = this.pictureTeamTerColor.BackColor;
-      int num = (int)this.colorDialog.ShowDialog();
-      this.pictureTeamTerColor.BackColor = this.colorDialog.Color;
-      this.m_CurrentKit.TeamColor3 = this.colorDialog.Color;
-    }
-
-    private void numericJerseyNumberFont_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.m_UpdatingLock = true;
-      this.m_CurrentKit.jerseyNumberFont = (int)this.numericJerseyNumberFont.Value;
-      this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.jerseyNumberFont, this.m_CurrentKit.jerseyNumberColor);
-      this.m_UpdatingLock = false;
-    }
-
-    private void numericShortsNumberFont_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.m_UpdatingLock = true;
-      this.m_CurrentKit.shortsNumberFont = (int)this.numericShortsNumberFont.Value;
-      this.multiViewer2DShortsNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont, this.m_CurrentKit.shortsNumberColor);
-      this.m_UpdatingLock = false;
-    }
-
-    private void buttonCamera_Click(object sender, EventArgs e)
-    {
-      Bitmap bitmap1 = this.viewer3D.Photo();
-      int height = bitmap1.Height * 3 / 4;
-      int width1 = bitmap1.Width;
-      int width2 = width1 < height * 6 / 6 ? width1 : height * 6 / 6;
-      Rectangle srcRect = new Rectangle((width1 - width2) / 2, 0, width2, height);
-      Rectangle destRect = new Rectangle(22, 22, 212, 212);
-      Bitmap srcBitmap = GraphicUtil.MakeAutoTransparent(bitmap1);
-      Bitmap bitmap2 = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
-      GraphicUtil.RemapRectangle(srcBitmap, srcRect, bitmap2, destRect);
-      this.m_CurrentKit.SetMiniKit(bitmap2);
-      this.viewer2DMinikit.CurrentBitmap = bitmap2;
-    }
-
-    private void radioPosition_Click(object sender, EventArgs e)
-    {
-      if (!((RadioButton)sender).Checked)
-        return;
-      this.LoadPositions();
-    }
-
-    private void numericPositions_ValueChanged(object sender, EventArgs e)
-    {
-      this.ChangePositions();
-    }
-
-    private void checkLink_CheckedChanged(object sender, EventArgs e)
-    {
-      this.LoadPositions();
-    }
-
-    private void buttonPositions_Click(object sender, EventArgs e)
-    {
-      ToolStripButton toolStripButton = (ToolStripButton)sender;
-      if (!toolStripButton.Checked)
-        return;
-      if (this.buttonBackName.Checked && this.buttonBackName != toolStripButton)
-        this.buttonBackName.Checked = false;
-      if (this.buttonBackNumber.Checked && this.buttonBackNumber != toolStripButton)
-        this.buttonBackNumber.Checked = false;
-      if (this.buttonFrontNumber.Checked && this.buttonFrontNumber != toolStripButton)
-        this.buttonFrontNumber.Checked = false;
-      if (this.buttonJerseyBadge.Checked && this.buttonJerseyBadge != toolStripButton)
-        this.buttonJerseyBadge.Checked = false;
-      if (this.buttonNameCurvature.Checked && this.buttonNameCurvature != toolStripButton)
-        this.buttonNameCurvature.Checked = false;
-      if (this.buttonShortsBadge.Checked && this.buttonShortsBadge != toolStripButton)
-        this.buttonShortsBadge.Checked = false;
-      if (this.buttonShortsNumber.Checked && this.buttonShortsNumber != toolStripButton)
-        this.buttonShortsNumber.Checked = false;
-      this.LoadPositions();
-    }
-
-    private void buttonSavePositions_Click(object sender, EventArgs e)
-    {
-    }
-
-    private void buttonRefresh3D_Click(object sender, EventArgs e)
-    {
-      this.Show3DKit();
-    }
-
-    private void buttonShowNumbers3D_Click(object sender, EventArgs e)
-    {
-      this.Show3DKit();
-    }
-
-    private void ShowFont()
-    {
-      int num = (int)this.numericNameFont.Value;
-      string fileName = FifaEnvironment.ExportFolder + "\\" + NameFont.NameFontFileName(num);
-      Font font = (Font)null;
-      if (NameFont.Export(num, FifaEnvironment.ExportFolder))
-      {
-        FontFamily family = this.LoadFontFamily(fileName, out this.m_FontCollection);
-        if (family.IsStyleAvailable(FontStyle.Regular))
-          font = new Font(family, 15f, FontStyle.Regular);
-        else if (family.IsStyleAvailable(FontStyle.Bold))
-          font = new Font(family, 15f, FontStyle.Bold);
-        else if (family.IsStyleAvailable(FontStyle.Italic))
-          font = new Font(family, 15f, FontStyle.Italic);
-        else if (family.IsStyleAvailable(FontStyle.Strikeout))
-          font = new Font(family, 15f, FontStyle.Strikeout);
-        else if (family.IsStyleAvailable(FontStyle.Underline))
-          font = new Font(family, 15f, FontStyle.Underline);
-        string s = family.Name + "\r\n" + "abcdefghijklmnopqrstuvwxyz\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        if (font != null)
+        public void CheckPositions()
         {
-          this.m_FontGraphics.Clear(Color.White);
-          this.m_FontGraphics.DrawString(s, font, (Brush)this.m_FontBrush, 0.0f, 0.0f);
+            for (int index = 0; index < 32; ++index)
+            {
+                if ((double)this.m_CurrentKit.Positions[index] < 0.0)
+                    this.m_CurrentKit.Positions[index] = 0.0f;
+                if ((double)this.m_CurrentKit.Positions[index] > 1.0)
+                    this.m_CurrentKit.Positions[index] = 1f;
+            }
         }
-        else
-          this.m_FontGraphics.Clear(Color.White);
-      }
-      else
-        this.m_FontGraphics.Clear(Color.White);
-    }
 
-    private void buttonPreviewNameFont_Click(object sender, EventArgs e)
-    {
-      int num = (int)this.numericNameFont.Value;
-      string filePath = FifaEnvironment.ExportFolder + "\\" + NameFont.NameFontFileName(num);
-      bool flag = true;
-      if (!FifaUtil.IsFileLocked(filePath))
-        flag = NameFont.Export(num, FifaEnvironment.ExportFolder);
-      if (!flag || filePath == null)
-        return;
-      this.processFontView.StartInfo.WorkingDirectory = FifaEnvironment.LaunchDir;
-      this.processFontView.StartInfo.FileName = "fontview";
-      this.processFontView.StartInfo.CreateNoWindow = true;
-      this.processFontView.StartInfo.UseShellExecute = false;
-      this.processFontView.StartInfo.Arguments = filePath;
-      this.processFontView.StartInfo.RedirectStandardOutput = false;
-      this.processFontView.Start();
-      this.processFontView.WaitForExit();
-    }
+        private void EnablePositions(bool enabled)
+        {
+            if (!enabled)
+            {
+                this.numericLeft.Enabled = enabled;
+                this.numericTop.Enabled = enabled;
+                this.numericRight.Enabled = enabled;
+                this.numericBottom.Enabled = enabled;
+            }
+            else if (this.checkLink.Checked || this.buttonNameCurvature.Checked)
+            {
+                this.numericLeft.Enabled = enabled;
+                this.numericTop.Enabled = enabled;
+                this.numericRight.Enabled = !enabled;
+                this.numericBottom.Enabled = !enabled;
+            }
+            else
+            {
+                this.numericLeft.Enabled = enabled;
+                this.numericTop.Enabled = enabled;
+                this.numericRight.Enabled = enabled;
+                this.numericBottom.Enabled = enabled;
+            }
+        }
 
-    private void buttonImportNameFont_Click(object sender, EventArgs e)
-    {
-      int style = (int)this.numericNameFont.Value;
-      string srcFileName = FifaEnvironment.BrowseAndCheckTtf(ref this.m_FontnameCurrentFolder);
-      if (srcFileName == null)
-        return;
-      NameFont.Import(style, srcFileName);
-      this.ShowFont();
-    }
+        public void ReloadKit(Kit kit)
+        {
+            this.m_CurrentKit = (Kit)null;
+            this.LoadKit(kit);
+        }
 
-    private void buttonExportNameFont_Click(object sender, EventArgs e)
-    {
-      NameFont.Export((int)this.numericNameFont.Value, FifaEnvironment.ExportFolder);
-    }
+        private void KitForm_Load(object sender, EventArgs e)
+        {
+            this.m_IsLoaded = true;
+            this.Preset();
+        }
 
-    private void buttonDeleteNameFont_Click(object sender, EventArgs e)
-    {
-      NameFont.Delete((int)this.numericNameFont.Value);
-      this.ShowFont();
-    }
+        private bool ImportImageMinikit(object sender, Bitmap bitmap)
+        {
+            return this.m_CurrentKit.SetMiniKit(bitmap);
+        }
 
-    private void checkFrontNumber_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.m_CurrentKit.jerseyFrontNumber = this.checkFrontNumber.Checked;
-    }
+        private bool DeleteMinikit(object sender)
+        {
+            return this.m_CurrentKit.DeleteMiniKit();
+        }
 
-    private void checkShortsNumber_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.m_CurrentKit.shortsNumber = this.checkShortsNumber.Checked;
-    }
+        private bool SaveBitmapsKit(object sender, Bitmap[] bitmaps)
+        {
+            bool flag = this.m_CurrentKit.SetKitTextures(bitmaps);
+            this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    private void checkHasBackname_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.m_CurrentKit.jerseyBackName = this.checkHasBackname.Checked;
-    }
+        private bool ExportRx3Kit(object sender, string exportDir)
+        {
+            return this.m_CurrentKit.ExportKitTextures(exportDir);
+        }
 
-    private void buttonCopyPositions_Click(object sender, EventArgs e)
-    {
-      for (int index = 0; index < 32; ++index)
-        this.m_CopyPosition[index] = this.m_CurrentKit.Positions[index];
-    }
+        private bool ImportRx3Kit(object sender, string rx3FileName)
+        {
+            bool flag = this.m_CurrentKit.ImportKitTextures(rx3FileName);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    private void buttonPastePositions_Click(object sender, EventArgs e)
-    {
-      for (int index = 0; index < 32; ++index)
-        this.m_CurrentKit.Positions[index] = this.m_CopyPosition[index];
-      this.LoadPositions();
-      if (this.multiViewer2DKit.buttonSave.Enabled)
-        return;
-      this.multiViewer2DKit.buttonSave.Enabled = true;
-    }
+        private bool DeleteRx3Kit(object sender)
+        {
+            bool flag = this.m_CurrentKit.DeleteKitTextures();
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    private void labelTeam_DoubleClick(object sender, EventArgs e)
-    {
-      if (this.m_CurrentKit.Team == null)
-        return;
-      MainForm.CM.JumpTo((IdObject)this.m_CurrentKit.Team);
-    }
+        private bool SaveBitmapsJerseyNumbers(object sender, Bitmap[] bitmaps)
+        {
+            bool flag = NumberFont.SetNumberFont(this.m_CurrentKit.jerseyNumberFont, bitmaps);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    private void buttonShowFont_Click(object sender, EventArgs e)
-    {
-      int num = (int)this.fontDialog.ShowDialog();
-    }
+        private bool ExportRx3JerseyNumbers(object sender, string exportDir)
+        {
+            return NumberFont.Export(this.m_CurrentKit.jerseyNumberFont, exportDir);
+        }
 
-    private void numericNameFont_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_UpdatingLock)
-        return;
-      this.ShowFont();
-    }
+        private bool ImportRx3JerseyNumbers(object sender, string rx3FileName)
+        {
+            bool flag = NumberFont.Import(this.m_CurrentKit.jerseyNumberFont, rx3FileName);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        private bool DeleteRx3JerseyNumbers(object sender)
+        {
+            bool flag = NumberFont.Delete(this.m_CurrentKit.jerseyNumberFont);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
 
-    private void InitializeComponent()
-    {
+        private bool SaveBitmapsShortsNumbers(object sender, Bitmap[] bitmaps)
+        {
+            bool flag = NumberFont.SetNumberFont(this.m_CurrentKit.shortsNumberFont, bitmaps);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
+
+        private bool ExportRx3ShortsNumbers(object sender, string exportDir)
+        {
+            return NumberFont.Export(this.m_CurrentKit.shortsNumberFont, exportDir);
+        }
+
+        private bool ImportRx3ShortsNumbers(object sender, string rx3FileName)
+        {
+            bool flag = NumberFont.Import(this.m_CurrentKit.shortsNumberFont, rx3FileName);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
+
+        private bool DeleteRx3ShortsNumbers(object sender)
+        {
+            bool flag = NumberFont.Delete(this.m_CurrentKit.shortsNumberFont);
+            if (flag)
+                this.ReloadKit(this.m_CurrentKit);
+            return flag;
+        }
+
+        public void Show3DKit()
+        {
+            if (!this.buttonShow3DModel.Checked)
+            {
+                this.viewer3D.ShowEmpty();
+            }
+            else
+            {
+                Bitmap[] kitTextures = this.m_CurrentKit.GetKitTextures();
+                if (kitTextures == null)
+                {
+                    this.viewer3D.ShowEmpty();
+                }
+                else
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    Bitmap bitmap1 = (Bitmap)null;
+                    Bitmap bitmap2 = (Bitmap)null;
+                    if (kitTextures != null)
+                    {
+                        bitmap1 = kitTextures[1];
+                        bitmap2 = kitTextures[3];
+                    }
+                    Rectangle destRectangle1 = new Rectangle((int)((double)bitmap2.Width * (double)this.m_CurrentKit.Positions[24]), (int)((double)bitmap2.Height * (double)this.m_CurrentKit.Positions[25]), (int)((double)bitmap2.Width * ((double)this.m_CurrentKit.Positions[26] - (double)this.m_CurrentKit.Positions[24])), (int)((double)bitmap2.Height * ((double)this.m_CurrentKit.Positions[27] - (double)this.m_CurrentKit.Positions[25])));
+                    if (destRectangle1.Width > 0 && destRectangle1.Height > 0)
+                        bitmap2 = GraphicUtil.Overlap(bitmap2, kitTextures[0], destRectangle1);
+                    Rectangle destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[0]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[1]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[2] - (double)this.m_CurrentKit.Positions[0])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[3] - (double)this.m_CurrentKit.Positions[1])));
+                    if (destRectangle2.Width > 0 && destRectangle2.Height > 0)
+                        bitmap1 = GraphicUtil.Overlap(bitmap1, kitTextures[0], destRectangle2);
+                    if (this.buttonShowNumbers3D.Checked && this.m_CurrentKit.jerseyBackName)
+                    {
+                        Bitmap srcBitmap = new Bitmap(FifaEnvironment.LaunchDir + "\\Templates\\PlayerName.png");
+                        if (srcBitmap != null)
+                        {
+                            Bitmap upperBitmap = GraphicUtil.ColorizeWhite(srcBitmap, this.pictureNameColor.BackColor);
+                            Rectangle destRectangle3 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[14]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[15]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[12] - (double)this.m_CurrentKit.Positions[14])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[13] - (double)this.m_CurrentKit.Positions[15])));
+                            if (destRectangle3.Width > 0 && destRectangle3.Height > 0)
+                                bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle3);
+                        }
+                    }
+                    if (this.buttonShowNumbers3D.Checked)
+                    {
+                        if (this.multiViewer2DShortsNumbers.GetCurrentBitmap() != null && this.m_CurrentKit.shortsNumber)
+                        {
+                            destRectangle1 = new Rectangle((int)((double)bitmap2.Width * (double)this.m_CurrentKit.Positions[28]), (int)((double)bitmap2.Height * (double)this.m_CurrentKit.Positions[29]), (int)((double)bitmap2.Width * ((double)this.m_CurrentKit.Positions[30] - (double)this.m_CurrentKit.Positions[28])), (int)((double)bitmap2.Height * ((double)this.m_CurrentKit.Positions[31] - (double)this.m_CurrentKit.Positions[29])));
+                            Bitmap upperBitmap = (Bitmap)this.multiViewer2DShortsNumbers.GetCurrentBitmap().Clone();
+                            if (upperBitmap != null && destRectangle1.Width > 0 && destRectangle1.Height > 0)
+                                bitmap2 = GraphicUtil.Overlap(bitmap2, upperBitmap, destRectangle1);
+                        }
+                        if (this.multiViewer2DJerseyNumbers.GetCurrentBitmap() != null)
+                        {
+                            Bitmap upperBitmap = (Bitmap)this.multiViewer2DJerseyNumbers.GetCurrentBitmap().Clone();
+                            if (this.m_CurrentKit.jerseyFrontNumber)
+                            {
+                                destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[8]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[9]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[10] - (double)this.m_CurrentKit.Positions[8])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[11] - (double)this.m_CurrentKit.Positions[9])));
+                                if (upperBitmap != null && destRectangle2.Width > 0 && destRectangle2.Height > 0)
+                                    bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle2);
+                            }
+                            destRectangle2 = new Rectangle((int)((double)bitmap1.Width * (double)this.m_CurrentKit.Positions[6]), (int)((double)bitmap1.Height * (double)this.m_CurrentKit.Positions[7]), (int)((double)bitmap1.Width * ((double)this.m_CurrentKit.Positions[4] - (double)this.m_CurrentKit.Positions[6])), (int)((double)bitmap1.Height * ((double)this.m_CurrentKit.Positions[5] - (double)this.m_CurrentKit.Positions[7])));
+                            if (upperBitmap != null && destRectangle2.Width > 0 && destRectangle2.Height > 0)
+                            {
+                                upperBitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                bitmap1 = GraphicUtil.Overlap(bitmap1, upperBitmap, destRectangle2);
+                            }
+                        }
+                    }
+                    Bitmap bitmap3 = GraphicUtil.EmbossBitmap(bitmap1, Kit.s_JerseyWrinkle);
+                    Bitmap bitmap4 = GraphicUtil.EmbossBitmap(bitmap2, Kit.s_ShortsWrinkle);
+                    /*Kit.s_JerseyModel3D[this.m_CurrentKit.jerseyCollar].TextureBitmap = bitmap3;
+                    Kit.s_ShortsModel3D.TextureBitmap = bitmap4;
+                    Kit.s_SocksModel3D.TextureBitmap = bitmap4;
+                    this.viewer3D.Clean(3);
+                    this.viewer3D.SetMesh(0, Kit.s_JerseyModel3D[this.m_CurrentKit.jerseyCollar]);
+                    this.viewer3D.SetMesh(1, Kit.s_ShortsModel3D);
+                    this.viewer3D.SetMesh(2, Kit.s_SocksModel3D);*/
+                    this.viewer3D.Render();
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
+
+        private void buttonShow3DModel_Click(object sender, EventArgs e)
+        {
+            this.Show3DKit();
+        }
+
+        private void numericCollar_ValueChanged(object sender, EventArgs e)
+        {
+            this.m_CurrentKit.jerseyCollar = (int)this.numericCollar.Value;
+            this.labelCollarImage.ImageIndex = this.m_CurrentKit.jerseyCollar;
+        }
+
+        private void pictureNameColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureNameColor.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureNameColor.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.JerseyNameColor = this.colorDialog.Color;
+        }
+
+        /*private void pictureJerseyNumberColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureJerseyNumberColorPrim.BackColor;
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.pictureJerseyNumberColorPrim.BackColor = this.colorDialog.Color;
+                this.m_CurrentKit.JerseyNumberColorPrim = this.colorDialog.Color;
+                if (!this.m_UpdatingLock)
+                {
+                    this.m_UpdatingLock = true;
+                    this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.jerseyNumberFont);
+                    this.m_UpdatingLock = false;
+                }
+            }
+            colorDialog.Dispose();
+        }
+
+        private void pictureShortsNumberColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureShortsNumberColorPrim.BackColor;
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.pictureShortsNumberColorPrim.BackColor = this.colorDialog.Color;
+                this.m_CurrentKit.ShortsNumberColorPrim = this.colorDialog.Color;
+                if (!this.m_UpdatingLock)
+                {
+                    this.m_UpdatingLock = true;
+                    this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont);
+                    this.m_UpdatingLock = false;
+                }
+            }
+            colorDialog.Dispose();
+        }*/
+
+        private void pictureTeamPrimColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureTeamPrimColor.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureTeamPrimColor.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.TeamColor1 = this.colorDialog.Color;
+        }
+
+        private void pictureTeamSecColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureTeamSecColor.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureTeamSecColor.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.TeamColor2 = this.colorDialog.Color;
+        }
+
+        private void pictureTeamTerColor_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureTeamTerColor.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureTeamTerColor.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.TeamColor3 = this.colorDialog.Color;
+        }
+
+        private void numericJerseyNumberFont_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.m_UpdatingLock = true;
+            this.m_CurrentKit.jerseyNumberFont = (int)this.numericJerseyNumberFont.Value;
+            this.multiViewer2DJerseyNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.jerseyNumberFont);
+            this.m_UpdatingLock = false;
+        }
+
+        private void numericShortsNumberFont_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.m_UpdatingLock = true;
+            this.m_CurrentKit.shortsNumberFont = (int)this.numericShortsNumberFont.Value;
+            this.multiViewer2DShortsNumbers.Bitmaps = NumberFont.GetNumberFont(this.m_CurrentKit.shortsNumberFont);
+            this.m_UpdatingLock = false;
+        }
+
+        private void buttonCamera_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = this.viewer3D.Photo();
+            int height = bitmap1.Height * 3 / 4;
+            int width1 = bitmap1.Width;
+            int width2 = width1 < height * 6 / 6 ? width1 : height * 6 / 6;
+            Rectangle srcRect = new Rectangle((width1 - width2) / 2, 0, width2, height);
+            Rectangle destRect = new Rectangle(22, 22, 212, 212);
+            Bitmap srcBitmap = GraphicUtil.MakeAutoTransparent(bitmap1);
+            Bitmap bitmap2 = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
+            GraphicUtil.RemapRectangle(srcBitmap, srcRect, bitmap2, destRect);
+            this.m_CurrentKit.SetMiniKit(bitmap2);
+            this.viewer2DMinikit.CurrentBitmap = bitmap2;
+        }
+
+        private void radioPosition_Click(object sender, EventArgs e)
+        {
+            if (!((RadioButton)sender).Checked)
+                return;
+            this.LoadPositions();
+        }
+
+        private void numericPositions_ValueChanged(object sender, EventArgs e)
+        {
+            this.ChangePositions();
+        }
+
+        private void checkLink_CheckedChanged(object sender, EventArgs e)
+        {
+            this.LoadPositions();
+        }
+
+        private void buttonPositions_Click(object sender, EventArgs e)
+        {
+            ToolStripButton toolStripButton = (ToolStripButton)sender;
+            if (!toolStripButton.Checked)
+                return;
+            if (this.buttonBackName.Checked && this.buttonBackName != toolStripButton)
+                this.buttonBackName.Checked = false;
+            if (this.buttonBackNumber.Checked && this.buttonBackNumber != toolStripButton)
+                this.buttonBackNumber.Checked = false;
+            if (this.buttonFrontNumber.Checked && this.buttonFrontNumber != toolStripButton)
+                this.buttonFrontNumber.Checked = false;
+            if (this.buttonJerseyBadge.Checked && this.buttonJerseyBadge != toolStripButton)
+                this.buttonJerseyBadge.Checked = false;
+            if (this.buttonNameCurvature.Checked && this.buttonNameCurvature != toolStripButton)
+                this.buttonNameCurvature.Checked = false;
+            if (this.buttonShortsBadge.Checked && this.buttonShortsBadge != toolStripButton)
+                this.buttonShortsBadge.Checked = false;
+            if (this.buttonShortsNumber.Checked && this.buttonShortsNumber != toolStripButton)
+                this.buttonShortsNumber.Checked = false;
+            this.LoadPositions();
+        }
+
+        private void buttonSavePositions_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void buttonRefresh3D_Click(object sender, EventArgs e)
+        {
+            this.Show3DKit();
+        }
+
+        private void buttonShowNumbers3D_Click(object sender, EventArgs e)
+        {
+            this.Show3DKit();
+        }
+
+        private void ShowFont()
+        {
+            int num = (int)this.numericNameFont.Value;
+            string fileName = FifaEnvironment.ExportFolder + "\\" + NameFont.NameFontFileName(num);
+            Font font = (Font)null;
+            if (NameFont.Export(num, FifaEnvironment.ExportFolder))
+            {
+                FontFamily family = this.LoadFontFamily(fileName, out this.m_FontCollection);
+                if (family.IsStyleAvailable(FontStyle.Regular))
+                    font = new Font(family, 15f, FontStyle.Regular);
+                else if (family.IsStyleAvailable(FontStyle.Bold))
+                    font = new Font(family, 15f, FontStyle.Bold);
+                else if (family.IsStyleAvailable(FontStyle.Italic))
+                    font = new Font(family, 15f, FontStyle.Italic);
+                else if (family.IsStyleAvailable(FontStyle.Strikeout))
+                    font = new Font(family, 15f, FontStyle.Strikeout);
+                else if (family.IsStyleAvailable(FontStyle.Underline))
+                    font = new Font(family, 15f, FontStyle.Underline);
+                string s = family.Name + "\r\n" + "abcdefghijklmnopqrstuvwxyz\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                if (font != null)
+                {
+                    this.m_FontGraphics.Clear(Color.White);
+                    this.m_FontGraphics.DrawString(s, font, (Brush)this.m_FontBrush, 0.0f, 0.0f);
+                }
+                else
+                    this.m_FontGraphics.Clear(Color.White);
+            }
+            else
+                this.m_FontGraphics.Clear(Color.White);
+        }
+
+        private void buttonPreviewNameFont_Click(object sender, EventArgs e)
+        {
+            int num = (int)this.numericNameFont.Value;
+            string filePath = FifaEnvironment.ExportFolder + "\\" + NameFont.NameFontFileName(num);
+            bool flag = true;
+            if (!FifaUtil.IsFileLocked(filePath))
+                flag = NameFont.Export(num, FifaEnvironment.ExportFolder);
+            if (!flag || filePath == null)
+                return;
+            this.processFontView.StartInfo.WorkingDirectory = FifaEnvironment.LaunchDir;
+            this.processFontView.StartInfo.FileName = "fontview";
+            this.processFontView.StartInfo.CreateNoWindow = true;
+            this.processFontView.StartInfo.UseShellExecute = false;
+            this.processFontView.StartInfo.Arguments = filePath;
+            this.processFontView.StartInfo.RedirectStandardOutput = false;
+            this.processFontView.Start();
+            this.processFontView.WaitForExit();
+        }
+
+        private void buttonImportNameFont_Click(object sender, EventArgs e)
+        {
+            int style = (int)this.numericNameFont.Value;
+            string srcFileName = FifaEnvironment.BrowseAndCheckTtf(ref this.m_FontnameCurrentFolder);
+            if (srcFileName == null)
+                return;
+            NameFont.Import(style, srcFileName);
+            this.ShowFont();
+        }
+
+        private void buttonExportNameFont_Click(object sender, EventArgs e)
+        {
+            NameFont.Export((int)this.numericNameFont.Value, FifaEnvironment.ExportFolder);
+        }
+
+        private void buttonDeleteNameFont_Click(object sender, EventArgs e)
+        {
+            NameFont.Delete((int)this.numericNameFont.Value);
+            this.ShowFont();
+        }
+
+        private void checkFrontNumber_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.m_CurrentKit.jerseyFrontNumber = this.checkFrontNumber.Checked;
+        }
+
+        private void checkShortsNumber_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.m_CurrentKit.shortsNumber = this.checkShortsNumber.Checked;
+        }
+
+        private void checkHasBackname_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.m_CurrentKit.jerseyBackName = this.checkHasBackname.Checked;
+        }
+
+        private void buttonCopyPositions_Click(object sender, EventArgs e)
+        {
+            for (int index = 0; index < 32; ++index)
+                this.m_CopyPosition[index] = this.m_CurrentKit.Positions[index];
+        }
+
+        private void buttonPastePositions_Click(object sender, EventArgs e)
+        {
+            for (int index = 0; index < 32; ++index)
+                this.m_CurrentKit.Positions[index] = this.m_CopyPosition[index];
+            this.LoadPositions();
+            if (this.multiViewer2DKit.buttonSave.Enabled)
+                return;
+            this.multiViewer2DKit.buttonSave.Enabled = true;
+        }
+
+        private void labelTeam_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.m_CurrentKit.Team == null)
+                return;
+            MainForm.CM.JumpTo((IdObject)this.m_CurrentKit.Team);
+        }
+
+        private void buttonShowFont_Click(object sender, EventArgs e)
+        {
+            int num = (int)this.fontDialog.ShowDialog();
+        }
+
+        private void numericNameFont_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_UpdatingLock)
+                return;
+            this.ShowFont();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+                this.components.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private void pictureJerseyNumberColorPrim_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureJerseyNumberColorPrim.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureJerseyNumberColorPrim.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.JerseyNumberColorPrim = this.colorDialog.Color;
+        }
+
+        private void pictureJerseyNumberColorSec_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureJerseyNumberColorSec.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureJerseyNumberColorSec.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.JerseyNumberColorSec = this.colorDialog.Color;
+        }
+
+        private void pictureJerseyNumberColorTer_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureJerseyNumberColorTer.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureJerseyNumberColorTer.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.JerseyNumberColorTer = this.colorDialog.Color;
+        }
+
+        private void pictureShortsNumberColorPrim_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureShortsNumberColorPrim.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureShortsNumberColorPrim.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.ShortsNumberColorPrim = this.colorDialog.Color;
+        }
+
+        private void pictureShortsNumberColorSec_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureShortsNumberColorSec.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureShortsNumberColorSec.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.ShortsNumberColorSec = this.colorDialog.Color;
+        }
+
+        private void pictureShortsNumberColorTer_Click(object sender, EventArgs e)
+        {
+            this.colorDialog.Color = this.pictureShortsNumberColorTer.BackColor;
+            int num = (int)this.colorDialog.ShowDialog();
+            this.pictureShortsNumberColorTer.BackColor = this.colorDialog.Color;
+            this.m_CurrentKit.ShortsNumberColorTer = this.colorDialog.Color;
+        }
+
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -1013,8 +1069,9 @@ namespace CreationMaster
             this.numericLeft = new System.Windows.Forms.NumericUpDown();
             this.checkLink = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericTeamId = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxIsEmbargoed = new System.Windows.Forms.CheckBox();
             this.kitBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numericTeamId = new System.Windows.Forms.NumericUpDown();
             this.labelTeamId = new System.Windows.Forms.Label();
             this.labelKitType = new System.Windows.Forms.Label();
             this.labelTeam = new System.Windows.Forms.Label();
@@ -1031,13 +1088,17 @@ namespace CreationMaster
             this.buttonShowNumbers3D = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonCamera = new System.Windows.Forms.ToolStripButton();
+            this.pictureShortsNumberColorTer = new System.Windows.Forms.PictureBox();
+            this.pictureShortsNumberColorSec = new System.Windows.Forms.PictureBox();
+            this.pictureShortsNumberColorPrim = new System.Windows.Forms.PictureBox();
+            this.pictureJerseyNumberColorTer = new System.Windows.Forms.PictureBox();
             this.multiViewer2DShortsNumbers = new FifaControls.MultiViewer2D();
-            this.pictureShortsNumberColor = new System.Windows.Forms.PictureBox();
+            this.pictureJerseyNumberColorSec = new System.Windows.Forms.PictureBox();
+            this.pictureJerseyNumberColorPrim = new System.Windows.Forms.PictureBox();
             this.numericShortsNumberFont = new System.Windows.Forms.NumericUpDown();
             this.multiViewer2DJerseyNumbers = new FifaControls.MultiViewer2D();
             this.checkShortsNumber = new System.Windows.Forms.CheckBox();
             this.checkFrontNumber = new System.Windows.Forms.CheckBox();
-            this.pictureJerseyNumberColor = new System.Windows.Forms.PictureBox();
             this.numericJerseyNumberFont = new System.Windows.Forms.NumericUpDown();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.viewer2DMinikit = new FifaControls.Viewer2D();
@@ -1069,6 +1130,11 @@ namespace CreationMaster
             this.comboNameLayout = new System.Windows.Forms.ComboBox();
             this.pictureFont = new System.Windows.Forms.PictureBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.FullOpen = true;
+            this.colorDialog.SolidColorOnly = true;
             this.pickUpControl = new FifaControls.PickUpControl();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.processFontView = new System.Diagnostics.Process();
@@ -1087,8 +1153,8 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.numericTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kitBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teamListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1100,9 +1166,13 @@ namespace CreationMaster
             this.splitContainer4.SuspendLayout();
             this.group3D.SuspendLayout();
             this.toolNear3D.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorTer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorPrim)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorTer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorPrim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericShortsNumberFont)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericJerseyNumberFont)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
             this.splitContainer5.Panel1.SuspendLayout();
@@ -1154,6 +1224,7 @@ namespace CreationMaster
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.checkBoxIsEmbargoed);
             this.splitContainer3.Panel2.Controls.Add(this.numericTeamId);
             this.splitContainer3.Panel2.Controls.Add(this.labelTeamId);
             this.splitContainer3.Panel2.Controls.Add(this.labelKitType);
@@ -1161,7 +1232,7 @@ namespace CreationMaster
             this.splitContainer3.Panel2.Controls.Add(this.comboTeam);
             this.splitContainer3.Panel2.Controls.Add(this.comboKitType);
             this.splitContainer3.Size = new System.Drawing.Size(516, 807);
-            this.splitContainer3.SplitterDistance = 665;
+            this.splitContainer3.SplitterDistance = 683;
             this.splitContainer3.TabIndex = 0;
             // 
             // multiViewer2DKit
@@ -1176,7 +1247,7 @@ namespace CreationMaster
             this.multiViewer2DKit.Location = new System.Drawing.Point(0, 0);
             this.multiViewer2DKit.Name = "multiViewer2DKit";
             this.multiViewer2DKit.ShowDeleteButton = true;
-            this.multiViewer2DKit.Size = new System.Drawing.Size(512, 556);
+            this.multiViewer2DKit.Size = new System.Drawing.Size(512, 513);
             this.multiViewer2DKit.TabIndex = 0;
             // 
             // groupPositions
@@ -1189,9 +1260,9 @@ namespace CreationMaster
             this.groupPositions.Controls.Add(this.checkLink);
             this.groupPositions.Controls.Add(this.label2);
             this.groupPositions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupPositions.Location = new System.Drawing.Point(0, 556);
+            this.groupPositions.Location = new System.Drawing.Point(0, 513);
             this.groupPositions.Name = "groupPositions";
-            this.groupPositions.Size = new System.Drawing.Size(512, 105);
+            this.groupPositions.Size = new System.Drawing.Size(512, 166);
             this.groupPositions.TabIndex = 3;
             this.groupPositions.TabStop = false;
             this.groupPositions.Text = "Positions";
@@ -1215,7 +1286,7 @@ namespace CreationMaster
             this.toolStrip3D.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip3D.Location = new System.Drawing.Point(3, 16);
             this.toolStrip3D.Name = "toolStrip3D";
-            this.toolStrip3D.Size = new System.Drawing.Size(201, 86);
+            this.toolStrip3D.Size = new System.Drawing.Size(201, 147);
             this.toolStrip3D.TabIndex = 190;
             this.toolStrip3D.Text = "toolStrip1";
             // 
@@ -1229,7 +1300,7 @@ namespace CreationMaster
             this.buttonJerseyBadge.Image = ((System.Drawing.Image)(resources.GetObject("buttonJerseyBadge.Image")));
             this.buttonJerseyBadge.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonJerseyBadge.Name = "buttonJerseyBadge";
-            this.buttonJerseyBadge.Size = new System.Drawing.Size(90, 19);
+            this.buttonJerseyBadge.Size = new System.Drawing.Size(105, 21);
             this.buttonJerseyBadge.Text = "  Jersey Badge  ";
             this.buttonJerseyBadge.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1241,7 +1312,7 @@ namespace CreationMaster
             this.buttonFrontNumber.Image = ((System.Drawing.Image)(resources.GetObject("buttonFrontNumber.Image")));
             this.buttonFrontNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonFrontNumber.Name = "buttonFrontNumber";
-            this.buttonFrontNumber.Size = new System.Drawing.Size(92, 19);
+            this.buttonFrontNumber.Size = new System.Drawing.Size(102, 21);
             this.buttonFrontNumber.Text = " Front Number ";
             this.buttonFrontNumber.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1253,7 +1324,7 @@ namespace CreationMaster
             this.buttonBackName.Image = ((System.Drawing.Image)(resources.GetObject("buttonBackName.Image")));
             this.buttonBackName.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonBackName.Name = "buttonBackName";
-            this.buttonBackName.Size = new System.Drawing.Size(89, 19);
+            this.buttonBackName.Size = new System.Drawing.Size(101, 21);
             this.buttonBackName.Text = "   Back Name   ";
             this.buttonBackName.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1265,7 +1336,7 @@ namespace CreationMaster
             this.buttonNameCurvature.Image = ((System.Drawing.Image)(resources.GetObject("buttonNameCurvature.Image")));
             this.buttonNameCurvature.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonNameCurvature.Name = "buttonNameCurvature";
-            this.buttonNameCurvature.Size = new System.Drawing.Size(98, 19);
+            this.buttonNameCurvature.Size = new System.Drawing.Size(107, 21);
             this.buttonNameCurvature.Text = "Name Curvature";
             this.buttonNameCurvature.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1277,7 +1348,7 @@ namespace CreationMaster
             this.buttonShortsNumber.Image = ((System.Drawing.Image)(resources.GetObject("buttonShortsNumber.Image")));
             this.buttonShortsNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonShortsNumber.Name = "buttonShortsNumber";
-            this.buttonShortsNumber.Size = new System.Drawing.Size(91, 19);
+            this.buttonShortsNumber.Size = new System.Drawing.Size(101, 21);
             this.buttonShortsNumber.Text = "Shorts Number";
             this.buttonShortsNumber.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1289,7 +1360,7 @@ namespace CreationMaster
             this.buttonShortsBadge.Image = ((System.Drawing.Image)(resources.GetObject("buttonShortsBadge.Image")));
             this.buttonShortsBadge.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonShortsBadge.Name = "buttonShortsBadge";
-            this.buttonShortsBadge.Size = new System.Drawing.Size(86, 19);
+            this.buttonShortsBadge.Size = new System.Drawing.Size(98, 21);
             this.buttonShortsBadge.Text = " Shorts Badge ";
             this.buttonShortsBadge.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1301,7 +1372,7 @@ namespace CreationMaster
             this.buttonBackNumber.Image = ((System.Drawing.Image)(resources.GetObject("buttonBackNumber.Image")));
             this.buttonBackNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonBackNumber.Name = "buttonBackNumber";
-            this.buttonBackNumber.Size = new System.Drawing.Size(89, 19);
+            this.buttonBackNumber.Size = new System.Drawing.Size(98, 21);
             this.buttonBackNumber.Text = " Back Number ";
             this.buttonBackNumber.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
@@ -1429,6 +1500,22 @@ namespace CreationMaster
             this.label2.Size = new System.Drawing.Size(129, 56);
             this.label2.TabIndex = 188;
             // 
+            // checkBoxIsEmbargoed
+            // 
+            this.checkBoxIsEmbargoed.AutoSize = true;
+            this.checkBoxIsEmbargoed.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "IsEmbargoed", true, DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBoxIsEmbargoed.Location = new System.Drawing.Point(230, 36);
+            this.checkBoxIsEmbargoed.Name = "checkBoxIsEmbargoed";
+            this.checkBoxIsEmbargoed.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkBoxIsEmbargoed.Size = new System.Drawing.Size(91, 17);
+            this.checkBoxIsEmbargoed.TabIndex = 153;
+            this.checkBoxIsEmbargoed.Text = "Is Embargoed";
+            this.checkBoxIsEmbargoed.UseVisualStyleBackColor = true;
+            // 
+            // kitBindingSource
+            // 
+            this.kitBindingSource.DataSource = typeof(FifaLibrary.Kit);
+            // 
             // numericTeamId
             // 
             this.numericTeamId.BackColor = System.Drawing.SystemColors.Window;
@@ -1445,10 +1532,6 @@ namespace CreationMaster
             this.numericTeamId.Size = new System.Drawing.Size(98, 20);
             this.numericTeamId.TabIndex = 11;
             this.numericTeamId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // kitBindingSource
-            // 
-            this.kitBindingSource.DataSource = typeof(FifaLibrary.Kit);
             // 
             // labelTeamId
             // 
@@ -1551,13 +1634,17 @@ namespace CreationMaster
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.AutoScroll = true;
+            this.splitContainer4.Panel2.Controls.Add(this.pictureShortsNumberColorTer);
+            this.splitContainer4.Panel2.Controls.Add(this.pictureShortsNumberColorSec);
+            this.splitContainer4.Panel2.Controls.Add(this.pictureShortsNumberColorPrim);
+            this.splitContainer4.Panel2.Controls.Add(this.pictureJerseyNumberColorTer);
             this.splitContainer4.Panel2.Controls.Add(this.multiViewer2DShortsNumbers);
-            this.splitContainer4.Panel2.Controls.Add(this.pictureShortsNumberColor);
+            this.splitContainer4.Panel2.Controls.Add(this.pictureJerseyNumberColorSec);
+            this.splitContainer4.Panel2.Controls.Add(this.pictureJerseyNumberColorPrim);
             this.splitContainer4.Panel2.Controls.Add(this.numericShortsNumberFont);
             this.splitContainer4.Panel2.Controls.Add(this.multiViewer2DJerseyNumbers);
             this.splitContainer4.Panel2.Controls.Add(this.checkShortsNumber);
             this.splitContainer4.Panel2.Controls.Add(this.checkFrontNumber);
-            this.splitContainer4.Panel2.Controls.Add(this.pictureJerseyNumberColor);
             this.splitContainer4.Panel2.Controls.Add(this.numericJerseyNumberFont);
             this.splitContainer4.Size = new System.Drawing.Size(430, 807);
             this.splitContainer4.SplitterDistance = 577;
@@ -1652,6 +1739,58 @@ namespace CreationMaster
             this.buttonCamera.Text = "Take a picture for minikit";
             this.buttonCamera.Click += new System.EventHandler(this.buttonCamera_Click);
             // 
+            // pictureShortsNumberColorTer
+            // 
+            this.pictureShortsNumberColorTer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureShortsNumberColorTer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureShortsNumberColorTer.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "ShortsNumberColorTer", true));
+            this.pictureShortsNumberColorTer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureShortsNumberColorTer.Location = new System.Drawing.Point(358, 151);
+            this.pictureShortsNumberColorTer.Name = "pictureShortsNumberColorTer";
+            this.pictureShortsNumberColorTer.Size = new System.Drawing.Size(24, 24);
+            this.pictureShortsNumberColorTer.TabIndex = 156;
+            this.pictureShortsNumberColorTer.TabStop = false;
+            this.pictureShortsNumberColorTer.Click += new System.EventHandler(this.pictureShortsNumberColorTer_Click);
+            // 
+            // pictureShortsNumberColorSec
+            // 
+            this.pictureShortsNumberColorSec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureShortsNumberColorSec.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureShortsNumberColorSec.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "ShortsNumberColorSec", true));
+            this.pictureShortsNumberColorSec.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureShortsNumberColorSec.Location = new System.Drawing.Point(358, 121);
+            this.pictureShortsNumberColorSec.Name = "pictureShortsNumberColorSec";
+            this.pictureShortsNumberColorSec.Size = new System.Drawing.Size(24, 24);
+            this.pictureShortsNumberColorSec.TabIndex = 155;
+            this.pictureShortsNumberColorSec.TabStop = false;
+            this.pictureShortsNumberColorSec.Click += new System.EventHandler(this.pictureShortsNumberColorSec_Click);
+            // 
+            // pictureShortsNumberColorPrim
+            // 
+            this.pictureShortsNumberColorPrim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureShortsNumberColorPrim.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureShortsNumberColorPrim.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "ShortsNumberColorPrim", true));
+            this.pictureShortsNumberColorPrim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureShortsNumberColorPrim.Location = new System.Drawing.Point(358, 91);
+            this.pictureShortsNumberColorPrim.Name = "pictureShortsNumberColorPrim";
+            this.pictureShortsNumberColorPrim.Size = new System.Drawing.Size(24, 24);
+            this.pictureShortsNumberColorPrim.TabIndex = 154;
+            this.pictureShortsNumberColorPrim.TabStop = false;
+            this.pictureShortsNumberColorPrim.Click += new System.EventHandler(this.pictureShortsNumberColorPrim_Click);
+            // 
+            // pictureJerseyNumberColorTer
+            // 
+            this.pictureJerseyNumberColorTer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureJerseyNumberColorTer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureJerseyNumberColorTer.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "JerseyNumberColorTer", true));
+            this.pictureJerseyNumberColorTer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureJerseyNumberColorTer.Location = new System.Drawing.Point(151, 151);
+            this.pictureJerseyNumberColorTer.Name = "pictureJerseyNumberColorTer";
+            this.pictureJerseyNumberColorTer.Size = new System.Drawing.Size(24, 24);
+            this.pictureJerseyNumberColorTer.TabIndex = 153;
+            this.pictureJerseyNumberColorTer.TabStop = false;
+            this.pictureJerseyNumberColorTer.Click += new System.EventHandler(this.pictureJerseyNumberColorTer_Click);
+            // 
             // multiViewer2DShortsNumbers
             // 
             this.multiViewer2DShortsNumbers.AutoTransparency = true;
@@ -1666,22 +1805,36 @@ namespace CreationMaster
             this.multiViewer2DShortsNumbers.Size = new System.Drawing.Size(132, 178);
             this.multiViewer2DShortsNumbers.TabIndex = 1;
             // 
-            // pictureShortsNumberColor
+            // pictureJerseyNumberColorSec
             // 
-            this.pictureShortsNumberColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureShortsNumberColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureShortsNumberColor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureShortsNumberColor.Location = new System.Drawing.Point(357, 108);
-            this.pictureShortsNumberColor.Name = "pictureShortsNumberColor";
-            this.pictureShortsNumberColor.Size = new System.Drawing.Size(24, 24);
-            this.pictureShortsNumberColor.TabIndex = 147;
-            this.pictureShortsNumberColor.TabStop = false;
-            this.pictureShortsNumberColor.Click += new System.EventHandler(this.pictureShortsNumberColor_Click);
+            this.pictureJerseyNumberColorSec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureJerseyNumberColorSec.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureJerseyNumberColorSec.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "JerseyNumberColorSec", true));
+            this.pictureJerseyNumberColorSec.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureJerseyNumberColorSec.Location = new System.Drawing.Point(151, 121);
+            this.pictureJerseyNumberColorSec.Name = "pictureJerseyNumberColorSec";
+            this.pictureJerseyNumberColorSec.Size = new System.Drawing.Size(24, 24);
+            this.pictureJerseyNumberColorSec.TabIndex = 152;
+            this.pictureJerseyNumberColorSec.TabStop = false;
+            this.pictureJerseyNumberColorSec.Click += new System.EventHandler(this.pictureJerseyNumberColorSec_Click);
+            // 
+            // pictureJerseyNumberColorPrim
+            // 
+            this.pictureJerseyNumberColorPrim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureJerseyNumberColorPrim.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureJerseyNumberColorPrim.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "JerseyNumberColorPrim", true));
+            this.pictureJerseyNumberColorPrim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureJerseyNumberColorPrim.Location = new System.Drawing.Point(151, 91);
+            this.pictureJerseyNumberColorPrim.Name = "pictureJerseyNumberColorPrim";
+            this.pictureJerseyNumberColorPrim.Size = new System.Drawing.Size(24, 24);
+            this.pictureJerseyNumberColorPrim.TabIndex = 151;
+            this.pictureJerseyNumberColorPrim.TabStop = false;
+            this.pictureJerseyNumberColorPrim.Click += new System.EventHandler(this.pictureJerseyNumberColorPrim_Click);
             // 
             // numericShortsNumberFont
             // 
             this.numericShortsNumberFont.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.kitBindingSource, "shortsNumberFont", true));
-            this.numericShortsNumberFont.Location = new System.Drawing.Point(357, 82);
+            this.numericShortsNumberFont.Location = new System.Drawing.Point(358, 65);
             this.numericShortsNumberFont.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1733,23 +1886,10 @@ namespace CreationMaster
             this.checkFrontNumber.UseVisualStyleBackColor = true;
             this.checkFrontNumber.CheckedChanged += new System.EventHandler(this.checkFrontNumber_CheckedChanged);
             // 
-            // pictureJerseyNumberColor
-            // 
-            this.pictureJerseyNumberColor.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureJerseyNumberColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureJerseyNumberColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureJerseyNumberColor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureJerseyNumberColor.Location = new System.Drawing.Point(151, 108);
-            this.pictureJerseyNumberColor.Name = "pictureJerseyNumberColor";
-            this.pictureJerseyNumberColor.Size = new System.Drawing.Size(24, 24);
-            this.pictureJerseyNumberColor.TabIndex = 146;
-            this.pictureJerseyNumberColor.TabStop = false;
-            this.pictureJerseyNumberColor.Click += new System.EventHandler(this.pictureJerseyNumberColor_Click);
-            // 
             // numericJerseyNumberFont
             // 
             this.numericJerseyNumberFont.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.kitBindingSource, "jerseyNumberFont", true));
-            this.numericJerseyNumberFont.Location = new System.Drawing.Point(151, 82);
+            this.numericJerseyNumberFont.Location = new System.Drawing.Point(151, 65);
             this.numericJerseyNumberFont.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1861,7 +2001,7 @@ namespace CreationMaster
             // checkIsFitting
             // 
             this.checkIsFitting.AutoSize = true;
-            this.checkIsFitting.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "jerseyfit", true));
+            this.checkIsFitting.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "jerseyfit", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkIsFitting.Location = new System.Drawing.Point(245, 42);
             this.checkIsFitting.Name = "checkIsFitting";
             this.checkIsFitting.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1873,7 +2013,7 @@ namespace CreationMaster
             // checkHasAdvertising
             // 
             this.checkHasAdvertising.AutoSize = true;
-            this.checkHasAdvertising.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "hasadvertisingkit", true));
+            this.checkHasAdvertising.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "hasadvertisingkit", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkHasAdvertising.Location = new System.Drawing.Point(246, 19);
             this.checkHasAdvertising.Name = "checkHasAdvertising";
             this.checkHasAdvertising.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2056,7 +2196,7 @@ namespace CreationMaster
             // checkHasBackname
             // 
             this.checkHasBackname.AutoSize = true;
-            this.checkHasBackname.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "jerseyBackName", true));
+            this.checkHasBackname.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.kitBindingSource, "jerseyBackName", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkHasBackname.Location = new System.Drawing.Point(9, 19);
             this.checkHasBackname.Name = "checkHasBackname";
             this.checkHasBackname.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2096,7 +2236,7 @@ namespace CreationMaster
             this.pictureNameColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureNameColor.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.kitBindingSource, "JerseyNameColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.pictureNameColor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureNameColor.Location = new System.Drawing.Point(190, 12);
+            this.pictureNameColor.Location = new System.Drawing.Point(139, 12);
             this.pictureNameColor.Name = "pictureNameColor";
             this.pictureNameColor.Size = new System.Drawing.Size(24, 24);
             this.pictureNameColor.TabIndex = 145;
@@ -2206,8 +2346,8 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.numericTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kitBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teamListBindingSource)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -2222,9 +2362,13 @@ namespace CreationMaster
             this.group3D.PerformLayout();
             this.toolNear3D.ResumeLayout(false);
             this.toolNear3D.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorTer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureShortsNumberColorPrim)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorTer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColorPrim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericShortsNumberFont)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureJerseyNumberColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericJerseyNumberFont)).EndInit();
             this.splitContainer5.Panel1.ResumeLayout(false);
             this.splitContainer5.Panel2.ResumeLayout(false);
@@ -2246,6 +2390,6 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.pictureFont)).EndInit();
             this.ResumeLayout(false);
 
+        }
     }
-  }
 }

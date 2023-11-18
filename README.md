@@ -16,7 +16,14 @@ If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this r
 - Game development with Unity
 
 
-## Pendencias
+## Data Changes
+
+- South Africa stadium: Allianz Arena
+- Cameroon stadium: Stadio Olimpico
+- Ivory Coast stadium: Etihad Stadium
+- Turkey stadium: Stadion Hanguk
+
+## Pendencies
 
 - Weather Probability
 - Argentina num_games = 0
@@ -51,12 +58,28 @@ If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this r
 +1699,standings_sort,H2HGOALSFOR
  
  ```
+ 
 - FIFA DB IS SMALLER AFTER SAVING FOR THE FIRST TIME, LOSS OF DATA?
-- COLORS OF NUMBERS IN KITS IN GAME ARE WRONG
 
-- FIX TEMPLATE/DB FILES TO BUILD AND RUN CORRECTLY
+- FIX TEMPLATE/DB FILES TO BUILD AND RUN CORRECTLY: Probably need to package the original db file within cm17
+
+- What is the purpose of shortstyle? Roda JC Kerkade (321) value = 3, maybe affects the 3d model?
+- Teams: fix on National Team relation ???
 
 ## Changelog
+
+v008
+- Country: fixed National team target not saving
+- Teams: fixed stadium change not saving
+- Teams: Added links to all kits 
+- Kits: Support for IsEmbargoed
+- Kits: Support for new format of number colors (primary, secondary and tertiary)
+- Compdata: added support to Competition Dependency (advance_teamcompdependency)
+- Compdata: reload data right after saving
+- Compdata: Added Data Usage at World Level (FIFA)
+- Compdata: Fixed bug on "Get teams in order from league"
+- Compdata: "4 Chars Name" adjusted to "5 Chars Code"
+- Compdata: failsafe for new tournaments rankings table, avoiding the necessity of open the data again to add it.
 
 v007
 - 3d Render: Opengl before DirectX 12 and 11
@@ -81,20 +104,20 @@ v004
 - Support for ISOCountryCode on Country Screen
 - Using FIFA 17 Country/League/Teams assets (Extracted with FrostyEditor 1.0.6.2)
 v003
-- Preventing to set num_games in INTERFRIENDLY to avoid duplicate the national teams games
-- Support for J-League parameters on match_stagetype=SETUP
-- Support for Stage "Aggregate standings"
-- Not setting match_stagetype=LEAGUE if match_situation is already LEAGUE
-- Support for apertura/clausura asset_id
+- Compdata: Preventing to set num_games in INTERFRIENDLY to avoid duplicate the national teams games
+- Compdata: Support for J-League parameters on match_stagetype=SETUP
+- Compdata: Support for Stage "Aggregate standings"
+- Compdata: Not setting match_stagetype=LEAGUE if match_situation is already LEAGUE
+- Compdata: Support for apertura/clausura asset_id
 v002
-- Support for Low Celebration level at Trophy level
-- Support for Starting Month at World level (FIFA)
-- Support for info_color_slot_adv_group at Stage level
-- Hidding League tasks panel when Match Situation is not LEAGUE
-- num_games = 0 in Group Stage (Used in Japanese League Overall Table)
+- Compdata: Support for Low Celebration level at Trophy level
+- Compdata: Support for Starting Month at World level (FIFA)
+- Compdata: Support for info_color_slot_adv_group at Stage level
+- Compdata: Hidding League tasks panel when Match Situation is not LEAGUE
+- Compdata: num_games = 0 in Group Stage (Used in Japanese League Overall Table)
 v001
-- Use Fan Cards
-- Support to new Qualification Rules (ChampionsCup, EuroLeague)
+- Compdata: Use Fan Cards
+- Compdata: Support to new Qualification Rules (ChampionsCup, EuroLeague)
 
 ## Current progress ##
 

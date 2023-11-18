@@ -587,7 +587,7 @@ namespace CreationMaster
       // 
       // comboRegionalTarget
       // 
-      this.comboRegionalTarget.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.countryBindingSource, "ContinentalCupTarget", true));
+      this.comboRegionalTarget.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.countryBindingSource, "ContinentalCupTarget", true, DataSourceUpdateMode.OnPropertyChanged));
       this.comboRegionalTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
       this.comboRegionalTarget.ItemHeight = 13;
       this.comboRegionalTarget.Items.AddRange(new object[] {
@@ -723,7 +723,7 @@ namespace CreationMaster
       // 
       // checkTopTier
       // 
-      this.checkTopTier.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.countryBindingSource, "Top_tier", true));
+      this.checkTopTier.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.countryBindingSource, "Top_tier", true, DataSourceUpdateMode.OnPropertyChanged));
       this.checkTopTier.Location = new System.Drawing.Point(4, 221);
       this.checkTopTier.Name = "checkTopTier";
       this.checkTopTier.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

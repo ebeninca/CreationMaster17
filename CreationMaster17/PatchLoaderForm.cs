@@ -2296,7 +2296,7 @@ namespace CreationMaster
         {
           int styleId = int32 / 20;
           int colorId = int32 - 20 * styleId;
-          this.ShowRx3File(this.m_TempFolder + "\\" + NumberFont.NumberFontFileName(styleId, colorId));
+          this.ShowRx3File(this.m_TempFolder + "\\" + NumberFont.NumberFontFileName(styleId, colorId, null));
         }
         else if (text == "Net")
           this.ShowRx3File(this.m_TempFolder + "\\" + Net.NetFileName(int32));

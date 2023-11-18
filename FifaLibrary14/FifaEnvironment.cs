@@ -5,6 +5,7 @@ using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FifaLibrary
@@ -65,6 +66,7 @@ namespace FifaLibrary
         private static string m_LaunchDir;
         private static UserMessage m_UserMessages;
         private static UserOptions m_UserOptions;
+        private static int m_AdvancementsSize, m_InitTeamsSize, m_CompIdsSize, m_CompObjSize, m_WeatherSize, m_TasksSize, m_StandingsSize, m_ScheduleSize, m_SettingsSize;
 
         public static FifaFat FifaFat
         {
@@ -530,6 +532,16 @@ namespace FifaLibrary
             }
         }
 
+        public static int AdvancementsSize { get => m_AdvancementsSize; set => m_AdvancementsSize = value; }
+        public static int InitTeamsSize { get => m_InitTeamsSize; set => m_InitTeamsSize = value; }
+        public static int CompIdsSize { get => m_CompIdsSize; set => m_CompIdsSize = value; }
+        public static int CompObjSize { get => m_CompObjSize; set => m_CompObjSize = value; }
+        public static int WeatherSize { get => m_WeatherSize; set => m_WeatherSize = value; }
+        public static int TasksSize { get => m_TasksSize; set => m_TasksSize = value; }
+        public static int StandingsSize { get => m_StandingsSize; set => m_StandingsSize = value; }
+        public static int ScheduleSize { get => m_ScheduleSize; set => m_ScheduleSize = value; }
+        public static int SettingsSize { get => m_SettingsSize; set => m_SettingsSize = value; }
+
         public static void InitializeLaunchFolder()
         {
             int num = Environment.CommandLine.IndexOf(".exe");
@@ -881,6 +893,11 @@ namespace FifaLibrary
             return true;
         }
 
+        public static void UpdateCompetitionData()
+        {
+            ExtractCompetitionFiles();
+        }
+
         public static bool OpenFat()
         {
             FifaEnvironment.m_FifaFat = (FifaFat)null;
@@ -973,6 +990,39 @@ namespace FifaLibrary
                 }
                 else
                     FifaEnvironment.m_FifaFat.HideFile(fileNames[index]);
+
+                switch (index)
+                {
+                    case 0:
+                        m_CompObjSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 1:
+                        m_SettingsSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 2:
+                        m_StandingsSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 3:
+                        m_AdvancementsSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 4:
+                        m_ScheduleSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 5:
+                        m_WeatherSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 6:
+                        m_TasksSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 7:
+                        m_InitTeamsSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    case 8:
+                        m_CompIdsSize = File.ReadLines(FifaEnvironment.m_GameDir + fileNames[index]).Count();
+                        break;
+                    default:
+                        break;
+                }
             }
             return flag;
         }
@@ -2280,9 +2330,12 @@ namespace FifaLibrary
                 FifaEnvironment.s_CompetitionObjects = new CompobjList(FifaEnvironment.m_GameDir, FifaEnvironment.m_FifaDb);
 
             //if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
+            // Causing stackoverflow when removing national team
             //  FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
             if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
+            {
                 FifaEnvironment.s_CountryList.LinkTeam(FifaEnvironment.s_TeamList);
+            }
 
             if (FifaEnvironment.s_CompetitionObjects == null)
                 return;

@@ -29,7 +29,7 @@ namespace FifaLibrary
       {
         for (int colorId = num2; colorId <= num3; ++colorId)
         {
-          string fileName = NumberFont.NumberFontFileName(styleId, colorId);
+          string fileName = NumberFont.NumberFontFileName(styleId, colorId, null);
           if (fatFile.IsArchivedFilePresent(fileName) || fatFile.IsPhisycalFilePresent(fileName))
             this.Add((object) new NumberFont(styleId * (num3 + 1) + colorId));
         }

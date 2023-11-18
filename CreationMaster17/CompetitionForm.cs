@@ -11,4587 +11,4663 @@ using System.Windows.Forms;
 
 namespace CreationMaster
 {
-  public class CompetitionForm : Form
-  {
-    private NewIdCreator m_NewIdCreator = new NewIdCreator();
-    private Label[] m_QRLabels = new Label[48];
-    private Label[] m_AdvanceLabels = new Label[48];
-    private Label[] m_UpdateTableLabels = new Label[24];
-    private ComboBox[] m_SpecialTeamCombos = new ComboBox[4];
-    private ComboBox[] m_StadiumCombos = new ComboBox[12];
-    private QualifyRuleDialog m_QualifyRuleDialog = new QualifyRuleDialog();
-    private AdvanceRuleDialog m_AdvanceRuleDialog = new AdvanceRuleDialog();
-    private RankingRuleDialog m_RankingRuleDialog = new RankingRuleDialog();
-    private NumericUpDown[] m_RainProb = new NumericUpDown[12];
-    private NumericUpDown[] m_SnowProb = new NumericUpDown[12];
-    private NumericUpDown[] m_OvercastProb = new NumericUpDown[12];
-    private ComboBox[] m_SunsetTime = new ComboBox[12];
-    private ComboBox[] m_NightTime = new ComboBox[12];
-    private Panel[] m_InitTeamPanel = new Panel[24];
-    private ComboBox[] m_InitTeamCombo = new ComboBox[24];
-    private string m_TrophyCurrentFolder = FifaEnvironment.ExportFolder;
-    private bool m_IsLoaded;
-    private CompobjList m_Competitions;
-    private World m_CurrentWorld;
-    private Confederation m_CurrentConfederation;
-    private Nation m_CurrentNation;
-    private Trophy m_CurrentTrophy;
-    private Trophy m_ClipboardTrophy;
-    private Stage m_CurrentStage;
-    private Group m_CurrentGroup;
-    private Compobj m_CurrentCompobj;
-    private Schedule m_CurrentStageSchedule;
-    private Schedule m_CurrentGroupSchedule;
-    private bool m_Locked;
-    private bool m_LockTree;
-    private bool m_LockToPanel;
-    private int m_NUpdateTableLabels;
-    private Nation m_ClipboardNation;
-    private Stage m_ClipboardStageForSchedule;
-    private Group m_ClipboardGroupForSchedule;
-    private Group m_ClipboardGroup;
-    private IContainer components;
-    private TreeView treeWorld;
-    private GroupBox groupConfederation;
-    private Label labelConfStartMonth;
-    private ComboBox comboConfederationStartingMonth;
-    private GroupBox groupNation;
-    private GroupBox groupTrophy;
-    private GroupBox groupStage;
-    private ComboBox comboNationStartMonth;
-    private NumericUpDown numericNationYellowsStored;
-    private ComboBox comboNationStandingsRules;
-    private CheckBox checkNationStandingsRules;
-    private ComboBox comboCountry;
-    private Label labelDatabaseCountry;
-    private ToolTip toolTip;
-    private Label labelCompetitionType;
-    private Label labelAssetId;
-    private Label labelMatchImportance;
-    private CheckBox checkTrophyStandingsRules;
-    private CheckBox checkPromotionLeague;
-    private CheckBox checkRelegationLeague;
-    private GroupBox groupSchedule;
-    private GroupBox groupPromotionRelegation;
-    private CheckBox checkForceSchedule;
-    private TextBox textTrophyLongName;
-    private TextBox textTrophyShortName;
-    private Label labeTrophylLongName;
-    private Label labelTrophyShortName;
-    private Button buttonGetId;
-    private NumericUpDown numericAssetId;
-    private ComboBox comboCompetitionType;
-    private NumericUpDown numericImportance;
-    private ComboBox comboTrophyStandingRules;
-    private ComboBox comboRelegationLeague;
-    private ComboBox comboPromotionLeague;
-    private ComboBox comboSchedForce;
-    private ToolStrip toolCompetitionTree;
-    private SplitContainer splitContainer1;
-    private Panel panelCompObj;
-    private Label label1;
-    private Label label3;
-    private TextBox textLanguageKey;
-    private Label label2;
-    private TextBox textFourCharName;
-    private NumericUpDown numericNTeams;
-    private Label label4;
-    private Panel panelQualificationRules;
-    private Panel panelAdvancement;
-    private TabControl tabCompetitions;
-    private TabPage pageConfederation;
-    private TabPage pageNation;
-    private TabPage pageTrophy;
-    private TabPage pageStage;
-    private TabPage pageGroup;
-    private TabPage pageWorld;
-    private GroupBox groupGroup;
-    private CheckBox checkScheduleConflicts;
-    private GroupBox groupBenchPlayers;
-    private RadioButton radioBench7Players;
-    private RadioButton radioBench5Players;
-    private Label label6;
-    private Label label5;
-    private ComboBox comboStageType;
-    private Label label7;
-    private GroupBox groupPlayStage;
-    private ComboBox comboMatchSituation;
-    private Label label8;
-    private GroupBox groupSetupStage;
-    private NumericUpDown numericPrizeMoney;
-    private Label label9;
-    private NumericUpDown numericMoneyDrop;
-    private Label label10;
-    private CheckBox checkRandomDraw;
-    private CheckBox checkMaxteamsgroup;
-    private CheckBox checkMaxteamsassoc;
-    private CheckBox checkCalccompavgs;
-    private CheckBox checkMatchReplay;
-    private CheckBox checkClausuraSchedule;
-    private NumericUpDown numericStartYear;
-    private Label label13;
-    private GroupBox groupBox2;
-    private ComboBox comboSpecialTeam1;
-    private ComboBox comboSpecialTeam4;
-    private ComboBox comboSpecialTeam3;
-    private ComboBox comboSpecialTeam2;
-    private GroupBox groupStadiums;
-    private ComboBox comboStadium12;
-    private ComboBox comboStadium11;
-    private ComboBox comboStadium10;
-    private ComboBox comboStadium9;
-    private ComboBox comboStadium8;
-    private ComboBox comboStadium7;
-    private ComboBox comboStadium6;
-    private ComboBox comboStadium5;
-    private ComboBox comboStadium4;
-    private ComboBox comboStadium3;
-    private ComboBox comboStadium2;
-    private ComboBox comboStadium1;
-    private NumericUpDown numericStageRef;
-    private NumericUpDown numericStandingKeep;
-    private CheckBox checkStandingKeep;
-    private NumericUpDown numericKeepPointsPercentage;
-    private CheckBox checkKeepPointsPercentage;
-    private ComboBox comboSpecialKo2Rule;
-    private CheckBox checkSpecialKo2Rule;
-    private ComboBox comboSpecialKo1Rule;
-    private CheckBox checkSpecialKo1Rule;
-    private NumericUpDown numericRegularSeason;
-    private NumericUpDown numericStandingsRank;
-    private CheckBox checkStandingsRank;
-    private GroupBox groupInfoColors;
-    private CheckBox checkInfoColorAdvance;
-    private CheckBox checkInfoColorPromotion;
-    private CheckBox checkInfoColorPossiblePromotion;
-    private CheckBox checkInfoColorRelegation;
-    private CheckBox checkInfoColorPossibleRelegation;
-    private CheckBox checkInfoColorEuropa;
-    private CheckBox checkInfoColorChampions;
-    private CheckBox checkInfoColorChamp;
-    private Label label12;
-    private Label label11;
-    private NumericUpDown numericColorAdvanceMax;
-    private NumericUpDown numericColorAdvanceMin;
-    private NumericUpDown numericColorPromotionMax;
-    private NumericUpDown numericColorPromotionMin;
-    private NumericUpDown numericColorPossiblePromotionMax;
-    private NumericUpDown numericColorPossiblePromotionMin;
-    private NumericUpDown numericColorRelegationMax;
-    private NumericUpDown numericColorRelegationMin;
-    private NumericUpDown numericColorPossibleRelegationMax;
-    private NumericUpDown numericColorPossibleRelegationMin;
-    private NumericUpDown numericColorEuropaMax;
-    private NumericUpDown numericColorEuropaMin;
-    private NumericUpDown numericColorChampionsMax;
-    private NumericUpDown numericColorChampionsMin;
-    private GroupBox groupSlots;
-    private NumericUpDown numericPossiblePromotionMax;
-    private CheckBox checkInfoPossiblePromotion;
-    private NumericUpDown numericPossiblePromotionMin;
-    private NumericUpDown numericPromotionMax;
-    private NumericUpDown numericPromotionMin;
-    private NumericUpDown numericRelegationMax;
-    private NumericUpDown numericRelegationMin;
-    private NumericUpDown numericPossibleRelegationMax;
-    private NumericUpDown numericPossibleRelegationMin;
-    private Label label15;
-    private Label label16;
-    private CheckBox checkInfoPromotion;
-    private CheckBox checkInfoRelegation;
-    private CheckBox checkInfoPossibleRelegation;
-    private CheckBox checkInfoChamp;
-    private ComboBox comboLanguageKey;
-    private GroupBox groupWeather;
-    private Label label28;
-    private Label label27;
-    private Label label26;
-    private Label label25;
-    private Label label24;
-    private Label label23;
-    private Label label22;
-    private Label label21;
-    private Label label20;
-    private Label label19;
-    private Label label18;
-    private Label label17;
-    private ComboBox comboBox23;
-    private ComboBox comboBox24;
-    private NumericUpDown numericUpDown34;
-    private NumericUpDown numericUpDown35;
-    private NumericUpDown numericUpDown36;
-    private ComboBox comboBox21;
-    private ComboBox comboBox22;
-    private NumericUpDown numericUpDown31;
-    private NumericUpDown numericUpDown32;
-    private NumericUpDown numericUpDown33;
-    private ComboBox comboBox19;
-    private ComboBox comboBox20;
-    private NumericUpDown numericUpDown28;
-    private NumericUpDown numericUpDown29;
-    private NumericUpDown numericUpDown30;
-    private ComboBox comboBox17;
-    private ComboBox comboBox18;
-    private NumericUpDown numericUpDown25;
-    private NumericUpDown numericUpDown26;
-    private NumericUpDown numericUpDown27;
-    private ComboBox comboBox15;
-    private ComboBox comboBox16;
-    private NumericUpDown numericUpDown22;
-    private NumericUpDown numericUpDown23;
-    private NumericUpDown numericUpDown24;
-    private ComboBox comboBox13;
-    private ComboBox comboBox14;
-    private NumericUpDown numericUpDown19;
-    private NumericUpDown numericUpDown20;
-    private NumericUpDown numericUpDown21;
-    private ComboBox comboBox11;
-    private ComboBox comboBox12;
-    private NumericUpDown numericUpDown16;
-    private NumericUpDown numericUpDown17;
-    private NumericUpDown numericUpDown18;
-    private ComboBox comboBox9;
-    private ComboBox comboBox10;
-    private NumericUpDown numericUpDown13;
-    private NumericUpDown numericUpDown14;
-    private NumericUpDown numericUpDown15;
-    private ComboBox comboBox7;
-    private ComboBox comboBox8;
-    private NumericUpDown numericUpDown10;
-    private NumericUpDown numericUpDown11;
-    private NumericUpDown numericUpDown12;
-    private ComboBox comboBox5;
-    private ComboBox comboBox6;
-    private NumericUpDown numericUpDown7;
-    private NumericUpDown numericUpDown8;
-    private NumericUpDown numericUpDown9;
-    private ComboBox comboBox3;
-    private ComboBox comboBox4;
-    private NumericUpDown numericUpDown4;
-    private NumericUpDown numericUpDown5;
-    private NumericUpDown numericUpDown6;
-    private ComboBox comboBox1;
-    private ComboBox comboBox2;
-    private NumericUpDown numericUpDown1;
-    private NumericUpDown numericUpDown2;
-    private NumericUpDown numericUpDown3;
-    private Label label33;
-    private Label label32;
-    private Label label31;
-    private Label label30;
-    private Label label29;
-    private ToolStrip toolWeather;
-    private ToolStripButton buttonCopyWeather;
-    private ToolStripButton buttonPasteWeather;
-    private GroupBox groupStageSchedules;
-    private TreeView treeStageSchedule;
-    private ToolStrip toolStageSchedule;
-    private Panel panelStageScheduleDetails;
-    private Label label37;
-    private Label label36;
-    private Label label35;
-    private Label label34;
-    private ComboBox comboStageTime;
-    private NumericUpDown numericStageMaxGames;
-    private NumericUpDown numericStageMinGames;
-    private DateTimePicker dateStagePicker;
-    private GroupBox groupStageScheduleDetails;
-    private GroupBox groupGroupScheduke;
-    private TreeView treeGroupSchedule;
-    private Panel panelGroupScheduleDetails;
-    private GroupBox groupGroupScheduleDetails;
-    private DateTimePicker dateGroupPicker;
-    private Label label38;
-    private NumericUpDown numericGroupMinGames;
-    private Label label39;
-    private NumericUpDown numericGroupMaxGames;
-    private Label label40;
-    private ComboBox comboGroupTime;
-    private Label label41;
-    private ToolStrip toolGroupSchedule;
-    private NumericUpDown numericNumGames;
-    private Label label14;
-    private GroupBox groupPlayGroup;
-    private ToolStripButton buttonAddTrophy;
-    private ToolStripButton buttonDeleteTrophy;
-    private ToolStripButton buttonAddStage;
-    private ToolStripButton buttonDeleteStage;
-    private ToolStripButton buttonAddGroup;
-    private ToolStripButton buttonDeleteGroup;
-    private ToolStripButton buttonAddNatiom;
-    private ToolStripButton buttonDeleteNation;
-    private ToolStripButton buttonPasteTrophy;
-    private ToolStripButton buttonCopyTrophy;
-    private GroupBox groupRules;
-    private ToolStrip toolRules;
-    private ToolStripButton buttonAddRule;
-    private ToolStripButton buttonRemoveRule;
-    private ToolStripButton buttonCopyGroupCalendar;
-    private ToolStripButton buttonPasteGroupCalendar;
-    private ToolStripButton buttonNewGroupLeg;
-    private ToolStripButton buttonRemoveGroupLeg;
-    private ToolStripButton buttonGroupAddTime;
-    private ToolStripButton buttonGroupRemoveTime;
-    private ToolStripButton buttonCopyStageCalendar;
-    private ToolStripButton buttonPasteStageCalendar;
-    private ToolStripButton buttonNeewStageLeg;
-    private ToolStripButton buttonDeleteStageLeg;
-    private ToolStripButton buttonStageAddTime;
-    private ToolStripButton buttonStageRemoveTime;
-    private ToolStripButton buttonCleanStageCalendar;
-    private ToolStripButton buttonCleanGroupCalendar;
-    private Viewer2D viewer2DTrophy256;
-    private Label label66;
-    private TextBox textUniqueId;
-    private Label label67;
-    private NumericUpDown numericBall;
-    private PictureBox pictureBall;
-    private GroupBox group3D;
-    private FbxViewer3D viewer3D;
-    private ToolStrip toolNear3D;
-    private ToolStripButton buttonShow3DModel;
-    private ToolStripSeparator toolStripSeparator1;
-    private ToolStripButton buttonImport3DModel;
-    private ToolStripButton buttonExport3DModel;
-    private ToolStripSeparator toolStripSeparator2;
-    private ToolStripButton buttonRemove3DModel;
-    private TabControl tabTrophy;
-    private TabPage tabPageTrophyStructure;
-    private TabPage tabPageTrophyGraphics;
-    private GroupBox groupGraphics;
-    private MultiViewer2D multiViewer2DTextures;
-    private Button buttonReplicateTrophy128;
-    private Viewer2D viewer2DTrophy128;
-    private GroupBox groupInternationalschedule;
-    private NumericUpDown numericInternationalPeriodicity;
-    private Label label69;
-    private Label label68;
-    private NumericUpDown numericInternationalFirstYear;
-    private TabPage tabPageRankingTable;
-    private GroupBox groupInitTeams;
-    private Panel panelInitTeam24;
-    private ComboBox comboInitTeam24;
-    private Label label65;
-    private Panel panelInitTeam23;
-    private ComboBox comboInitTeam23;
-    private Label label64;
-    private Panel panelInitTeam22;
-    private ComboBox comboInitTeam22;
-    private Label label63;
-    private Panel panelInitTeam21;
-    private ComboBox comboInitTeam21;
-    private Label label62;
-    private Panel panelInitTeam20;
-    private ComboBox comboInitTeam20;
-    private Label label61;
-    private Panel panelInitTeam19;
-    private ComboBox comboInitTeam19;
-    private Label label60;
-    private Panel panelInitTeam18;
-    private ComboBox comboInitTeam18;
-    private Label label59;
-    private Panel panelInitTeam17;
-    private ComboBox comboInitTeam17;
-    private Label label58;
-    private Panel panelInitTeam16;
-    private ComboBox comboInitTeam16;
-    private Label label57;
-    private Panel panelInitTeam15;
-    private ComboBox comboInitTeam15;
-    private Label label56;
-    private Panel panelInitTeam14;
-    private ComboBox comboInitTeam14;
-    private Label label55;
-    private Panel panelInitTeam13;
-    private ComboBox comboInitTeam13;
-    private Label label54;
-    private Panel panelInitTeam12;
-    private ComboBox comboInitTeam12;
-    private Label label53;
-    private Panel panelInitTeam11;
-    private ComboBox comboInitTeam11;
-    private Label label52;
-    private Panel panelInitTeam10;
-    private ComboBox comboInitTeam10;
-    private Label label51;
-    private Panel panelInitTeam9;
-    private ComboBox comboInitTeam9;
-    private Label label50;
-    private Panel panelInitTeam8;
-    private ComboBox comboInitTeam8;
-    private Label label49;
-    private Panel panelInitTeam7;
-    private ComboBox comboInitTeam7;
-    private Label label48;
-    private Panel panelInitTeam6;
-    private ComboBox comboInitTeam6;
-    private Label label47;
-    private Panel panelInitTeam5;
-    private ComboBox comboInitTeam5;
-    private Label label46;
-    private Panel panelInitTeam4;
-    private ComboBox comboInitTeam4;
-    private Label label45;
-    private Panel panelInitTeam3;
-    private ComboBox comboInitTeam3;
-    private Label label44;
-    private Panel panelInitTeam2;
-    private ComboBox comboInitTeam2;
-    private Label label43;
-    private Panel panelInitTeam1;
-    private ComboBox comboInitTeam1;
-    private Label label42;
-    private Label labelUpdateTable24;
-    private Label labelUpdateTable23;
-    private Label labelUpdateTable22;
-    private Label labelUpdateTable21;
-    private Label labelUpdateTable20;
-    private Label labelUpdateTable19;
-    private Label labelUpdateTable18;
-    private Label labelUpdateTable17;
-    private Label labelUpdateTable16;
-    private Label labelUpdateTable15;
-    private Label labelUpdateTable14;
-    private Label labelUpdateTable13;
-    private Label labelUpdateTable12;
-    private Label labelUpdateTable11;
-    private Label labelUpdateTable10;
-    private Label labelUpdateTable9;
-    private Label labelUpdateTable8;
-    private Label labelUpdateTable7;
-    private Label labelUpdateTable6;
-    private Label labelUpdateTable5;
-    private Label labelUpdateTable4;
-    private Label labelUpdateTable3;
-    private Label labelUpdateTable2;
-    private Label labelUpdateTable1;
-    private Label label70;
-    private NumericUpDown numericUpdateTableEntries;
-    private CheckBox checkUpdateLeagueStats;
-    private ComboBox comboLeagueStats;
-    private CheckBox checkClearLeagueStats;
-    private GroupBox groupLeaguetasks;
-    private CheckBox checkUpdateLeagueTable;
-    private ComboBox comboStageStandingRules;
-    private CheckBox checkStageStandingsRules;
-    private Label label71;
-    private ComboBox comboTrophyStartMonth;
-    private CheckBox checkRandomDrawEvent;
-    private ToolStripComboBox comboTargetLeague;
-    private TextBox textLanguageName;
-    private ToolStripButton buttonStageSortLegs;
-    private ToolStripButton buttongroupSortLegs;
-    private CheckBox checkScheduleUseDates;
-    private NumericUpDown numericKeepPointsStageRef;
-    private Button buttonReplicateTropy;
-    private CheckBox checkUseFanCards;
-    private GroupBox groupStageInfoColors;
-    private NumericUpDown numericStageColorAdvanceMax;
-    private NumericUpDown numericStageColorAdvanceMin;
-    private CheckBox checkStageInfoColorAdvance;
-    private ComboBox comboWorldStartingMonth;
-    private Label label72;
-    private CheckBox checkLowCelebrationLevel;
-    private Label label73;
-    private NumericUpDown numericAssetIdAperClau;
-    private NumericUpDown numericStandingAgg;
-    private CheckBox checkStandingAgg;
-    private NumericUpDown numericQuarterJLeague;
-    private CheckBox checkBoxQuarterJLeague;
-    private CheckBox checkBoxIgnoreJLeague;
-    private GroupBox groupBox3;
-    private RadioButton radioFIFABenchPlayers7;
-    private RadioButton radioFIFABenchPlayers5;
-    private GroupBox groupBox1;
-    private RadioButton radioFIFASubs5;
-    private RadioButton radioFIFASubs3;
-    private Label label74;
-    private NumericUpDown numericFIFAYellowStored;
-    private Viewer2D viewer2DTrophy;
-
-    public CompetitionForm()
+    public class CompetitionForm : Form
     {
-      this.Visible = false;
-      this.InitializeComponent();
-      for (int index = 47; index >= 0; --index)
-      {
-        this.m_QRLabels[index] = new Label();
-        this.m_QRLabels[index].Location = new Point(2, 58 + 20 * index);
-        this.m_QRLabels[index].Name = "labelQR" + index.ToString();
-        this.m_QRLabels[index].Text = "labelQR" + index.ToString();
-        this.m_QRLabels[index].Size = new Size(480, 19);
-        this.m_QRLabels[index].Dock = DockStyle.None;
-        this.m_QRLabels[index].BorderStyle = BorderStyle.None;
-        this.m_QRLabels[index].Cursor = Cursors.Hand;
-        this.panelQualificationRules.Controls.Add((Control)this.m_QRLabels[index]);
-        this.m_QRLabels[index].Click += new EventHandler(this.labelQR_Click);
-      }
-      for (int index = 47; index >= 0; --index)
-      {
-        this.m_AdvanceLabels[index] = new Label();
-        this.m_AdvanceLabels[index].Location = new Point(4, 28 + 20 * index);
-        this.m_AdvanceLabels[index].Name = "labelAdvancemenet" + index.ToString();
-        this.m_AdvanceLabels[index].Text = "label advancement " + index.ToString();
-        this.m_AdvanceLabels[index].Size = new Size(120, 19);
-        this.m_AdvanceLabels[index].Dock = DockStyle.Top;
-        this.m_AdvanceLabels[index].Cursor = Cursors.Hand;
-        this.panelAdvancement.Controls.Add((Control)this.m_AdvanceLabels[index]);
-        this.m_AdvanceLabels[index].Click += new EventHandler(this.labelAdvance_Click);
-      }
-      this.m_UpdateTableLabels[0] = this.labelUpdateTable1;
-      this.m_UpdateTableLabels[1] = this.labelUpdateTable2;
-      this.m_UpdateTableLabels[2] = this.labelUpdateTable3;
-      this.m_UpdateTableLabels[3] = this.labelUpdateTable4;
-      this.m_UpdateTableLabels[4] = this.labelUpdateTable5;
-      this.m_UpdateTableLabels[5] = this.labelUpdateTable6;
-      this.m_UpdateTableLabels[6] = this.labelUpdateTable7;
-      this.m_UpdateTableLabels[7] = this.labelUpdateTable8;
-      this.m_UpdateTableLabels[8] = this.labelUpdateTable9;
-      this.m_UpdateTableLabels[9] = this.labelUpdateTable10;
-      this.m_UpdateTableLabels[10] = this.labelUpdateTable11;
-      this.m_UpdateTableLabels[11] = this.labelUpdateTable12;
-      this.m_UpdateTableLabels[12] = this.labelUpdateTable13;
-      this.m_UpdateTableLabels[13] = this.labelUpdateTable14;
-      this.m_UpdateTableLabels[14] = this.labelUpdateTable15;
-      this.m_UpdateTableLabels[15] = this.labelUpdateTable16;
-      this.m_UpdateTableLabels[16] = this.labelUpdateTable17;
-      this.m_UpdateTableLabels[17] = this.labelUpdateTable18;
-      this.m_UpdateTableLabels[18] = this.labelUpdateTable19;
-      this.m_UpdateTableLabels[19] = this.labelUpdateTable20;
-      this.m_UpdateTableLabels[20] = this.labelUpdateTable21;
-      this.m_UpdateTableLabels[21] = this.labelUpdateTable22;
-      this.m_UpdateTableLabels[22] = this.labelUpdateTable23;
-      this.m_UpdateTableLabels[23] = this.labelUpdateTable24;
-      this.m_SpecialTeamCombos[0] = this.comboSpecialTeam1;
-      this.m_SpecialTeamCombos[1] = this.comboSpecialTeam2;
-      this.m_SpecialTeamCombos[2] = this.comboSpecialTeam3;
-      this.m_SpecialTeamCombos[3] = this.comboSpecialTeam4;
-      this.m_StadiumCombos[0] = this.comboStadium1;
-      this.m_StadiumCombos[1] = this.comboStadium2;
-      this.m_StadiumCombos[2] = this.comboStadium3;
-      this.m_StadiumCombos[3] = this.comboStadium4;
-      this.m_StadiumCombos[4] = this.comboStadium5;
-      this.m_StadiumCombos[5] = this.comboStadium6;
-      this.m_StadiumCombos[6] = this.comboStadium7;
-      this.m_StadiumCombos[7] = this.comboStadium8;
-      this.m_StadiumCombos[8] = this.comboStadium9;
-      this.m_StadiumCombos[9] = this.comboStadium10;
-      this.m_StadiumCombos[10] = this.comboStadium11;
-      this.m_StadiumCombos[11] = this.comboStadium12;
-      this.m_OvercastProb[0] = this.numericUpDown1;
-      this.m_SnowProb[0] = this.numericUpDown2;
-      this.m_RainProb[0] = this.numericUpDown3;
-      this.m_OvercastProb[1] = this.numericUpDown4;
-      this.m_SnowProb[1] = this.numericUpDown5;
-      this.m_RainProb[1] = this.numericUpDown6;
-      this.m_OvercastProb[2] = this.numericUpDown7;
-      this.m_SnowProb[2] = this.numericUpDown8;
-      this.m_RainProb[2] = this.numericUpDown9;
-      this.m_OvercastProb[3] = this.numericUpDown10;
-      this.m_SnowProb[3] = this.numericUpDown11;
-      this.m_RainProb[3] = this.numericUpDown12;
-      this.m_OvercastProb[4] = this.numericUpDown13;
-      this.m_SnowProb[4] = this.numericUpDown14;
-      this.m_RainProb[4] = this.numericUpDown15;
-      this.m_OvercastProb[5] = this.numericUpDown16;
-      this.m_SnowProb[5] = this.numericUpDown17;
-      this.m_RainProb[5] = this.numericUpDown18;
-      this.m_OvercastProb[6] = this.numericUpDown19;
-      this.m_SnowProb[6] = this.numericUpDown20;
-      this.m_RainProb[6] = this.numericUpDown21;
-      this.m_OvercastProb[7] = this.numericUpDown22;
-      this.m_SnowProb[7] = this.numericUpDown23;
-      this.m_RainProb[7] = this.numericUpDown24;
-      this.m_OvercastProb[8] = this.numericUpDown25;
-      this.m_SnowProb[8] = this.numericUpDown26;
-      this.m_RainProb[8] = this.numericUpDown27;
-      this.m_OvercastProb[9] = this.numericUpDown28;
-      this.m_SnowProb[9] = this.numericUpDown29;
-      this.m_RainProb[9] = this.numericUpDown30;
-      this.m_OvercastProb[10] = this.numericUpDown31;
-      this.m_SnowProb[10] = this.numericUpDown32;
-      this.m_RainProb[10] = this.numericUpDown33;
-      this.m_OvercastProb[11] = this.numericUpDown34;
-      this.m_SnowProb[11] = this.numericUpDown35;
-      this.m_RainProb[11] = this.numericUpDown36;
-      for (int index = 0; index < 12; ++index)
-      {
-        this.m_OvercastProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
-        this.m_SnowProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
-        this.m_RainProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
-      }
-      this.m_NightTime[0] = this.comboBox1;
-      this.m_SunsetTime[0] = this.comboBox2;
-      this.m_NightTime[1] = this.comboBox3;
-      this.m_SunsetTime[1] = this.comboBox4;
-      this.m_NightTime[2] = this.comboBox5;
-      this.m_SunsetTime[2] = this.comboBox6;
-      this.m_NightTime[3] = this.comboBox7;
-      this.m_SunsetTime[3] = this.comboBox8;
-      this.m_NightTime[4] = this.comboBox9;
-      this.m_SunsetTime[4] = this.comboBox10;
-      this.m_NightTime[5] = this.comboBox11;
-      this.m_SunsetTime[5] = this.comboBox12;
-      this.m_NightTime[6] = this.comboBox13;
-      this.m_SunsetTime[6] = this.comboBox14;
-      this.m_NightTime[7] = this.comboBox15;
-      this.m_SunsetTime[7] = this.comboBox16;
-      this.m_NightTime[8] = this.comboBox17;
-      this.m_SunsetTime[8] = this.comboBox18;
-      this.m_NightTime[9] = this.comboBox19;
-      this.m_SunsetTime[9] = this.comboBox20;
-      this.m_NightTime[10] = this.comboBox21;
-      this.m_SunsetTime[10] = this.comboBox22;
-      this.m_NightTime[11] = this.comboBox23;
-      this.m_SunsetTime[11] = this.comboBox24;
-      for (int index = 0; index < 12; ++index)
-      {
-        this.m_NightTime[index].SelectedIndexChanged += new EventHandler(this.dayTime_SelectedIndexChanged);
-        this.m_SunsetTime[index].SelectedIndexChanged += new EventHandler(this.dayTime_SelectedIndexChanged);
-      }
-      this.m_InitTeamPanel[0] = this.panelInitTeam1;
-      this.m_InitTeamPanel[1] = this.panelInitTeam2;
-      this.m_InitTeamPanel[2] = this.panelInitTeam3;
-      this.m_InitTeamPanel[3] = this.panelInitTeam4;
-      this.m_InitTeamPanel[4] = this.panelInitTeam5;
-      this.m_InitTeamPanel[5] = this.panelInitTeam6;
-      this.m_InitTeamPanel[6] = this.panelInitTeam7;
-      this.m_InitTeamPanel[7] = this.panelInitTeam8;
-      this.m_InitTeamPanel[8] = this.panelInitTeam9;
-      this.m_InitTeamPanel[9] = this.panelInitTeam10;
-      this.m_InitTeamPanel[10] = this.panelInitTeam11;
-      this.m_InitTeamPanel[11] = this.panelInitTeam12;
-      this.m_InitTeamPanel[12] = this.panelInitTeam13;
-      this.m_InitTeamPanel[13] = this.panelInitTeam14;
-      this.m_InitTeamPanel[14] = this.panelInitTeam15;
-      this.m_InitTeamPanel[15] = this.panelInitTeam16;
-      this.m_InitTeamPanel[16] = this.panelInitTeam17;
-      this.m_InitTeamPanel[17] = this.panelInitTeam18;
-      this.m_InitTeamPanel[18] = this.panelInitTeam19;
-      this.m_InitTeamPanel[19] = this.panelInitTeam20;
-      this.m_InitTeamPanel[20] = this.panelInitTeam21;
-      this.m_InitTeamPanel[21] = this.panelInitTeam22;
-      this.m_InitTeamPanel[22] = this.panelInitTeam23;
-      this.m_InitTeamPanel[23] = this.panelInitTeam24;
-      this.m_InitTeamCombo[0] = this.comboInitTeam1;
-      this.m_InitTeamCombo[1] = this.comboInitTeam2;
-      this.m_InitTeamCombo[2] = this.comboInitTeam3;
-      this.m_InitTeamCombo[3] = this.comboInitTeam4;
-      this.m_InitTeamCombo[4] = this.comboInitTeam5;
-      this.m_InitTeamCombo[5] = this.comboInitTeam6;
-      this.m_InitTeamCombo[6] = this.comboInitTeam7;
-      this.m_InitTeamCombo[7] = this.comboInitTeam8;
-      this.m_InitTeamCombo[8] = this.comboInitTeam9;
-      this.m_InitTeamCombo[9] = this.comboInitTeam10;
-      this.m_InitTeamCombo[10] = this.comboInitTeam11;
-      this.m_InitTeamCombo[11] = this.comboInitTeam12;
-      this.m_InitTeamCombo[12] = this.comboInitTeam13;
-      this.m_InitTeamCombo[13] = this.comboInitTeam14;
-      this.m_InitTeamCombo[14] = this.comboInitTeam15;
-      this.m_InitTeamCombo[15] = this.comboInitTeam16;
-      this.m_InitTeamCombo[16] = this.comboInitTeam17;
-      this.m_InitTeamCombo[17] = this.comboInitTeam18;
-      this.m_InitTeamCombo[18] = this.comboInitTeam19;
-      this.m_InitTeamCombo[19] = this.comboInitTeam20;
-      this.m_InitTeamCombo[20] = this.comboInitTeam21;
-      this.m_InitTeamCombo[21] = this.comboInitTeam22;
-      this.m_InitTeamCombo[22] = this.comboInitTeam23;
-      this.m_InitTeamCombo[23] = this.comboInitTeam24;
-      for (int index = 0; index < this.m_InitTeamCombo.Length; ++index)
-        this.m_InitTeamCombo[index].SelectedIndexChanged += new EventHandler(this.comboInitTeam_SelectedIndexChanged);
-      for (int index = 0; index < 24; ++index)
-        this.m_InitTeamPanel[index].Visible = false;
-      this.viewer2DTrophy.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophy);
-      this.viewer2DTrophy.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophy);
-      this.viewer2DTrophy.ButtonStripVisible = true;
-      this.viewer2DTrophy.RemoveButton = true;
-      this.viewer2DTrophy256.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophy256);
-      this.viewer2DTrophy256.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophy256);
-      this.viewer2DTrophy256.ButtonStripVisible = true;
-      this.viewer2DTrophy256.RemoveButton = true;
-      this.viewer2DTrophy128.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophySmall);
-      this.viewer2DTrophy128.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophySmall);
-      this.viewer2DTrophy128.ButtonStripVisible = true;
-      this.viewer2DTrophy128.RemoveButton = true;
-      this.multiViewer2DTextures.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3TrophyTextures);
-      this.multiViewer2DTextures.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3TrophyTextures);
-      this.multiViewer2DTextures.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveRx3TrophyTextures);
-    }
+        private NewIdCreator m_NewIdCreator = new NewIdCreator();
+        private Label[] m_QRLabels = new Label[48];
+        private Label[] m_AdvanceLabels = new Label[48];
+        private Label[] m_UpdateTableLabels = new Label[24];
+        private ComboBox[] m_SpecialTeamCombos = new ComboBox[4];
+        private ComboBox[] m_StadiumCombos = new ComboBox[12];
+        private QualifyRuleDialog m_QualifyRuleDialog = new QualifyRuleDialog();
+        private AdvanceRuleDialog m_AdvanceRuleDialog = new AdvanceRuleDialog();
+        private RankingRuleDialog m_RankingRuleDialog = new RankingRuleDialog();
+        private NumericUpDown[] m_RainProb = new NumericUpDown[12];
+        private NumericUpDown[] m_SnowProb = new NumericUpDown[12];
+        private NumericUpDown[] m_OvercastProb = new NumericUpDown[12];
+        private ComboBox[] m_SunsetTime = new ComboBox[12];
+        private ComboBox[] m_NightTime = new ComboBox[12];
+        private Panel[] m_InitTeamPanel = new Panel[24];
+        private ComboBox[] m_InitTeamCombo = new ComboBox[24];
+        private string m_TrophyCurrentFolder = FifaEnvironment.ExportFolder;
+        private bool m_IsLoaded;
+        private CompobjList m_Competitions;
+        private World m_CurrentWorld;
+        private Confederation m_CurrentConfederation;
+        private Nation m_CurrentNation;
+        private Trophy m_CurrentTrophy;
+        private Trophy m_ClipboardTrophy;
+        private Stage m_CurrentStage;
+        private Group m_CurrentGroup;
+        private Compobj m_CurrentCompobj;
+        private Schedule m_CurrentStageSchedule;
+        private Schedule m_CurrentGroupSchedule;
+        private bool m_Locked;
+        private bool m_LockTree;
+        private bool m_LockToPanel;
+        private int m_NUpdateTableLabels;
+        private Nation m_ClipboardNation;
+        private Stage m_ClipboardStageForSchedule;
+        private Group m_ClipboardGroupForSchedule;
+        private Group m_ClipboardGroup;
+        private IContainer components;
+        private TreeView treeWorld;
+        private GroupBox groupConfederation;
+        private Label labelConfStartMonth;
+        private ComboBox comboConfederationStartingMonth;
+        private GroupBox groupNation;
+        private GroupBox groupTrophy;
+        private GroupBox groupStage;
+        private ComboBox comboNationStartMonth;
+        private NumericUpDown numericNationYellowsStored;
+        private ComboBox comboNationStandingsRules;
+        private CheckBox checkNationStandingsRules;
+        private ComboBox comboCountry;
+        private Label labelDatabaseCountry;
+        private ToolTip toolTip;
+        private Label labelCompetitionType;
+        private Label labelAssetId;
+        private Label labelMatchImportance;
+        private CheckBox checkTrophyStandingsRules;
+        private CheckBox checkPromotionLeague;
+        private CheckBox checkRelegationLeague;
+        private GroupBox groupSchedule;
+        private GroupBox groupPromotionRelegation;
+        private CheckBox checkForceSchedule;
+        private TextBox textTrophyLongName;
+        private TextBox textTrophyShortName;
+        private Label labeTrophylLongName;
+        private Label labelTrophyShortName;
+        private Button buttonGetId;
+        private NumericUpDown numericAssetId;
+        private ComboBox comboCompetitionType;
+        private NumericUpDown numericImportance;
+        private ComboBox comboTrophyStandingRules;
+        private ComboBox comboRelegationLeague;
+        private ComboBox comboPromotionLeague;
+        private ComboBox comboSchedForce;
+        private ToolStrip toolCompetitionTree;
+        private SplitContainer splitContainer1;
+        private Panel panelCompObj;
+        private Label label1;
+        private Label label3;
+        private TextBox textLanguageKey;
+        private Label label2;
+        private TextBox textFourCharName;
+        private NumericUpDown numericNTeams;
+        private Label label4;
+        private Panel panelQualificationRules;
+        private Panel panelAdvancement;
+        private TabControl tabCompetitions;
+        private TabPage pageConfederation;
+        private TabPage pageNation;
+        private TabPage pageTrophy;
+        private TabPage pageStage;
+        private TabPage pageGroup;
+        private TabPage pageWorld;
+        private GroupBox groupGroup;
+        private CheckBox checkScheduleConflicts;
+        private GroupBox groupBenchPlayers;
+        private RadioButton radioBench7Players;
+        private RadioButton radioBench5Players;
+        private Label label6;
+        private Label label5;
+        private ComboBox comboStageType;
+        private Label label7;
+        private GroupBox groupPlayStage;
+        private ComboBox comboMatchSituation;
+        private Label label8;
+        private GroupBox groupSetupStage;
+        private NumericUpDown numericPrizeMoney;
+        private Label label9;
+        private NumericUpDown numericMoneyDrop;
+        private Label label10;
+        private CheckBox checkRandomDraw;
+        private CheckBox checkMaxteamsgroup;
+        private CheckBox checkMaxteamsassoc;
+        private CheckBox checkCalccompavgs;
+        private CheckBox checkMatchReplay;
+        private CheckBox checkClausuraSchedule;
+        private NumericUpDown numericStartYear;
+        private Label label13;
+        private GroupBox groupBox2;
+        private ComboBox comboSpecialTeam1;
+        private ComboBox comboSpecialTeam4;
+        private ComboBox comboSpecialTeam3;
+        private ComboBox comboSpecialTeam2;
+        private GroupBox groupStadiums;
+        private ComboBox comboStadium12;
+        private ComboBox comboStadium11;
+        private ComboBox comboStadium10;
+        private ComboBox comboStadium9;
+        private ComboBox comboStadium8;
+        private ComboBox comboStadium7;
+        private ComboBox comboStadium6;
+        private ComboBox comboStadium5;
+        private ComboBox comboStadium4;
+        private ComboBox comboStadium3;
+        private ComboBox comboStadium2;
+        private ComboBox comboStadium1;
+        private NumericUpDown numericStageRef;
+        private NumericUpDown numericStandingKeep;
+        private CheckBox checkStandingKeep;
+        private NumericUpDown numericKeepPointsPercentage;
+        private CheckBox checkKeepPointsPercentage;
+        private ComboBox comboSpecialKo2Rule;
+        private CheckBox checkSpecialKo2Rule;
+        private ComboBox comboSpecialKo1Rule;
+        private CheckBox checkSpecialKo1Rule;
+        private NumericUpDown numericRegularSeason;
+        private NumericUpDown numericStandingsRank;
+        private CheckBox checkStandingsRank;
+        private GroupBox groupInfoColors;
+        private CheckBox checkInfoColorAdvance;
+        private CheckBox checkInfoColorPromotion;
+        private CheckBox checkInfoColorPossiblePromotion;
+        private CheckBox checkInfoColorRelegation;
+        private CheckBox checkInfoColorPossibleRelegation;
+        private CheckBox checkInfoColorEuropa;
+        private CheckBox checkInfoColorChampions;
+        private CheckBox checkInfoColorChamp;
+        private Label label12;
+        private Label label11;
+        private NumericUpDown numericColorAdvanceMax;
+        private NumericUpDown numericColorAdvanceMin;
+        private NumericUpDown numericColorPromotionMax;
+        private NumericUpDown numericColorPromotionMin;
+        private NumericUpDown numericColorPossiblePromotionMax;
+        private NumericUpDown numericColorPossiblePromotionMin;
+        private NumericUpDown numericColorRelegationMax;
+        private NumericUpDown numericColorRelegationMin;
+        private NumericUpDown numericColorPossibleRelegationMax;
+        private NumericUpDown numericColorPossibleRelegationMin;
+        private NumericUpDown numericColorEuropaMax;
+        private NumericUpDown numericColorEuropaMin;
+        private NumericUpDown numericColorChampionsMax;
+        private NumericUpDown numericColorChampionsMin;
+        private GroupBox groupSlots;
+        private NumericUpDown numericPossiblePromotionMax;
+        private CheckBox checkInfoPossiblePromotion;
+        private NumericUpDown numericPossiblePromotionMin;
+        private NumericUpDown numericPromotionMax;
+        private NumericUpDown numericPromotionMin;
+        private NumericUpDown numericRelegationMax;
+        private NumericUpDown numericRelegationMin;
+        private NumericUpDown numericPossibleRelegationMax;
+        private NumericUpDown numericPossibleRelegationMin;
+        private Label label15;
+        private Label label16;
+        private CheckBox checkInfoPromotion;
+        private CheckBox checkInfoRelegation;
+        private CheckBox checkInfoPossibleRelegation;
+        private CheckBox checkInfoChamp;
+        private ComboBox comboLanguageKey;
+        private GroupBox groupWeather;
+        private Label label28;
+        private Label label27;
+        private Label label26;
+        private Label label25;
+        private Label label24;
+        private Label label23;
+        private Label label22;
+        private Label label21;
+        private Label label20;
+        private Label label19;
+        private Label label18;
+        private Label label17;
+        private ComboBox comboBox23;
+        private ComboBox comboBox24;
+        private NumericUpDown numericUpDown34;
+        private NumericUpDown numericUpDown35;
+        private NumericUpDown numericUpDown36;
+        private ComboBox comboBox21;
+        private ComboBox comboBox22;
+        private NumericUpDown numericUpDown31;
+        private NumericUpDown numericUpDown32;
+        private NumericUpDown numericUpDown33;
+        private ComboBox comboBox19;
+        private ComboBox comboBox20;
+        private NumericUpDown numericUpDown28;
+        private NumericUpDown numericUpDown29;
+        private NumericUpDown numericUpDown30;
+        private ComboBox comboBox17;
+        private ComboBox comboBox18;
+        private NumericUpDown numericUpDown25;
+        private NumericUpDown numericUpDown26;
+        private NumericUpDown numericUpDown27;
+        private ComboBox comboBox15;
+        private ComboBox comboBox16;
+        private NumericUpDown numericUpDown22;
+        private NumericUpDown numericUpDown23;
+        private NumericUpDown numericUpDown24;
+        private ComboBox comboBox13;
+        private ComboBox comboBox14;
+        private NumericUpDown numericUpDown19;
+        private NumericUpDown numericUpDown20;
+        private NumericUpDown numericUpDown21;
+        private ComboBox comboBox11;
+        private ComboBox comboBox12;
+        private NumericUpDown numericUpDown16;
+        private NumericUpDown numericUpDown17;
+        private NumericUpDown numericUpDown18;
+        private ComboBox comboBox9;
+        private ComboBox comboBox10;
+        private NumericUpDown numericUpDown13;
+        private NumericUpDown numericUpDown14;
+        private NumericUpDown numericUpDown15;
+        private ComboBox comboBox7;
+        private ComboBox comboBox8;
+        private NumericUpDown numericUpDown10;
+        private NumericUpDown numericUpDown11;
+        private NumericUpDown numericUpDown12;
+        private ComboBox comboBox5;
+        private ComboBox comboBox6;
+        private NumericUpDown numericUpDown7;
+        private NumericUpDown numericUpDown8;
+        private NumericUpDown numericUpDown9;
+        private ComboBox comboBox3;
+        private ComboBox comboBox4;
+        private NumericUpDown numericUpDown4;
+        private NumericUpDown numericUpDown5;
+        private NumericUpDown numericUpDown6;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
+        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDown2;
+        private NumericUpDown numericUpDown3;
+        private Label label33;
+        private Label label32;
+        private Label label31;
+        private Label label30;
+        private Label label29;
+        private ToolStrip toolWeather;
+        private ToolStripButton buttonCopyWeather;
+        private ToolStripButton buttonPasteWeather;
+        private GroupBox groupStageSchedules;
+        private TreeView treeStageSchedule;
+        private ToolStrip toolStageSchedule;
+        private Panel panelStageScheduleDetails;
+        private Label label37;
+        private Label label36;
+        private Label label35;
+        private Label label34;
+        private ComboBox comboStageTime;
+        private NumericUpDown numericStageMaxGames;
+        private NumericUpDown numericStageMinGames;
+        private DateTimePicker dateStagePicker;
+        private GroupBox groupStageScheduleDetails;
+        private GroupBox groupGroupScheduke;
+        private TreeView treeGroupSchedule;
+        private Panel panelGroupScheduleDetails;
+        private GroupBox groupGroupScheduleDetails;
+        private DateTimePicker dateGroupPicker;
+        private Label label38;
+        private NumericUpDown numericGroupMinGames;
+        private Label label39;
+        private NumericUpDown numericGroupMaxGames;
+        private Label label40;
+        private ComboBox comboGroupTime;
+        private Label label41;
+        private ToolStrip toolGroupSchedule;
+        private NumericUpDown numericNumGames;
+        private Label label14;
+        private GroupBox groupPlayGroup;
+        private ToolStripButton buttonAddTrophy;
+        private ToolStripButton buttonDeleteTrophy;
+        private ToolStripButton buttonAddStage;
+        private ToolStripButton buttonDeleteStage;
+        private ToolStripButton buttonAddGroup;
+        private ToolStripButton buttonDeleteGroup;
+        private ToolStripButton buttonAddNatiom;
+        private ToolStripButton buttonDeleteNation;
+        private ToolStripButton buttonPasteTrophy;
+        private ToolStripButton buttonCopyTrophy;
+        private GroupBox groupRules;
+        private ToolStrip toolRules;
+        private ToolStripButton buttonAddRule;
+        private ToolStripButton buttonRemoveRule;
+        private ToolStripButton buttonCopyGroupCalendar;
+        private ToolStripButton buttonPasteGroupCalendar;
+        private ToolStripButton buttonNewGroupLeg;
+        private ToolStripButton buttonRemoveGroupLeg;
+        private ToolStripButton buttonGroupAddTime;
+        private ToolStripButton buttonGroupRemoveTime;
+        private ToolStripButton buttonCopyStageCalendar;
+        private ToolStripButton buttonPasteStageCalendar;
+        private ToolStripButton buttonNeewStageLeg;
+        private ToolStripButton buttonDeleteStageLeg;
+        private ToolStripButton buttonStageAddTime;
+        private ToolStripButton buttonStageRemoveTime;
+        private ToolStripButton buttonCleanStageCalendar;
+        private ToolStripButton buttonCleanGroupCalendar;
+        private Viewer2D viewer2DTrophy256;
+        private Label label66;
+        private TextBox textUniqueId;
+        private Label label67;
+        private NumericUpDown numericBall;
+        private PictureBox pictureBall;
+        private GroupBox group3D;
+        private FbxViewer3D viewer3D;
+        private ToolStrip toolNear3D;
+        private ToolStripButton buttonShow3DModel;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton buttonImport3DModel;
+        private ToolStripButton buttonExport3DModel;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton buttonRemove3DModel;
+        private TabControl tabTrophy;
+        private TabPage tabPageTrophyStructure;
+        private TabPage tabPageTrophyGraphics;
+        private GroupBox groupGraphics;
+        private MultiViewer2D multiViewer2DTextures;
+        private Button buttonReplicateTrophy128;
+        private Viewer2D viewer2DTrophy128;
+        private GroupBox groupInternationalschedule;
+        private NumericUpDown numericInternationalPeriodicity;
+        private Label label69;
+        private Label label68;
+        private NumericUpDown numericInternationalFirstYear;
+        private TabPage tabPageRankingTable;
+        private GroupBox groupInitTeams;
+        private Panel panelInitTeam24;
+        private ComboBox comboInitTeam24;
+        private Label label65;
+        private Panel panelInitTeam23;
+        private ComboBox comboInitTeam23;
+        private Label label64;
+        private Panel panelInitTeam22;
+        private ComboBox comboInitTeam22;
+        private Label label63;
+        private Panel panelInitTeam21;
+        private ComboBox comboInitTeam21;
+        private Label label62;
+        private Panel panelInitTeam20;
+        private ComboBox comboInitTeam20;
+        private Label label61;
+        private Panel panelInitTeam19;
+        private ComboBox comboInitTeam19;
+        private Label label60;
+        private Panel panelInitTeam18;
+        private ComboBox comboInitTeam18;
+        private Label label59;
+        private Panel panelInitTeam17;
+        private ComboBox comboInitTeam17;
+        private Label label58;
+        private Panel panelInitTeam16;
+        private ComboBox comboInitTeam16;
+        private Label label57;
+        private Panel panelInitTeam15;
+        private ComboBox comboInitTeam15;
+        private Label label56;
+        private Panel panelInitTeam14;
+        private ComboBox comboInitTeam14;
+        private Label label55;
+        private Panel panelInitTeam13;
+        private ComboBox comboInitTeam13;
+        private Label label54;
+        private Panel panelInitTeam12;
+        private ComboBox comboInitTeam12;
+        private Label label53;
+        private Panel panelInitTeam11;
+        private ComboBox comboInitTeam11;
+        private Label label52;
+        private Panel panelInitTeam10;
+        private ComboBox comboInitTeam10;
+        private Label label51;
+        private Panel panelInitTeam9;
+        private ComboBox comboInitTeam9;
+        private Label label50;
+        private Panel panelInitTeam8;
+        private ComboBox comboInitTeam8;
+        private Label label49;
+        private Panel panelInitTeam7;
+        private ComboBox comboInitTeam7;
+        private Label label48;
+        private Panel panelInitTeam6;
+        private ComboBox comboInitTeam6;
+        private Label label47;
+        private Panel panelInitTeam5;
+        private ComboBox comboInitTeam5;
+        private Label label46;
+        private Panel panelInitTeam4;
+        private ComboBox comboInitTeam4;
+        private Label label45;
+        private Panel panelInitTeam3;
+        private ComboBox comboInitTeam3;
+        private Label label44;
+        private Panel panelInitTeam2;
+        private ComboBox comboInitTeam2;
+        private Label label43;
+        private Panel panelInitTeam1;
+        private ComboBox comboInitTeam1;
+        private Label label42;
+        private Label labelUpdateTable24;
+        private Label labelUpdateTable23;
+        private Label labelUpdateTable22;
+        private Label labelUpdateTable21;
+        private Label labelUpdateTable20;
+        private Label labelUpdateTable19;
+        private Label labelUpdateTable18;
+        private Label labelUpdateTable17;
+        private Label labelUpdateTable16;
+        private Label labelUpdateTable15;
+        private Label labelUpdateTable14;
+        private Label labelUpdateTable13;
+        private Label labelUpdateTable12;
+        private Label labelUpdateTable11;
+        private Label labelUpdateTable10;
+        private Label labelUpdateTable9;
+        private Label labelUpdateTable8;
+        private Label labelUpdateTable7;
+        private Label labelUpdateTable6;
+        private Label labelUpdateTable5;
+        private Label labelUpdateTable4;
+        private Label labelUpdateTable3;
+        private Label labelUpdateTable2;
+        private Label labelUpdateTable1;
+        private Label label70;
+        private NumericUpDown numericUpdateTableEntries;
+        private CheckBox checkUpdateLeagueStats;
+        private ComboBox comboLeagueStats;
+        private CheckBox checkClearLeagueStats;
+        private GroupBox groupLeaguetasks;
+        private CheckBox checkUpdateLeagueTable;
+        private ComboBox comboStageStandingRules;
+        private CheckBox checkStageStandingsRules;
+        private Label label71;
+        private ComboBox comboTrophyStartMonth;
+        private CheckBox checkRandomDrawEvent;
+        private ToolStripComboBox comboTargetLeague;
+        private TextBox textLanguageName;
+        private ToolStripButton buttonStageSortLegs;
+        private ToolStripButton buttongroupSortLegs;
+        private CheckBox checkScheduleUseDates;
+        private NumericUpDown numericKeepPointsStageRef;
+        private Button buttonReplicateTropy;
+        private CheckBox checkUseFanCards;
+        private GroupBox groupStageInfoColors;
+        private NumericUpDown numericStageColorAdvanceMax;
+        private NumericUpDown numericStageColorAdvanceMin;
+        private CheckBox checkStageInfoColorAdvance;
+        private ComboBox comboWorldStartingMonth;
+        private Label label72;
+        private CheckBox checkLowCelebrationLevel;
+        private Label label73;
+        private NumericUpDown numericAssetIdAperClau;
+        private NumericUpDown numericStandingAgg;
+        private CheckBox checkStandingAgg;
+        private NumericUpDown numericQuarterJLeague;
+        private CheckBox checkBoxQuarterJLeague;
+        private CheckBox checkBoxIgnoreJLeague;
+        private GroupBox groupBox3;
+        private RadioButton radioFIFABenchPlayers7;
+        private RadioButton radioFIFABenchPlayers5;
+        private GroupBox groupBox1;
+        private RadioButton radioFIFASubs5;
+        private RadioButton radioFIFASubs3;
+        private Label label74;
+        private NumericUpDown numericFIFAYellowStored;
+        private GroupBox groupBox4;
+        private Label labelCompIds;
+        private Label labelStandings;
+        private Label labelInitTeams;
+        private Label labelTasks;
+        private Label labelSchedule;
+        private Label labelCompObj;
+        private Label labelAdvancements;
+        private Label labelSettings;
+        private Label labelWeather;
+        private ComboBox comboTrophyAdvCompDependency;
+        private CheckBox checkTrophyAdvCompDependency;
+        private Viewer2D viewer2DTrophy;
 
-    public void Clean()
-    {
-      this.Visible = false;
-    }
-
-    private Trophy SelectTrophy(object sender, object obj)
-    {
-      Trophy trophy = (Trophy)obj;
-      this.Refresh();
-      this.LoadTrophy(trophy);
-      return trophy;
-    }
-
-    private bool ImportImageTrophy(object sender, Bitmap bitmap)
-    {
-      return this.m_CurrentTrophy.SetTrophy(bitmap);
-    }
-
-    private bool DeleteTrophy(object sender)
-    {
-      return this.m_CurrentTrophy.DeleteTrophy();
-    }
-
-    private bool ImportImageTrophy256(object sender, Bitmap bitmap)
-    {
-      return this.m_CurrentTrophy.SetTrophy256(bitmap);
-    }
-
-    private bool DeleteTrophy256(object sender)
-    {
-      return this.m_CurrentTrophy.DeleteTrophy256();
-    }
-
-    private bool ImportImageTrophySmall(object sender, Bitmap bitmap)
-    {
-      return this.m_CurrentTrophy.SetTrophy128(bitmap);
-    }
-
-    private bool DeleteTrophySmall(object sender)
-    {
-      return this.m_CurrentTrophy.DeleteTrophy128();
-    }
-
-    private bool ExportRx3TrophyTextures(object sender, string exportDir)
-    {
-      return FifaEnvironment.ExportFileFromZdata(this.m_CurrentTrophy.TexturesFileName(), exportDir);
-    }
-
-    private bool SaveRx3TrophyTextures(object sender, Bitmap[] bitmaps)
-    {
-      bool flag = this.m_CurrentTrophy.SetTextures(bitmaps);
-      if (flag)
-        this.ReloadTrophy(this.m_CurrentTrophy);
-      return flag;
-    }
-
-    private bool ImportRx3TrophyTextures(object sender, string rx3FileName)
-    {
-      bool flag = this.m_CurrentTrophy.SetTextures(rx3FileName);
-      if (flag)
-        this.ReloadTrophy(this.m_CurrentTrophy);
-      return flag;
-    }
-
-    public void LoadCompetitions()
-    {
-      this.WorldStructureToPanel();
-    }
-
-    public void LoadTrophy(Trophy trophy)
-    {
-      if (!this.m_IsLoaded || this.m_CurrentTrophy == trophy)
-        return;
-      this.m_Locked = true;
-      this.m_CurrentTrophy = trophy;
-      this.m_Locked = false;
-      this.TrophyToPanel();
-    }
-
-    public void Preset()
-    {
-      if (FifaEnvironment.Year == 14)
-      {
-        this.viewer2DTrophy128.Visible = true;
-        this.viewer2DTrophy.Visible = false;
-        this.buttonReplicateTrophy128.Visible = true;
-        this.buttonReplicateTropy.Visible = false;
-      }
-      else
-      {
-        this.viewer2DTrophy128.Visible = false;
-        this.viewer2DTrophy.Visible = true;
-        this.buttonReplicateTrophy128.Visible = false;
-        this.buttonReplicateTropy.Visible = true;
-      }
-      this.m_NewIdCreator.IdList = (IdArrayList)FifaEnvironment.CompetitionObjects.Trophies;
-      Schedule.s_BaseDate = FifaEnvironment.Year != 14 ? new DateTime(2013, 12, 29, 0, 0, 0) : new DateTime(2012, 12, 30, 0, 0, 0);
-      if (this.comboCountry.Items.Count != FifaEnvironment.Countries.Count)
-      {
-        this.comboCountry.Items.Clear();
-        this.comboCountry.Items.AddRange(FifaEnvironment.Countries.ToArray());
-      }
-      if (this.comboPromotionLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
-      {
-        this.comboPromotionLeague.Items.Clear();
-        this.comboPromotionLeague.Items.Add((object)"None");
-        this.comboPromotionLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
-      }
-      if (this.comboRelegationLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
-      {
-        this.comboRelegationLeague.Items.Clear();
-        this.comboRelegationLeague.Items.Add((object)"None");
-        this.comboRelegationLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
-      }
-      if (this.comboTargetLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
-      {
-        this.comboTargetLeague.Items.Clear();
-        this.comboTargetLeague.Items.Add((object)"None");
-        this.comboTargetLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
-        this.comboTargetLeague.SelectedIndex = 0;
-      }
-      if (this.comboLeagueStats.Items.Count != FifaEnvironment.Leagues.Count + 1)
-      {
-        this.comboLeagueStats.Items.Clear();
-        this.comboLeagueStats.Items.AddRange(FifaEnvironment.Leagues.ToArray());
-      }
-      if (this.comboSpecialTeam1.Items.Count != FifaEnvironment.Teams.Count + 1)
-      {
-        for (int index = 0; index < 4; ++index)
+        public CompetitionForm()
         {
-          this.m_SpecialTeamCombos[index].Items.Clear();
-          this.m_SpecialTeamCombos[index].Items.Add((object)"<None>");
-          this.m_SpecialTeamCombos[index].Items.AddRange(FifaEnvironment.Teams.ToArray());
-        }
-      }
-      if (this.comboStadium1.Items.Count != FifaEnvironment.Stadiums.Count)
-      {
-        for (int index = 0; index < 12; ++index)
-        {
-          this.m_StadiumCombos[index].Items.Clear();
-          this.m_StadiumCombos[index].Items.Add((object)"<Auto>");
-          this.m_StadiumCombos[index].Items.AddRange(FifaEnvironment.Stadiums.ToArray());
-        }
-      }
-      if (this.comboSchedForce.Items.Count != FifaEnvironment.CompetitionObjects.Trophies.Count)
-      {
-        this.comboSchedForce.Items.Clear();
-        this.comboSchedForce.Items.AddRange(FifaEnvironment.CompetitionObjects.Trophies.ToArray());
-      }
-      if (this.comboLanguageKey.Items.Count != CompobjList.s_Descriptions.Count)
-      {
-        this.comboLanguageKey.Items.Clear();
-        this.comboLanguageKey.Items.AddRange(CompobjList.s_Descriptions.ToArray());
-      }
-      if (this.m_InitTeamCombo[0].Items.Count != FifaEnvironment.Teams.Count + 1)
-      {
-        for (int index = 0; index < this.m_InitTeamCombo.Length; ++index)
-        {
-          this.m_InitTeamCombo[index].Items.Clear();
-          this.m_InitTeamCombo[index].Items.Add((object)"<Unknown>");
-          this.m_InitTeamCombo[index].Items.AddRange(FifaEnvironment.Teams.ToArray());
-        }
-      }
-      this.m_Competitions = FifaEnvironment.CompetitionObjects;
-      this.m_CurrentWorld = this.m_Competitions.World;
-      this.numericBall.Maximum = (Decimal)FifaEnvironment.FifaDb.Table[TI.teamballs].TableDescriptor.MaxValues[FI.teamballs_ballid];
-    }
-
-    private void CompetitionsForm_Load(object sender, EventArgs e)
-    {
-      this.m_IsLoaded = true;
-      this.Preset();
-      this.LoadCompetitions();
-    }
-
-    public void ReloadCompetitions()
-    {
-      this.Preset();
-      this.CompetitionToPanel();
-    }
-
-    public void ReloadTrophy(Trophy trophy)
-    {
-      this.m_CurrentTrophy = (Trophy)null;
-      this.LoadTrophy(trophy);
-    }
-
-    public void WorldStructureToPanel()
-    {
-      this.treeWorld.Nodes.Clear();
-      TreeNode treeNode1 = this.treeWorld.Nodes.Add(this.m_CurrentWorld.ToString());
-      treeNode1.Tag = (object)this.m_CurrentWorld;
-      treeNode1.ForeColor = Color.Black;
-      foreach (Trophy trophy in (ArrayList)this.m_CurrentWorld.Trophies)
-      {
-        TreeNode treeNode2 = treeNode1.Nodes.Add(trophy.ToString());
-        treeNode2.Tag = (object)trophy;
-        treeNode2.ForeColor = Color.DarkGreen;
-        foreach (Stage stage in (ArrayList)trophy.Stages)
-        {
-          TreeNode treeNode3 = treeNode2.Nodes.Add(stage.ToString());
-          treeNode3.Tag = (object)stage;
-          treeNode3.ForeColor = Color.Magenta;
-          foreach (Group group in (ArrayList)stage.Groups)
-          {
-            TreeNode treeNode4 = treeNode3.Nodes.Add(group.ToString());
-            treeNode4.Tag = (object)group;
-            treeNode4.ForeColor = Color.Brown;
-          }
-        }
-      }
-      foreach (Confederation confederation in (ArrayList)this.m_CurrentWorld.Confederations)
-      {
-        TreeNode treeNode2 = treeNode1.Nodes.Add(confederation.ToString());
-        treeNode2.Tag = (object)confederation;
-        treeNode2.ForeColor = Color.Red;
-        foreach (Trophy trophy in (ArrayList)confederation.Trophies)
-        {
-          TreeNode treeNode3 = treeNode2.Nodes.Add(trophy.ToString());
-          treeNode3.Tag = (object)trophy;
-          treeNode3.ForeColor = Color.DarkGreen;
-          foreach (Stage stage in (ArrayList)trophy.Stages)
-          {
-            TreeNode treeNode4 = treeNode3.Nodes.Add(stage.ToString());
-            treeNode4.Tag = (object)stage;
-            treeNode4.ForeColor = Color.Magenta;
-            foreach (Group group1 in (ArrayList)stage.Groups)
+            this.Visible = false;
+            this.InitializeComponent();
+            for (int index = 47; index >= 0; --index)
             {
-              TreeNode treeNode5 = treeNode4.Nodes.Add(group1.ToString());
-              treeNode5.Tag = (object)group1;
-              treeNode5.ForeColor = Color.Brown;
-              foreach (Group group2 in (ArrayList)group1.Groups)
-              {
-                TreeNode treeNode6 = treeNode5.Nodes.Add(group2.ToString());
-                treeNode6.Tag = (object)group2;
-                treeNode6.ForeColor = Color.Brown;
-              }
+                this.m_QRLabels[index] = new Label();
+                this.m_QRLabels[index].Location = new Point(2, 58 + 20 * index);
+                this.m_QRLabels[index].Name = "labelQR" + index.ToString();
+                this.m_QRLabels[index].Text = "labelQR" + index.ToString();
+                this.m_QRLabels[index].Size = new Size(480, 19);
+                this.m_QRLabels[index].Dock = DockStyle.None;
+                this.m_QRLabels[index].BorderStyle = BorderStyle.None;
+                this.m_QRLabels[index].Cursor = Cursors.Hand;
+                this.panelQualificationRules.Controls.Add((Control)this.m_QRLabels[index]);
+                this.m_QRLabels[index].Click += new EventHandler(this.labelQR_Click);
             }
-          }
-        }
-        foreach (Nation nation in (ArrayList)confederation.Nations)
-        {
-          TreeNode treeNode3 = treeNode2.Nodes.Add(nation.ToString());
-          treeNode3.Tag = (object)nation;
-          treeNode3.ForeColor = Color.Blue;
-          foreach (Trophy trophy in (ArrayList)nation.Trophies)
-          {
-            TreeNode treeNode4 = treeNode3.Nodes.Add(trophy.ToString());
-            treeNode4.Tag = (object)trophy;
-            treeNode4.ForeColor = Color.DarkGreen;
-            foreach (Stage stage in (ArrayList)trophy.Stages)
+            for (int index = 47; index >= 0; --index)
             {
-              TreeNode treeNode5 = treeNode4.Nodes.Add(stage.ToString());
-              treeNode5.Tag = (object)stage;
-              treeNode5.ForeColor = Color.Magenta;
-              foreach (Group group1 in (ArrayList)stage.Groups)
-              {
-                TreeNode treeNode6 = treeNode5.Nodes.Add(group1.ToString());
-                treeNode6.Tag = (object)group1;
-                treeNode6.ForeColor = Color.Brown;
-                foreach (Group group2 in (ArrayList)group1.Groups)
-                {
-                  TreeNode treeNode7 = treeNode6.Nodes.Add(group2.ToString());
-                  treeNode7.Tag = (object)group2;
-                  treeNode7.ForeColor = Color.Brown;
-                }
-              }
+                this.m_AdvanceLabels[index] = new Label();
+                this.m_AdvanceLabels[index].Location = new Point(4, 28 + 20 * index);
+                this.m_AdvanceLabels[index].Name = "labelAdvancemenet" + index.ToString();
+                this.m_AdvanceLabels[index].Text = "label advancement " + index.ToString();
+                this.m_AdvanceLabels[index].Size = new Size(120, 19);
+                this.m_AdvanceLabels[index].Dock = DockStyle.Top;
+                this.m_AdvanceLabels[index].Cursor = Cursors.Hand;
+                this.panelAdvancement.Controls.Add((Control)this.m_AdvanceLabels[index]);
+                this.m_AdvanceLabels[index].Click += new EventHandler(this.labelAdvance_Click);
             }
-          }
-        }
-      }
-      this.treeWorld.SelectedNode = this.treeWorld.Nodes[0];
-    }
-
-    public void WorldToPanel()
-    {
-      this.m_LockToPanel = true;
-      this.panelCompObj.Enabled = true;
-      this.textUniqueId.Text = this.m_CurrentWorld.Id.ToString();
-      this.textFourCharName.Text = this.m_CurrentWorld.TypeString;
-      this.textLanguageKey.Text = this.m_CurrentWorld.Description;
-      this.textLanguageName.Text = this.m_CurrentWorld.Description;
-      this.textFourCharName.Enabled = false;
-      this.textLanguageKey.Enabled = false;
-      this.textLanguageName.Enabled = false;
-      this.comboLanguageKey.Visible = false;
-      this.numericStartYear.Value = (Decimal)this.m_CurrentWorld.Settings.m_schedule_year_start;
-      this.comboWorldStartingMonth.Text = this.m_CurrentWorld.Settings.GetProperty("schedule_seasonstartmonth", 0, out bool _);
-      numericFIFAYellowStored.Value = this.m_CurrentWorld.Settings.m_rule_numyellowstored;
-      radioFIFABenchPlayers7.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsbench == 7;
-      radioFIFABenchPlayers5.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsbench == 5;
-      radioFIFASubs5.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsmatch == 5;
-      radioFIFASubs3.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsmatch == 3;
-      this.m_LockToPanel = false;
-    }
-
-    public void ConfederationToPanel()
-    {
-      if (this.m_CurrentConfederation == null)
-      {
-        this.panelCompObj.Enabled = false;
-        this.groupConfederation.Visible = false;
-      }
-      else
-      {
-        this.m_LockToPanel = true;
-        this.groupConfederation.Visible = true;
-        this.panelCompObj.Enabled = true;
-        this.textUniqueId.Text = this.m_CurrentConfederation.Id.ToString();
-        this.textFourCharName.Text = this.m_CurrentConfederation.TypeString;
-        this.textLanguageKey.Text = this.m_CurrentConfederation.Description;
-        this.textLanguageName.Text = string.Empty;
-        this.textFourCharName.Enabled = false;
-        this.textLanguageKey.Enabled = false;
-        this.textLanguageName.Enabled = false;
-        this.comboLanguageKey.Visible = false;
-        this.groupConfederation.Text = "Confederation: " + this.m_CurrentConfederation.ToString();
-        this.comboConfederationStartingMonth.Text = this.m_CurrentConfederation.Settings.GetProperty("schedule_seasonstartmonth", 0, out bool _);
-        this.m_LockToPanel = false;
-      }
-    }
-
-    public void NationToPanel()
-    {
-      if (this.m_CurrentNation == null)
-      {
-        this.panelCompObj.Enabled = false;
-        this.groupNation.Visible = false;
-      }
-      else
-      {
-        this.m_LockToPanel = true;
-        this.groupNation.Visible = true;
-        this.panelCompObj.Enabled = true;
-        this.textUniqueId.Text = this.m_CurrentNation.Id.ToString();
-        this.textFourCharName.Text = this.m_CurrentNation.TypeString;
-        this.textLanguageKey.Text = this.m_CurrentNation.Description;
-        if (this.m_CurrentNation.Country != null)
-          this.textLanguageName.Text = this.m_CurrentNation.Country.LanguageName;
-        else
-          this.textLanguageName.Text = (string)null;
-        this.textFourCharName.Enabled = true;
-        this.textLanguageKey.Enabled = false;
-        this.textLanguageName.Enabled = false;
-        this.comboLanguageKey.Visible = false;
-        this.groupNation.Text = "Nation: " + this.m_CurrentNation.ToString();
-        this.comboCountry.SelectedItem = (object)this.m_CurrentNation.Country;
-        if (this.m_CurrentNation.Country == null)
-          this.comboCountry.Text = string.Empty;
-        this.comboNationStartMonth.Visible = true;
-        bool isSpecific;
-        this.comboNationStartMonth.Text = this.m_CurrentNation.Settings.GetProperty("schedule_seasonstartmonth", 0, out isSpecific);
-        this.numericNationYellowsStored.Visible = true;
-        this.numericNationYellowsStored.Value = (Decimal)Convert.ToInt32(this.m_CurrentNation.Settings.GetProperty("rule_numyellowstored", 0, out isSpecific));
-        isSpecific = this.m_CurrentNation.Settings.m_StandingsSort >= 0;
-        this.comboNationStandingsRules.Visible = isSpecific;
-        if (isSpecific)
-          this.comboNationStandingsRules.SelectedIndex = this.m_CurrentNation.Settings.m_StandingsSort;
-        this.checkNationStandingsRules.Checked = isSpecific;
-        for (int index = 0; index < 12; ++index)
-        {
-          this.m_RainProb[index].Value = (Decimal)this.m_CurrentNation.RainProb[index];
-          this.m_SnowProb[index].Value = (Decimal)this.m_CurrentNation.SnowProb[index];
-          this.m_OvercastProb[index].Value = (Decimal)this.m_CurrentNation.OvercastProb[index];
-          switch (this.m_CurrentNation.SunsetTime[index])
-          {
-            case 1630:
-              this.m_SunsetTime[index].SelectedIndex = 1;
-              break;
-            case 1700:
-              this.m_SunsetTime[index].SelectedIndex = 2;
-              break;
-            case 1730:
-              this.m_SunsetTime[index].SelectedIndex = 3;
-              break;
-            case 1800:
-              this.m_SunsetTime[index].SelectedIndex = 4;
-              break;
-            case 1830:
-              this.m_SunsetTime[index].SelectedIndex = 5;
-              break;
-            case 1900:
-              this.m_SunsetTime[index].SelectedIndex = 6;
-              break;
-            case 1930:
-              this.m_SunsetTime[index].SelectedIndex = 7;
-              break;
-            case 2000:
-              this.m_SunsetTime[index].SelectedIndex = 8;
-              break;
-            case 2030:
-              this.m_SunsetTime[index].SelectedIndex = 9;
-              break;
-            case 2100:
-              this.m_SunsetTime[index].SelectedIndex = 10;
-              break;
-            case 2120:
-              this.m_SunsetTime[index].SelectedIndex = 11;
-              break;
-            case 2200:
-              this.m_SunsetTime[index].SelectedIndex = 12;
-              break;
-            default:
-              this.m_SunsetTime[index].SelectedIndex = 0;
-              break;
-          }
-          switch (this.m_CurrentNation.DarkTime[index])
-          {
-            case 1600:
-              this.m_NightTime[index].SelectedIndex = 0;
-              break;
-            case 1630:
-              this.m_NightTime[index].SelectedIndex = 1;
-              break;
-            case 1700:
-              this.m_NightTime[index].SelectedIndex = 2;
-              break;
-            case 1730:
-              this.m_NightTime[index].SelectedIndex = 3;
-              break;
-            case 1800:
-              this.m_NightTime[index].SelectedIndex = 4;
-              break;
-            case 1830:
-              this.m_NightTime[index].SelectedIndex = 5;
-              break;
-            case 1900:
-              this.m_NightTime[index].SelectedIndex = 6;
-              break;
-            case 1930:
-              this.m_NightTime[index].SelectedIndex = 7;
-              break;
-            case 2000:
-              this.m_NightTime[index].SelectedIndex = 8;
-              break;
-            case 2030:
-              this.m_NightTime[index].SelectedIndex = 9;
-              break;
-            case 2100:
-              this.m_NightTime[index].SelectedIndex = 10;
-              break;
-            case 2130:
-              this.m_NightTime[index].SelectedIndex = 11;
-              break;
-            case 2200:
-              this.m_NightTime[index].SelectedIndex = 12;
-              break;
-          }
-        }
-        this.m_LockToPanel = false;
-      }
-    }
-
-    public void StageToPanel()
-    {
-      if (this.m_CurrentStage == null)
-      {
-        this.panelCompObj.Enabled = false;
-        this.groupStage.Visible = false;
-      }
-      else
-      {
-        this.m_LockToPanel = true;
-        this.groupStage.Visible = true;
-        this.panelCompObj.Enabled = true;
-        this.textUniqueId.Text = this.m_CurrentStage.Id.ToString();
-        this.textFourCharName.Text = this.m_CurrentStage.TypeString;
-        this.textLanguageKey.Text = this.m_CurrentStage.Description;
-        this.textLanguageName.Text = this.m_CurrentStage.GetLanguageName();
-        this.comboLanguageKey.SelectedItem = (object)this.m_CurrentStage.Description;
-        this.textFourCharName.Enabled = true;
-        this.textLanguageKey.Enabled = true;
-        this.textLanguageName.Enabled = true;
-        this.comboLanguageKey.Visible = true;
-        this.comboStageType.Text = this.m_CurrentStage.Settings.m_match_stagetype;
-        bool flag1 = this.m_CurrentStage.Settings.m_StandingsSort >= 0;
-        this.comboStageStandingRules.Visible = flag1;
-        if (flag1)
-          this.comboStageStandingRules.SelectedIndex = this.m_CurrentStage.Settings.m_StandingsSort;
-        this.checkStageStandingsRules.Checked = flag1;
-        if (this.m_CurrentStage.Settings.Advance_standingskeep != -1)
-          this.numericStandingKeep.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingskeep;
-        this.checkStandingKeep.Checked = this.m_CurrentStage.Settings.Advance_standingskeep != -1;
-        this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
-        if (this.m_CurrentStage.Settings.Advance_standingsagg != -1)
-          this.numericStandingAgg.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsagg;
-        this.checkStandingAgg.Checked = this.m_CurrentStage.Settings.Advance_standingsagg != -1;
-        this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
-        this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
-        if (this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1)
-          this.numericQuarterJLeague.Value = (Decimal)this.m_CurrentStage.Settings.Advance_jleagueqtrsetup;
-        this.checkBoxQuarterJLeague.Checked = this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1;
-        this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
-        if (this.m_CurrentStage.Settings.Advance_standingsrank != -1)
-          this.numericStandingsRank.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsrank;
-        this.checkStandingsRank.Checked = this.m_CurrentStage.Settings.Advance_standingsrank != -1;
-        this.numericStandingsRank.Visible = this.checkStandingsRank.Checked;
-        if (this.m_CurrentStage.Settings.m_match_stagetype != "SETUP")
-        {
-          this.groupSetupStage.Visible = false;
-          this.groupPlayStage.Visible = true;
-          this.comboMatchSituation.Text = this.m_CurrentStage.Settings.m_match_matchsituation;
-          this.checkMatchReplay.Checked = this.m_CurrentStage.Settings.m_schedule_matchreplay != -1;
-          this.numericPrizeMoney.Value = (Decimal)this.m_CurrentStage.Settings.m_info_prize_money;
-          this.numericMoneyDrop.Value = (Decimal)this.m_CurrentStage.Settings.m_info_prize_money_drop;
-          this.checkMaxteamsgroup.Checked = this.m_CurrentStage.Settings.m_advance_maxteamsgroup != -1;
-          this.numericStageRef.Visible = this.checkMaxteamsgroup.Checked;
-          this.numericStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_maxteamsstageref;
-          this.checkMaxteamsassoc.Checked = this.m_CurrentStage.Settings.m_advance_maxteamsassoc != -1;
-          this.checkClausuraSchedule.Checked = this.m_CurrentStage.Settings.m_schedule_reversed != -1;
-          this.checkRandomDrawEvent.Checked = this.m_CurrentStage.Settings.m_advance_random_draw_event != -1;
-          this.checkUseFanCards.Checked = this.m_CurrentStage.Settings.m_match_canusefancards != null;
-          bool flag2 = this.m_CurrentStage.Settings.m_EndRuleKo1Leg != -1;
-          this.comboSpecialKo1Rule.Visible = flag2;
-          if (flag2)
-            this.comboSpecialKo1Rule.SelectedIndex = this.m_CurrentStage.Settings.m_EndRuleKo1Leg;
-          this.checkSpecialKo1Rule.Checked = flag2;
-          bool flag3 = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 != -1;
-          this.comboSpecialKo2Rule.Visible = flag3;
-          if (flag3)
-            this.comboSpecialKo2Rule.SelectedIndex = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2;
-          this.checkSpecialKo2Rule.Checked = flag3;
-          this.numericRegularSeason.Visible = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 == 3;
-          if (this.numericRegularSeason.Visible)
-            this.numericRegularSeason.Value = (Decimal)this.m_CurrentStage.Settings.Standings_checkrank;
-          for (int index = 0; index < 12; ++index)
-          {
-            Stadium stadium = (Stadium)null;
-            if (this.m_CurrentStage.Settings.m_match_stadium != null && this.m_CurrentStage.Settings.m_match_stadium[index] > 0)
+            this.m_UpdateTableLabels[0] = this.labelUpdateTable1;
+            this.m_UpdateTableLabels[1] = this.labelUpdateTable2;
+            this.m_UpdateTableLabels[2] = this.labelUpdateTable3;
+            this.m_UpdateTableLabels[3] = this.labelUpdateTable4;
+            this.m_UpdateTableLabels[4] = this.labelUpdateTable5;
+            this.m_UpdateTableLabels[5] = this.labelUpdateTable6;
+            this.m_UpdateTableLabels[6] = this.labelUpdateTable7;
+            this.m_UpdateTableLabels[7] = this.labelUpdateTable8;
+            this.m_UpdateTableLabels[8] = this.labelUpdateTable9;
+            this.m_UpdateTableLabels[9] = this.labelUpdateTable10;
+            this.m_UpdateTableLabels[10] = this.labelUpdateTable11;
+            this.m_UpdateTableLabels[11] = this.labelUpdateTable12;
+            this.m_UpdateTableLabels[12] = this.labelUpdateTable13;
+            this.m_UpdateTableLabels[13] = this.labelUpdateTable14;
+            this.m_UpdateTableLabels[14] = this.labelUpdateTable15;
+            this.m_UpdateTableLabels[15] = this.labelUpdateTable16;
+            this.m_UpdateTableLabels[16] = this.labelUpdateTable17;
+            this.m_UpdateTableLabels[17] = this.labelUpdateTable18;
+            this.m_UpdateTableLabels[18] = this.labelUpdateTable19;
+            this.m_UpdateTableLabels[19] = this.labelUpdateTable20;
+            this.m_UpdateTableLabels[20] = this.labelUpdateTable21;
+            this.m_UpdateTableLabels[21] = this.labelUpdateTable22;
+            this.m_UpdateTableLabels[22] = this.labelUpdateTable23;
+            this.m_UpdateTableLabels[23] = this.labelUpdateTable24;
+            this.m_SpecialTeamCombos[0] = this.comboSpecialTeam1;
+            this.m_SpecialTeamCombos[1] = this.comboSpecialTeam2;
+            this.m_SpecialTeamCombos[2] = this.comboSpecialTeam3;
+            this.m_SpecialTeamCombos[3] = this.comboSpecialTeam4;
+            this.m_StadiumCombos[0] = this.comboStadium1;
+            this.m_StadiumCombos[1] = this.comboStadium2;
+            this.m_StadiumCombos[2] = this.comboStadium3;
+            this.m_StadiumCombos[3] = this.comboStadium4;
+            this.m_StadiumCombos[4] = this.comboStadium5;
+            this.m_StadiumCombos[5] = this.comboStadium6;
+            this.m_StadiumCombos[6] = this.comboStadium7;
+            this.m_StadiumCombos[7] = this.comboStadium8;
+            this.m_StadiumCombos[8] = this.comboStadium9;
+            this.m_StadiumCombos[9] = this.comboStadium10;
+            this.m_StadiumCombos[10] = this.comboStadium11;
+            this.m_StadiumCombos[11] = this.comboStadium12;
+            this.m_OvercastProb[0] = this.numericUpDown1;
+            this.m_SnowProb[0] = this.numericUpDown2;
+            this.m_RainProb[0] = this.numericUpDown3;
+            this.m_OvercastProb[1] = this.numericUpDown4;
+            this.m_SnowProb[1] = this.numericUpDown5;
+            this.m_RainProb[1] = this.numericUpDown6;
+            this.m_OvercastProb[2] = this.numericUpDown7;
+            this.m_SnowProb[2] = this.numericUpDown8;
+            this.m_RainProb[2] = this.numericUpDown9;
+            this.m_OvercastProb[3] = this.numericUpDown10;
+            this.m_SnowProb[3] = this.numericUpDown11;
+            this.m_RainProb[3] = this.numericUpDown12;
+            this.m_OvercastProb[4] = this.numericUpDown13;
+            this.m_SnowProb[4] = this.numericUpDown14;
+            this.m_RainProb[4] = this.numericUpDown15;
+            this.m_OvercastProb[5] = this.numericUpDown16;
+            this.m_SnowProb[5] = this.numericUpDown17;
+            this.m_RainProb[5] = this.numericUpDown18;
+            this.m_OvercastProb[6] = this.numericUpDown19;
+            this.m_SnowProb[6] = this.numericUpDown20;
+            this.m_RainProb[6] = this.numericUpDown21;
+            this.m_OvercastProb[7] = this.numericUpDown22;
+            this.m_SnowProb[7] = this.numericUpDown23;
+            this.m_RainProb[7] = this.numericUpDown24;
+            this.m_OvercastProb[8] = this.numericUpDown25;
+            this.m_SnowProb[8] = this.numericUpDown26;
+            this.m_RainProb[8] = this.numericUpDown27;
+            this.m_OvercastProb[9] = this.numericUpDown28;
+            this.m_SnowProb[9] = this.numericUpDown29;
+            this.m_RainProb[9] = this.numericUpDown30;
+            this.m_OvercastProb[10] = this.numericUpDown31;
+            this.m_SnowProb[10] = this.numericUpDown32;
+            this.m_RainProb[10] = this.numericUpDown33;
+            this.m_OvercastProb[11] = this.numericUpDown34;
+            this.m_SnowProb[11] = this.numericUpDown35;
+            this.m_RainProb[11] = this.numericUpDown36;
+            for (int index = 0; index < 12; ++index)
             {
-              stadium = (Stadium)FifaEnvironment.Stadiums.SearchId(this.m_CurrentStage.Settings.m_match_stadium[index]);
-              if (stadium != null)
-                this.m_StadiumCombos[index].SelectedItem = (object)stadium;
+                this.m_OvercastProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
+                this.m_SnowProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
+                this.m_RainProb[index].ValueChanged += new EventHandler(this.weatherProb_ValueChanged);
             }
-            if (stadium == null)
-              this.m_StadiumCombos[index].SelectedIndex = 0;
-          }
-          this.treeStageSchedule.Nodes.Clear();
-          this.groupStageScheduleDetails.Visible = false;
-          this.buttonStageAddTime.Enabled = false;
-          this.buttonStageRemoveTime.Enabled = false;
-          this.buttonDeleteStageLeg.Enabled = false;
-          for (int legId = 1; legId < 46; ++legId)
-          {
-            Schedule[] legSchedule = this.m_CurrentStage.GetLegSchedule(legId);
-            if (legSchedule != null)
+            this.m_NightTime[0] = this.comboBox1;
+            this.m_SunsetTime[0] = this.comboBox2;
+            this.m_NightTime[1] = this.comboBox3;
+            this.m_SunsetTime[1] = this.comboBox4;
+            this.m_NightTime[2] = this.comboBox5;
+            this.m_SunsetTime[2] = this.comboBox6;
+            this.m_NightTime[3] = this.comboBox7;
+            this.m_SunsetTime[3] = this.comboBox8;
+            this.m_NightTime[4] = this.comboBox9;
+            this.m_SunsetTime[4] = this.comboBox10;
+            this.m_NightTime[5] = this.comboBox11;
+            this.m_SunsetTime[5] = this.comboBox12;
+            this.m_NightTime[6] = this.comboBox13;
+            this.m_SunsetTime[6] = this.comboBox14;
+            this.m_NightTime[7] = this.comboBox15;
+            this.m_SunsetTime[7] = this.comboBox16;
+            this.m_NightTime[8] = this.comboBox17;
+            this.m_SunsetTime[8] = this.comboBox18;
+            this.m_NightTime[9] = this.comboBox19;
+            this.m_SunsetTime[9] = this.comboBox20;
+            this.m_NightTime[10] = this.comboBox21;
+            this.m_SunsetTime[10] = this.comboBox22;
+            this.m_NightTime[11] = this.comboBox23;
+            this.m_SunsetTime[11] = this.comboBox24;
+            for (int index = 0; index < 12; ++index)
             {
-              TreeNode treeNode = this.treeStageSchedule.Nodes.Add("Leg " + legId.ToString());
-              treeNode.ForeColor = Color.DarkGreen;
-              for (int index = 0; index < legSchedule.Length; ++index)
-                treeNode.Nodes.Add(legSchedule[index].Date.ToString("f")).Tag = (object)legSchedule[index];
+                this.m_NightTime[index].SelectedIndexChanged += new EventHandler(this.dayTime_SelectedIndexChanged);
+                this.m_SunsetTime[index].SelectedIndexChanged += new EventHandler(this.dayTime_SelectedIndexChanged);
+            }
+            this.m_InitTeamPanel[0] = this.panelInitTeam1;
+            this.m_InitTeamPanel[1] = this.panelInitTeam2;
+            this.m_InitTeamPanel[2] = this.panelInitTeam3;
+            this.m_InitTeamPanel[3] = this.panelInitTeam4;
+            this.m_InitTeamPanel[4] = this.panelInitTeam5;
+            this.m_InitTeamPanel[5] = this.panelInitTeam6;
+            this.m_InitTeamPanel[6] = this.panelInitTeam7;
+            this.m_InitTeamPanel[7] = this.panelInitTeam8;
+            this.m_InitTeamPanel[8] = this.panelInitTeam9;
+            this.m_InitTeamPanel[9] = this.panelInitTeam10;
+            this.m_InitTeamPanel[10] = this.panelInitTeam11;
+            this.m_InitTeamPanel[11] = this.panelInitTeam12;
+            this.m_InitTeamPanel[12] = this.panelInitTeam13;
+            this.m_InitTeamPanel[13] = this.panelInitTeam14;
+            this.m_InitTeamPanel[14] = this.panelInitTeam15;
+            this.m_InitTeamPanel[15] = this.panelInitTeam16;
+            this.m_InitTeamPanel[16] = this.panelInitTeam17;
+            this.m_InitTeamPanel[17] = this.panelInitTeam18;
+            this.m_InitTeamPanel[18] = this.panelInitTeam19;
+            this.m_InitTeamPanel[19] = this.panelInitTeam20;
+            this.m_InitTeamPanel[20] = this.panelInitTeam21;
+            this.m_InitTeamPanel[21] = this.panelInitTeam22;
+            this.m_InitTeamPanel[22] = this.panelInitTeam23;
+            this.m_InitTeamPanel[23] = this.panelInitTeam24;
+            this.m_InitTeamCombo[0] = this.comboInitTeam1;
+            this.m_InitTeamCombo[1] = this.comboInitTeam2;
+            this.m_InitTeamCombo[2] = this.comboInitTeam3;
+            this.m_InitTeamCombo[3] = this.comboInitTeam4;
+            this.m_InitTeamCombo[4] = this.comboInitTeam5;
+            this.m_InitTeamCombo[5] = this.comboInitTeam6;
+            this.m_InitTeamCombo[6] = this.comboInitTeam7;
+            this.m_InitTeamCombo[7] = this.comboInitTeam8;
+            this.m_InitTeamCombo[8] = this.comboInitTeam9;
+            this.m_InitTeamCombo[9] = this.comboInitTeam10;
+            this.m_InitTeamCombo[10] = this.comboInitTeam11;
+            this.m_InitTeamCombo[11] = this.comboInitTeam12;
+            this.m_InitTeamCombo[12] = this.comboInitTeam13;
+            this.m_InitTeamCombo[13] = this.comboInitTeam14;
+            this.m_InitTeamCombo[14] = this.comboInitTeam15;
+            this.m_InitTeamCombo[15] = this.comboInitTeam16;
+            this.m_InitTeamCombo[16] = this.comboInitTeam17;
+            this.m_InitTeamCombo[17] = this.comboInitTeam18;
+            this.m_InitTeamCombo[18] = this.comboInitTeam19;
+            this.m_InitTeamCombo[19] = this.comboInitTeam20;
+            this.m_InitTeamCombo[20] = this.comboInitTeam21;
+            this.m_InitTeamCombo[21] = this.comboInitTeam22;
+            this.m_InitTeamCombo[22] = this.comboInitTeam23;
+            this.m_InitTeamCombo[23] = this.comboInitTeam24;
+            for (int index = 0; index < this.m_InitTeamCombo.Length; ++index)
+                this.m_InitTeamCombo[index].SelectedIndexChanged += new EventHandler(this.comboInitTeam_SelectedIndexChanged);
+            for (int index = 0; index < 24; ++index)
+                this.m_InitTeamPanel[index].Visible = false;
+            this.viewer2DTrophy.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophy);
+            this.viewer2DTrophy.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophy);
+            this.viewer2DTrophy.ButtonStripVisible = true;
+            this.viewer2DTrophy.RemoveButton = true;
+            this.viewer2DTrophy256.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophy256);
+            this.viewer2DTrophy256.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophy256);
+            this.viewer2DTrophy256.ButtonStripVisible = true;
+            this.viewer2DTrophy256.RemoveButton = true;
+            this.viewer2DTrophy128.ImageImport = new Viewer2D.ImageImportHandler(this.ImportImageTrophySmall);
+            this.viewer2DTrophy128.ImageDelete = new Viewer2D.ImageDeleteHandler(this.DeleteTrophySmall);
+            this.viewer2DTrophy128.ButtonStripVisible = true;
+            this.viewer2DTrophy128.RemoveButton = true;
+            this.multiViewer2DTextures.Rx3ExportDelegate = new MultiViewer2D.Rx3ExportHandler(this.ExportRx3TrophyTextures);
+            this.multiViewer2DTextures.Rx3ImportDelegate = new MultiViewer2D.Rx3ImportHandler(this.ImportRx3TrophyTextures);
+            this.multiViewer2DTextures.Rx3SaveDelegate = new MultiViewer2D.Rx3SaveHandler(this.SaveRx3TrophyTextures);
+        }
+
+        public void UpdateDataUsage()
+        {
+            if (FifaEnvironment.CompetitionObjects != null)
+            {
+                labelCompIds.Text = "CompIds: " + FifaEnvironment.CompIdsSize + "/99";
+                labelCompObj.Text = "CompObj: " + FifaEnvironment.CompObjSize + "/1809";
+                labelAdvancements.Text = "Advancements: " + FifaEnvironment.AdvancementsSize + "/3549";
+                labelTasks.Text = "Tasks: " + FifaEnvironment.TasksSize + "/800";
+                labelSettings.Text = "Settings: " + FifaEnvironment.SettingsSize + "/3752";
+                labelStandings.Text = "Standings: " + FifaEnvironment.StandingsSize + "/5274";
+                labelInitTeams.Text = "InitTeams: " + FifaEnvironment.InitTeamsSize + "/366";
+                labelSchedule.Text = "Schedule: " + FifaEnvironment.ScheduleSize + "/6995";
+                labelWeather.Text = "Weather: " + FifaEnvironment.WeatherSize + "/468";
+
+                labelCompIds.ForeColor = FifaEnvironment.CompIdsSize >= 99 ? Color.Red : Color.Black;
+                labelCompObj.ForeColor = FifaEnvironment.CompObjSize >= 1809 ? Color.Red : Color.Black;
+                labelAdvancements.ForeColor = FifaEnvironment.AdvancementsSize >= 3549 ? Color.Red : Color.Black;
+                labelTasks.ForeColor = FifaEnvironment.TasksSize >= 800 ? Color.Red : Color.Black;
+                labelSettings.ForeColor = FifaEnvironment.SettingsSize >= 3752 ? Color.Red : Color.Black;
+                labelStandings.ForeColor = FifaEnvironment.StandingsSize >= 5274 ? Color.Red : Color.Black;
+                labelInitTeams.ForeColor = FifaEnvironment.InitTeamsSize >= 366 ? Color.Red : Color.Black;
+                labelSchedule.ForeColor = FifaEnvironment.ScheduleSize >= 6995 ? Color.Red : Color.Black;
+                labelWeather.ForeColor = FifaEnvironment.WeatherSize >= 468 ? Color.Red : Color.Black;
+
+                groupBox4.Refresh();
+            }
+        }
+
+        public void Clean()
+        {
+            this.Visible = false;
+        }
+
+        private Trophy SelectTrophy(object sender, object obj)
+        {
+            Trophy trophy = (Trophy)obj;
+            this.Refresh();
+            this.LoadTrophy(trophy);
+            return trophy;
+        }
+
+        private bool ImportImageTrophy(object sender, Bitmap bitmap)
+        {
+            return this.m_CurrentTrophy.SetTrophy(bitmap);
+        }
+
+        private bool DeleteTrophy(object sender)
+        {
+            return this.m_CurrentTrophy.DeleteTrophy();
+        }
+
+        private bool ImportImageTrophy256(object sender, Bitmap bitmap)
+        {
+            return this.m_CurrentTrophy.SetTrophy256(bitmap);
+        }
+
+        private bool DeleteTrophy256(object sender)
+        {
+            return this.m_CurrentTrophy.DeleteTrophy256();
+        }
+
+        private bool ImportImageTrophySmall(object sender, Bitmap bitmap)
+        {
+            return this.m_CurrentTrophy.SetTrophy128(bitmap);
+        }
+
+        private bool DeleteTrophySmall(object sender)
+        {
+            return this.m_CurrentTrophy.DeleteTrophy128();
+        }
+
+        private bool ExportRx3TrophyTextures(object sender, string exportDir)
+        {
+            return FifaEnvironment.ExportFileFromZdata(this.m_CurrentTrophy.TexturesFileName(), exportDir);
+        }
+
+        private bool SaveRx3TrophyTextures(object sender, Bitmap[] bitmaps)
+        {
+            bool flag = this.m_CurrentTrophy.SetTextures(bitmaps);
+            if (flag)
+                this.ReloadTrophy(this.m_CurrentTrophy);
+            return flag;
+        }
+
+        private bool ImportRx3TrophyTextures(object sender, string rx3FileName)
+        {
+            bool flag = this.m_CurrentTrophy.SetTextures(rx3FileName);
+            if (flag)
+                this.ReloadTrophy(this.m_CurrentTrophy);
+            return flag;
+        }
+
+        public void LoadCompetitions()
+        {
+            this.WorldStructureToPanel();
+        }
+
+        public void LoadTrophy(Trophy trophy)
+        {
+            if (!this.m_IsLoaded || this.m_CurrentTrophy == trophy)
+                return;
+            this.m_Locked = true;
+            this.m_CurrentTrophy = trophy;
+            this.m_Locked = false;
+            this.TrophyToPanel();
+        }
+
+        public void Preset()
+        {
+            if (FifaEnvironment.Year == 14)
+            {
+                this.viewer2DTrophy128.Visible = true;
+                this.viewer2DTrophy.Visible = false;
+                this.buttonReplicateTrophy128.Visible = true;
+                this.buttonReplicateTropy.Visible = false;
             }
             else
-              break;
-          }
-        }
-        else
-        {
-          this.groupSetupStage.Visible = true;
-          this.groupPlayStage.Visible = false;
-          this.checkRandomDraw.Checked = this.m_CurrentStage.Settings.m_advance_randomdraw != -1;
-          this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
-          this.checkCalccompavgs.Checked = this.m_CurrentStage.Settings.m_advance_calccompavgs != -1;
-          for (int index = 0; index < 4; ++index)
-          {
-            Team team = (Team)null;
-            if (this.m_CurrentStage.Settings.m_info_special_team_id[index] != 0)
             {
-              team = (Team)FifaEnvironment.Teams.SearchId(this.m_CurrentStage.Settings.m_info_special_team_id[index]);
-              if (team != null)
-                this.m_SpecialTeamCombos[index].SelectedItem = (object)team;
+                this.viewer2DTrophy128.Visible = false;
+                this.viewer2DTrophy.Visible = true;
+                this.buttonReplicateTrophy128.Visible = false;
+                this.buttonReplicateTropy.Visible = true;
             }
-            if (team == null)
-              this.m_SpecialTeamCombos[index].SelectedIndex = 0;
-          }
-        }
-        this.checkKeepPointsPercentage.Checked = this.m_CurrentStage.Settings.Advance_pointskeep != -1;
-        this.numericKeepPointsPercentage.Visible = this.checkKeepPointsPercentage.Checked;
-        this.numericKeepPointsStageRef.Visible = this.checkKeepPointsPercentage.Checked;
-        if (this.m_CurrentStage.Settings.m_advance_pointskeeppercentage != -1)
-          this.numericKeepPointsPercentage.Value = (Decimal)this.m_CurrentStage.Settings.m_advance_pointskeeppercentage;
-        if (this.m_CurrentStage.Settings.Advance_pointskeep != -1)
-          this.numericKeepPointsStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_pointskeep;
-        this.groupLeaguetasks.Visible = this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE";
-        if (this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE")
-        {
-          Task task1 = this.m_CurrentStage.SearchTask("start", "ClearLeagueStats", -1, -1, -1);
-          League league = (League)null;
-          this.checkClearLeagueStats.Checked = task1 != null;
-          if (task1 != null)
-            league = task1.League;
-          Task task2 = this.m_CurrentStage.SearchTask("end", "UpdateLeagueStats", -1, -1, -1);
-          this.checkUpdateLeagueStats.Checked = task2 != null;
-          if (task2 != null)
-            league = task2.League;
-          Task task3 = this.m_CurrentStage.SearchTask("end", "UpdateLeagueTable", -1, -1, -1);
-          this.checkUpdateLeagueTable.Checked = task3 != null;
-          if (task3 != null)
-            league = task3.League;
-          if (league != null)
-            this.comboLeagueStats.SelectedItem = (object)league;
-        }
-
-        if (this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY" || this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP")
-        {
-          this.groupStageInfoColors.Visible = true;
-          int min, max;
-          this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkStageInfoColorAdvance.Checked = false;
-            this.numericStageColorAdvanceMin.Visible = false;
-            this.numericStageColorAdvanceMax.Visible = false;
-          }
-          else
-          {
-            this.checkStageInfoColorAdvance.Checked = true;
-            this.numericStageColorAdvanceMin.Visible = true;
-            this.numericStageColorAdvanceMax.Visible = true;
-            this.numericStageColorAdvanceMin.Value = (Decimal)min;
-            this.numericStageColorAdvanceMax.Value = (Decimal)max;
-          }
-        }
-        else
-          this.groupStageInfoColors.Visible = false;
-
-
-        this.m_LockToPanel = false;
-      }
-    }
-
-    public void GroupToPanel()
-    {
-      if (this.m_CurrentGroup == null)
-      {
-        this.panelCompObj.Enabled = false;
-        this.groupGroup.Visible = false;
-      }
-      else
-      {
-        this.m_LockToPanel = true;
-        this.groupGroup.Visible = true;
-        this.panelCompObj.Enabled = true;
-        this.textUniqueId.Text = this.m_CurrentGroup.Id.ToString();
-        this.textFourCharName.Text = this.m_CurrentGroup.TypeString;
-        this.textLanguageKey.Text = this.m_CurrentGroup.Description;
-        this.textLanguageName.Text = this.m_CurrentGroup.LanguageName;
-        this.textFourCharName.Enabled = true;
-        this.textLanguageKey.Enabled = true;
-        this.textLanguageName.Enabled = true;
-        this.comboLanguageKey.Visible = false;
-        this.numericNTeams.Value = (Decimal)(this.m_CurrentGroup.Ranks.Count - 1);
-        Stage parentStage = this.m_CurrentGroup.ParentStage;
-        Trophy trophy = parentStage.Trophy;
-        int index1 = 0;
-        if (parentStage.TypeString == "S1")
-        {
-          this.panelQualificationRules.Visible = true;
-          this.panelAdvancement.Visible = false;
-          this.groupRules.Text = "Qualification Rules";
-          for (int index2 = 0; index2 < this.m_CurrentGroup.m_NStartTasks; ++index2)
-          {
-            this.m_QRLabels[index1].Text = this.m_CurrentGroup.m_StartTask[index2].ToString();
-            this.m_QRLabels[index1].Tag = (object)this.m_CurrentGroup.m_StartTask[index2];
-            this.m_QRLabels[index1].Enabled = true;
-            ++index1;
-          }
-          for (; index1 < this.m_QRLabels.Length; ++index1)
-          {
-            this.m_QRLabels[index1].Enabled = false;
-            this.m_QRLabels[index1].Text = string.Empty;
-          }
-        }
-        else
-        {
-          this.panelQualificationRules.Visible = false;
-          this.panelAdvancement.Visible = true;
-          this.groupRules.Text = "Advancement Rules";
-          for (int index2 = 1; index2 < this.m_CurrentGroup.Ranks.Count; ++index2)
-          {
-            Rank rank = (Rank)this.m_CurrentGroup.Ranks[index2];
-            this.m_AdvanceLabels[index2 - 1].Text = rank.GetFromRankString();
-            this.m_AdvanceLabels[index2 - 1].Visible = true;
-            this.m_AdvanceLabels[index2 - 1].Tag = (object)rank;
-          }
-          for (int index2 = this.m_CurrentGroup.Ranks.Count - 1; index2 < this.m_AdvanceLabels.Length; ++index2)
-            this.m_AdvanceLabels[index2].Visible = false;
-        }
-        if (parentStage.Settings.m_match_stagetype == "LEAGUE")
-        {
-          this.groupInfoColors.Visible = true;
-          this.checkInfoColorChamp.Checked = this.m_CurrentGroup.Settings.m_info_color_slot_champ == 1;
-          int min;
-          int max;
-          this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorChampions.Checked = false;
-            this.numericColorChampionsMin.Visible = false;
-            this.numericColorChampionsMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorChampions.Checked = true;
-            this.numericColorChampionsMin.Visible = true;
-            this.numericColorChampionsMax.Visible = true;
-            this.numericColorChampionsMin.Value = (Decimal)min;
-            this.numericColorChampionsMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorEuropa.Checked = false;
-            this.numericColorEuropaMin.Visible = false;
-            this.numericColorEuropaMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorEuropa.Checked = true;
-            this.numericColorEuropaMin.Visible = true;
-            this.numericColorEuropaMax.Visible = true;
-            this.numericColorEuropaMin.Value = (Decimal)min;
-            this.numericColorEuropaMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorRelegation.Checked = false;
-            this.numericColorRelegationMin.Visible = false;
-            this.numericColorRelegationMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorRelegation.Checked = true;
-            this.numericColorRelegationMin.Visible = true;
-            this.numericColorRelegationMax.Visible = true;
-            this.numericColorRelegationMin.Value = (Decimal)min;
-            this.numericColorRelegationMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorPossibleRelegation.Checked = false;
-            this.numericColorPossibleRelegationMin.Visible = false;
-            this.numericColorPossibleRelegationMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorPossibleRelegation.Checked = true;
-            this.numericColorPossibleRelegationMin.Visible = true;
-            this.numericColorPossibleRelegationMax.Visible = true;
-            this.numericColorPossibleRelegationMin.Value = (Decimal)min;
-            this.numericColorPossibleRelegationMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorPromotion.Checked = false;
-            this.numericColorPromotionMin.Visible = false;
-            this.numericColorPromotionMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorPromotion.Checked = true;
-            this.numericColorPromotionMin.Visible = true;
-            this.numericColorPromotionMax.Visible = true;
-            this.numericColorPromotionMin.Value = (Decimal)min;
-            this.numericColorPromotionMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorPossiblePromotion.Checked = false;
-            this.numericColorPossiblePromotionMin.Visible = false;
-            this.numericColorPossiblePromotionMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorPossiblePromotion.Checked = true;
-            this.numericColorPossiblePromotionMin.Visible = true;
-            this.numericColorPossiblePromotionMax.Visible = true;
-            this.numericColorPossiblePromotionMin.Value = (Decimal)min;
-            this.numericColorPossiblePromotionMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoColorAdvance.Checked = false;
-            this.numericColorAdvanceMin.Visible = false;
-            this.numericColorAdvanceMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoColorAdvance.Checked = true;
-            this.numericColorAdvanceMin.Visible = true;
-            this.numericColorAdvanceMax.Visible = true;
-            this.numericColorAdvanceMin.Value = (Decimal)min;
-            this.numericColorAdvanceMax.Value = (Decimal)max;
-          }
-        }
-        else
-          this.groupInfoColors.Visible = false;
-        if (parentStage.Settings.m_match_stagetype == "SETUP")
-        {
-          this.groupPlayGroup.Visible = false;
-          this.groupSlots.Visible = false;
-          this.groupGroupScheduke.Visible = false;
-        }
-        else
-        {
-          this.groupPlayGroup.Visible = true;
-          this.groupGroupScheduke.Visible = true;
-          if (this.m_CurrentGroup.Settings.m_num_games <= 0)
-            this.m_CurrentGroup.Settings.m_num_games = 0;
-          this.numericNumGames.Value = (Decimal)this.m_CurrentGroup.Settings.m_num_games;
-          this.treeGroupSchedule.Nodes.Clear();
-          this.groupGroupScheduleDetails.Visible = false;
-          this.buttonGroupAddTime.Enabled = false;
-          this.buttonGroupRemoveTime.Enabled = false;
-          this.buttonRemoveGroupLeg.Enabled = false;
-          for (int legId = 1; legId < 46; ++legId)
-          {
-            Schedule[] legSchedule = this.m_CurrentGroup.GetLegSchedule(legId);
-            if (legSchedule != null)
+            this.m_NewIdCreator.IdList = (IdArrayList)FifaEnvironment.CompetitionObjects.Trophies;
+            Schedule.s_BaseDate = FifaEnvironment.Year != 14 ? new DateTime(2013, 12, 29, 0, 0, 0) : new DateTime(2012, 12, 30, 0, 0, 0);
+            if (this.comboCountry.Items.Count != FifaEnvironment.Countries.Count)
             {
-              TreeNode treeNode = this.treeGroupSchedule.Nodes.Add("Leg " + legId.ToString());
-              treeNode.ForeColor = Color.DarkGreen;
-              for (int index2 = 0; index2 < legSchedule.Length; ++index2)
-                treeNode.Nodes.Add(legSchedule[index2].Date.ToString("f")).Tag = (object)legSchedule[index2];
+                this.comboCountry.Items.Clear();
+                this.comboCountry.Items.AddRange(FifaEnvironment.Countries.ToArray());
             }
-          }
-          this.groupSlots.Visible = true;
-          this.checkInfoChamp.Checked = this.m_CurrentGroup.Settings.m_info_slot_champ == 1;
-          int min;
-          int max;
-          this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoRelegation.Checked = false;
-            this.numericRelegationMin.Visible = false;
-            this.numericRelegationMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoRelegation.Checked = true;
-            this.numericRelegationMin.Visible = true;
-            this.numericRelegationMax.Visible = true;
-            this.numericRelegationMin.Value = (Decimal)min;
-            this.numericRelegationMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoPossibleRelegation.Checked = false;
-            this.numericPossibleRelegationMin.Visible = false;
-            this.numericPossibleRelegationMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoPossibleRelegation.Checked = true;
-            this.numericPossibleRelegationMin.Visible = true;
-            this.numericPossibleRelegationMax.Visible = true;
-            this.numericPossibleRelegationMin.Value = (Decimal)min;
-            this.numericPossibleRelegationMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoPromotion.Checked = false;
-            this.numericPromotionMin.Visible = false;
-            this.numericPromotionMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoPromotion.Checked = true;
-            this.numericPromotionMin.Visible = true;
-            this.numericPromotionMax.Visible = true;
-            this.numericPromotionMin.Value = (Decimal)min;
-            this.numericPromotionMax.Value = (Decimal)max;
-          }
-          this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min, out max);
-          if (min == -1 || max == -1)
-          {
-            this.checkInfoPossiblePromotion.Checked = false;
-            this.numericPossiblePromotionMin.Visible = false;
-            this.numericPossiblePromotionMax.Visible = false;
-          }
-          else
-          {
-            this.checkInfoPossiblePromotion.Checked = true;
-            this.numericPossiblePromotionMin.Visible = true;
-            this.numericPossiblePromotionMax.Visible = true;
-            this.numericPossiblePromotionMin.Value = (Decimal)min;
-            this.numericPossiblePromotionMax.Value = (Decimal)max;
-          }
+            if (this.comboPromotionLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
+            {
+                this.comboPromotionLeague.Items.Clear();
+                this.comboPromotionLeague.Items.Add((object)"None");
+                this.comboPromotionLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
+            }
+            if (this.comboRelegationLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
+            {
+                this.comboRelegationLeague.Items.Clear();
+                this.comboRelegationLeague.Items.Add((object)"None");
+                this.comboRelegationLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
+            }
+            if (this.comboTargetLeague.Items.Count != FifaEnvironment.Leagues.Count + 1)
+            {
+                this.comboTargetLeague.Items.Clear();
+                this.comboTargetLeague.Items.Add((object)"None");
+                this.comboTargetLeague.Items.AddRange(FifaEnvironment.Leagues.ToArray());
+                this.comboTargetLeague.SelectedIndex = 0;
+            }
+            if (this.comboLeagueStats.Items.Count != FifaEnvironment.Leagues.Count + 1)
+            {
+                this.comboLeagueStats.Items.Clear();
+                this.comboLeagueStats.Items.AddRange(FifaEnvironment.Leagues.ToArray());
+            }
+            if (this.comboSpecialTeam1.Items.Count != FifaEnvironment.Teams.Count + 1)
+            {
+                for (int index = 0; index < 4; ++index)
+                {
+                    this.m_SpecialTeamCombos[index].Items.Clear();
+                    this.m_SpecialTeamCombos[index].Items.Add((object)"<None>");
+                    this.m_SpecialTeamCombos[index].Items.AddRange(FifaEnvironment.Teams.ToArray());
+                }
+            }
+            if (this.comboStadium1.Items.Count != FifaEnvironment.Stadiums.Count)
+            {
+                for (int index = 0; index < 12; ++index)
+                {
+                    this.m_StadiumCombos[index].Items.Clear();
+                    this.m_StadiumCombos[index].Items.Add((object)"<Auto>");
+                    this.m_StadiumCombos[index].Items.AddRange(FifaEnvironment.Stadiums.ToArray());
+                }
+            }
+            if (this.comboSchedForce.Items.Count != FifaEnvironment.CompetitionObjects.Trophies.Count)
+            {
+                this.comboSchedForce.Items.Clear();
+                this.comboSchedForce.Items.AddRange(FifaEnvironment.CompetitionObjects.Trophies.ToArray());
+            }
+            if (this.comboTrophyAdvCompDependency.Items.Count != FifaEnvironment.CompetitionObjects.Trophies.Count)
+            {
+                this.comboTrophyAdvCompDependency.Items.Clear();
+                this.comboTrophyAdvCompDependency.Items.AddRange(FifaEnvironment.CompetitionObjects.Trophies.ToArray());
+            }
+            if (this.comboLanguageKey.Items.Count != CompobjList.s_Descriptions.Count)
+            {
+                this.comboLanguageKey.Items.Clear();
+                this.comboLanguageKey.Items.AddRange(CompobjList.s_Descriptions.ToArray());
+            }
+            if (this.m_InitTeamCombo[0].Items.Count != FifaEnvironment.Teams.Count + 1)
+            {
+                for (int index = 0; index < this.m_InitTeamCombo.Length; ++index)
+                {
+                    this.m_InitTeamCombo[index].Items.Clear();
+                    this.m_InitTeamCombo[index].Items.Add((object)"<Unknown>");
+                    this.m_InitTeamCombo[index].Items.AddRange(FifaEnvironment.Teams.ToArray());
+                }
+            }
+            this.m_Competitions = FifaEnvironment.CompetitionObjects;
+            this.m_CurrentWorld = this.m_Competitions.World;
+            this.numericBall.Maximum = (Decimal)FifaEnvironment.FifaDb.Table[TI.teamballs].TableDescriptor.MaxValues[FI.teamballs_ballid];
         }
-        this.m_LockToPanel = false;
-      }
-    }
 
-    public void TrophyStructureToPanel()
-    {
-      if (this.m_CurrentTrophy == null)
-      {
-        this.groupTrophy.Visible = false;
-      }
-      else
-      {
-        this.groupTrophy.Visible = true;
-        this.groupTrophy.Text = this.m_CurrentTrophy.ShortName;
-        this.textTrophyLongName.Text = this.m_CurrentTrophy.LongName;
-        this.textTrophyShortName.Text = this.m_CurrentTrophy.ShortName;
-        this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
-        this.numericAssetIdAperClau.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[1];
-        this.numericBall.Value = (Decimal)this.m_CurrentTrophy.ballid;
-        this.comboCompetitionType.SelectedItem = (object)this.m_CurrentTrophy.Settings.m_comp_type;
-        this.checkScheduleConflicts.Checked = this.m_CurrentTrophy.Settings.m_schedule_checkconflict == 1;
-        bool flag1 = this.m_CurrentTrophy.Settings.TrophyForcecomp != null;
-        this.comboSchedForce.Visible = flag1;
-        if (flag1)
-          this.comboSchedForce.SelectedItem = (object)this.m_CurrentTrophy.Settings.TrophyForcecomp;
-        this.checkForceSchedule.Checked = flag1;
-        this.checkScheduleUseDates.Checked = this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp != -1;
-        if (this.m_CurrentTrophy.Settings.m_match_matchimportance == -1)
-          this.m_CurrentTrophy.Settings.m_match_matchimportance = 25;
-        this.numericImportance.Value = (Decimal)this.m_CurrentTrophy.Settings.m_match_matchimportance;
-        bool flag2 = this.m_CurrentTrophy.Settings.LeaguePromo != null;
-        this.comboPromotionLeague.Visible = flag2;
-        if (flag2)
-          this.comboPromotionLeague.SelectedItem = (object)this.m_CurrentTrophy.Settings.LeaguePromo;
-        this.checkPromotionLeague.Checked = flag2;
-        bool flag3 = this.m_CurrentTrophy.Settings.LeagueReleg != null;
-        this.comboRelegationLeague.Visible = flag3;
-        if (flag3)
-          this.comboRelegationLeague.SelectedItem = (object)this.m_CurrentTrophy.Settings.LeagueReleg;
-        this.checkRelegationLeague.Checked = flag3;
-        bool flag4 = this.m_CurrentTrophy.Settings.m_rule_numsubsbench != -1;
-        this.radioBench5Players.Checked = flag4;
-        this.radioBench7Players.Checked = !flag4;
-        bool isSpecific = this.m_CurrentTrophy.Settings.m_StandingsSort >= 0;
-        this.comboTrophyStandingRules.Visible = isSpecific;
-        if (isSpecific)
-          this.comboTrophyStandingRules.SelectedIndex = this.m_CurrentTrophy.Settings.m_StandingsSort;
-        this.checkTrophyStandingsRules.Checked = isSpecific;
-
-        this.checkLowCelebrationLevel.Checked = this.m_CurrentTrophy.Settings.m_match_celebrationlevel == "LOW";
-
-        if (this.m_CurrentTrophy.Settings.m_comp_type == "INTERCUP" || this.m_CurrentTrophy.Settings.m_comp_type == "INTERQUAL")
+        private void CompetitionsForm_Load(object sender, EventArgs e)
         {
-          this.groupInternationalschedule.Visible = true;
-          this.numericInternationalFirstYear.Value = (Decimal)this.m_CurrentTrophy.Settings.m_schedule_year_start;
-          this.numericInternationalPeriodicity.Value = (Decimal)this.m_CurrentTrophy.Settings.m_schedule_year_offset;
-          this.comboNationStartMonth.Visible = true;
-          this.comboTrophyStartMonth.Text = this.m_CurrentTrophy.Settings.GetProperty("schedule_seasonstartmonth", 0, out isSpecific);
+            this.m_IsLoaded = true;
+            this.Preset();
+            this.LoadCompetitions();
         }
-        else
-          this.groupInternationalschedule.Visible = false;
-      }
-    }
 
-    public void TrophyGraphicsToPanel()
-    {
-      this.viewer2DTrophy256.CurrentBitmap = this.m_CurrentTrophy.GetTrophy256();
-      if (FifaEnvironment.Year == 14)
-        this.viewer2DTrophy128.CurrentBitmap = this.m_CurrentTrophy.GetTrophy128();
-      else
-        this.viewer2DTrophy.CurrentBitmap = this.m_CurrentTrophy.GetTrophy();
-      this.multiViewer2DTextures.Bitmaps = this.m_CurrentTrophy.GetTextures();
-      this.Show3DTrophy();
-    }
+        public void ReloadCompetitions()
+        {
+            this.Preset();
+            this.CompetitionToPanel();
+        }
 
-    public void TrophyRankingToPanel()
-    {
-      this.m_NUpdateTableLabels = 0;
-      for (int index = 0; index < 24; ++index)
-      {
-        Task task = this.m_CurrentTrophy.SearchTask("end", "UpdateTable", -1, -1, index + 1);
-        if (task != null)
+        public void ReloadTrophy(Trophy trophy)
         {
-          this.m_UpdateTableLabels[index].Text = task.ToString();
-          this.m_UpdateTableLabels[index].Tag = (object)task;
-          ++this.m_NUpdateTableLabels;
+            this.m_CurrentTrophy = (Trophy)null;
+            this.LoadTrophy(trophy);
         }
-        else
-          break;
-      }
-      this.numericUpdateTableEntries.Value = (Decimal)this.m_NUpdateTableLabels;
-      for (int index = 0; index < 24; ++index)
-        this.m_InitTeamPanel[index].Visible = index < this.m_NUpdateTableLabels;
-      for (int index = 0; index < this.m_NUpdateTableLabels; ++index)
-      {
-        InitTeam initTeam = this.m_CurrentTrophy.InitTeamArray[index];
-        Team team = (Team)null;
-        if (initTeam != null)
-          team = initTeam.Team;
-        if (team != null)
-          this.m_InitTeamCombo[index].SelectedItem = (object)initTeam.Team;
-        else
-          this.m_InitTeamCombo[index].SelectedIndex = 0;
-      }
-    }
 
-    public void TrophyToPanel()
-    {
-      if (this.m_CurrentTrophy == null)
-      {
-        this.panelCompObj.Enabled = false;
-        this.groupTrophy.Visible = false;
-        this.groupGraphics.Visible = false;
-        this.groupInitTeams.Visible = false;
-      }
-      else
-      {
-        this.m_LockToPanel = true;
-        this.panelCompObj.Enabled = true;
-        this.groupTrophy.Visible = true;
-        this.groupGraphics.Visible = true;
-        this.groupInitTeams.Visible = true;
-        this.textUniqueId.Text = this.m_CurrentTrophy.Id.ToString();
-        this.textFourCharName.Text = this.m_CurrentTrophy.TypeString;
-        this.textLanguageKey.Text = this.m_CurrentTrophy.Description;
-        this.textLanguageName.Text = this.m_CurrentTrophy.ShortName;
-        this.textFourCharName.Enabled = true;
-        this.textLanguageKey.Enabled = false;
-        this.textLanguageName.Enabled = false;
-        this.comboLanguageKey.Visible = false;
-        if (this.tabTrophy.SelectedIndex == 0)
-          this.TrophyStructureToPanel();
-        else if (this.tabTrophy.SelectedIndex == 1)
-          this.TrophyRankingToPanel();
-        else if (this.tabTrophy.SelectedIndex == 2)
-          this.TrophyGraphicsToPanel();
-        this.m_LockToPanel = false;
-      }
-    }
+        public void WorldStructureToPanel()
+        {
+            this.treeWorld.Nodes.Clear();
+            TreeNode treeNode1 = this.treeWorld.Nodes.Add(this.m_CurrentWorld.ToString());
+            treeNode1.Tag = (object)this.m_CurrentWorld;
+            treeNode1.ForeColor = Color.Black;
+            foreach (Trophy trophy in (ArrayList)this.m_CurrentWorld.Trophies)
+            {
+                TreeNode treeNode2 = treeNode1.Nodes.Add(trophy.ToString());
+                treeNode2.Tag = (object)trophy;
+                treeNode2.ForeColor = Color.DarkGreen;
+                foreach (Stage stage in (ArrayList)trophy.Stages)
+                {
+                    TreeNode treeNode3 = treeNode2.Nodes.Add(stage.ToString());
+                    treeNode3.Tag = (object)stage;
+                    treeNode3.ForeColor = Color.Magenta;
+                    foreach (Group group in (ArrayList)stage.Groups)
+                    {
+                        TreeNode treeNode4 = treeNode3.Nodes.Add(group.ToString());
+                        treeNode4.Tag = (object)group;
+                        treeNode4.ForeColor = Color.Brown;
+                    }
+                }
+            }
+            foreach (Confederation confederation in (ArrayList)this.m_CurrentWorld.Confederations)
+            {
+                TreeNode treeNode2 = treeNode1.Nodes.Add(confederation.ToString());
+                treeNode2.Tag = (object)confederation;
+                treeNode2.ForeColor = Color.Red;
+                foreach (Trophy trophy in (ArrayList)confederation.Trophies)
+                {
+                    TreeNode treeNode3 = treeNode2.Nodes.Add(trophy.ToString());
+                    treeNode3.Tag = (object)trophy;
+                    treeNode3.ForeColor = Color.DarkGreen;
+                    foreach (Stage stage in (ArrayList)trophy.Stages)
+                    {
+                        TreeNode treeNode4 = treeNode3.Nodes.Add(stage.ToString());
+                        treeNode4.Tag = (object)stage;
+                        treeNode4.ForeColor = Color.Magenta;
+                        foreach (Group group1 in (ArrayList)stage.Groups)
+                        {
+                            TreeNode treeNode5 = treeNode4.Nodes.Add(group1.ToString());
+                            treeNode5.Tag = (object)group1;
+                            treeNode5.ForeColor = Color.Brown;
+                            foreach (Group group2 in (ArrayList)group1.Groups)
+                            {
+                                TreeNode treeNode6 = treeNode5.Nodes.Add(group2.ToString());
+                                treeNode6.Tag = (object)group2;
+                                treeNode6.ForeColor = Color.Brown;
+                            }
+                        }
+                    }
+                }
+                foreach (Nation nation in (ArrayList)confederation.Nations)
+                {
+                    TreeNode treeNode3 = treeNode2.Nodes.Add(nation.ToString());
+                    treeNode3.Tag = (object)nation;
+                    treeNode3.ForeColor = Color.Blue;
+                    foreach (Trophy trophy in (ArrayList)nation.Trophies)
+                    {
+                        TreeNode treeNode4 = treeNode3.Nodes.Add(trophy.ToString());
+                        treeNode4.Tag = (object)trophy;
+                        treeNode4.ForeColor = Color.DarkGreen;
+                        foreach (Stage stage in (ArrayList)trophy.Stages)
+                        {
+                            TreeNode treeNode5 = treeNode4.Nodes.Add(stage.ToString());
+                            treeNode5.Tag = (object)stage;
+                            treeNode5.ForeColor = Color.Magenta;
+                            foreach (Group group1 in (ArrayList)stage.Groups)
+                            {
+                                TreeNode treeNode6 = treeNode5.Nodes.Add(group1.ToString());
+                                treeNode6.Tag = (object)group1;
+                                treeNode6.ForeColor = Color.Brown;
+                                foreach (Group group2 in (ArrayList)group1.Groups)
+                                {
+                                    TreeNode treeNode7 = treeNode6.Nodes.Add(group2.ToString());
+                                    treeNode7.Tag = (object)group2;
+                                    treeNode7.ForeColor = Color.Brown;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            this.treeWorld.SelectedNode = this.treeWorld.Nodes[0];
+        }
 
-    public void Show3DTrophy()
-    {
-      if (!this.buttonShow3DModel.Checked)
-      {
-        this.viewer3D.ShowEmpty();
-      }
-      else
-      {
-        Bitmap[] textures = this.m_CurrentTrophy.GetTextures();
-        Bitmap textureBitmap = (Bitmap)null;
-        if (textures != null)
-          textureBitmap = GraphicUtil.EmbossBitmap(textures[0], textures[1]);
-        Rx3File model = this.m_CurrentTrophy.GetModel();
-        if (textureBitmap == null || model == null)
+        public void WorldToPanel()
         {
-          //this.viewer3D.Clean(1);
+            this.m_LockToPanel = true;
+            this.panelCompObj.Enabled = true;
+            this.textUniqueId.Text = this.m_CurrentWorld.Id.ToString();
+            this.textFourCharName.Text = this.m_CurrentWorld.TypeString;
+            this.textLanguageKey.Text = this.m_CurrentWorld.Description;
+            this.textLanguageName.Text = this.m_CurrentWorld.Description;
+            this.textFourCharName.Enabled = false;
+            this.textLanguageKey.Enabled = false;
+            this.textLanguageName.Enabled = false;
+            this.comboLanguageKey.Visible = false;
+            this.numericStartYear.Value = (Decimal)this.m_CurrentWorld.Settings.m_schedule_year_start;
+            this.comboWorldStartingMonth.Text = this.m_CurrentWorld.Settings.GetProperty("schedule_seasonstartmonth", 0, out bool _);
+            numericFIFAYellowStored.Value = this.m_CurrentWorld.Settings.m_rule_numyellowstored;
+            radioFIFABenchPlayers7.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsbench == 7;
+            radioFIFABenchPlayers5.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsbench == 5;
+            radioFIFASubs5.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsmatch == 5;
+            radioFIFASubs3.Checked = this.m_CurrentWorld.Settings.m_rule_numsubsmatch == 3;
+            UpdateDataUsage();
+            this.m_LockToPanel = false;
         }
-        else
-        {
-          Rx3IndexArray.TriangleListType = Rx3IndexArray.ETriangleListType.InvertEven;
-          //this.viewer3D.Clean(model.Rx3VertexArrays.Length);
-          for (int meshIndex = 0; meshIndex < model.Rx3VertexArrays.Length; ++meshIndex)
-          {
-            //Model3D model3D = new Model3D(model.Rx3IndexArrays[meshIndex], model.Rx3VertexArrays[meshIndex], textureBitmap);
-            //this.viewer3D.SetMesh(meshIndex, model3D);
-          }
-          this.viewer3D.Render();
-        }
-      }
-    }
 
-    private void treeWorld_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      if (this.treeWorld.SelectedNode == null)
-        return;
-      this.m_CurrentCompobj = (Compobj)this.treeWorld.SelectedNode.Tag;
-      if (!this.m_LockTree)
-      {
-        this.m_LockTree = true;
-        if (this.m_CurrentCompobj.IsGroup())
+        public void ConfederationToPanel()
         {
-          this.m_CurrentGroup = (Group)this.treeWorld.SelectedNode.Tag;
-          this.m_CurrentStage = this.m_CurrentGroup.ParentStage;
-          this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
-          this.m_CurrentNation = this.m_CurrentTrophy.Nation;
-          this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
-          if (this.tabCompetitions.SelectedTab == this.pageGroup)
-            this.GroupToPanel();
-          this.tabCompetitions.SelectedTab = this.pageGroup;
-          this.treeWorld.Select();
+            if (this.m_CurrentConfederation == null)
+            {
+                this.panelCompObj.Enabled = false;
+                this.groupConfederation.Visible = false;
+            }
+            else
+            {
+                this.m_LockToPanel = true;
+                this.groupConfederation.Visible = true;
+                this.panelCompObj.Enabled = true;
+                this.textUniqueId.Text = this.m_CurrentConfederation.Id.ToString();
+                this.textFourCharName.Text = this.m_CurrentConfederation.TypeString;
+                this.textLanguageKey.Text = this.m_CurrentConfederation.Description;
+                this.textLanguageName.Text = string.Empty;
+                this.textFourCharName.Enabled = false;
+                this.textLanguageKey.Enabled = false;
+                this.textLanguageName.Enabled = false;
+                this.comboLanguageKey.Visible = false;
+                this.groupConfederation.Text = "Confederation: " + this.m_CurrentConfederation.ToString();
+                this.comboConfederationStartingMonth.Text = this.m_CurrentConfederation.Settings.GetProperty("schedule_seasonstartmonth", 0, out bool _);
+                this.m_LockToPanel = false;
+            }
         }
-        else if (this.m_CurrentCompobj.IsStage())
+
+        public void NationToPanel()
         {
-          this.m_CurrentStage = (Stage)this.treeWorld.SelectedNode.Tag;
-          this.m_CurrentGroup = (Group)null;
-          this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
-          this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
-          this.m_CurrentNation = this.m_CurrentTrophy.Nation;
-          this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
-          if (this.tabCompetitions.SelectedTab == this.pageStage)
-            this.StageToPanel();
-          this.tabCompetitions.SelectedTab = this.pageStage;
-          this.treeWorld.Select();
+            if (this.m_CurrentNation == null)
+            {
+                this.panelCompObj.Enabled = false;
+                this.groupNation.Visible = false;
+            }
+            else
+            {
+                this.m_LockToPanel = true;
+                this.groupNation.Visible = true;
+                this.panelCompObj.Enabled = true;
+                this.textUniqueId.Text = this.m_CurrentNation.Id.ToString();
+                this.textFourCharName.Text = this.m_CurrentNation.TypeString;
+                this.textLanguageKey.Text = this.m_CurrentNation.Description;
+                if (this.m_CurrentNation.Country != null)
+                    this.textLanguageName.Text = this.m_CurrentNation.Country.LanguageName;
+                else
+                    this.textLanguageName.Text = (string)null;
+                this.textFourCharName.Enabled = true;
+                this.textLanguageKey.Enabled = false;
+                this.textLanguageName.Enabled = false;
+                this.comboLanguageKey.Visible = false;
+                this.groupNation.Text = "Nation: " + this.m_CurrentNation.ToString();
+                this.comboCountry.SelectedItem = (object)this.m_CurrentNation.Country;
+                if (this.m_CurrentNation.Country == null)
+                    this.comboCountry.Text = string.Empty;
+                this.comboNationStartMonth.Visible = true;
+                bool isSpecific;
+                this.comboNationStartMonth.Text = this.m_CurrentNation.Settings.GetProperty("schedule_seasonstartmonth", 0, out isSpecific);
+                this.numericNationYellowsStored.Visible = true;
+                this.numericNationYellowsStored.Value = (Decimal)Convert.ToInt32(this.m_CurrentNation.Settings.GetProperty("rule_numyellowstored", 0, out isSpecific));
+                isSpecific = this.m_CurrentNation.Settings.m_StandingsSort >= 0;
+                this.comboNationStandingsRules.Visible = isSpecific;
+                if (isSpecific)
+                    this.comboNationStandingsRules.SelectedIndex = this.m_CurrentNation.Settings.m_StandingsSort;
+                this.checkNationStandingsRules.Checked = isSpecific;
+                for (int index = 0; index < 12; ++index)
+                {
+                    this.m_RainProb[index].Value = (Decimal)this.m_CurrentNation.RainProb[index];
+                    this.m_SnowProb[index].Value = (Decimal)this.m_CurrentNation.SnowProb[index];
+                    this.m_OvercastProb[index].Value = (Decimal)this.m_CurrentNation.OvercastProb[index];
+                    switch (this.m_CurrentNation.SunsetTime[index])
+                    {
+                        case 1630:
+                            this.m_SunsetTime[index].SelectedIndex = 1;
+                            break;
+                        case 1700:
+                            this.m_SunsetTime[index].SelectedIndex = 2;
+                            break;
+                        case 1730:
+                            this.m_SunsetTime[index].SelectedIndex = 3;
+                            break;
+                        case 1800:
+                            this.m_SunsetTime[index].SelectedIndex = 4;
+                            break;
+                        case 1830:
+                            this.m_SunsetTime[index].SelectedIndex = 5;
+                            break;
+                        case 1900:
+                            this.m_SunsetTime[index].SelectedIndex = 6;
+                            break;
+                        case 1930:
+                            this.m_SunsetTime[index].SelectedIndex = 7;
+                            break;
+                        case 2000:
+                            this.m_SunsetTime[index].SelectedIndex = 8;
+                            break;
+                        case 2030:
+                            this.m_SunsetTime[index].SelectedIndex = 9;
+                            break;
+                        case 2100:
+                            this.m_SunsetTime[index].SelectedIndex = 10;
+                            break;
+                        case 2120:
+                            this.m_SunsetTime[index].SelectedIndex = 11;
+                            break;
+                        case 2200:
+                            this.m_SunsetTime[index].SelectedIndex = 12;
+                            break;
+                        default:
+                            this.m_SunsetTime[index].SelectedIndex = 0;
+                            break;
+                    }
+                    switch (this.m_CurrentNation.DarkTime[index])
+                    {
+                        case 1600:
+                            this.m_NightTime[index].SelectedIndex = 0;
+                            break;
+                        case 1630:
+                            this.m_NightTime[index].SelectedIndex = 1;
+                            break;
+                        case 1700:
+                            this.m_NightTime[index].SelectedIndex = 2;
+                            break;
+                        case 1730:
+                            this.m_NightTime[index].SelectedIndex = 3;
+                            break;
+                        case 1800:
+                            this.m_NightTime[index].SelectedIndex = 4;
+                            break;
+                        case 1830:
+                            this.m_NightTime[index].SelectedIndex = 5;
+                            break;
+                        case 1900:
+                            this.m_NightTime[index].SelectedIndex = 6;
+                            break;
+                        case 1930:
+                            this.m_NightTime[index].SelectedIndex = 7;
+                            break;
+                        case 2000:
+                            this.m_NightTime[index].SelectedIndex = 8;
+                            break;
+                        case 2030:
+                            this.m_NightTime[index].SelectedIndex = 9;
+                            break;
+                        case 2100:
+                            this.m_NightTime[index].SelectedIndex = 10;
+                            break;
+                        case 2130:
+                            this.m_NightTime[index].SelectedIndex = 11;
+                            break;
+                        case 2200:
+                            this.m_NightTime[index].SelectedIndex = 12;
+                            break;
+                    }
+                }
+                this.m_LockToPanel = false;
+            }
         }
-        else if (this.m_CurrentCompobj.IsTrophy())
+
+        public void StageToPanel()
         {
-          this.m_CurrentTrophy = (Trophy)this.treeWorld.SelectedNode.Tag;
-          this.m_CurrentStage = (Stage)null;
-          this.m_CurrentGroup = (Group)null;
-          this.m_CurrentNation = this.m_CurrentTrophy.Nation;
-          this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
-          if (this.tabCompetitions.SelectedTab == this.pageTrophy)
-            this.TrophyToPanel();
-          this.tabCompetitions.SelectedTab = this.pageTrophy;
-          this.treeWorld.Select();
+            if (this.m_CurrentStage == null)
+            {
+                this.panelCompObj.Enabled = false;
+                this.groupStage.Visible = false;
+            }
+            else
+            {
+                this.m_LockToPanel = true;
+                this.groupStage.Visible = true;
+                this.panelCompObj.Enabled = true;
+                this.textUniqueId.Text = this.m_CurrentStage.Id.ToString();
+                this.textFourCharName.Text = this.m_CurrentStage.TypeString;
+                this.textLanguageKey.Text = this.m_CurrentStage.Description;
+                this.textLanguageName.Text = this.m_CurrentStage.GetLanguageName();
+                this.comboLanguageKey.SelectedItem = (object)this.m_CurrentStage.Description;
+                this.textFourCharName.Enabled = true;
+                this.textLanguageKey.Enabled = true;
+                this.textLanguageName.Enabled = true;
+                this.comboLanguageKey.Visible = true;
+                this.comboStageType.Text = this.m_CurrentStage.Settings.m_match_stagetype;
+                bool flag1 = this.m_CurrentStage.Settings.m_StandingsSort >= 0;
+                this.comboStageStandingRules.Visible = flag1;
+                if (flag1)
+                    this.comboStageStandingRules.SelectedIndex = this.m_CurrentStage.Settings.m_StandingsSort;
+                this.checkStageStandingsRules.Checked = flag1;
+                if (this.m_CurrentStage.Settings.Advance_standingskeep != -1)
+                    this.numericStandingKeep.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingskeep;
+                this.checkStandingKeep.Checked = this.m_CurrentStage.Settings.Advance_standingskeep != -1;
+                this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
+                if (this.m_CurrentStage.Settings.Advance_standingsagg != -1)
+                    this.numericStandingAgg.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsagg;
+                this.checkStandingAgg.Checked = this.m_CurrentStage.Settings.Advance_standingsagg != -1;
+                this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
+                this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
+                if (this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1)
+                    this.numericQuarterJLeague.Value = (Decimal)this.m_CurrentStage.Settings.Advance_jleagueqtrsetup;
+                this.checkBoxQuarterJLeague.Checked = this.m_CurrentStage.Settings.Advance_jleagueqtrsetup != -1;
+                this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
+                if (this.m_CurrentStage.Settings.Advance_standingsrank != -1)
+                    this.numericStandingsRank.Value = (Decimal)this.m_CurrentStage.Settings.Advance_standingsrank;
+                this.checkStandingsRank.Checked = this.m_CurrentStage.Settings.Advance_standingsrank != -1;
+                this.numericStandingsRank.Visible = this.checkStandingsRank.Checked;
+                if (this.m_CurrentStage.Settings.m_match_stagetype != "SETUP")
+                {
+                    this.groupSetupStage.Visible = false;
+                    this.groupPlayStage.Visible = true;
+                    this.comboMatchSituation.Text = this.m_CurrentStage.Settings.m_match_matchsituation;
+                    this.checkMatchReplay.Checked = this.m_CurrentStage.Settings.m_schedule_matchreplay != -1;
+                    this.numericPrizeMoney.Value = (Decimal)this.m_CurrentStage.Settings.m_info_prize_money;
+                    this.numericMoneyDrop.Value = (Decimal)this.m_CurrentStage.Settings.m_info_prize_money_drop;
+                    this.checkMaxteamsgroup.Checked = this.m_CurrentStage.Settings.m_advance_maxteamsgroup != -1;
+                    this.numericStageRef.Visible = this.checkMaxteamsgroup.Checked;
+                    this.numericStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_maxteamsstageref;
+                    this.checkMaxteamsassoc.Checked = this.m_CurrentStage.Settings.m_advance_maxteamsassoc != -1;
+                    this.checkClausuraSchedule.Checked = this.m_CurrentStage.Settings.m_schedule_reversed != -1;
+                    this.checkRandomDrawEvent.Checked = this.m_CurrentStage.Settings.m_advance_random_draw_event != -1;
+                    this.checkUseFanCards.Checked = this.m_CurrentStage.Settings.m_match_canusefancards != null;
+                    bool flag2 = this.m_CurrentStage.Settings.m_EndRuleKo1Leg != -1;
+                    this.comboSpecialKo1Rule.Visible = flag2;
+                    if (flag2)
+                        this.comboSpecialKo1Rule.SelectedIndex = this.m_CurrentStage.Settings.m_EndRuleKo1Leg;
+                    this.checkSpecialKo1Rule.Checked = flag2;
+                    bool flag3 = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 != -1;
+                    this.comboSpecialKo2Rule.Visible = flag3;
+                    if (flag3)
+                        this.comboSpecialKo2Rule.SelectedIndex = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2;
+                    this.checkSpecialKo2Rule.Checked = flag3;
+                    this.numericRegularSeason.Visible = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 == 3;
+                    if (this.numericRegularSeason.Visible)
+                        this.numericRegularSeason.Value = (Decimal)this.m_CurrentStage.Settings.Standings_checkrank;
+                    for (int index = 0; index < 12; ++index)
+                    {
+                        Stadium stadium = (Stadium)null;
+                        if (this.m_CurrentStage.Settings.m_match_stadium != null && this.m_CurrentStage.Settings.m_match_stadium[index] > 0)
+                        {
+                            stadium = (Stadium)FifaEnvironment.Stadiums.SearchId(this.m_CurrentStage.Settings.m_match_stadium[index]);
+                            if (stadium != null)
+                                this.m_StadiumCombos[index].SelectedItem = (object)stadium;
+                        }
+                        if (stadium == null)
+                            this.m_StadiumCombos[index].SelectedIndex = 0;
+                    }
+                    this.treeStageSchedule.Nodes.Clear();
+                    this.groupStageScheduleDetails.Visible = false;
+                    this.buttonStageAddTime.Enabled = false;
+                    this.buttonStageRemoveTime.Enabled = false;
+                    this.buttonDeleteStageLeg.Enabled = false;
+                    for (int legId = 1; legId < 46; ++legId)
+                    {
+                        Schedule[] legSchedule = this.m_CurrentStage.GetLegSchedule(legId);
+                        if (legSchedule != null)
+                        {
+                            TreeNode treeNode = this.treeStageSchedule.Nodes.Add("Leg " + legId.ToString());
+                            treeNode.ForeColor = Color.DarkGreen;
+                            for (int index = 0; index < legSchedule.Length; ++index)
+                                treeNode.Nodes.Add(legSchedule[index].Date.ToString("f")).Tag = (object)legSchedule[index];
+                        }
+                        else
+                            break;
+                    }
+                }
+                else
+                {
+                    this.groupSetupStage.Visible = true;
+                    this.groupPlayStage.Visible = false;
+                    this.checkRandomDraw.Checked = this.m_CurrentStage.Settings.m_advance_randomdraw != -1;
+                    this.checkBoxIgnoreJLeague.Checked = this.m_CurrentStage.Settings.m_advance_jleagueignorecheck != -1;
+                    this.checkCalccompavgs.Checked = this.m_CurrentStage.Settings.m_advance_calccompavgs != -1;
+                    for (int index = 0; index < 4; ++index)
+                    {
+                        Team team = (Team)null;
+                        if (this.m_CurrentStage.Settings.m_info_special_team_id[index] != 0)
+                        {
+                            team = (Team)FifaEnvironment.Teams.SearchId(this.m_CurrentStage.Settings.m_info_special_team_id[index]);
+                            if (team != null)
+                                this.m_SpecialTeamCombos[index].SelectedItem = (object)team;
+                        }
+                        if (team == null)
+                            this.m_SpecialTeamCombos[index].SelectedIndex = 0;
+                    }
+                }
+                this.checkKeepPointsPercentage.Checked = this.m_CurrentStage.Settings.Advance_pointskeep != -1;
+                this.numericKeepPointsPercentage.Visible = this.checkKeepPointsPercentage.Checked;
+                this.numericKeepPointsStageRef.Visible = this.checkKeepPointsPercentage.Checked;
+                if (this.m_CurrentStage.Settings.m_advance_pointskeeppercentage != -1)
+                    this.numericKeepPointsPercentage.Value = (Decimal)this.m_CurrentStage.Settings.m_advance_pointskeeppercentage;
+                if (this.m_CurrentStage.Settings.Advance_pointskeep != -1)
+                    this.numericKeepPointsStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_pointskeep;
+                this.groupLeaguetasks.Visible = this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE";
+                if (this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE")
+                {
+                    Task task1 = this.m_CurrentStage.SearchTask("start", "ClearLeagueStats", -1, -1, -1);
+                    League league = (League)null;
+                    this.checkClearLeagueStats.Checked = task1 != null;
+                    if (task1 != null)
+                        league = task1.League;
+                    Task task2 = this.m_CurrentStage.SearchTask("end", "UpdateLeagueStats", -1, -1, -1);
+                    this.checkUpdateLeagueStats.Checked = task2 != null;
+                    if (task2 != null)
+                        league = task2.League;
+                    Task task3 = this.m_CurrentStage.SearchTask("end", "UpdateLeagueTable", -1, -1, -1);
+                    this.checkUpdateLeagueTable.Checked = task3 != null;
+                    if (task3 != null)
+                        league = task3.League;
+                    if (league != null)
+                        this.comboLeagueStats.SelectedItem = (object)league;
+                }
+
+                if (this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY" || this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP")
+                {
+                    this.groupStageInfoColors.Visible = true;
+                    int min, max;
+                    this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkStageInfoColorAdvance.Checked = false;
+                        this.numericStageColorAdvanceMin.Visible = false;
+                        this.numericStageColorAdvanceMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkStageInfoColorAdvance.Checked = true;
+                        this.numericStageColorAdvanceMin.Visible = true;
+                        this.numericStageColorAdvanceMax.Visible = true;
+                        this.numericStageColorAdvanceMin.Value = (Decimal)min;
+                        this.numericStageColorAdvanceMax.Value = (Decimal)max;
+                    }
+                }
+                else
+                    this.groupStageInfoColors.Visible = false;
+
+
+                this.m_LockToPanel = false;
+            }
         }
-        else if (this.m_CurrentCompobj.IsNation())
+
+        public void GroupToPanel()
         {
-          this.m_CurrentNation = (Nation)this.treeWorld.SelectedNode.Tag;
-          this.m_CurrentTrophy = (Trophy)null;
-          this.m_CurrentStage = (Stage)null;
-          this.m_CurrentGroup = (Group)null;
-          this.m_CurrentConfederation = this.m_CurrentNation.Confederation;
-          if (this.tabCompetitions.SelectedTab == this.pageNation)
+            if (this.m_CurrentGroup == null)
+            {
+                this.panelCompObj.Enabled = false;
+                this.groupGroup.Visible = false;
+            }
+            else
+            {
+                this.m_LockToPanel = true;
+                this.groupGroup.Visible = true;
+                this.panelCompObj.Enabled = true;
+                this.textUniqueId.Text = this.m_CurrentGroup.Id.ToString();
+                this.textFourCharName.Text = this.m_CurrentGroup.TypeString;
+                this.textLanguageKey.Text = this.m_CurrentGroup.Description;
+                this.textLanguageName.Text = this.m_CurrentGroup.LanguageName;
+                this.textFourCharName.Enabled = true;
+                this.textLanguageKey.Enabled = true;
+                this.textLanguageName.Enabled = true;
+                this.comboLanguageKey.Visible = false;
+                this.numericNTeams.Value = (Decimal)(this.m_CurrentGroup.Ranks.Count - 1);
+                Stage parentStage = this.m_CurrentGroup.ParentStage;
+                Trophy trophy = parentStage.Trophy;
+                int index1 = 0;
+                if (parentStage.TypeString == "S1")
+                {
+                    this.panelQualificationRules.Visible = true;
+                    this.panelAdvancement.Visible = false;
+                    this.groupRules.Text = "Qualification Rules (Standings/Tasks)";
+                    for (int index2 = 0; index2 < this.m_CurrentGroup.m_NStartTasks; ++index2)
+                    {
+                        this.m_QRLabels[index1].Text = this.m_CurrentGroup.m_StartTask[index2].ToString();
+                        this.m_QRLabels[index1].Tag = (object)this.m_CurrentGroup.m_StartTask[index2];
+                        this.m_QRLabels[index1].Enabled = true;
+                        ++index1;
+                    }
+                    for (; index1 < this.m_QRLabels.Length; ++index1)
+                    {
+                        this.m_QRLabels[index1].Enabled = false;
+                        this.m_QRLabels[index1].Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    this.panelQualificationRules.Visible = false;
+                    this.panelAdvancement.Visible = true;
+                    this.groupRules.Text = "Advancement Rules";
+                    for (int index2 = 1; index2 < this.m_CurrentGroup.Ranks.Count; ++index2)
+                    {
+                        Rank rank = (Rank)this.m_CurrentGroup.Ranks[index2];
+                        this.m_AdvanceLabels[index2 - 1].Text = rank.GetFromRankString();
+                        this.m_AdvanceLabels[index2 - 1].Visible = true;
+                        this.m_AdvanceLabels[index2 - 1].Tag = (object)rank;
+                    }
+                    for (int index2 = this.m_CurrentGroup.Ranks.Count - 1; index2 < this.m_AdvanceLabels.Length; ++index2)
+                        this.m_AdvanceLabels[index2].Visible = false;
+                }
+                if (parentStage.Settings.m_match_stagetype == "LEAGUE")
+                {
+                    this.groupInfoColors.Visible = true;
+                    this.checkInfoColorChamp.Checked = this.m_CurrentGroup.Settings.m_info_color_slot_champ == 1;
+                    int min;
+                    int max;
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorChampions.Checked = false;
+                        this.numericColorChampionsMin.Visible = false;
+                        this.numericColorChampionsMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorChampions.Checked = true;
+                        this.numericColorChampionsMin.Visible = true;
+                        this.numericColorChampionsMax.Visible = true;
+                        this.numericColorChampionsMin.Value = (Decimal)min;
+                        this.numericColorChampionsMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorEuropa.Checked = false;
+                        this.numericColorEuropaMin.Visible = false;
+                        this.numericColorEuropaMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorEuropa.Checked = true;
+                        this.numericColorEuropaMin.Visible = true;
+                        this.numericColorEuropaMax.Visible = true;
+                        this.numericColorEuropaMin.Value = (Decimal)min;
+                        this.numericColorEuropaMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorRelegation.Checked = false;
+                        this.numericColorRelegationMin.Visible = false;
+                        this.numericColorRelegationMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorRelegation.Checked = true;
+                        this.numericColorRelegationMin.Visible = true;
+                        this.numericColorRelegationMax.Visible = true;
+                        this.numericColorRelegationMin.Value = (Decimal)min;
+                        this.numericColorRelegationMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorPossibleRelegation.Checked = false;
+                        this.numericColorPossibleRelegationMin.Visible = false;
+                        this.numericColorPossibleRelegationMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorPossibleRelegation.Checked = true;
+                        this.numericColorPossibleRelegationMin.Visible = true;
+                        this.numericColorPossibleRelegationMax.Visible = true;
+                        this.numericColorPossibleRelegationMin.Value = (Decimal)min;
+                        this.numericColorPossibleRelegationMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorPromotion.Checked = false;
+                        this.numericColorPromotionMin.Visible = false;
+                        this.numericColorPromotionMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorPromotion.Checked = true;
+                        this.numericColorPromotionMin.Visible = true;
+                        this.numericColorPromotionMax.Visible = true;
+                        this.numericColorPromotionMin.Value = (Decimal)min;
+                        this.numericColorPromotionMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorPossiblePromotion.Checked = false;
+                        this.numericColorPossiblePromotionMin.Visible = false;
+                        this.numericColorPossiblePromotionMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorPossiblePromotion.Checked = true;
+                        this.numericColorPossiblePromotionMin.Visible = true;
+                        this.numericColorPossiblePromotionMax.Visible = true;
+                        this.numericColorPossiblePromotionMin.Value = (Decimal)min;
+                        this.numericColorPossiblePromotionMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoColorAdvance.Checked = false;
+                        this.numericColorAdvanceMin.Visible = false;
+                        this.numericColorAdvanceMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoColorAdvance.Checked = true;
+                        this.numericColorAdvanceMin.Visible = true;
+                        this.numericColorAdvanceMax.Visible = true;
+                        this.numericColorAdvanceMin.Value = (Decimal)min;
+                        this.numericColorAdvanceMax.Value = (Decimal)max;
+                    }
+                }
+                else
+                    this.groupInfoColors.Visible = false;
+                if (parentStage.Settings.m_match_stagetype == "SETUP")
+                {
+                    this.groupPlayGroup.Visible = false;
+                    this.groupSlots.Visible = false;
+                    this.groupGroupScheduke.Visible = false;
+                }
+                else
+                {
+                    this.groupPlayGroup.Visible = true;
+                    this.groupGroupScheduke.Visible = true;
+                    if (this.m_CurrentGroup.Settings.m_num_games <= 0)
+                        this.m_CurrentGroup.Settings.m_num_games = 0;
+                    this.numericNumGames.Value = (Decimal)this.m_CurrentGroup.Settings.m_num_games;
+                    this.treeGroupSchedule.Nodes.Clear();
+                    this.groupGroupScheduleDetails.Visible = false;
+                    this.buttonGroupAddTime.Enabled = false;
+                    this.buttonGroupRemoveTime.Enabled = false;
+                    this.buttonRemoveGroupLeg.Enabled = false;
+                    for (int legId = 1; legId < 46; ++legId)
+                    {
+                        Schedule[] legSchedule = this.m_CurrentGroup.GetLegSchedule(legId);
+                        if (legSchedule != null)
+                        {
+                            TreeNode treeNode = this.treeGroupSchedule.Nodes.Add("Leg " + legId.ToString());
+                            treeNode.ForeColor = Color.DarkGreen;
+                            for (int index2 = 0; index2 < legSchedule.Length; ++index2)
+                                treeNode.Nodes.Add(legSchedule[index2].Date.ToString("f")).Tag = (object)legSchedule[index2];
+                        }
+                    }
+                    this.groupSlots.Visible = true;
+                    this.checkInfoChamp.Checked = this.m_CurrentGroup.Settings.m_info_slot_champ == 1;
+                    int min;
+                    int max;
+                    this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoRelegation.Checked = false;
+                        this.numericRelegationMin.Visible = false;
+                        this.numericRelegationMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoRelegation.Checked = true;
+                        this.numericRelegationMin.Visible = true;
+                        this.numericRelegationMax.Visible = true;
+                        this.numericRelegationMin.Value = (Decimal)min;
+                        this.numericRelegationMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoPossibleRelegation.Checked = false;
+                        this.numericPossibleRelegationMin.Visible = false;
+                        this.numericPossibleRelegationMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoPossibleRelegation.Checked = true;
+                        this.numericPossibleRelegationMin.Visible = true;
+                        this.numericPossibleRelegationMax.Visible = true;
+                        this.numericPossibleRelegationMin.Value = (Decimal)min;
+                        this.numericPossibleRelegationMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoPromotion.Checked = false;
+                        this.numericPromotionMin.Visible = false;
+                        this.numericPromotionMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoPromotion.Checked = true;
+                        this.numericPromotionMin.Visible = true;
+                        this.numericPromotionMax.Visible = true;
+                        this.numericPromotionMin.Value = (Decimal)min;
+                        this.numericPromotionMax.Value = (Decimal)max;
+                    }
+                    this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min, out max);
+                    if (min == -1 || max == -1)
+                    {
+                        this.checkInfoPossiblePromotion.Checked = false;
+                        this.numericPossiblePromotionMin.Visible = false;
+                        this.numericPossiblePromotionMax.Visible = false;
+                    }
+                    else
+                    {
+                        this.checkInfoPossiblePromotion.Checked = true;
+                        this.numericPossiblePromotionMin.Visible = true;
+                        this.numericPossiblePromotionMax.Visible = true;
+                        this.numericPossiblePromotionMin.Value = (Decimal)min;
+                        this.numericPossiblePromotionMax.Value = (Decimal)max;
+                    }
+                }
+                this.m_LockToPanel = false;
+            }
+        }
+
+        public void TrophyStructureToPanel()
+        {
+            if (this.m_CurrentTrophy == null)
+            {
+                this.groupTrophy.Visible = false;
+            }
+            else
+            {
+                this.groupTrophy.Visible = true;
+                this.groupTrophy.Text = this.m_CurrentTrophy.ShortName;
+                this.textTrophyLongName.Text = this.m_CurrentTrophy.LongName;
+                this.textTrophyShortName.Text = this.m_CurrentTrophy.ShortName;
+                this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
+                this.numericAssetIdAperClau.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[1];
+                this.numericBall.Value = (Decimal)this.m_CurrentTrophy.ballid;
+                this.comboCompetitionType.SelectedItem = (object)this.m_CurrentTrophy.Settings.m_comp_type;
+                this.checkScheduleConflicts.Checked = this.m_CurrentTrophy.Settings.m_schedule_checkconflict == 1;
+
+                bool flag1 = this.m_CurrentTrophy.Settings.TrophyForcecomp != null;
+                this.comboSchedForce.Visible = flag1;
+                if (flag1)
+                    this.comboSchedForce.SelectedItem = (object)this.m_CurrentTrophy.Settings.TrophyForcecomp;
+                this.checkForceSchedule.Checked = flag1;
+
+                bool flag11 = this.m_CurrentTrophy.Settings.TrophyCompdependency != null;
+                this.comboTrophyAdvCompDependency.Visible = flag11;
+                if (flag11)
+                    this.comboTrophyAdvCompDependency.SelectedItem = (object)this.m_CurrentTrophy.Settings.TrophyCompdependency;
+                this.checkTrophyAdvCompDependency.Checked = flag11;
+
+                this.checkScheduleUseDates.Checked = this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp != -1;
+                if (this.m_CurrentTrophy.Settings.m_match_matchimportance == -1)
+                    this.m_CurrentTrophy.Settings.m_match_matchimportance = 25;
+                this.numericImportance.Value = (Decimal)this.m_CurrentTrophy.Settings.m_match_matchimportance;
+                bool flag2 = this.m_CurrentTrophy.Settings.LeaguePromo != null;
+                this.comboPromotionLeague.Visible = flag2;
+                if (flag2)
+                    this.comboPromotionLeague.SelectedItem = (object)this.m_CurrentTrophy.Settings.LeaguePromo;
+                this.checkPromotionLeague.Checked = flag2;
+                bool flag3 = this.m_CurrentTrophy.Settings.LeagueReleg != null;
+                this.comboRelegationLeague.Visible = flag3;
+                if (flag3)
+                    this.comboRelegationLeague.SelectedItem = (object)this.m_CurrentTrophy.Settings.LeagueReleg;
+                this.checkRelegationLeague.Checked = flag3;
+                bool flag4 = this.m_CurrentTrophy.Settings.m_rule_numsubsbench != -1;
+                this.radioBench5Players.Checked = flag4;
+                this.radioBench7Players.Checked = !flag4;
+                bool isSpecific = this.m_CurrentTrophy.Settings.m_StandingsSort >= 0;
+                this.comboTrophyStandingRules.Visible = isSpecific;
+                if (isSpecific)
+                    this.comboTrophyStandingRules.SelectedIndex = this.m_CurrentTrophy.Settings.m_StandingsSort;
+                this.checkTrophyStandingsRules.Checked = isSpecific;
+
+                this.checkLowCelebrationLevel.Checked = this.m_CurrentTrophy.Settings.m_match_celebrationlevel == "LOW";
+
+                if (this.m_CurrentTrophy.Settings.m_comp_type == "INTERCUP" || this.m_CurrentTrophy.Settings.m_comp_type == "INTERQUAL")
+                {
+                    this.groupInternationalschedule.Visible = true;
+                    this.numericInternationalFirstYear.Value = (Decimal)this.m_CurrentTrophy.Settings.m_schedule_year_start;
+                    this.numericInternationalPeriodicity.Value = (Decimal)this.m_CurrentTrophy.Settings.m_schedule_year_offset;
+                    this.comboNationStartMonth.Visible = true;
+                    this.comboTrophyStartMonth.Text = this.m_CurrentTrophy.Settings.GetProperty("schedule_seasonstartmonth", 0, out isSpecific);
+                }
+                else
+                    this.groupInternationalschedule.Visible = false;
+            }
+        }
+
+        public void TrophyGraphicsToPanel()
+        {
+            this.viewer2DTrophy256.CurrentBitmap = this.m_CurrentTrophy.GetTrophy256();
+            if (FifaEnvironment.Year == 14)
+                this.viewer2DTrophy128.CurrentBitmap = this.m_CurrentTrophy.GetTrophy128();
+            else
+                this.viewer2DTrophy.CurrentBitmap = this.m_CurrentTrophy.GetTrophy();
+            this.multiViewer2DTextures.Bitmaps = this.m_CurrentTrophy.GetTextures();
+            this.Show3DTrophy();
+        }
+
+        public void TrophyRankingToPanel()
+        {
+            this.m_NUpdateTableLabels = 0;
+            for (int index = 0; index < 24; ++index)
+            {
+                Task task = this.m_CurrentTrophy.SearchTask("end", "UpdateTable", -1, -1, index + 1);
+                if (task != null)
+                {
+                    this.m_UpdateTableLabels[index].Text = task.ToString();
+                    this.m_UpdateTableLabels[index].Tag = (object)task;
+                    ++this.m_NUpdateTableLabels;
+                }
+                else
+                    break;
+            }
+            this.numericUpdateTableEntries.Value = (Decimal)this.m_NUpdateTableLabels;
+            for (int index = 0; index < 24; ++index)
+                this.m_InitTeamPanel[index].Visible = index < this.m_NUpdateTableLabels;
+            for (int index = 0; index < this.m_NUpdateTableLabels; ++index)
+            {
+                InitTeam initTeam = this.m_CurrentTrophy.InitTeamArray[index];
+                Team team = (Team)null;
+                if (initTeam != null)
+                    team = initTeam.Team;
+                if (team != null)
+                    this.m_InitTeamCombo[index].SelectedItem = (object)initTeam.Team;
+                else
+                    this.m_InitTeamCombo[index].SelectedIndex = 0;
+            }
+        }
+
+        public void TrophyToPanel()
+        {
+            if (this.m_CurrentTrophy == null)
+            {
+                this.panelCompObj.Enabled = false;
+                this.groupTrophy.Visible = false;
+                this.groupGraphics.Visible = false;
+                this.groupInitTeams.Visible = false;
+            }
+            else
+            {
+                this.m_LockToPanel = true;
+                this.panelCompObj.Enabled = true;
+                this.groupTrophy.Visible = true;
+                this.groupGraphics.Visible = true;
+                this.groupInitTeams.Visible = true;
+                this.textUniqueId.Text = this.m_CurrentTrophy.Id.ToString();
+                this.textFourCharName.Text = this.m_CurrentTrophy.TypeString;
+                this.textLanguageKey.Text = this.m_CurrentTrophy.Description;
+                this.textLanguageName.Text = this.m_CurrentTrophy.ShortName;
+                this.textFourCharName.Enabled = true;
+                this.textLanguageKey.Enabled = false;
+                this.textLanguageName.Enabled = false;
+                this.comboLanguageKey.Visible = false;
+                if (this.tabTrophy.SelectedIndex == 0)
+                    this.TrophyStructureToPanel();
+                else if (this.tabTrophy.SelectedIndex == 1)
+                    this.TrophyRankingToPanel();
+                else if (this.tabTrophy.SelectedIndex == 2)
+                    this.TrophyGraphicsToPanel();
+                this.m_LockToPanel = false;
+            }
+        }
+
+        public void Show3DTrophy()
+        {
+            if (!this.buttonShow3DModel.Checked)
+            {
+                this.viewer3D.ShowEmpty();
+            }
+            else
+            {
+                Bitmap[] textures = this.m_CurrentTrophy.GetTextures();
+                Bitmap textureBitmap = (Bitmap)null;
+                if (textures != null)
+                    textureBitmap = GraphicUtil.EmbossBitmap(textures[0], textures[1]);
+                Rx3File model = this.m_CurrentTrophy.GetModel();
+                if (textureBitmap == null || model == null)
+                {
+                    //this.viewer3D.Clean(1);
+                }
+                else
+                {
+                    Rx3IndexArray.TriangleListType = Rx3IndexArray.ETriangleListType.InvertEven;
+                    //this.viewer3D.Clean(model.Rx3VertexArrays.Length);
+                    for (int meshIndex = 0; meshIndex < model.Rx3VertexArrays.Length; ++meshIndex)
+                    {
+                        //Model3D model3D = new Model3D(model.Rx3IndexArrays[meshIndex], model.Rx3VertexArrays[meshIndex], textureBitmap);
+                        //this.viewer3D.SetMesh(meshIndex, model3D);
+                    }
+                    this.viewer3D.Render();
+                }
+            }
+        }
+
+        private void treeWorld_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (this.treeWorld.SelectedNode == null)
+                return;
+            this.m_CurrentCompobj = (Compobj)this.treeWorld.SelectedNode.Tag;
+            if (!this.m_LockTree)
+            {
+                this.m_LockTree = true;
+                if (this.m_CurrentCompobj.IsGroup())
+                {
+                    this.m_CurrentGroup = (Group)this.treeWorld.SelectedNode.Tag;
+                    this.m_CurrentStage = this.m_CurrentGroup.ParentStage;
+                    this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
+                    this.m_CurrentNation = this.m_CurrentTrophy.Nation;
+                    this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
+                    if (this.tabCompetitions.SelectedTab == this.pageGroup)
+                        this.GroupToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageGroup;
+                    this.treeWorld.Select();
+                }
+                else if (this.m_CurrentCompobj.IsStage())
+                {
+                    this.m_CurrentStage = (Stage)this.treeWorld.SelectedNode.Tag;
+                    this.m_CurrentGroup = (Group)null;
+                    this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
+                    this.m_CurrentTrophy = this.m_CurrentStage.Trophy;
+                    this.m_CurrentNation = this.m_CurrentTrophy.Nation;
+                    this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
+                    if (this.tabCompetitions.SelectedTab == this.pageStage)
+                        this.StageToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageStage;
+                    this.treeWorld.Select();
+                }
+                else if (this.m_CurrentCompobj.IsTrophy())
+                {
+                    this.m_CurrentTrophy = (Trophy)this.treeWorld.SelectedNode.Tag;
+                    this.m_CurrentStage = (Stage)null;
+                    this.m_CurrentGroup = (Group)null;
+                    this.m_CurrentNation = this.m_CurrentTrophy.Nation;
+                    this.m_CurrentConfederation = this.m_CurrentNation == null ? this.m_CurrentTrophy.Confederation : this.m_CurrentNation.Confederation;
+                    if (this.tabCompetitions.SelectedTab == this.pageTrophy)
+                        this.TrophyToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageTrophy;
+                    this.treeWorld.Select();
+                }
+                else if (this.m_CurrentCompobj.IsNation())
+                {
+                    this.m_CurrentNation = (Nation)this.treeWorld.SelectedNode.Tag;
+                    this.m_CurrentTrophy = (Trophy)null;
+                    this.m_CurrentStage = (Stage)null;
+                    this.m_CurrentGroup = (Group)null;
+                    this.m_CurrentConfederation = this.m_CurrentNation.Confederation;
+                    if (this.tabCompetitions.SelectedTab == this.pageNation)
+                        this.NationToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageNation;
+                    this.treeWorld.Select();
+                }
+                else if (this.m_CurrentCompobj.IsConfederation())
+                {
+                    this.m_CurrentConfederation = (Confederation)this.treeWorld.SelectedNode.Tag;
+                    this.m_CurrentNation = (Nation)null;
+                    this.m_CurrentTrophy = (Trophy)null;
+                    this.m_CurrentStage = (Stage)null;
+                    this.m_CurrentGroup = (Group)null;
+                    if (this.tabCompetitions.SelectedTab == this.pageConfederation)
+                        this.ConfederationToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageConfederation;
+                    this.treeWorld.Select();
+                }
+                else if (this.m_CurrentCompobj.IsWorld())
+                {
+                    this.m_CurrentConfederation = (Confederation)null;
+                    this.m_CurrentNation = (Nation)null;
+                    this.m_CurrentTrophy = (Trophy)null;
+                    this.m_CurrentStage = (Stage)null;
+                    this.m_CurrentGroup = (Group)null;
+                    if (this.tabCompetitions.SelectedTab == this.pageWorld)
+                        this.WorldToPanel();
+                    this.tabCompetitions.SelectedTab = this.pageWorld;
+                    this.treeWorld.Select();
+                }
+                this.m_LockTree = false;
+            }
+            this.EnableToolWorld();
+        }
+
+        private void comboConfederationStartingMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboConfederationStartingMonth.SelectedItem == null)
+                return;
+            this.m_CurrentConfederation.Settings.m_schedule_seasonstartmonth = (string)this.comboConfederationStartingMonth.SelectedItem;
+        }
+
+        private void comboNationStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboNationStartMonth.SelectedItem == null)
+                return;
+            this.m_CurrentNation.Settings.m_schedule_seasonstartmonth = (string)this.comboNationStartMonth.SelectedItem;
+        }
+
+        private void numericYellowsStored_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentNation.Settings.m_rule_numyellowstored = (int)this.numericNationYellowsStored.Value;
+        }
+
+        private void checkNationStandingsRules_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboNationStandingsRules.Visible = this.checkNationStandingsRules.Checked;
+            if (this.checkNationStandingsRules.Checked)
+                this.m_CurrentNation.Settings.m_StandingsSort = this.comboNationStandingsRules.SelectedIndex;
+            else
+                this.m_CurrentNation.Settings.m_StandingsSort = -1;
+        }
+
+        private void comboNationStandingsRules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentNation.Settings.m_StandingsSort = this.comboNationStandingsRules.SelectedIndex;
+        }
+
+        private void comboCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboCountry.SelectedItem == null)
+                return;
+            Country selectedItem = (Country)this.comboCountry.SelectedItem;
+            if (this.m_CurrentNation.Country == selectedItem || selectedItem == null)
+                return;
+            this.m_CurrentNation.Country = selectedItem;
+            this.m_CurrentNation.Description = FifaEnvironment.Language.GetCountryConventionalString(selectedItem.Id, Language.ECountryStringType.Full);
             this.NationToPanel();
-          this.tabCompetitions.SelectedTab = this.pageNation;
-          this.treeWorld.Select();
         }
-        else if (this.m_CurrentCompobj.IsConfederation())
+
+        private void textTrophyLongName_TextChanged(object sender, EventArgs e)
         {
-          this.m_CurrentConfederation = (Confederation)this.treeWorld.SelectedNode.Tag;
-          this.m_CurrentNation = (Nation)null;
-          this.m_CurrentTrophy = (Trophy)null;
-          this.m_CurrentStage = (Stage)null;
-          this.m_CurrentGroup = (Group)null;
-          if (this.tabCompetitions.SelectedTab == this.pageConfederation)
-            this.ConfederationToPanel();
-          this.tabCompetitions.SelectedTab = this.pageConfederation;
-          this.treeWorld.Select();
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.LongName = this.textTrophyLongName.Text;
+            this.treeWorld.SelectedNode.Text = this.m_CurrentTrophy.ToString();
         }
-        else if (this.m_CurrentCompobj.IsWorld())
+
+        private void textTrophyShortName_TextChanged(object sender, EventArgs e)
         {
-          this.m_CurrentConfederation = (Confederation)null;
-          this.m_CurrentNation = (Nation)null;
-          this.m_CurrentTrophy = (Trophy)null;
-          this.m_CurrentStage = (Stage)null;
-          this.m_CurrentGroup = (Group)null;
-          if (this.tabCompetitions.SelectedTab == this.pageWorld)
-            this.WorldToPanel();
-          this.tabCompetitions.SelectedTab = this.pageWorld;
-          this.treeWorld.Select();
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.ShortName = this.textTrophyShortName.Text;
+            this.treeWorld.SelectedNode.Text = this.m_CurrentTrophy.ToString();
+            this.textLanguageName.Text = this.m_CurrentTrophy.ShortName;
+            this.m_CurrentTrophy.SetLanguageName(this.m_CurrentTrophy.ShortName);
         }
-        this.m_LockTree = false;
-      }
-      this.EnableToolWorld();
-    }
 
-    private void comboConfederationStartingMonth_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboConfederationStartingMonth.SelectedItem == null)
-        return;
-      this.m_CurrentConfederation.Settings.m_schedule_seasonstartmonth = (string)this.comboConfederationStartingMonth.SelectedItem;
-    }
-
-    private void comboNationStartMonth_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboNationStartMonth.SelectedItem == null)
-        return;
-      this.m_CurrentNation.Settings.m_schedule_seasonstartmonth = (string)this.comboNationStartMonth.SelectedItem;
-    }
-
-    private void numericYellowsStored_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentNation.Settings.m_rule_numyellowstored = (int)this.numericNationYellowsStored.Value;
-    }
-
-    private void checkNationStandingsRules_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboNationStandingsRules.Visible = this.checkNationStandingsRules.Checked;
-      if (this.checkNationStandingsRules.Checked)
-        this.m_CurrentNation.Settings.m_StandingsSort = this.comboNationStandingsRules.SelectedIndex;
-      else
-        this.m_CurrentNation.Settings.m_StandingsSort = -1;
-    }
-
-    private void comboNationStandingsRules_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentNation.Settings.m_StandingsSort = this.comboNationStandingsRules.SelectedIndex;
-    }
-
-    private void comboCountry_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboCountry.SelectedItem == null)
-        return;
-      Country selectedItem = (Country)this.comboCountry.SelectedItem;
-      if (this.m_CurrentNation.Country == selectedItem || selectedItem == null)
-        return;
-      this.m_CurrentNation.Country = selectedItem;
-      this.m_CurrentNation.Description = FifaEnvironment.Language.GetCountryConventionalString(selectedItem.Id, Language.ECountryStringType.Full);
-      this.NationToPanel();
-    }
-
-    private void textTrophyLongName_TextChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.LongName = this.textTrophyLongName.Text;
-      this.treeWorld.SelectedNode.Text = this.m_CurrentTrophy.ToString();
-    }
-
-    private void textTrophyShortName_TextChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.ShortName = this.textTrophyShortName.Text;
-      this.treeWorld.SelectedNode.Text = this.m_CurrentTrophy.ToString();
-      this.textLanguageName.Text = this.m_CurrentTrophy.ShortName;
-      this.m_CurrentTrophy.SetLanguageName(this.m_CurrentTrophy.ShortName);
-    }
-
-    private void buttonGetId_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericAssetId.Value = (Decimal)Trophy.AutoAsset();
-    }
-
-    private void numericAssetId_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_Locked)
-        return;
-      int assetId = (int)this.numericAssetId.Value;
-      if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[0])
-        return;
-      this.m_Locked = true;
-      foreach (Compobj competitionObject in (ArrayList)FifaEnvironment.CompetitionObjects)
-      {
-        if (competitionObject.IsTrophy() && competitionObject.Settings.m_asset_id[0] == assetId)
+        private void buttonGetId_Click(object sender, EventArgs e)
         {
-          int num = (int)FifaEnvironment.UserMessages.ShowMessage(1015);
-          this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
-          this.m_Locked = false;
-          return;
+            if (this.m_LockToPanel)
+                return;
+            this.numericAssetId.Value = (Decimal)Trophy.AutoAsset();
         }
-      }
-      this.m_CurrentTrophy.Settings.SetAssetId(0, assetId);
-      this.m_CurrentTrophy.Description = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
-      this.textLanguageKey.Text = this.m_CurrentTrophy.Description;
-      this.textFourCharName.Text = "C" + this.m_CurrentTrophy.Settings.m_asset_id.ToString();
-      this.TrophyGraphicsToPanel();
-      this.m_Locked = false;
-    }
 
-    private void comboCompetitionType_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentTrophy.Settings.m_comp_type == (string)this.comboCompetitionType.SelectedItem)
-        return;
-      this.m_CurrentTrophy.Settings.m_comp_type = (string)this.comboCompetitionType.SelectedItem;
-      this.TrophyToPanel();
-    }
-
-    private void numericImportance_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.Settings.m_match_matchimportance = (int)this.numericImportance.Value;
-    }
-
-    private void comboPromotionLeague_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboPromotionLeague.SelectedIndex < 0)
-        return;
-      if (this.comboPromotionLeague.SelectedIndex == 0)
-        this.m_CurrentTrophy.Settings.LeaguePromo = (League)null;
-      else
-        this.m_CurrentTrophy.Settings.LeaguePromo = (League)this.comboPromotionLeague.SelectedItem;
-    }
-
-    private void comboRelegationLeague_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboRelegationLeague.SelectedIndex < 0)
-        return;
-      if (this.comboRelegationLeague.SelectedIndex == 0)
-        this.m_CurrentTrophy.Settings.LeagueReleg = (League)null;
-      else
-        this.m_CurrentTrophy.Settings.LeagueReleg = (League)this.comboRelegationLeague.SelectedItem;
-    }
-
-    private void checkForceSchedule_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboSchedForce.Visible = this.checkForceSchedule.Checked;
-      if (this.checkForceSchedule.Checked)
-      {
-        if (this.comboSchedForce.SelectedItem == null)
-          this.comboSchedForce.SelectedItem = this.comboSchedForce.Items[0];
-        this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)this.comboSchedForce.SelectedItem;
-      }
-      else
-        this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)null;
-    }
-
-    private void checkTrophyStandingsRules_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboTrophyStandingRules.Visible = this.checkTrophyStandingsRules.Checked;
-      if (this.checkTrophyStandingsRules.Checked)
-        this.m_CurrentTrophy.Settings.m_StandingsSort = this.comboTrophyStandingRules.SelectedIndex;
-      else
-        this.m_CurrentTrophy.Settings.m_StandingsSort = -1;
-    }
-
-    private void comboTrophyStandingRules_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboTrophyStandingRules.SelectedIndex < 0)
-        return;
-      this.m_CurrentTrophy.Settings.m_StandingsSort = this.comboTrophyStandingRules.SelectedIndex;
-    }
-
-    private void comboSchedForce_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboSchedForce.SelectedItem == null)
-        return;
-      this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)this.comboSchedForce.SelectedItem;
-    }
-
-    private void checkPromotionLeague_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboPromotionLeague.Visible = this.checkPromotionLeague.Checked;
-      if (this.checkPromotionLeague.Checked)
-        this.m_CurrentTrophy.Settings.LeaguePromo = (League)this.comboPromotionLeague.SelectedItem;
-      else
-        this.m_CurrentTrophy.Settings.LeaguePromo = (League)null;
-    }
-
-    private void checkRelegationLeague_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboRelegationLeague.Visible = this.checkRelegationLeague.Checked;
-      if (this.checkRelegationLeague.Checked)
-        this.m_CurrentTrophy.Settings.LeagueReleg = (League)this.comboRelegationLeague.SelectedItem;
-      else
-        this.m_CurrentTrophy.Settings.LeagueReleg = (League)null;
-    }
-
-    private void checkScheduleConflicts_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.Settings.m_schedule_checkconflict = this.checkScheduleConflicts.Checked ? 1 : -1;
-    }
-
-    private void radioBench5Players_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioBench5Players.Checked)
-        return;
-      this.m_CurrentTrophy.Settings.m_rule_numsubsbench = 5;
-    }
-
-    private void radioBench7Players_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioBench7Players.Checked)
-        return;
-      this.m_CurrentTrophy.Settings.m_rule_numsubsbench = -1;
-    }
-
-    private void comboStageType_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboStageType.SelectedItem == null)
-        return;
-      this.m_CurrentStage.Settings.m_match_stagetype = (string)this.comboStageType.SelectedItem;
-      this.StageToPanel();
-    }
-
-    private void comboMatchSituation_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboStageType.SelectedItem == null)
-        return;
-      this.m_CurrentStage.Settings.m_match_matchsituation = (string)this.comboMatchSituation.SelectedItem;
-      this.m_CurrentStage.Settings.m_schedule_matchreplay = this.m_CurrentStage.Settings.m_match_matchsituation == "REPLAY" ? 1 : -1;
-
-      if (this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE")
-        groupLeaguetasks.Visible = true;
-      else
-        groupLeaguetasks.Visible = false;
-
-      if (this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP" || this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY")
-        groupStageInfoColors.Visible = true;
-      else
-        groupStageInfoColors.Visible = false;
-    }
-
-    private void numericPrizeMoney_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_info_prize_money = (int)this.numericPrizeMoney.Value;
-    }
-
-    private void numericMoneyDrop_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_info_prize_money_drop = (int)this.numericMoneyDrop.Value;
-    }
-
-    private void numericStartYear_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentWorld.Settings.m_schedule_year_start = (int)this.numericStartYear.Value;
-    }
-
-    private void numericNumGames_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_num_games = (int)this.numericNumGames.Value;
-    }
-
-    private void comboSpecialTeam1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetSpecialTeam(0);
-    }
-
-    private void comboSpecialTeam2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetSpecialTeam(1);
-    }
-
-    private void comboSpecialTeam3_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetSpecialTeam(2);
-    }
-
-    private void comboSpecialTeam4_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetSpecialTeam(3);
-    }
-
-    private void SetSpecialTeam(int index)
-    {
-      if (this.m_SpecialTeamCombos[index].SelectedIndex == 0)
-      {
-        this.m_CurrentStage.Settings.m_info_special_team_id[index] = -1;
-      }
-      else
-      {
-        Team selectedItem = (Team)this.m_SpecialTeamCombos[index].SelectedItem;
-        this.m_CurrentStage.Settings.m_info_special_team_id[index] = selectedItem.Id;
-      }
-    }
-
-    private void SetMatchStadium(int index)
-    {
-      if (this.m_StadiumCombos[index].SelectedIndex == 0)
-      {
-        if (this.m_CurrentStage.Settings.m_match_stadium == null)
-          return;
-        this.m_CurrentStage.Settings.m_match_stadium[index] = -1;
-      }
-      else
-      {
-        Stadium selectedItem = (Stadium)this.m_StadiumCombos[index].SelectedItem;
-        if (selectedItem == null || this.m_CurrentStage.Settings.m_match_stadium != null && this.m_CurrentStage.Settings.m_match_stadium[index] == selectedItem.Id)
-          return;
-        this.m_CurrentStage.Settings.SetProperty("match_stadium", index, selectedItem.Id.ToString());
-      }
-    }
-
-    private void comboStadium1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(0);
-    }
-
-    private void comboStadium2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(1);
-    }
-
-    private void comboStadium3_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(2);
-    }
-
-    private void comboStadium4_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(3);
-    }
-
-    private void comboStadium5_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(4);
-    }
-
-    private void comboStadium6_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(5);
-    }
-
-    private void comboStadium7_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(6);
-    }
-
-    private void comboStadium8_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(7);
-    }
-
-    private void comboStadium9_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(8);
-    }
-
-    private void comboStadium10_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(9);
-    }
-
-    private void comboStadium11_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(10);
-    }
-
-    private void comboStadium12_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.SetMatchStadium(11);
-    }
-
-    private void checkMaxteamsgroup_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_maxteamsgroup = this.checkMaxteamsgroup.Checked ? 1 : -1;
-      this.numericStageRef.Visible = this.checkMaxteamsgroup.Checked;
-      if (this.m_CurrentStage.Settings.m_advance_maxteamsgroup == -1)
-        this.m_CurrentStage.Settings.Advance_maxteamsstageref = -1;
-      else
-        this.numericStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_maxteamsstageref;
-    }
-
-    private void checkStandingKeep_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
-      this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
-      //this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
-    }
-
-    private void checkKeepPointsPercentage_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericKeepPointsPercentage.Visible = this.checkKeepPointsPercentage.Checked;
-      this.numericKeepPointsStageRef.Visible = this.checkKeepPointsPercentage.Checked;
-      if (this.checkKeepPointsPercentage.Checked == (this.m_CurrentStage.Settings.Advance_pointskeep != -1))
-        return;
-      if (!this.checkKeepPointsPercentage.Checked)
-      {
-        this.m_CurrentStage.Settings.Advance_pointskeep = -1;
-        this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = -1;
-      }
-      else
-      {
-        this.m_CurrentStage.Settings.Advance_pointskeep = this.m_CurrentStage.Id;
-        this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = 50;
-        this.numericKeepPointsPercentage.Value = new Decimal(50);
-        this.numericKeepPointsStageRef.Value = (Decimal)this.m_CurrentStage.Id;
-      }
-    }
-
-    private void numericStandingKeep_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingskeep == (int)this.numericStandingKeep.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
-    }
-
-    private void numericKeepPointsPercentage_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = this.checkKeepPointsPercentage.Checked ? (int)this.numericKeepPointsPercentage.Value : -1;
-    }
-
-    private void checkSpecialKo1Rule_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboSpecialKo1Rule.Visible = this.checkSpecialKo1Rule.Checked;
-      if (this.checkSpecialKo1Rule.Checked)
-        this.m_CurrentStage.Settings.m_EndRuleKo1Leg = this.comboSpecialKo1Rule.SelectedIndex;
-      else
-        this.m_CurrentStage.Settings.m_EndRuleKo1Leg = -1;
-    }
-
-    private void checkSpecialKo2Rule_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboSpecialKo2Rule.Visible = this.checkSpecialKo2Rule.Checked;
-      if (this.checkSpecialKo2Rule.Checked)
-        this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = this.comboSpecialKo2Rule.SelectedIndex;
-      else
-        this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = -1;
-    }
-
-    private void comboSpecialKo1Rule_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboSpecialKo1Rule.SelectedIndex < 0)
-        return;
-      this.m_CurrentStage.Settings.m_EndRuleKo1Leg = this.comboSpecialKo1Rule.SelectedIndex;
-    }
-
-    private void comboSpecialKo2Rule_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboSpecialKo2Rule.SelectedIndex < 0)
-        return;
-      this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = this.comboSpecialKo2Rule.SelectedIndex;
-      this.numericRegularSeason.Visible = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 == 3;
-    }
-
-    private void numericRegularSeason_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Standings_checkrank == (int)this.numericRegularSeason.Value)
-        return;
-      this.m_CurrentStage.Settings.Standings_checkrank = (int)this.numericRegularSeason.Value;
-    }
-
-    private void checkStandingsRank_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
-      this.numericStandingsRank.Visible = this.checkStandingsRank.Checked;
-      //this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
-    }
-
-    private void numericStandingsRank_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingsrank == (int)this.numericStandingsRank.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
-    }
-
-    private void checkInfoColorChamp_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentGroup.Settings.m_info_color_slot_champ = this.checkInfoColorChamp.Checked ? 1 : -1;
-    }
-
-    private void numericColorChampionsMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorChampionsMin.Value;
-      int max = (int)this.numericColorChampionsMax.Value;
-      int min2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min2, out int _);
-      if (min1 == min2 || this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(min1, max))
-        return;
-      this.numericColorChampionsMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorChampionsMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min = (int)this.numericColorChampionsMin.Value;
-      int max1 = (int)this.numericColorChampionsMax.Value;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out int _, out max2);
-      if (max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(min, max1))
-        return;
-      this.numericColorChampionsMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorEuropaMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorEuropaMin.Value;
-      int max1 = (int)this.numericColorEuropaMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(min1, max1))
-        return;
-      this.numericColorEuropaMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorEuropaMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorEuropaMin.Value;
-      int max1 = (int)this.numericColorEuropaMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(min1, max1))
-        return;
-      this.numericColorEuropaMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorPossibleRelegationMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPossibleRelegationMin.Value;
-      int max1 = (int)this.numericColorPossibleRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(min1, max1))
-        return;
-      this.numericColorPossibleRelegationMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorPossibleRelegationMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPossibleRelegationMin.Value;
-      int max1 = (int)this.numericColorPossibleRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(min1, max1))
-        return;
-      this.numericColorPossibleRelegationMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorRelegationMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorRelegationMin.Value;
-      int max1 = (int)this.numericColorRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(min1, max1))
-        return;
-      this.numericColorRelegationMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorRelegationMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorRelegationMin.Value;
-      int max1 = (int)this.numericColorRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(min1, max1))
-        return;
-      this.numericColorRelegationMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorPromotionMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPromotionMin.Value;
-      int max1 = (int)this.numericColorPromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(min1, max1))
-        return;
-      this.numericColorPromotionMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorPromotionMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPromotionMin.Value;
-      int max1 = (int)this.numericColorPromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(min1, max1))
-        return;
-      this.numericColorPromotionMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorPossiblePromotionMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPossiblePromotionMin.Value;
-      int max1 = (int)this.numericColorPossiblePromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(min1, max1))
-        return;
-      this.numericColorPossiblePromotionMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorPossiblePromotionMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorPossiblePromotionMin.Value;
-      int max1 = (int)this.numericColorPossiblePromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(min1, max1))
-        return;
-      this.numericColorPossiblePromotionMax.Value = (Decimal)max2;
-    }
-
-    private void numericColorAdvanceMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorAdvanceMin.Value;
-      int max1 = (int)this.numericColorAdvanceMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericColorAdvanceMin.Value = (Decimal)min2;
-    }
-
-    private void numericColorAdvanceMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericColorAdvanceMin.Value;
-      int max1 = (int)this.numericColorAdvanceMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericColorAdvanceMax.Value = (Decimal)max2;
-    }
-
-    private void checkInfoColorChampions_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorChampionsMin.Visible = this.numericColorChampionsMax.Visible = this.checkInfoColorChampions.Checked;
-      if (this.checkInfoColorChampions.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorChampionsMax.Value = (Decimal)min;
-        this.numericColorChampionsMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(-1, -1);
-    }
-
-    private void checkInfoColorEuropa_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorEuropaMin.Visible = this.numericColorEuropaMax.Visible = this.checkInfoColorEuropa.Checked;
-      if (this.checkInfoColorEuropa.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorEuropaMin.Value = (Decimal)min;
-        this.numericColorEuropaMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(-1, -1);
-    }
-
-    private void checkInfoColorPossibleRelegation_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorPossibleRelegationMin.Visible = this.numericColorPossibleRelegationMax.Visible = this.checkInfoColorPossibleRelegation.Checked;
-      if (this.checkInfoColorPossibleRelegation.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorPossibleRelegationMin.Value = (Decimal)min;
-        this.numericColorPossibleRelegationMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(-1, -1);
-    }
-
-    private void checkInfoColorRelegation_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorRelegationMin.Visible = this.numericColorRelegationMax.Visible = this.checkInfoColorRelegation.Checked;
-      if (this.checkInfoColorRelegation.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorRelegationMin.Value = (Decimal)min;
-        this.numericColorRelegationMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(-1, -1);
-    }
-
-    private void checkInfoColorPromotion_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorPromotionMin.Visible = this.numericColorPromotionMax.Visible = this.checkInfoColorPromotion.Checked;
-      if (this.checkInfoColorPromotion.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorPromotionMin.Value = (Decimal)min;
-        this.numericColorPromotionMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(-1, -1);
-    }
-
-    private void checkInfoColorPossiblePromotion_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorPossiblePromotionMin.Visible = this.numericColorPossiblePromotionMax.Visible = this.checkInfoColorPossiblePromotion.Checked;
-      if (this.checkInfoColorPossiblePromotion.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorPossiblePromotionMin.Value = (Decimal)min;
-        this.numericColorPossiblePromotionMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(-1, -1);
-    }
-
-    private void checkInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericColorAdvanceMin.Visible = this.numericColorAdvanceMax.Visible = this.checkInfoColorAdvance.Checked;
-      if (this.checkInfoColorAdvance.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericColorAdvanceMin.Value = (Decimal)min;
-        this.numericColorAdvanceMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(-1, -1);
-    }
-
-    private void labelQR_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      Label label = (Label)sender;
-      Task tag = (Task)label.Tag;
-      this.m_QualifyRuleDialog.QualifyRule = tag;
-      if (this.m_QualifyRuleDialog.ShowDialog() != DialogResult.OK)
-        return;
-      label.Tag = (object)tag;
-      label.Text = tag.ToString();
-    }
-
-    private void labelAdvance_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      Rank tag = (Rank)((Control)sender).Tag;
-      Rank rank = new Rank(tag.Group, tag.Id);
-      rank.MoveFrom = tag.MoveFrom;
-      this.m_AdvanceRuleDialog.Rule = rank;
-      if (this.m_AdvanceRuleDialog.ShowDialog() != DialogResult.OK)
-        return;
-      if (rank.MoveFrom != tag.MoveFrom)
-      {
-        if (tag.MoveFrom != null && tag.MoveFrom.Id != 0)
-          tag.MoveFrom.MoveTo = (Rank)null;
-        if (rank.MoveFrom.Id != 0)
+        private void numericAssetId_ValueChanged(object sender, EventArgs e)
         {
-          if (rank.MoveFrom.MoveTo == null)
-          {
-            rank.MoveFrom.MoveTo = tag;
-          }
-          else
-          {
-            rank.MoveFrom.MoveTo.MoveFrom = (Rank)null;
-            rank.MoveFrom.MoveTo = tag;
-          }
-        }
-        tag.MoveFrom = rank.MoveFrom;
-      }
-      this.GroupToPanel();
-    }
-
-    private void textLanguageKey_TextChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentCompobj == null)
-        return;
-      if (this.m_CurrentCompobj.IsTrophy())
-      {
-        this.m_CurrentTrophy.Description = this.textLanguageKey.Text;
-      }
-      else
-      {
-        if (!this.m_CurrentCompobj.IsGroup())
-          return;
-        this.m_CurrentGroup.Description = this.textLanguageKey.Text;
-      }
-    }
-
-    private void textFourCharName_TextChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentCompobj == null || this.m_CurrentCompobj.TypeString == this.textFourCharName.Text)
-        return;
-      if (this.textFourCharName.Text.Length > 4)
-      {
-        this.textFourCharName.Text = this.textFourCharName.Text.Substring(0, 4);
-      }
-      else
-      {
-        this.m_CurrentCompobj.TypeString = this.textFourCharName.Text;
-        if (this.m_CurrentCompobj.IsNation())
-          this.treeWorld.SelectedNode.Text = this.m_CurrentCompobj.TypeString;
-        if (!this.m_CurrentCompobj.IsGroup())
-          return;
-        this.treeWorld.SelectedNode.Text = this.m_CurrentCompobj.TypeString;
-      }
-    }
-
-    private TreeNode SelectWorldTreeNode(Compobj compobj)
-    {
-      if (compobj == null)
-      {
-        this.treeWorld.SelectedNode = (TreeNode)null;
-        return (TreeNode)null;
-      }
-      TreeNode treeNode = this.RecusiveSearchNode(this.treeWorld.TopNode, compobj);
-      this.treeWorld.SelectedNode = treeNode;
-      return treeNode;
-    }
-
-    private TreeNode RecusiveSearchNode(TreeNode node, Compobj compobj)
-    {
-      if ((Compobj)node.Tag == compobj)
-        return node;
-      foreach (TreeNode node1 in node.Nodes)
-      {
-        TreeNode treeNode = this.RecusiveSearchNode(node1, compobj);
-        if (treeNode != null)
-          return treeNode;
-      }
-      return (TreeNode)null;
-    }
-
-    private void textLanguageName_TextChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentCompobj == null)
-        return;
-      if (this.m_CurrentCompobj.IsTrophy())
-        this.m_CurrentTrophy.ShortName = this.textLanguageName.Text;
-      else if (this.m_CurrentCompobj.IsStage())
-      {
-        if (this.m_CurrentStage.GetLanguageName() != this.textLanguageName.Text)
-          this.m_CurrentStage.SetLanguageName(this.textLanguageName.Text);
-        string str = this.m_CurrentStage.ToString();
-        if (!(this.treeWorld.SelectedNode.Text != str))
-          return;
-        this.treeWorld.SelectedNode.Text = str;
-      }
-      else
-      {
-        if (!this.m_CurrentCompobj.IsGroup())
-          return;
-        this.m_CurrentGroup.LanguageName = this.textLanguageName.Text;
-      }
-    }
-
-    private void comboLanguageKey_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboLanguageKey.SelectedItem == null || !(this.comboLanguageKey.SelectedItem.ToString() != this.m_CurrentStage.Description))
-        return;
-      this.m_CurrentStage.Description = (string)this.comboLanguageKey.SelectedItem;
-      this.textLanguageName.Text = FifaEnvironment.Language.GetString(this.m_CurrentStage.Description);
-      this.treeWorld.SelectedNode.Text = this.m_CurrentStage.ToString();
-    }
-
-    private void buttonCopyWeather_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_ClipboardNation = this.m_CurrentNation;
-      this.buttonPasteWeather.Enabled = true;
-    }
-
-    private void buttonPasteWeather_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_ClipboardNation == null)
-        return;
-      for (int index = 0; index < 12; ++index)
-      {
-        this.m_CurrentNation.ClearProb[index] = this.m_ClipboardNation.ClearProb[index];
-        this.m_CurrentNation.HazyProb[index] = this.m_ClipboardNation.HazyProb[index];
-        this.m_CurrentNation.CloudyProb[index] = this.m_ClipboardNation.CloudyProb[index];
-        this.m_CurrentNation.OvercastProb[index] = this.m_ClipboardNation.OvercastProb[index];
-        this.m_CurrentNation.FoggyProb[index] = this.m_ClipboardNation.FoggyProb[index];
-        this.m_CurrentNation.RainProb[index] = this.m_ClipboardNation.RainProb[index];
-        this.m_CurrentNation.ShowersProb[index] = this.m_ClipboardNation.ShowersProb[index];
-        this.m_CurrentNation.FlurriesProb[index] = this.m_ClipboardNation.FlurriesProb[index];
-        this.m_CurrentNation.SnowProb[index] = this.m_ClipboardNation.SnowProb[index];
-        this.m_CurrentNation.OvercastProb[index] = this.m_ClipboardNation.OvercastProb[index];
-        this.m_CurrentNation.SunsetTime[index] = this.m_ClipboardNation.SunsetTime[index];
-        this.m_CurrentNation.DarkTime[index] = this.m_ClipboardNation.DarkTime[index];
-      }
-      this.NationToPanel();
-    }
-
-    private void weatherProb_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      NumericUpDown numericUpDown = (NumericUpDown)sender;
-      for (int index = 0; index < 12; ++index)
-      {
-        if (numericUpDown == this.m_RainProb[index])
-        {
-          this.m_CurrentNation.RainProb[index] = (int)numericUpDown.Value;
-          if (this.m_CurrentNation.SnowProb[index] > 100 - this.m_CurrentNation.RainProb[index])
-          {
-            this.m_CurrentNation.SnowProb[index] = 100 - this.m_CurrentNation.RainProb[index];
-            this.m_SnowProb[index].Value = (Decimal)this.m_CurrentNation.SnowProb[index];
-          }
-        }
-        else if (numericUpDown == this.m_SnowProb[index])
-        {
-          this.m_CurrentNation.SnowProb[index] = (int)numericUpDown.Value;
-          if (this.m_CurrentNation.RainProb[index] > 100 - this.m_CurrentNation.SnowProb[index])
-          {
-            this.m_CurrentNation.RainProb[index] = 100 - this.m_CurrentNation.SnowProb[index];
-            this.m_RainProb[index].Value = (Decimal)this.m_CurrentNation.RainProb[index];
-          }
-        }
-        else if (numericUpDown == this.m_OvercastProb[index])
-          this.m_CurrentNation.OvercastProb[index] = (int)numericUpDown.Value;
-        if (this.m_CurrentNation.ClearProb[index] != 100 - (this.m_CurrentNation.SnowProb[index] + this.m_CurrentNation.RainProb[index]))
-          this.m_CurrentNation.ClearProb[index] = 100 - (this.m_CurrentNation.SnowProb[index] + this.m_CurrentNation.RainProb[index]);
-      }
-    }
-
-    private void dayTime_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      ComboBox comboBox = (ComboBox)sender;
-      for (int index = 0; index < 12; ++index)
-      {
-        if (comboBox == this.m_SunsetTime[index])
-        {
-          switch (comboBox.SelectedIndex)
-          {
-            case 0:
-              this.m_CurrentNation.SunsetTime[index] = 1600;
-              continue;
-            case 1:
-              this.m_CurrentNation.SunsetTime[index] = 1630;
-              continue;
-            case 2:
-              this.m_CurrentNation.SunsetTime[index] = 1700;
-              continue;
-            case 3:
-              this.m_CurrentNation.SunsetTime[index] = 1730;
-              continue;
-            case 4:
-              this.m_CurrentNation.SunsetTime[index] = 1800;
-              continue;
-            case 5:
-              this.m_CurrentNation.SunsetTime[index] = 1830;
-              continue;
-            case 6:
-              this.m_CurrentNation.SunsetTime[index] = 1900;
-              continue;
-            case 7:
-              this.m_CurrentNation.SunsetTime[index] = 1930;
-              continue;
-            case 8:
-              this.m_CurrentNation.SunsetTime[index] = 2000;
-              continue;
-            case 9:
-              this.m_CurrentNation.SunsetTime[index] = 2030;
-              continue;
-            case 10:
-              this.m_CurrentNation.SunsetTime[index] = 2100;
-              continue;
-            case 11:
-              this.m_CurrentNation.SunsetTime[index] = 2130;
-              continue;
-            case 12:
-              this.m_CurrentNation.SunsetTime[index] = 2200;
-              continue;
-            default:
-              continue;
-          }
-        }
-        else if (comboBox == this.m_NightTime[index])
-        {
-          switch (comboBox.SelectedIndex)
-          {
-            case 0:
-              this.m_CurrentNation.DarkTime[index] = 1600;
-              continue;
-            case 1:
-              this.m_CurrentNation.DarkTime[index] = 1630;
-              continue;
-            case 2:
-              this.m_CurrentNation.DarkTime[index] = 1700;
-              continue;
-            case 3:
-              this.m_CurrentNation.DarkTime[index] = 1730;
-              continue;
-            case 4:
-              this.m_CurrentNation.DarkTime[index] = 1800;
-              continue;
-            case 5:
-              this.m_CurrentNation.DarkTime[index] = 1830;
-              continue;
-            case 6:
-              this.m_CurrentNation.DarkTime[index] = 1900;
-              continue;
-            case 7:
-              this.m_CurrentNation.DarkTime[index] = 1930;
-              continue;
-            case 8:
-              this.m_CurrentNation.DarkTime[index] = 2000;
-              continue;
-            case 9:
-              this.m_CurrentNation.DarkTime[index] = 2030;
-              continue;
-            case 10:
-              this.m_CurrentNation.DarkTime[index] = 2100;
-              continue;
-            case 11:
-              this.m_CurrentNation.DarkTime[index] = 2130;
-              continue;
-            case 12:
-              this.m_CurrentNation.DarkTime[index] = 2200;
-              continue;
-            default:
-              continue;
-          }
-        }
-      }
-    }
-
-    private void treeStageSchedule_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      if (this.m_LockToPanel || this.treeStageSchedule.SelectedNode == null)
-        return;
-      if (this.treeStageSchedule.SelectedNode.Tag == null)
-      {
-        this.groupStageScheduleDetails.Visible = false;
-        this.buttonStageAddTime.Enabled = false;
-        this.buttonStageRemoveTime.Enabled = false;
-        this.buttonDeleteStageLeg.Enabled = false;
-      }
-      else
-      {
-        this.m_CurrentStageSchedule = (Schedule)this.treeStageSchedule.SelectedNode.Tag;
-        this.buttonDeleteStageLeg.Enabled = true;
-        this.StageScheduleToPanel();
-      }
-    }
-
-    private void StageScheduleToPanel()
-    {
-      this.groupStageScheduleDetails.Visible = true;
-      this.buttonStageAddTime.Enabled = true;
-      this.buttonStageRemoveTime.Enabled = true;
-      this.dateStagePicker.Value = this.m_CurrentStageSchedule.Date;
-      this.numericStageMinGames.Value = (Decimal)this.m_CurrentStageSchedule.MinGames;
-      this.numericStageMaxGames.Value = (Decimal)this.m_CurrentStageSchedule.MaxGames;
-      this.comboStageTime.SelectedIndex = this.m_CurrentStageSchedule.TimeIndex;
-    }
-
-    private void numericStageMinGames_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStageSchedule.MinGames = (int)this.numericStageMinGames.Value;
-    }
-
-    private void numericStageMaxGames_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStageSchedule.MaxGames = (int)this.numericStageMaxGames.Value;
-    }
-
-    private void comboStageTime_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboStageTime.SelectedIndex < 0 || this.comboStageTime.SelectedIndex == this.m_CurrentStageSchedule.TimeIndex)
-        return;
-      this.m_CurrentStageSchedule.TimeIndex = this.comboStageTime.SelectedIndex;
-      this.treeStageSchedule.SelectedNode.Text = this.m_CurrentStageSchedule.Date.ToString("f");
-    }
-
-    private void dateStagePicker_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.dateStagePicker.Value == this.m_CurrentStageSchedule.Date)
-        return;
-      this.m_CurrentStageSchedule.Date = this.dateStagePicker.Value;
-      this.treeStageSchedule.SelectedNode.Text = this.m_CurrentStageSchedule.Date.ToString("f");
-    }
-
-    private void GroupScheduleToPanel()
-    {
-      this.groupGroupScheduleDetails.Visible = true;
-      this.buttonGroupAddTime.Enabled = true;
-      this.buttonGroupRemoveTime.Enabled = true;
-      this.dateGroupPicker.Value = this.m_CurrentGroupSchedule.Date;
-      this.numericGroupMinGames.Value = (Decimal)this.m_CurrentGroupSchedule.MinGames;
-      this.numericGroupMaxGames.Value = (Decimal)this.m_CurrentGroupSchedule.MaxGames;
-      this.comboGroupTime.SelectedIndex = this.m_CurrentGroupSchedule.TimeIndex;
-    }
-
-    private void dateGroupPicker_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.dateGroupPicker.Value == this.m_CurrentGroupSchedule.Date)
-        return;
-      this.m_CurrentGroupSchedule.Date = this.dateGroupPicker.Value;
-      this.treeGroupSchedule.SelectedNode.Text = this.m_CurrentGroupSchedule.Date.ToString("f");
-    }
-
-    private void comboGroupTime_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboGroupTime.SelectedIndex < 0 || this.comboGroupTime.SelectedIndex == this.m_CurrentGroupSchedule.TimeIndex)
-        return;
-      this.m_CurrentGroupSchedule.TimeIndex = this.comboGroupTime.SelectedIndex;
-      this.treeGroupSchedule.SelectedNode.Text = this.m_CurrentGroupSchedule.Date.ToString("f");
-    }
-
-    private void numericGroupMinGames_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentGroupSchedule.MinGames = (int)this.numericGroupMinGames.Value;
-    }
-
-    private void numericGroupMaxGames_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentGroupSchedule.MaxGames = (int)this.numericGroupMaxGames.Value;
-    }
-
-    private void treeGroupSchedule_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      if (this.m_LockToPanel || this.treeGroupSchedule.SelectedNode == null)
-        return;
-      if (this.treeGroupSchedule.SelectedNode.Tag == null)
-      {
-        this.groupGroupScheduleDetails.Visible = false;
-        this.buttonGroupAddTime.Enabled = false;
-        this.buttonGroupRemoveTime.Enabled = false;
-        this.buttonRemoveGroupLeg.Enabled = false;
-      }
-      else
-      {
-        this.m_CurrentGroupSchedule = (Schedule)this.treeGroupSchedule.SelectedNode.Tag;
-        this.buttonRemoveGroupLeg.Enabled = true;
-        this.GroupScheduleToPanel();
-      }
-    }
-
-    private void comboInitTeam_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      ComboBox comboBox = (ComboBox)sender;
-      for (int orderId = 0; orderId < 24; ++orderId)
-      {
-        if (comboBox == this.m_InitTeamCombo[orderId])
-        {
-          InitTeam initTeam = this.m_CurrentTrophy.InitTeamArray[orderId];
-          if (initTeam == null)
-          {
-            initTeam = new InitTeam(orderId, -1);
-            this.m_CurrentTrophy.InitTeamArray[orderId] = initTeam;
-          }
-          if (initTeam != null)
-            initTeam.Team = comboBox.SelectedIndex != 0 ? (Team)comboBox.SelectedItem : (Team)null;
-        }
-      }
-    }
-
-    private void numericNTeams_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentGroup == null || this.numericNTeams.Value == (Decimal)(this.m_CurrentGroup.Ranks.Count - 1))
-        return;
-      if (this.numericNTeams.Value >= (Decimal)this.m_CurrentGroup.Ranks.Count)
-      {
-        for (int count = this.m_CurrentGroup.Ranks.Count; (Decimal)count <= this.numericNTeams.Value; ++count)
-          this.m_CurrentGroup.AddRank();
-      }
-      else
-      {
-        for (int index = this.m_CurrentGroup.Ranks.Count - 1; (Decimal)index > this.numericNTeams.Value; --index)
-          this.m_CurrentGroup.RemoveRank();
-      }
-      this.GroupToPanel();
-    }
-
-    private void numericNumGames_ValueChanged_1(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentGroup.Settings.m_num_games = (int)this.numericNumGames.Value;
-    }
-
-    private void EnableToolWorld()
-    {
-      if (this.m_CurrentCompobj == null || this.m_CurrentCompobj.IsWorld())
-      {
-        this.buttonAddNatiom.Visible = false;
-        this.buttonDeleteNation.Visible = false;
-        this.buttonAddTrophy.Visible = true;
-        this.buttonPasteTrophy.Visible = true;
-        this.comboTargetLeague.Visible = true;
-        this.buttonCopyTrophy.Visible = false;
-        this.buttonDeleteTrophy.Visible = false;
-        this.buttonAddStage.Visible = false;
-        this.buttonDeleteStage.Visible = false;
-        this.buttonAddGroup.Visible = false;
-        this.buttonDeleteGroup.Visible = false;
-      }
-      else if (this.m_CurrentCompobj.IsConfederation())
-      {
-        this.buttonAddNatiom.Visible = true;
-        this.buttonDeleteNation.Visible = false;
-        this.buttonAddTrophy.Visible = true;
-        this.buttonPasteTrophy.Visible = true;
-        this.comboTargetLeague.Visible = true;
-        this.buttonCopyTrophy.Visible = false;
-        this.buttonDeleteTrophy.Visible = false;
-        this.buttonAddStage.Visible = false;
-        this.buttonDeleteStage.Visible = false;
-        this.buttonAddGroup.Visible = false;
-        this.buttonDeleteGroup.Visible = false;
-      }
-      else if (this.m_CurrentCompobj.IsNation())
-      {
-        this.buttonAddNatiom.Visible = false;
-        this.buttonDeleteNation.Visible = true;
-        this.buttonAddTrophy.Visible = true;
-        this.buttonPasteTrophy.Visible = true;
-        this.comboTargetLeague.Visible = true;
-        this.buttonCopyTrophy.Visible = false;
-        this.buttonDeleteTrophy.Visible = false;
-        this.buttonAddStage.Visible = false;
-        this.buttonDeleteStage.Visible = false;
-        this.buttonAddGroup.Visible = false;
-        this.buttonDeleteGroup.Visible = false;
-      }
-      else if (this.m_CurrentCompobj.IsTrophy())
-      {
-        this.buttonAddNatiom.Visible = false;
-        this.buttonDeleteNation.Visible = false;
-        this.buttonAddTrophy.Visible = false;
-        this.buttonPasteTrophy.Visible = false;
-        this.comboTargetLeague.Visible = false;
-        this.buttonCopyTrophy.Visible = true;
-        this.buttonDeleteTrophy.Visible = true;
-        this.buttonAddStage.Visible = false;
-        this.buttonDeleteStage.Visible = false;
-        this.buttonAddGroup.Visible = false;
-        this.buttonDeleteGroup.Visible = false;
-      }
-      else if (this.m_CurrentCompobj.IsStage())
-      {
-        this.buttonAddNatiom.Visible = false;
-        this.buttonDeleteNation.Visible = false;
-        this.buttonAddTrophy.Visible = false;
-        this.buttonPasteTrophy.Visible = false;
-        this.comboTargetLeague.Visible = false;
-        this.buttonCopyTrophy.Visible = false;
-        this.buttonDeleteTrophy.Visible = false;
-        this.buttonAddStage.Visible = true;
-        this.buttonDeleteStage.Visible = true;
-        this.buttonAddGroup.Visible = false;
-        this.buttonDeleteGroup.Visible = false;
-      }
-      else
-      {
-        if (!this.m_CurrentCompobj.IsGroup())
-          return;
-        this.buttonAddNatiom.Visible = false;
-        this.buttonDeleteNation.Visible = false;
-        this.buttonAddTrophy.Visible = false;
-        this.buttonPasteTrophy.Visible = false;
-        this.comboTargetLeague.Visible = false;
-        this.buttonCopyTrophy.Visible = false;
-        this.buttonDeleteTrophy.Visible = false;
-        this.buttonAddStage.Visible = false;
-        this.buttonDeleteStage.Visible = false;
-        this.buttonAddGroup.Visible = true;
-        this.buttonDeleteGroup.Visible = true;
-      }
-    }
-
-    private void labelDatabaseCountry_DoubleClick(object sender, EventArgs e)
-    {
-      if (this.m_CurrentNation.Country == null)
-        return;
-      MainForm.CM.JumpTo((IdObject)this.m_CurrentNation.Country);
-    }
-
-    private void buttonAddNatiom_Click(object sender, EventArgs e)
-    {
-      Nation nation = new Nation(FifaEnvironment.CompetitionObjects.GetNewId(), "COUN", "NationName_XXX", (Compobj)this.m_CurrentConfederation);
-      this.m_CurrentConfederation.Nations.Add((object)nation);
-      FifaEnvironment.CompetitionObjects.Add((object)nation);
-      nation.Settings.m_schedule_seasonstartmonth = this.m_CurrentConfederation.Settings.m_schedule_seasonstartmonth;
-      nation.Settings.m_rule_numyellowstored = 3;
-      TreeNode treeNode = this.treeWorld.SelectedNode.Nodes.Add(nation.ToString());
-      treeNode.Tag = (object)nation;
-      treeNode.ForeColor = Color.Blue;
-      this.treeWorld.SelectedNode = treeNode;
-      this.treeWorld.Refresh();
-    }
-
-    private void buttonDeleteNation_Click(object sender, EventArgs e)
-    {
-      this.m_CurrentConfederation = (Confederation)this.m_CurrentNation.ParentObj;
-      foreach (Trophy trophy in (ArrayList)this.m_CurrentNation.Trophies)
-      {
-        foreach (Stage stage in (ArrayList)trophy.Stages)
-        {
-          foreach (IdObject group in (ArrayList)stage.Groups)
-            this.m_Competitions.RemoveId(group);
-          this.m_Competitions.RemoveId((IdObject)stage);
-        }
-        this.m_Competitions.RemoveId((IdObject)trophy);
-      }
-      this.m_CurrentConfederation.Nations.RemoveId((IdObject)this.m_CurrentNation);
-      this.treeWorld.SelectedNode.Remove();
-    }
-
-    private void buttonAddTrophy_Click(object sender, EventArgs e)
-    {
-      int newId = FifaEnvironment.CompetitionObjects.GetNewId();
-      int assetId = Trophy.AutoAsset();
-      string conventionalString = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
-      string typeString = "C" + assetId.ToString();
-      Trophy trophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
-      this.m_CurrentCompobj.Trophies.Add((object)trophy);
-      this.m_Competitions.Add((object)trophy);
-      trophy.Settings.m_asset_id[0] = assetId;
-      trophy.Settings.m_rule_numsubsbench = 5;
-      trophy.Settings.m_match_matchimportance = 25;
-      trophy.Settings.m_comp_type = "LEAGUE";
-      if (!trophy.InsertStage(0))
-        return;
-      Stage stage = (Stage)trophy.Stages[0];
-      stage.InsertGroup(0);
-      Group group = (Group)stage.Groups[0];
-      TreeNode treeNode1 = this.treeWorld.SelectedNode.Nodes.Add(trophy.ToString());
-      treeNode1.Tag = (object)trophy;
-      treeNode1.ForeColor = Color.DarkGreen;
-      TreeNode treeNode2 = treeNode1.Nodes.Add(stage.ToString());
-      treeNode2.Tag = (object)stage;
-      treeNode2.ForeColor = Color.Magenta;
-      TreeNode treeNode3 = treeNode2.Nodes.Add(group.ToString());
-      treeNode3.Tag = (object)group;
-      treeNode3.ForeColor = Color.DarkRed;
-      this.treeWorld.SelectedNode = treeNode1;
-      this.Preset();
-      this.treeWorld.Refresh();
-    }
-
-    private void buttonDeleteTrophy_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentTrophy.ParentObj.IsConfederation())
-      {
-        this.m_CurrentConfederation = (Confederation)this.m_CurrentTrophy.ParentObj;
-        this.m_CurrentConfederation.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
-      }
-      else if (this.m_CurrentTrophy.ParentObj.IsNation())
-      {
-        this.m_CurrentNation = (Nation)this.m_CurrentTrophy.ParentObj;
-        this.m_CurrentNation.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
-      }
-      else if (this.m_CurrentTrophy.ParentObj.IsWorld())
-        this.m_CurrentWorld.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
-      foreach (Stage stage in (ArrayList)this.m_CurrentTrophy.Stages)
-      {
-        foreach (IdObject group in (ArrayList)stage.Groups)
-          this.m_Competitions.RemoveId(group);
-        this.m_Competitions.RemoveId((IdObject)stage);
-      }
-      this.m_Competitions.RemoveId((IdObject)this.m_CurrentTrophy);
-      this.treeWorld.SelectedNode.Remove();
-      this.Preset();
-    }
-
-    private Stage CreateFirstStage(Trophy parentTrophy)
-    {
-      return !parentTrophy.InsertStage(0) ? (Stage)null : (Stage)parentTrophy.Stages[0];
-    }
-
-    private Group CreateFirstGroup(Stage parentStage)
-    {
-      Group group = new Group(FifaEnvironment.CompetitionObjects.GetNewId(), "G1", "FCE_Setup_Group", (Compobj)parentStage);
-      parentStage.Groups.Add((object)group);
-      FifaEnvironment.CompetitionObjects.Add((object)group);
-      group.Settings.m_num_games = 1;
-      return group;
-    }
-
-    private void buttonAddStage_Click(object sender, EventArgs e)
-    {
-      int num = this.m_CurrentTrophy.Stages.IndexOf((object)this.m_CurrentStage);
-      if (num < 0)
-        return;
-      int index = num + 1;
-      if (!this.m_CurrentTrophy.InsertStage(index))
-        return;
-      this.m_CurrentStage = (Stage)this.m_CurrentTrophy.Stages[index];
-      this.m_Competitions.Add((object)this.m_CurrentStage);
-      this.m_CurrentStage.InsertGroup(0);
-      Group group = (Group)this.m_CurrentStage.Groups[0];
-      this.m_Competitions.Add((object)group);
-      TreeNode treeNode1 = this.treeWorld.SelectedNode.Parent.Nodes.Insert(index, this.m_CurrentStage.ToString());
-      treeNode1.ForeColor = Color.Magenta;
-      treeNode1.Tag = (object)this.m_CurrentStage;
-      TreeNode treeNode2 = treeNode1.Nodes.Add(group.ToString());
-      treeNode2.Tag = (object)group;
-      treeNode2.ForeColor = Color.DarkRed;
-      this.treeWorld.SelectedNode = treeNode1;
-      this.Preset();
-    }
-
-    private void buttonDeleteStage_Click(object sender, EventArgs e)
-    {
-      foreach (Group group in (ArrayList)this.m_CurrentStage.Groups)
-      {
-        for (int index = 1; index < group.Ranks.Count; ++index)
-        {
-          Rank rank = (Rank)group.Ranks[index];
-          if (rank.MoveFrom != null)
-            rank.MoveFrom.MoveTo = (Rank)null;
-          if (rank.MoveTo != null)
-            rank.MoveTo.MoveFrom = (Rank)null;
-        }
-        this.m_Competitions.RemoveId((IdObject)group);
-      }
-      this.m_Competitions.RemoveId((IdObject)this.m_CurrentStage);
-      this.m_CurrentTrophy.RemoveStage(this.m_CurrentStage);
-      this.treeWorld.SelectedNode.Remove();
-      this.Preset();
-    }
-
-    private void checkCalccompavgs_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_calccompavgs = this.checkCalccompavgs.Checked ? 1 : -1;
-    }
-
-    private void checkRandomDraw_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_randomdraw = this.checkRandomDraw.Checked ? 1 : -1;
-    }
-
-    private void buttonAddGroup_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null)
-        return;
-      this.m_ClipboardGroup = this.m_CurrentGroup;
-      int num = this.m_CurrentStage.Groups.IndexOf((object)this.m_CurrentGroup);
-      if (num < 0)
-        return;
-      int index = num + 1;
-      if (!this.m_CurrentStage.InsertGroup(index))
-        return;
-      this.m_CurrentGroup = (Group)this.m_CurrentStage.Groups[index];
-      this.m_Competitions.Add((object)this.m_CurrentGroup);
-      for (int orderId = 1; orderId < this.m_ClipboardGroup.Ranks.Count; ++orderId)
-      {
-        Rank rank1 = new Rank(this.m_CurrentGroup, orderId);
-        Rank rank2 = (Rank)this.m_ClipboardGroup.Ranks[orderId];
-        if (rank2.MoveFrom != null && rank2.MoveFrom.Id == 0)
-          rank1.MoveFrom = rank2.MoveFrom;
-        this.m_CurrentGroup.Ranks.Add((object)rank1);
-      }
-      this.m_CurrentGroup.Settings.m_num_games = this.m_ClipboardGroup.Settings.m_num_games;
-      TreeNode treeNode = this.treeWorld.SelectedNode.Parent.Nodes.Insert(index, this.m_CurrentGroup.ToString());
-      treeNode.ForeColor = Color.Brown;
-      treeNode.Tag = (object)this.m_CurrentGroup;
-      this.treeWorld.SelectedNode = treeNode;
-      foreach (TreeNode node in this.treeWorld.SelectedNode.Parent.Nodes)
-        node.Text = ((Group)node.Tag).ToString();
-      this.Preset();
-    }
-
-    private void buttonDeleteGroup_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null)
-        return;
-      for (int index = 1; index < this.m_CurrentGroup.Ranks.Count; ++index)
-      {
-        Rank rank = (Rank)this.m_CurrentGroup.Ranks[index];
-        if (rank.MoveFrom != null)
-          rank.MoveFrom.MoveTo = (Rank)null;
-        if (rank.MoveTo != null)
-          rank.MoveTo.MoveFrom = (Rank)null;
-      }
-      this.m_CurrentStage.RemoveGroup(this.m_CurrentGroup);
-      this.m_Competitions.RemoveId((IdObject)this.m_CurrentGroup);
-      TreeNode parent = this.treeWorld.SelectedNode.Parent;
-      this.treeWorld.SelectedNode.Remove();
-      foreach (TreeNode node in parent.Nodes)
-        node.Text = ((Group)node.Tag).ToString();
-      this.Preset();
-    }
-
-    private void buttonCopyTrophy_Click(object sender, EventArgs e)
-    {
-      this.m_ClipboardTrophy = this.m_CurrentTrophy;
-      this.buttonPasteTrophy.Enabled = this.m_ClipboardTrophy != null;
-      this.comboTargetLeague.Enabled = this.buttonPasteTrophy.Enabled;
-    }
-
-    private void buttonPasteTrophy_Click(object sender, EventArgs e)
-    {
-      if (this.m_ClipboardTrophy == null)
-        return;
-      bool flag = false;
-      if (this.m_ClipboardTrophy.Stages != null && ((Compobj)this.m_ClipboardTrophy.Stages[0]).Settings.m_match_stagetype == "LEAGUE")
-        flag = true;
-      int newId = FifaEnvironment.CompetitionObjects.GetNewId();
-      League targetLeague = (League)null;
-      if (this.comboTargetLeague.SelectedIndex > 0)
-        targetLeague = (League)this.comboTargetLeague.SelectedItem;
-      int assetId = !flag || targetLeague == null ? Trophy.AutoAsset() : targetLeague.Id;
-      string conventionalString = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
-      string typeString = "C" + assetId.ToString();
-      Trophy newTrophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
-      this.m_CurrentCompobj.Trophies.Add((object)newTrophy);
-      this.m_Competitions.Add((object)newTrophy);
-      newTrophy.Settings.m_asset_id[0] = assetId;
-      newTrophy.Settings.m_rule_numsubsbench = this.m_ClipboardTrophy.Settings.m_rule_numsubsbench;
-      newTrophy.Settings.m_match_matchimportance = this.m_ClipboardTrophy.Settings.m_match_matchimportance;
-      newTrophy.Settings.m_comp_type = this.m_ClipboardTrophy.Settings.m_comp_type;
-      newTrophy.Settings.m_StandingsSort = this.m_ClipboardTrophy.Settings.m_StandingsSort;
-      newTrophy.Settings.m_schedule_checkconflict = this.m_ClipboardTrophy.Settings.m_schedule_checkconflict;
-      newTrophy.Settings.TrophyCompdependency = this.m_ClipboardTrophy.Settings.TrophyCompdependency;
-      newTrophy.Settings.TrophyForcecomp = this.m_ClipboardTrophy.Settings.TrophyForcecomp;
-      newTrophy.Settings.LeaguePromo = this.m_ClipboardTrophy.Settings.LeaguePromo;
-      newTrophy.Settings.LeagueReleg = this.m_ClipboardTrophy.Settings.LeagueReleg;
-      TreeNode treeNode1 = this.treeWorld.SelectedNode.Nodes.Add(newTrophy.ToString());
-      treeNode1.Tag = (object)newTrophy;
-      treeNode1.ForeColor = Color.DarkGreen;
-      for (int index1 = 0; index1 < this.m_ClipboardTrophy.Stages.Count; ++index1)
-      {
-        newTrophy.AddStage();
-        Stage stage1 = (Stage)newTrophy.Stages[index1];
-        Stage stage2 = (Stage)this.m_ClipboardTrophy.Stages[index1];
-        if (stage2.Schedules != null)
-        {
-          foreach (Schedule schedule1 in (ArrayList)stage2.Schedules)
-          {
-            Schedule schedule2 = new Schedule(stage1, schedule1.Day, schedule1.Leg, schedule1.MinGames, schedule1.MaxGames, schedule1.Time);
-            stage1.AddSchedule(schedule2);
-          }
-        }
-        stage1.Description = stage2.Description;
-        stage1.Settings.m_match_stagetype = stage2.Settings.m_match_stagetype;
-        stage1.Settings.m_match_matchsituation = stage2.Settings.m_match_matchsituation;
-        stage1.Settings.m_schedule_matchreplay = stage2.Settings.m_schedule_matchreplay;
-        stage1.Settings.m_info_prize_money = stage2.Settings.m_info_prize_money;
-        stage1.Settings.m_info_prize_money_drop = stage2.Settings.m_info_prize_money_drop;
-        stage1.Settings.m_advance_maxteamsassoc = stage2.Settings.m_advance_maxteamsassoc;
-        stage1.Settings.m_advance_maxteamsgroup = stage2.Settings.m_advance_maxteamsgroup;
-        stage1.Settings.m_schedule_reversed = stage2.Settings.m_schedule_reversed;
-        stage1.Settings.Advance_standingskeep = stage2.Settings.Advance_standingskeep;
-        stage1.Settings.Advance_standingsagg = stage2.Settings.Advance_standingsagg;
-        stage1.Settings.Advance_pointskeep = stage2.Settings.Advance_pointskeep;
-        stage1.Settings.m_advance_pointskeeppercentage = stage2.Settings.m_advance_pointskeeppercentage;
-        stage1.Settings.Advance_standingsrank = stage2.Settings.Advance_standingsrank;
-        stage1.Settings.m_EndRuleKo1Leg = stage2.Settings.m_EndRuleKo1Leg;
-        stage1.Settings.m_EndRuleKo2Leg2 = stage2.Settings.m_EndRuleKo2Leg2;
-        stage1.Settings.Standings_checkrank = stage2.Settings.Standings_checkrank;
-        stage1.Settings.m_advance_randomdraw = stage2.Settings.m_advance_randomdraw;
-        stage1.Settings.m_advance_jleagueignorecheck = stage2.Settings.m_advance_jleagueignorecheck;
-        stage1.Settings.m_advance_calccompavgs = stage2.Settings.m_advance_calccompavgs;
-        stage2.CopyTasks(stage1, targetLeague);
-        TreeNode treeNode2 = treeNode1.Nodes.Add(stage1.ToString());
-        treeNode2.Tag = (object)stage1;
-        treeNode2.ForeColor = Color.Magenta;
-        for (int groupIndex = 0; groupIndex < stage2.Groups.Count; ++groupIndex)
-        {
-          stage1.InsertGroup(groupIndex);
-          Group group1 = (Group)stage1.Groups[groupIndex];
-          Group group2 = (Group)stage2.Groups[groupIndex];
-          TreeNode treeNode3 = treeNode2.Nodes.Add(group1.ToString());
-          treeNode3.Tag = (object)group1;
-          treeNode3.ForeColor = Color.DarkRed;
-          if (group2.Schedules != null)
-          {
-            foreach (Schedule schedule1 in (ArrayList)group2.Schedules)
+            if (this.m_LockToPanel || this.m_Locked)
+                return;
+            int assetId = (int)this.numericAssetId.Value;
+            if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[0])
+                return;
+            this.m_Locked = true;
+            foreach (Compobj competitionObject in (ArrayList)FifaEnvironment.CompetitionObjects)
             {
-              Schedule schedule2 = new Schedule(group1, schedule1.Day, schedule1.Leg, schedule1.MinGames, schedule1.MaxGames, schedule1.Time);
-              group1.AddSchedule(schedule2);
+                if (competitionObject.IsTrophy() && competitionObject.Settings.m_asset_id[0] == assetId)
+                {
+                    int num = (int)FifaEnvironment.UserMessages.ShowMessage(1015);
+                    this.numericAssetId.Value = (Decimal)this.m_CurrentTrophy.Settings.m_asset_id[0];
+                    this.m_Locked = false;
+                    return;
+                }
             }
-          }
-          group1.Description = group2.Description;
-          for (int index2 = 1; index2 < group2.Ranks.Count; ++index2)
-          {
-            group1.AddRank();
-            Rank rank1 = (Rank)group2.Ranks[index2];
-            Rank rank2 = (Rank)group1.Ranks[index2];
-          }
-          group1.Settings.m_num_games = group2.Settings.m_num_games;
-          group1.Settings.m_StandingsSort = group2.Settings.m_StandingsSort;
-          group1.Settings.m_info_color_slot_champ = group2.Settings.m_info_color_slot_champ;
-          group1.Settings.m_info_slot_champ = group2.Settings.m_info_slot_champ;
-          int min;
-          int max;
-          group2.Settings.GetInfoColorSlotChampCup(out min, out max);
-          group1.Settings.SetInfoColorSlotChampCup(min, max);
-          group2.Settings.GetInfoColorSlotEuroLeague(out min, out max);
-          group1.Settings.SetInfoColorSlotEuroLeague(min, max);
-          group2.Settings.GetInfoColorSlotRelegPoss(out min, out max);
-          group1.Settings.SetInfoColorSlotRelegPoss(min, max);
-          group2.Settings.GetInfoColorSlotReleg(out min, out max);
-          group1.Settings.SetInfoColorSlotReleg(min, max);
-          group2.Settings.GetInfoColorSlotPromo(out min, out max);
-          group1.Settings.SetInfoColorSlotPromo(min, max);
-          group2.Settings.GetInfoColorSlotPromoPoss(out min, out max);
-          group1.Settings.SetInfoColorSlotPromoPoss(min, max);
-          group2.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-          group1.Settings.SetInfoColorSlotAdvGroup(min, max);
-          group2.Settings.GetInfoSlotRelegPoss(out min, out max);
-          group1.Settings.SetInfoSlotRelegPoss(min, max);
-          group2.Settings.GetInfoSlotReleg(out min, out max);
-          group1.Settings.SetInfoSlotReleg(min, max);
-          group2.Settings.GetInfoSlotPromo(out min, out max);
-          group1.Settings.SetInfoSlotPromo(min, max);
-          group2.Settings.GetInfoSlotPromoPoss(out min, out max);
-          group1.Settings.SetInfoSlotPromoPoss(min, max);
-          group2.CopyTasks(group1, targetLeague);
+            this.m_CurrentTrophy.Settings.SetAssetId(0, assetId);
+            this.m_CurrentTrophy.Description = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
+            this.textLanguageKey.Text = this.m_CurrentTrophy.Description;
+            this.textFourCharName.Text = "C" + this.m_CurrentTrophy.Settings.m_asset_id.ToString();
+            this.TrophyGraphicsToPanel();
+            this.m_Locked = false;
         }
-      }
-      this.m_ClipboardTrophy.CopyTasks(newTrophy, targetLeague);
-      newTrophy.LinkCompetitions();
-      for (int index1 = 0; index1 < this.m_ClipboardTrophy.Stages.Count; ++index1)
-      {
-        Stage stage1 = (Stage)newTrophy.Stages[index1];
-        Stage stage2 = (Stage)this.m_ClipboardTrophy.Stages[index1];
-        stage1.LinkCompetitions();
-        for (int index2 = 0; index2 < stage2.Groups.Count; ++index2)
+
+        private void comboCompetitionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          Group group1 = (Group)stage1.Groups[index2];
-          Group group2 = (Group)stage2.Groups[index2];
-          group1.LinkCompetitions();
-          for (int index3 = 1; index3 < group2.Ranks.Count; ++index3)
-          {
-            Rank rank1 = (Rank)group2.Ranks[index3];
-            Rank rank2 = (Rank)group1.Ranks[index3];
-            if (rank1.MoveFrom != null)
+            if (this.m_LockToPanel || this.m_CurrentTrophy.Settings.m_comp_type == (string)this.comboCompetitionType.SelectedItem)
+                return;
+            this.m_CurrentTrophy.Settings.m_comp_type = (string)this.comboCompetitionType.SelectedItem;
+            this.TrophyToPanel();
+        }
+
+        private void numericImportance_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.Settings.m_match_matchimportance = (int)this.numericImportance.Value;
+        }
+
+        private void comboPromotionLeague_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboPromotionLeague.SelectedIndex < 0)
+                return;
+            if (this.comboPromotionLeague.SelectedIndex == 0)
+                this.m_CurrentTrophy.Settings.LeaguePromo = (League)null;
+            else
+                this.m_CurrentTrophy.Settings.LeaguePromo = (League)this.comboPromotionLeague.SelectedItem;
+        }
+
+        private void comboRelegationLeague_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboRelegationLeague.SelectedIndex < 0)
+                return;
+            if (this.comboRelegationLeague.SelectedIndex == 0)
+                this.m_CurrentTrophy.Settings.LeagueReleg = (League)null;
+            else
+                this.m_CurrentTrophy.Settings.LeagueReleg = (League)this.comboRelegationLeague.SelectedItem;
+        }
+
+        private void checkTrophyAdvCompDependency_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboTrophyAdvCompDependency.Visible = this.checkTrophyAdvCompDependency.Checked;
+            if (this.checkTrophyAdvCompDependency.Checked)
             {
-              int num = rank1.MoveFrom.Group.Id - rank1.Group.Id;
-              Compobj compobj = (Compobj)this.m_Competitions.SearchId(rank2.Group.Id + num);
-              if (compobj.IsGroup())
-              {
-                Group group3 = (Group)compobj;
-                if (group3 != null && group3.Ranks.Count > rank1.MoveFrom.Id)
-                  rank2.MoveFrom = (Rank)group3.Ranks[rank1.MoveFrom.Id];
-              }
+                if (this.comboTrophyAdvCompDependency.SelectedItem == null)
+                    this.comboTrophyAdvCompDependency.SelectedItem = this.comboTrophyAdvCompDependency.Items[0];
+                this.m_CurrentTrophy.Settings.TrophyCompdependency = (Trophy)this.comboTrophyAdvCompDependency.SelectedItem;
             }
-            if (rank1.MoveTo != null)
+            else
+                this.m_CurrentTrophy.Settings.TrophyCompdependency = (Trophy)null;
+        }
+
+        private void checkForceSchedule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboSchedForce.Visible = this.checkForceSchedule.Checked;
+            if (this.checkForceSchedule.Checked)
             {
-              int num = rank1.MoveTo.Group.Id - rank1.Group.Id;
-              Compobj compobj = (Compobj)this.m_Competitions.SearchId(rank2.Group.Id + num);
-              if (compobj != null && compobj.IsGroup())
-              {
-                Group group3 = (Group)compobj;
-                if (group3 != null)
-                  rank2.MoveTo = (Rank)group3.Ranks[rank1.MoveTo.Id];
-              }
+                if (this.comboSchedForce.SelectedItem == null)
+                    this.comboSchedForce.SelectedItem = this.comboSchedForce.Items[0];
+                this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)this.comboSchedForce.SelectedItem;
             }
-          }
+            else
+                this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)null;
         }
-      }
-      this.treeWorld.SelectedNode = treeNode1;
-      this.Preset();
-      this.treeWorld.Refresh();
-    }
 
-    private void buttonCopyStageCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStage.NSchedule == 0)
-        return;
-      this.m_ClipboardStageForSchedule = this.m_CurrentStage;
-      this.m_ClipboardGroupForSchedule = (Group)null;
-      this.buttonPasteStageCalendar.Enabled = true;
-      this.buttonPasteGroupCalendar.Enabled = true;
-    }
-
-    private void buttonPasteStageCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_ClipboardStageForSchedule != null && this.m_CurrentStage != this.m_ClipboardStageForSchedule)
-      {
-        this.m_CurrentStage.RemoveAllSchedules();
-        foreach (Schedule schedule in (ArrayList)this.m_ClipboardStageForSchedule.Schedules)
-          this.m_CurrentStage.AddSchedule(new Schedule(this.m_CurrentStage, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
-        this.StageToPanel();
-      }
-      else
-      {
-        if (this.m_ClipboardGroupForSchedule == null || this.m_ClipboardGroupForSchedule.NSchedule == 0)
-          return;
-        this.m_CurrentStage.RemoveAllSchedules();
-        foreach (Schedule schedule in (ArrayList)this.m_ClipboardGroupForSchedule.Schedules)
-          this.m_CurrentStage.AddSchedule(new Schedule(this.m_CurrentStage, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
-        this.StageToPanel();
-      }
-    }
-
-    private void buttonNewStageLeg_Click(object sender, EventArgs e)
-    {
-      int dayDelay = 7;
-      this.m_CurrentStageSchedule = this.m_CurrentStageSchedule == null || this.m_CurrentStage.Schedules == null || this.m_CurrentStage.Schedules.Count == 0 ? this.m_CurrentStage.AppendLeg(dayDelay) : this.m_CurrentStage.Schedules.DuplicatetLeg(this.m_CurrentStageSchedule.Leg, dayDelay);
-      this.StageToPanel();
-    }
-
-    private void buttonDeleteStageLeg_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStageSchedule == null)
-        return;
-      this.m_CurrentStage.Schedules.RemoveLeg(this.m_CurrentStageSchedule.Leg);
-      this.m_CurrentStageSchedule = (Schedule)null;
-      this.StageToPanel();
-    }
-
-    private void buttonStageAddTime_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStage == null || this.m_CurrentStageSchedule == null)
-        return;
-      this.m_CurrentStage.CloneSchedule(this.m_CurrentStageSchedule, 100);
-      this.StageToPanel();
-    }
-
-    private void buttonStageRemoveTime_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStage == null || this.m_CurrentStageSchedule == null)
-        return;
-      this.m_CurrentStage.DeleteSchedule(this.m_CurrentStageSchedule);
-      this.m_CurrentStageSchedule = (Schedule)null;
-      this.StageToPanel();
-    }
-
-    private void buttonCopyGroupCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup.NSchedule <= 0)
-        return;
-      this.m_ClipboardStageForSchedule = (Stage)null;
-      this.m_ClipboardGroupForSchedule = this.m_CurrentGroup;
-      this.buttonPasteStageCalendar.Enabled = true;
-      this.buttonPasteGroupCalendar.Enabled = true;
-    }
-
-    private void buttonPasteGroupCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_ClipboardStageForSchedule != null && this.m_ClipboardStageForSchedule.NSchedule != 0)
-      {
-        this.m_CurrentGroup.RemoveAllSchedules();
-        foreach (Schedule schedule in (ArrayList)this.m_ClipboardStageForSchedule.Schedules)
-          this.m_CurrentGroup.AddSchedule(new Schedule(this.m_CurrentGroup, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
-        this.GroupToPanel();
-      }
-      else
-      {
-        if (this.m_ClipboardGroupForSchedule == null || this.m_ClipboardGroupForSchedule == this.m_CurrentGroup)
-          return;
-        this.m_CurrentGroup.RemoveAllSchedules();
-        foreach (Schedule schedule in (ArrayList)this.m_ClipboardGroupForSchedule.Schedules)
-          this.m_CurrentGroup.AddSchedule(new Schedule(this.m_CurrentGroup, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
-        this.GroupToPanel();
-      }
-    }
-
-    private void buttonGroupAddTime_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null || this.m_CurrentGroupSchedule == null)
-        return;
-      this.m_CurrentGroup.CloneSchedule(this.m_CurrentGroupSchedule, 100);
-      this.GroupToPanel();
-    }
-
-    private void buttonGroupRemoveTime_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null || this.m_CurrentGroupSchedule == null)
-        return;
-      this.m_CurrentGroup.DeleteSchedule(this.m_CurrentGroupSchedule);
-      this.m_CurrentGroupSchedule = (Schedule)null;
-      this.GroupToPanel();
-    }
-
-    private void buttonAddRule_Click(object sender, EventArgs e)
-    {
-      this.m_CurrentGroup.AddTask(new Task("start", "", this.m_CurrentGroup.Id, 0, 0, 0)
-      {
-        Group = this.m_CurrentGroup
-      });
-      this.GroupToPanel();
-    }
-
-    private void buttonRemoveRule_Click(object sender, EventArgs e)
-    {
-      this.m_CurrentGroup.RemoveLastTask("start");
-      this.GroupToPanel();
-    }
-
-    private void checkInfoChamp_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentGroup.Settings.m_info_slot_champ = this.checkInfoChamp.Checked ? 1 : -1;
-    }
-
-    private void checkInfoPossibleRelegation_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericPossibleRelegationMin.Visible = this.numericPossibleRelegationMax.Visible = this.checkInfoPossibleRelegation.Checked;
-      if (this.checkInfoPossibleRelegation.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericPossibleRelegationMin.Value = (Decimal)min;
-        this.numericPossibleRelegationMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(-1, -1);
-    }
-
-    private void checkInfoRelegation_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericRelegationMin.Visible = this.numericRelegationMax.Visible = this.checkInfoRelegation.Checked;
-      if (this.checkInfoRelegation.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericRelegationMin.Value = (Decimal)min;
-        this.numericRelegationMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoSlotReleg(-1, -1);
-    }
-
-    private void checkInfoPromotion_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericPromotionMin.Visible = this.numericPromotionMax.Visible = this.checkInfoPromotion.Checked;
-      if (this.checkInfoPromotion.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericPromotionMin.Value = (Decimal)min;
-        this.numericPromotionMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoSlotPromo(-1, -1);
-    }
-
-    private void checkInfoPossiblePromotion_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericPossiblePromotionMin.Visible = this.numericPossiblePromotionMax.Visible = this.checkInfoPossiblePromotion.Checked;
-      if (this.checkInfoPossiblePromotion.Checked)
-      {
-        int min;
-        int max;
-        this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericPossiblePromotionMin.Value = (Decimal)min;
-        this.numericPossiblePromotionMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(-1, -1);
-    }
-
-    private void numericPossibleRelegationMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPossibleRelegationMin.Value;
-      int max1 = (int)this.numericPossibleRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(min1, max1))
-        return;
-      this.numericPossibleRelegationMin.Value = (Decimal)min2;
-    }
-
-    private void numericRelegationMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericRelegationMin.Value;
-      int max1 = (int)this.numericRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotReleg(min1, max1))
-        return;
-      this.numericRelegationMin.Value = (Decimal)min2;
-    }
-
-    private void numericPromotionMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPromotionMin.Value;
-      int max1 = (int)this.numericPromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromo(min1, max1))
-        return;
-      this.numericPromotionMin.Value = (Decimal)min2;
-    }
-
-    private void numericPossiblePromotionMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPossiblePromotionMin.Value;
-      int max1 = (int)this.numericPossiblePromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(min1, max1))
-        return;
-      this.numericPossiblePromotionMin.Value = (Decimal)min2;
-    }
-
-    private void numericPossibleRelegationMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPossibleRelegationMin.Value;
-      int max1 = (int)this.numericPossibleRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(min1, max1))
-        return;
-      this.numericPossibleRelegationMax.Value = (Decimal)max2;
-    }
-
-    private void numericRelegationMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericRelegationMin.Value;
-      int max1 = (int)this.numericRelegationMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotReleg(min1, max1))
-        return;
-      this.numericRelegationMax.Value = (Decimal)max2;
-    }
-
-    private void numericPromotionMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPromotionMin.Value;
-      int max1 = (int)this.numericPromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromo(min1, max1))
-        return;
-      this.numericPromotionMax.Value = (Decimal)max2;
-    }
-
-    private void numericPossiblePromotionMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericPossiblePromotionMin.Value;
-      int max1 = (int)this.numericPossiblePromotionMax.Value;
-      int min2;
-      int max2;
-      this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(min1, max1))
-        return;
-      this.numericPossiblePromotionMax.Value = (Decimal)max2;
-    }
-
-    private void buttonCleanGroupCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null)
-        return;
-      this.m_CurrentGroup.RemoveAllSchedules();
-      this.GroupToPanel();
-    }
-
-    private void buttonCleanStageCalendar_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStage == null)
-        return;
-      this.m_CurrentStage.RemoveAllSchedules();
-      this.StageToPanel();
-    }
-
-    private void buttonNewGroupLeg_Click(object sender, EventArgs e)
-    {
-      int dayDelay = 7;
-      this.m_CurrentGroupSchedule = this.m_CurrentGroupSchedule == null || this.m_CurrentGroup.Schedules.Count == 0 ? this.m_CurrentGroup.AppendLeg(dayDelay) : this.m_CurrentGroup.Schedules.DuplicatetLeg(this.m_CurrentGroupSchedule.Leg, dayDelay);
-      this.GroupToPanel();
-    }
-
-    private void buttonRemoveGroupLeg_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroupSchedule == null)
-        return;
-      this.m_CurrentGroup.Schedules.RemoveLeg(this.m_CurrentGroupSchedule.Leg);
-      this.m_CurrentGroupSchedule = (Schedule)null;
-      this.GroupToPanel();
-    }
-
-    private void checkMatchReplay_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_schedule_matchreplay = this.checkMatchReplay.Checked ? 1 : -1;
-    }
-
-    private void checkMaxteamsassoc_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_maxteamsassoc = this.checkMaxteamsassoc.Checked ? 1 : -1;
-    }
-
-    private void numericStageRef_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_maxteamsstageref == (int)this.numericStageRef.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_maxteamsstageref = (int)this.numericStageRef.Value;
-    }
-
-    private void checkClausuraSchedule_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_schedule_reversed = this.checkClausuraSchedule.Checked ? 1 : -1;
-    }
-
-    private void probUpDown_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      NumericUpDown numericUpDown = (NumericUpDown)sender;
-      string tag = (string)numericUpDown.Tag;
-      if (tag == null)
-        return;
-      int int32 = Convert.ToInt32(tag.Substring(1));
-      if (tag.StartsWith("R"))
-        this.m_CurrentNation.RainProb[int32] = (int)numericUpDown.Value;
-      else if (tag.StartsWith("S"))
-      {
-        this.m_CurrentNation.SnowProb[int32] = (int)numericUpDown.Value;
-      }
-      else
-      {
-        if (!tag.StartsWith("O"))
-          return;
-        this.m_CurrentNation.OvercastProb[int32] = (int)numericUpDown.Value;
-      }
-    }
-
-    private void TimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      ComboBox comboBox = (ComboBox)sender;
-      string tag = (string)comboBox.Tag;
-      if (tag == null)
-        return;
-      int int32 = Convert.ToInt32(tag.Substring(1));
-      if (tag.StartsWith("U"))
-      {
-        this.m_CurrentNation.SunsetTime[int32] = this.ConvertIndexToTime(comboBox.SelectedIndex);
-      }
-      else
-      {
-        if (!tag.StartsWith("N"))
-          return;
-        this.m_CurrentNation.DarkTime[int32] = this.ConvertIndexToTime(comboBox.SelectedIndex);
-      }
-    }
-
-    private int ConvertIndexToTime(int index)
-    {
-      switch (index)
-      {
-        case 0:
-          return 1600;
-        case 1:
-          return 1630;
-        case 2:
-          return 1700;
-        case 3:
-          return 1730;
-        case 4:
-          return 1800;
-        case 5:
-          return 1830;
-        case 6:
-          return 1900;
-        case 7:
-          return 1930;
-        case 8:
-          return 2000;
-        case 9:
-          return 2030;
-        case 10:
-          return 2100;
-        case 11:
-          return 2130;
-        case 12:
-          return 2200;
-        default:
-          return 0;
-      }
-    }
-
-    private void numericBall_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentTrophy == null)
-        return;
-      this.m_CurrentTrophy.ballid = (int)this.numericBall.Value;
-      int ballId = (int)this.numericBall.Value;
-      if (ballId >= 0)
-        this.pictureBall.BackgroundImage = (Image)Ball.GetBallPicture(ballId);
-      else
-        this.pictureBall.BackgroundImage = (Image)null;
-    }
-
-    private void buttonReplicateTrophy128_Click(object sender, EventArgs e)
-    {
-      Bitmap currentBitmap = this.viewer2DTrophy256.CurrentBitmap;
-      Rectangle srcRect = new Rectangle(0, 0, 256, 256);
-      Bitmap bitmap = new Bitmap(128, 128, PixelFormat.Format32bppPArgb);
-      Rectangle destRect = new Rectangle(0, 0, 128, 128);
-      GraphicUtil.RemapRectangle(currentBitmap, srcRect, bitmap, destRect);
-      this.m_CurrentTrophy.SetTrophy128(bitmap);
-      this.viewer2DTrophy128.CurrentBitmap = bitmap;
-    }
-
-    private void buttonShow3DModel_Click(object sender, EventArgs e)
-    {
-      this.Show3DTrophy();
-    }
-
-    private void buttonImport3DModel_Click(object sender, EventArgs e)
-    {
-      string rx3FileName = FifaEnvironment.BrowseAndCheckModel(ref this.m_TrophyCurrentFolder, "Open 3D Trophy Model file", "3D trophy model files (*.rx3)|trophy_*.rx3");
-      if (rx3FileName == null)
-        return;
-      this.m_CurrentTrophy.SetModel(rx3FileName);
-      this.ReloadTrophy(this.m_CurrentTrophy);
-    }
-
-    private void buttonExport3DModel_Click(object sender, EventArgs e)
-    {
-      string fileName = this.m_CurrentTrophy.ModelFileName();
-      if (fileName == null)
-        return;
-      FifaEnvironment.AskAndExportFromZdata(fileName, ref this.m_TrophyCurrentFolder);
-    }
-
-    private void buttonRemove3DModel_Click(object sender, EventArgs e)
-    {
-      this.m_CurrentTrophy.DeleteModel();
-      this.ReloadTrophy(this.m_CurrentTrophy);
-    }
-
-    private void tabTrophy_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      this.ReloadTrophy(this.m_CurrentTrophy);
-    }
-
-    private void labelUpdateTable_Click(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      Label label = (Label)sender;
-      int num = -1;
-      Task tag = (Task)label.Tag;
-      for (int index = 0; index < this.m_UpdateTableLabels.Length; ++index)
-      {
-        if (label == this.m_UpdateTableLabels[index])
+        private void checkTrophyStandingsRules_CheckedChanged(object sender, EventArgs e)
         {
-          num = index;
-          break;
+            if (this.m_LockToPanel)
+                return;
+            this.comboTrophyStandingRules.Visible = this.checkTrophyStandingsRules.Checked;
+            if (this.checkTrophyStandingsRules.Checked)
+                this.m_CurrentTrophy.Settings.m_StandingsSort = this.comboTrophyStandingRules.SelectedIndex;
+            else
+                this.m_CurrentTrophy.Settings.m_StandingsSort = -1;
         }
-      }
-      if (num == -1)
-        return;
-      this.m_RankingRuleDialog.Rank = tag == null || tag.Group == null || (tag.Group.Ranks == null || tag.Parameter2 >= tag.Group.Ranks.Count) ? new Rank((Group)((Compobj)this.m_CurrentTrophy.Stages[0]).Groups[0], 1) : (Rank)tag.Group.Ranks[tag.Parameter2];
-      if (this.m_RankingRuleDialog.ShowDialog() == DialogResult.OK)
-      {
-        Task task = new Task("end", "UpdateTable", this.m_CurrentTrophy.Id, this.m_RankingRuleDialog.Rank.Group.Id, this.m_RankingRuleDialog.Rank.Id, num + 1);
-        task.LinkTrophy(this.m_CurrentTrophy);
-        label.Tag = (object)task;
-        if (tag == null)
-          this.m_CurrentTrophy.AddTask(task);
-        else
-          this.m_CurrentTrophy.ReplaceTask(tag, task);
-      }
-      this.TrophyRankingToPanel();
-    }
 
-    private void numericUpdateTableEntries_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.numericUpdateTableEntries.Value == (Decimal)this.m_NUpdateTableLabels)
-        return;
-      for (int index = 0; index < 24; ++index)
-        this.m_InitTeamPanel[index].Visible = (Decimal)index < this.numericUpdateTableEntries.Value;
-      int num = (int)this.numericUpdateTableEntries.Value;
-      if (num < this.m_NUpdateTableLabels)
-      {
-        for (int index = num; index < this.m_NUpdateTableLabels; ++index)
+        private void comboTrophyStandingRules_SelectedIndexChanged(object sender, EventArgs e)
         {
-          Task tag = (Task)this.m_UpdateTableLabels[index].Tag;
-          if (tag != null)
-          {
-            this.m_CurrentTrophy.RemoveTask(tag);
-            this.m_UpdateTableLabels[index].Tag = (object)null;
-            this.m_UpdateTableLabels[index].Text = (string)null;
-          }
+            if (this.m_LockToPanel || this.comboTrophyStandingRules.SelectedIndex < 0)
+                return;
+            this.m_CurrentTrophy.Settings.m_StandingsSort = this.comboTrophyStandingRules.SelectedIndex;
         }
-      }
-      else
-      {
-        for (int nupdateTableLabels = this.m_NUpdateTableLabels; nupdateTableLabels < num; ++nupdateTableLabels)
+
+        private void comboTrophyAdvCompDependency_SelectedIndexChanged(object sender, EventArgs e)
         {
-          this.m_UpdateTableLabels[nupdateTableLabels].Tag = (object)null;
-          this.m_UpdateTableLabels[nupdateTableLabels].Text = (string)null;
+            if (this.m_LockToPanel || this.comboTrophyAdvCompDependency.SelectedItem == null)
+                return;
+            this.m_CurrentTrophy.Settings.TrophyCompdependency = (Trophy)this.comboTrophyAdvCompDependency.SelectedItem;
         }
-      }
-      this.m_NUpdateTableLabels = num;
-    }
 
-    private void numericInternationalFirstYear_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.Settings.m_schedule_year_start = (int)this.numericInternationalFirstYear.Value;
-    }
+        private void comboSchedForce_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboSchedForce.SelectedItem == null)
+                return;
+            this.m_CurrentTrophy.Settings.TrophyForcecomp = (Trophy)this.comboSchedForce.SelectedItem;
+        }
 
-    private void numericInternationalPeriodicity_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.Settings.m_schedule_year_offset = (int)this.numericInternationalPeriodicity.Value;
-    }
+        private void checkPromotionLeague_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboPromotionLeague.Visible = this.checkPromotionLeague.Checked;
+            if (this.checkPromotionLeague.Checked)
+                this.m_CurrentTrophy.Settings.LeaguePromo = (League)this.comboPromotionLeague.SelectedItem;
+            else
+                this.m_CurrentTrophy.Settings.LeaguePromo = (League)null;
+        }
 
-    private void checkClearLeagueStats_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
-      if (this.checkClearLeagueStats.Checked)
-      {
-        League selectedItem = (League)this.comboLeagueStats.SelectedItem;
-        if (selectedItem == null)
-          return;
-        Task task = new Task("start", "ClearLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("start", "ClearLeagueStats", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("start", "ClearLeagueStats", -1, -1, -1);
-    }
+        private void checkRelegationLeague_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboRelegationLeague.Visible = this.checkRelegationLeague.Checked;
+            if (this.checkRelegationLeague.Checked)
+                this.m_CurrentTrophy.Settings.LeagueReleg = (League)this.comboRelegationLeague.SelectedItem;
+            else
+                this.m_CurrentTrophy.Settings.LeagueReleg = (League)null;
+        }
 
-    private void checkUpdateLeagueStats_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
-      if (this.checkUpdateLeagueStats.Checked)
-      {
-        League selectedItem = (League)this.comboLeagueStats.SelectedItem;
-        if (selectedItem == null)
-          return;
-        Task task = new Task("end", "UpdateLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueStats", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("end", "UpdateLeagueStats", -1, -1, -1);
-    }
+        private void checkScheduleConflicts_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.Settings.m_schedule_checkconflict = this.checkScheduleConflicts.Checked ? 1 : -1;
+        }
 
-    private void checkUpdateLeagueTable_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
-      if (this.checkUpdateLeagueTable.Checked)
-      {
-        League selectedItem = (League)this.comboLeagueStats.SelectedItem;
-        if (selectedItem == null)
-          return;
-        Task task = new Task("end", "UpdateLeagueTable", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueTable", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("end", "UpdateLeagueTable", -1, -1, -1);
-    }
+        private void radioBench5Players_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioBench5Players.Checked)
+                return;
+            this.m_CurrentTrophy.Settings.m_rule_numsubsbench = 5;
+        }
 
-    private void comboLeagueStats_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      League selectedItem = (League)this.comboLeagueStats.SelectedItem;
-      if (selectedItem == null)
-        return;
-      if (this.checkClearLeagueStats.Checked)
-      {
-        Task task = new Task("start", "ClearLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("end", "ClearLeagueStats", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("end", "ClearLeagueStats", -1, -1, -1);
-      if (this.checkUpdateLeagueStats.Checked)
-      {
-        Task task = new Task("end", "UpdateLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueStats", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("end", "UpdateLeagueStats", -1, -1, -1);
-      if (this.checkUpdateLeagueTable.Checked)
-      {
-        Task task = new Task("end", "UpdateLeagueTable", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
-        task.LinkStage(this.m_CurrentStage);
-        int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueTable", -1, -1, -1);
-        if (index >= 0)
-          this.m_CurrentStage.ReplaceTask(task, index);
-        else
-          this.m_CurrentStage.AddTask(task);
-      }
-      else
-        this.m_CurrentStage.RemoveTask("end", "UpdateLeagueTable", -1, -1, -1);
-    }
+        private void radioBench7Players_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioBench7Players.Checked)
+                return;
+            this.m_CurrentTrophy.Settings.m_rule_numsubsbench = -1;
+        }
 
-    private void checkStageStandingsRules_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.comboStageStandingRules.Visible = this.checkStageStandingsRules.Checked;
-      if (this.checkStageStandingsRules.Checked)
-        this.m_CurrentStage.Settings.m_StandingsSort = this.comboStageStandingRules.SelectedIndex;
-      else
-        this.m_CurrentStage.Settings.m_StandingsSort = -1;
-    }
+        private void comboStageType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboStageType.SelectedItem == null)
+                return;
+            this.m_CurrentStage.Settings.m_match_stagetype = (string)this.comboStageType.SelectedItem;
+            this.StageToPanel();
+        }
 
-    private void comboStageStandingRules_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboStageStandingRules.SelectedIndex < 0)
-        return;
-      this.m_CurrentStage.Settings.m_StandingsSort = this.comboStageStandingRules.SelectedIndex;
-    }
+        private void comboMatchSituation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboStageType.SelectedItem == null)
+                return;
+            this.m_CurrentStage.Settings.m_match_matchsituation = (string)this.comboMatchSituation.SelectedItem;
+            this.m_CurrentStage.Settings.m_schedule_matchreplay = this.m_CurrentStage.Settings.m_match_matchsituation == "REPLAY" ? 1 : -1;
 
-    private void comboTrophyStartMonth_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboTrophyStartMonth.SelectedItem == null)
-        return;
-      this.m_CurrentTrophy.Settings.m_schedule_seasonstartmonth = (string)this.comboTrophyStartMonth.SelectedItem;
-    }
+            if (this.m_CurrentStage.Settings.m_match_matchsituation == "LEAGUE")
+                groupLeaguetasks.Visible = true;
+            else
+                groupLeaguetasks.Visible = false;
 
-    private void checkRandomDrawEvent_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_random_draw_event = this.checkRandomDrawEvent.Checked ? 1 : -1;
-    }
-    private void checkBox1_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_match_canusefancards = this.checkUseFanCards.Checked ? "on" : null;
-    }
+            if (this.m_CurrentStage.Settings.m_match_matchsituation == "GROUP" || this.m_CurrentStage.Settings.m_match_matchsituation == "QUALIFY")
+                groupStageInfoColors.Visible = true;
+            else
+                groupStageInfoColors.Visible = false;
+        }
 
-    private void tabCompetitions_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (!this.m_LockTree)
-      {
-        this.m_LockTree = true;
-        if (this.tabCompetitions.SelectedTab == this.pageWorld)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentWorld);
-        else if (this.tabCompetitions.SelectedTab == this.pageConfederation)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentConfederation);
-        else if (this.tabCompetitions.SelectedTab == this.pageNation)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentNation);
-        else if (this.tabCompetitions.SelectedTab == this.pageTrophy)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentTrophy);
-        else if (this.tabCompetitions.SelectedTab == this.pageStage)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentStage);
-        else if (this.tabCompetitions.SelectedTab == this.pageGroup)
-          this.SelectWorldTreeNode((Compobj)this.m_CurrentGroup);
-        this.m_LockTree = false;
-      }
-      this.CompetitionToPanel();
-    }
+        private void numericPrizeMoney_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_info_prize_money = (int)this.numericPrizeMoney.Value;
+        }
 
-    private void CompetitionToPanel()
-    {
-      if (this.tabCompetitions.SelectedTab == this.pageWorld)
-        this.WorldToPanel();
-      else if (this.tabCompetitions.SelectedTab == this.pageConfederation)
-        this.ConfederationToPanel();
-      else if (this.tabCompetitions.SelectedTab == this.pageNation)
-        this.NationToPanel();
-      else if (this.tabCompetitions.SelectedTab == this.pageTrophy)
-        this.TrophyToPanel();
-      else if (this.tabCompetitions.SelectedTab == this.pageStage)
-      {
-        this.StageToPanel();
-      }
-      else
-      {
-        if (this.tabCompetitions.SelectedTab != this.pageGroup)
-          return;
-        this.GroupToPanel();
-      }
-    }
+        private void numericMoneyDrop_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_info_prize_money_drop = (int)this.numericMoneyDrop.Value;
+        }
 
-    private void buttongroupSortLegs_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentGroup == null || this.m_CurrentGroup.Schedules == null)
-        return;
-      this.m_CurrentGroup.Schedules.RenumberLegs();
-      this.GroupToPanel();
-    }
+        private void numericStartYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentWorld.Settings.m_schedule_year_start = (int)this.numericStartYear.Value;
+        }
 
-    private void buttonStageSortLegs_Click(object sender, EventArgs e)
-    {
-      if (this.m_CurrentStage == null || this.m_CurrentStage.Schedules == null)
-        return;
-      this.m_CurrentStage.Schedules.RenumberLegs();
-      this.StageToPanel();
-    }
+        private void numericNumGames_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_num_games = (int)this.numericNumGames.Value;
+        }
 
-    private void checkScheduleUseDates_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.checkScheduleUseDates.Checked == (this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp != -1))
-        return;
-      this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp = this.checkScheduleUseDates.Checked ? FifaEnvironment.CompetitionObjects.GetInternationalFriendlyId() : -1;
-    }
+        private void comboSpecialTeam1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetSpecialTeam(0);
+        }
 
-    private void numericKeepPointsStageRef_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_pointskeep == (int)this.numericKeepPointsStageRef.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_pointskeep = (int)this.numericKeepPointsStageRef.Value;
-    }
+        private void comboSpecialTeam2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetSpecialTeam(1);
+        }
 
-    private void buttonReplicateTropy_Click(object sender, EventArgs e)
-    {
-      Bitmap currentBitmap = this.viewer2DTrophy256.CurrentBitmap;
-      Rectangle srcRect = new Rectangle(0, 0, 256, 256);
-      Bitmap bitmap = new Bitmap(256, 256, PixelFormat.Format32bppPArgb);
-      Rectangle destRect = new Rectangle(0, 0, 192, 192);
-      GraphicUtil.RemapRectangle(currentBitmap, srcRect, bitmap, destRect);
-      this.m_CurrentTrophy.SetTrophy(bitmap);
-      this.viewer2DTrophy.CurrentBitmap = bitmap;
-    }
+        private void comboSpecialTeam3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetSpecialTeam(2);
+        }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        private void comboSpecialTeam4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetSpecialTeam(3);
+        }
+
+        private void SetSpecialTeam(int index)
+        {
+            if (this.m_SpecialTeamCombos[index].SelectedIndex == 0)
+            {
+                this.m_CurrentStage.Settings.m_info_special_team_id[index] = -1;
+            }
+            else
+            {
+                Team selectedItem = (Team)this.m_SpecialTeamCombos[index].SelectedItem;
+                this.m_CurrentStage.Settings.m_info_special_team_id[index] = selectedItem.Id;
+            }
+        }
+
+        private void SetMatchStadium(int index)
+        {
+            if (this.m_StadiumCombos[index].SelectedIndex == 0)
+            {
+                if (this.m_CurrentStage.Settings.m_match_stadium == null)
+                    return;
+                this.m_CurrentStage.Settings.m_match_stadium[index] = -1;
+            }
+            else
+            {
+                Stadium selectedItem = (Stadium)this.m_StadiumCombos[index].SelectedItem;
+                if (selectedItem == null || this.m_CurrentStage.Settings.m_match_stadium != null && this.m_CurrentStage.Settings.m_match_stadium[index] == selectedItem.Id)
+                    return;
+                this.m_CurrentStage.Settings.SetProperty("match_stadium", index, selectedItem.Id.ToString());
+            }
+        }
+
+        private void comboStadium1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(0);
+        }
+
+        private void comboStadium2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(1);
+        }
+
+        private void comboStadium3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(2);
+        }
+
+        private void comboStadium4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(3);
+        }
+
+        private void comboStadium5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(4);
+        }
+
+        private void comboStadium6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(5);
+        }
+
+        private void comboStadium7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(6);
+        }
+
+        private void comboStadium8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(7);
+        }
+
+        private void comboStadium9_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(8);
+        }
+
+        private void comboStadium10_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(9);
+        }
+
+        private void comboStadium11_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(10);
+        }
+
+        private void comboStadium12_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.SetMatchStadium(11);
+        }
+
+        private void checkMaxteamsgroup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_maxteamsgroup = this.checkMaxteamsgroup.Checked ? 1 : -1;
+            this.numericStageRef.Visible = this.checkMaxteamsgroup.Checked;
+            if (this.m_CurrentStage.Settings.m_advance_maxteamsgroup == -1)
+                this.m_CurrentStage.Settings.Advance_maxteamsstageref = -1;
+            else
+                this.numericStageRef.Value = (Decimal)this.m_CurrentStage.Settings.Advance_maxteamsstageref;
+        }
+
+        private void checkStandingKeep_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
+            this.numericStandingKeep.Visible = this.checkStandingKeep.Checked;
+            //this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
+        }
+
+        private void checkKeepPointsPercentage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericKeepPointsPercentage.Visible = this.checkKeepPointsPercentage.Checked;
+            this.numericKeepPointsStageRef.Visible = this.checkKeepPointsPercentage.Checked;
+            if (this.checkKeepPointsPercentage.Checked == (this.m_CurrentStage.Settings.Advance_pointskeep != -1))
+                return;
+            if (!this.checkKeepPointsPercentage.Checked)
+            {
+                this.m_CurrentStage.Settings.Advance_pointskeep = -1;
+                this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = -1;
+            }
+            else
+            {
+                this.m_CurrentStage.Settings.Advance_pointskeep = this.m_CurrentStage.Id;
+                this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = 50;
+                this.numericKeepPointsPercentage.Value = new Decimal(50);
+                this.numericKeepPointsStageRef.Value = (Decimal)this.m_CurrentStage.Id;
+            }
+        }
+
+        private void numericStandingKeep_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingskeep == (int)this.numericStandingKeep.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingskeep = this.checkStandingKeep.Checked ? (int)this.numericStandingKeep.Value : -1;
+        }
+
+        private void numericKeepPointsPercentage_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_pointskeeppercentage = this.checkKeepPointsPercentage.Checked ? (int)this.numericKeepPointsPercentage.Value : -1;
+        }
+
+        private void checkSpecialKo1Rule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboSpecialKo1Rule.Visible = this.checkSpecialKo1Rule.Checked;
+            if (this.checkSpecialKo1Rule.Checked)
+                this.m_CurrentStage.Settings.m_EndRuleKo1Leg = this.comboSpecialKo1Rule.SelectedIndex;
+            else
+                this.m_CurrentStage.Settings.m_EndRuleKo1Leg = -1;
+        }
+
+        private void checkSpecialKo2Rule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboSpecialKo2Rule.Visible = this.checkSpecialKo2Rule.Checked;
+            if (this.checkSpecialKo2Rule.Checked)
+                this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = this.comboSpecialKo2Rule.SelectedIndex;
+            else
+                this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = -1;
+        }
+
+        private void comboSpecialKo1Rule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboSpecialKo1Rule.SelectedIndex < 0)
+                return;
+            this.m_CurrentStage.Settings.m_EndRuleKo1Leg = this.comboSpecialKo1Rule.SelectedIndex;
+        }
+
+        private void comboSpecialKo2Rule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboSpecialKo2Rule.SelectedIndex < 0)
+                return;
+            this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 = this.comboSpecialKo2Rule.SelectedIndex;
+            this.numericRegularSeason.Visible = this.m_CurrentStage.Settings.m_EndRuleKo2Leg2 == 3;
+        }
+
+        private void numericRegularSeason_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Standings_checkrank == (int)this.numericRegularSeason.Value)
+                return;
+            this.m_CurrentStage.Settings.Standings_checkrank = (int)this.numericRegularSeason.Value;
+        }
+
+        private void checkStandingsRank_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
+            this.numericStandingsRank.Visible = this.checkStandingsRank.Checked;
+            //this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
+        }
+
+        private void numericStandingsRank_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingsrank == (int)this.numericStandingsRank.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingsrank = this.checkStandingsRank.Checked ? (int)this.numericStandingsRank.Value : -1;
+        }
+
+        private void checkInfoColorChamp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentGroup.Settings.m_info_color_slot_champ = this.checkInfoColorChamp.Checked ? 1 : -1;
+        }
+
+        private void numericColorChampionsMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorChampionsMin.Value;
+            int max = (int)this.numericColorChampionsMax.Value;
+            int min2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min2, out int _);
+            if (min1 == min2 || this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(min1, max))
+                return;
+            this.numericColorChampionsMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorChampionsMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min = (int)this.numericColorChampionsMin.Value;
+            int max1 = (int)this.numericColorChampionsMax.Value;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out int _, out max2);
+            if (max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(min, max1))
+                return;
+            this.numericColorChampionsMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorEuropaMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorEuropaMin.Value;
+            int max1 = (int)this.numericColorEuropaMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(min1, max1))
+                return;
+            this.numericColorEuropaMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorEuropaMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorEuropaMin.Value;
+            int max1 = (int)this.numericColorEuropaMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(min1, max1))
+                return;
+            this.numericColorEuropaMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorPossibleRelegationMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPossibleRelegationMin.Value;
+            int max1 = (int)this.numericColorPossibleRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(min1, max1))
+                return;
+            this.numericColorPossibleRelegationMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorPossibleRelegationMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPossibleRelegationMin.Value;
+            int max1 = (int)this.numericColorPossibleRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(min1, max1))
+                return;
+            this.numericColorPossibleRelegationMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorRelegationMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorRelegationMin.Value;
+            int max1 = (int)this.numericColorRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(min1, max1))
+                return;
+            this.numericColorRelegationMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorRelegationMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorRelegationMin.Value;
+            int max1 = (int)this.numericColorRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(min1, max1))
+                return;
+            this.numericColorRelegationMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorPromotionMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPromotionMin.Value;
+            int max1 = (int)this.numericColorPromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(min1, max1))
+                return;
+            this.numericColorPromotionMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorPromotionMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPromotionMin.Value;
+            int max1 = (int)this.numericColorPromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(min1, max1))
+                return;
+            this.numericColorPromotionMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorPossiblePromotionMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPossiblePromotionMin.Value;
+            int max1 = (int)this.numericColorPossiblePromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(min1, max1))
+                return;
+            this.numericColorPossiblePromotionMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorPossiblePromotionMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorPossiblePromotionMin.Value;
+            int max1 = (int)this.numericColorPossiblePromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(min1, max1))
+                return;
+            this.numericColorPossiblePromotionMax.Value = (Decimal)max2;
+        }
+
+        private void numericColorAdvanceMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorAdvanceMin.Value;
+            int max1 = (int)this.numericColorAdvanceMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+                return;
+            this.numericColorAdvanceMin.Value = (Decimal)min2;
+        }
+
+        private void numericColorAdvanceMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericColorAdvanceMin.Value;
+            int max1 = (int)this.numericColorAdvanceMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+                return;
+            this.numericColorAdvanceMax.Value = (Decimal)max2;
+        }
+
+        private void checkInfoColorChampions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorChampionsMin.Visible = this.numericColorChampionsMax.Visible = this.checkInfoColorChampions.Checked;
+            if (this.checkInfoColorChampions.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotChampCup(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorChampionsMax.Value = (Decimal)min;
+                this.numericColorChampionsMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotChampCup(-1, -1);
+        }
+
+        private void checkInfoColorEuropa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorEuropaMin.Visible = this.numericColorEuropaMax.Visible = this.checkInfoColorEuropa.Checked;
+            if (this.checkInfoColorEuropa.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotEuroLeague(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorEuropaMin.Value = (Decimal)min;
+                this.numericColorEuropaMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotEuroLeague(-1, -1);
+        }
+
+        private void checkInfoColorPossibleRelegation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorPossibleRelegationMin.Visible = this.numericColorPossibleRelegationMax.Visible = this.checkInfoColorPossibleRelegation.Checked;
+            if (this.checkInfoColorPossibleRelegation.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotRelegPoss(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorPossibleRelegationMin.Value = (Decimal)min;
+                this.numericColorPossibleRelegationMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotRelegPoss(-1, -1);
+        }
+
+        private void checkInfoColorRelegation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorRelegationMin.Visible = this.numericColorRelegationMax.Visible = this.checkInfoColorRelegation.Checked;
+            if (this.checkInfoColorRelegation.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotReleg(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorRelegationMin.Value = (Decimal)min;
+                this.numericColorRelegationMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotReleg(-1, -1);
+        }
+
+        private void checkInfoColorPromotion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorPromotionMin.Visible = this.numericColorPromotionMax.Visible = this.checkInfoColorPromotion.Checked;
+            if (this.checkInfoColorPromotion.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotPromo(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorPromotionMin.Value = (Decimal)min;
+                this.numericColorPromotionMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotPromo(-1, -1);
+        }
+
+        private void checkInfoColorPossiblePromotion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorPossiblePromotionMin.Visible = this.numericColorPossiblePromotionMax.Visible = this.checkInfoColorPossiblePromotion.Checked;
+            if (this.checkInfoColorPossiblePromotion.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotPromoPoss(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorPossiblePromotionMin.Value = (Decimal)min;
+                this.numericColorPossiblePromotionMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotPromoPoss(-1, -1);
+        }
+
+        private void checkInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericColorAdvanceMin.Visible = this.numericColorAdvanceMax.Visible = this.checkInfoColorAdvance.Checked;
+            if (this.checkInfoColorAdvance.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericColorAdvanceMin.Value = (Decimal)min;
+                this.numericColorAdvanceMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoColorSlotAdvGroup(-1, -1);
+        }
+
+        private void labelQR_Click(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            Label label = (Label)sender;
+            Task tag = (Task)label.Tag;
+            this.m_QualifyRuleDialog.QualifyRule = tag;
+            if (this.m_QualifyRuleDialog.ShowDialog() != DialogResult.OK)
+                return;
+            label.Tag = (object)tag;
+            label.Text = tag.ToString();
+        }
+
+        private void labelAdvance_Click(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            Rank tag = (Rank)((Control)sender).Tag;
+            Rank rank = new Rank(tag.Group, tag.Id);
+            rank.MoveFrom = tag.MoveFrom;
+            this.m_AdvanceRuleDialog.Rule = rank;
+            if (this.m_AdvanceRuleDialog.ShowDialog() != DialogResult.OK)
+                return;
+            if (rank.MoveFrom != tag.MoveFrom)
+            {
+                if (tag.MoveFrom != null && tag.MoveFrom.Id != 0)
+                    tag.MoveFrom.MoveTo = (Rank)null;
+                if (rank.MoveFrom.Id != 0)
+                {
+                    if (rank.MoveFrom.MoveTo == null)
+                    {
+                        rank.MoveFrom.MoveTo = tag;
+                    }
+                    else
+                    {
+                        rank.MoveFrom.MoveTo.MoveFrom = (Rank)null;
+                        rank.MoveFrom.MoveTo = tag;
+                    }
+                }
+                tag.MoveFrom = rank.MoveFrom;
+            }
+            this.GroupToPanel();
+        }
+
+        private void textLanguageKey_TextChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentCompobj == null)
+                return;
+            if (this.m_CurrentCompobj.IsTrophy())
+            {
+                this.m_CurrentTrophy.Description = this.textLanguageKey.Text;
+            }
+            else
+            {
+                if (!this.m_CurrentCompobj.IsGroup())
+                    return;
+                this.m_CurrentGroup.Description = this.textLanguageKey.Text;
+            }
+        }
+
+        private void textFourCharName_TextChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentCompobj == null || this.m_CurrentCompobj.TypeString == this.textFourCharName.Text)
+                return;
+            if (this.textFourCharName.Text.Length > 5)
+            {
+                this.textFourCharName.Text = this.textFourCharName.Text.Substring(0, 5);
+            }
+            else
+            {
+                this.m_CurrentCompobj.TypeString = this.textFourCharName.Text;
+                if (this.m_CurrentCompobj.IsNation())
+                    this.treeWorld.SelectedNode.Text = this.m_CurrentCompobj.TypeString;
+                if (!this.m_CurrentCompobj.IsGroup())
+                    return;
+                this.treeWorld.SelectedNode.Text = this.m_CurrentCompobj.TypeString;
+            }
+        }
+
+        private TreeNode SelectWorldTreeNode(Compobj compobj)
+        {
+            if (compobj == null)
+            {
+                this.treeWorld.SelectedNode = (TreeNode)null;
+                return (TreeNode)null;
+            }
+            TreeNode treeNode = this.RecusiveSearchNode(this.treeWorld.TopNode, compobj);
+            this.treeWorld.SelectedNode = treeNode;
+            return treeNode;
+        }
+
+        private TreeNode RecusiveSearchNode(TreeNode node, Compobj compobj)
+        {
+            if ((Compobj)node.Tag == compobj)
+                return node;
+            foreach (TreeNode node1 in node.Nodes)
+            {
+                TreeNode treeNode = this.RecusiveSearchNode(node1, compobj);
+                if (treeNode != null)
+                    return treeNode;
+            }
+            return (TreeNode)null;
+        }
+
+        private void textLanguageName_TextChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentCompobj == null)
+                return;
+            if (this.m_CurrentCompobj.IsTrophy())
+                this.m_CurrentTrophy.ShortName = this.textLanguageName.Text;
+            else if (this.m_CurrentCompobj.IsStage())
+            {
+                if (this.m_CurrentStage.GetLanguageName() != this.textLanguageName.Text)
+                    this.m_CurrentStage.SetLanguageName(this.textLanguageName.Text);
+                string str = this.m_CurrentStage.ToString();
+                if (!(this.treeWorld.SelectedNode.Text != str))
+                    return;
+                this.treeWorld.SelectedNode.Text = str;
+            }
+            else
+            {
+                if (!this.m_CurrentCompobj.IsGroup())
+                    return;
+                this.m_CurrentGroup.LanguageName = this.textLanguageName.Text;
+            }
+        }
+
+        private void comboLanguageKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboLanguageKey.SelectedItem == null || !(this.comboLanguageKey.SelectedItem.ToString() != this.m_CurrentStage.Description))
+                return;
+            this.m_CurrentStage.Description = (string)this.comboLanguageKey.SelectedItem;
+            this.textLanguageName.Text = FifaEnvironment.Language.GetString(this.m_CurrentStage.Description);
+            this.treeWorld.SelectedNode.Text = this.m_CurrentStage.ToString();
+        }
+
+        private void buttonCopyWeather_Click(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_ClipboardNation = this.m_CurrentNation;
+            this.buttonPasteWeather.Enabled = true;
+        }
+
+        private void buttonPasteWeather_Click(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_ClipboardNation == null)
+                return;
+            for (int index = 0; index < 12; ++index)
+            {
+                this.m_CurrentNation.ClearProb[index] = this.m_ClipboardNation.ClearProb[index];
+                this.m_CurrentNation.HazyProb[index] = this.m_ClipboardNation.HazyProb[index];
+                this.m_CurrentNation.CloudyProb[index] = this.m_ClipboardNation.CloudyProb[index];
+                this.m_CurrentNation.OvercastProb[index] = this.m_ClipboardNation.OvercastProb[index];
+                this.m_CurrentNation.FoggyProb[index] = this.m_ClipboardNation.FoggyProb[index];
+                this.m_CurrentNation.RainProb[index] = this.m_ClipboardNation.RainProb[index];
+                this.m_CurrentNation.ShowersProb[index] = this.m_ClipboardNation.ShowersProb[index];
+                this.m_CurrentNation.FlurriesProb[index] = this.m_ClipboardNation.FlurriesProb[index];
+                this.m_CurrentNation.SnowProb[index] = this.m_ClipboardNation.SnowProb[index];
+                this.m_CurrentNation.OvercastProb[index] = this.m_ClipboardNation.OvercastProb[index];
+                this.m_CurrentNation.SunsetTime[index] = this.m_ClipboardNation.SunsetTime[index];
+                this.m_CurrentNation.DarkTime[index] = this.m_ClipboardNation.DarkTime[index];
+            }
+            this.NationToPanel();
+        }
+
+        private void weatherProb_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+            for (int index = 0; index < 12; ++index)
+            {
+                if (numericUpDown == this.m_RainProb[index])
+                {
+                    this.m_CurrentNation.RainProb[index] = (int)numericUpDown.Value;
+                    if (this.m_CurrentNation.SnowProb[index] > 100 - this.m_CurrentNation.RainProb[index])
+                    {
+                        this.m_CurrentNation.SnowProb[index] = 100 - this.m_CurrentNation.RainProb[index];
+                        this.m_SnowProb[index].Value = (Decimal)this.m_CurrentNation.SnowProb[index];
+                    }
+                }
+                else if (numericUpDown == this.m_SnowProb[index])
+                {
+                    this.m_CurrentNation.SnowProb[index] = (int)numericUpDown.Value;
+                    if (this.m_CurrentNation.RainProb[index] > 100 - this.m_CurrentNation.SnowProb[index])
+                    {
+                        this.m_CurrentNation.RainProb[index] = 100 - this.m_CurrentNation.SnowProb[index];
+                        this.m_RainProb[index].Value = (Decimal)this.m_CurrentNation.RainProb[index];
+                    }
+                }
+                else if (numericUpDown == this.m_OvercastProb[index])
+                    this.m_CurrentNation.OvercastProb[index] = (int)numericUpDown.Value;
+                if (this.m_CurrentNation.ClearProb[index] != 100 - (this.m_CurrentNation.SnowProb[index] + this.m_CurrentNation.RainProb[index]))
+                    this.m_CurrentNation.ClearProb[index] = 100 - (this.m_CurrentNation.SnowProb[index] + this.m_CurrentNation.RainProb[index]);
+            }
+        }
+
+        private void dayTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            ComboBox comboBox = (ComboBox)sender;
+            for (int index = 0; index < 12; ++index)
+            {
+                if (comboBox == this.m_SunsetTime[index])
+                {
+                    switch (comboBox.SelectedIndex)
+                    {
+                        case 0:
+                            this.m_CurrentNation.SunsetTime[index] = 1600;
+                            continue;
+                        case 1:
+                            this.m_CurrentNation.SunsetTime[index] = 1630;
+                            continue;
+                        case 2:
+                            this.m_CurrentNation.SunsetTime[index] = 1700;
+                            continue;
+                        case 3:
+                            this.m_CurrentNation.SunsetTime[index] = 1730;
+                            continue;
+                        case 4:
+                            this.m_CurrentNation.SunsetTime[index] = 1800;
+                            continue;
+                        case 5:
+                            this.m_CurrentNation.SunsetTime[index] = 1830;
+                            continue;
+                        case 6:
+                            this.m_CurrentNation.SunsetTime[index] = 1900;
+                            continue;
+                        case 7:
+                            this.m_CurrentNation.SunsetTime[index] = 1930;
+                            continue;
+                        case 8:
+                            this.m_CurrentNation.SunsetTime[index] = 2000;
+                            continue;
+                        case 9:
+                            this.m_CurrentNation.SunsetTime[index] = 2030;
+                            continue;
+                        case 10:
+                            this.m_CurrentNation.SunsetTime[index] = 2100;
+                            continue;
+                        case 11:
+                            this.m_CurrentNation.SunsetTime[index] = 2130;
+                            continue;
+                        case 12:
+                            this.m_CurrentNation.SunsetTime[index] = 2200;
+                            continue;
+                        default:
+                            continue;
+                    }
+                }
+                else if (comboBox == this.m_NightTime[index])
+                {
+                    switch (comboBox.SelectedIndex)
+                    {
+                        case 0:
+                            this.m_CurrentNation.DarkTime[index] = 1600;
+                            continue;
+                        case 1:
+                            this.m_CurrentNation.DarkTime[index] = 1630;
+                            continue;
+                        case 2:
+                            this.m_CurrentNation.DarkTime[index] = 1700;
+                            continue;
+                        case 3:
+                            this.m_CurrentNation.DarkTime[index] = 1730;
+                            continue;
+                        case 4:
+                            this.m_CurrentNation.DarkTime[index] = 1800;
+                            continue;
+                        case 5:
+                            this.m_CurrentNation.DarkTime[index] = 1830;
+                            continue;
+                        case 6:
+                            this.m_CurrentNation.DarkTime[index] = 1900;
+                            continue;
+                        case 7:
+                            this.m_CurrentNation.DarkTime[index] = 1930;
+                            continue;
+                        case 8:
+                            this.m_CurrentNation.DarkTime[index] = 2000;
+                            continue;
+                        case 9:
+                            this.m_CurrentNation.DarkTime[index] = 2030;
+                            continue;
+                        case 10:
+                            this.m_CurrentNation.DarkTime[index] = 2100;
+                            continue;
+                        case 11:
+                            this.m_CurrentNation.DarkTime[index] = 2130;
+                            continue;
+                        case 12:
+                            this.m_CurrentNation.DarkTime[index] = 2200;
+                            continue;
+                        default:
+                            continue;
+                    }
+                }
+            }
+        }
+
+        private void treeStageSchedule_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (this.m_LockToPanel || this.treeStageSchedule.SelectedNode == null)
+                return;
+            if (this.treeStageSchedule.SelectedNode.Tag == null)
+            {
+                this.groupStageScheduleDetails.Visible = false;
+                this.buttonStageAddTime.Enabled = false;
+                this.buttonStageRemoveTime.Enabled = false;
+                this.buttonDeleteStageLeg.Enabled = false;
+            }
+            else
+            {
+                this.m_CurrentStageSchedule = (Schedule)this.treeStageSchedule.SelectedNode.Tag;
+                this.buttonDeleteStageLeg.Enabled = true;
+                this.StageScheduleToPanel();
+            }
+        }
+
+        private void StageScheduleToPanel()
+        {
+            this.groupStageScheduleDetails.Visible = true;
+            this.buttonStageAddTime.Enabled = true;
+            this.buttonStageRemoveTime.Enabled = true;
+            this.dateStagePicker.Value = this.m_CurrentStageSchedule.Date;
+            this.numericStageMinGames.Value = (Decimal)this.m_CurrentStageSchedule.MinGames;
+            this.numericStageMaxGames.Value = (Decimal)this.m_CurrentStageSchedule.MaxGames;
+            this.comboStageTime.SelectedIndex = this.m_CurrentStageSchedule.TimeIndex;
+        }
+
+        private void numericStageMinGames_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStageSchedule.MinGames = (int)this.numericStageMinGames.Value;
+        }
+
+        private void numericStageMaxGames_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStageSchedule.MaxGames = (int)this.numericStageMaxGames.Value;
+        }
+
+        private void comboStageTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboStageTime.SelectedIndex < 0 || this.comboStageTime.SelectedIndex == this.m_CurrentStageSchedule.TimeIndex)
+                return;
+            this.m_CurrentStageSchedule.TimeIndex = this.comboStageTime.SelectedIndex;
+            this.treeStageSchedule.SelectedNode.Text = this.m_CurrentStageSchedule.Date.ToString("f");
+        }
+
+        private void dateStagePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.dateStagePicker.Value == this.m_CurrentStageSchedule.Date)
+                return;
+            this.m_CurrentStageSchedule.Date = this.dateStagePicker.Value;
+            this.treeStageSchedule.SelectedNode.Text = this.m_CurrentStageSchedule.Date.ToString("f");
+        }
+
+        private void GroupScheduleToPanel()
+        {
+            this.groupGroupScheduleDetails.Visible = true;
+            this.buttonGroupAddTime.Enabled = true;
+            this.buttonGroupRemoveTime.Enabled = true;
+            this.dateGroupPicker.Value = this.m_CurrentGroupSchedule.Date;
+            this.numericGroupMinGames.Value = (Decimal)this.m_CurrentGroupSchedule.MinGames;
+            this.numericGroupMaxGames.Value = (Decimal)this.m_CurrentGroupSchedule.MaxGames;
+            this.comboGroupTime.SelectedIndex = this.m_CurrentGroupSchedule.TimeIndex;
+        }
+
+        private void dateGroupPicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.dateGroupPicker.Value == this.m_CurrentGroupSchedule.Date)
+                return;
+            this.m_CurrentGroupSchedule.Date = this.dateGroupPicker.Value;
+            this.treeGroupSchedule.SelectedNode.Text = this.m_CurrentGroupSchedule.Date.ToString("f");
+        }
+
+        private void comboGroupTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboGroupTime.SelectedIndex < 0 || this.comboGroupTime.SelectedIndex == this.m_CurrentGroupSchedule.TimeIndex)
+                return;
+            this.m_CurrentGroupSchedule.TimeIndex = this.comboGroupTime.SelectedIndex;
+            this.treeGroupSchedule.SelectedNode.Text = this.m_CurrentGroupSchedule.Date.ToString("f");
+        }
+
+        private void numericGroupMinGames_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentGroupSchedule.MinGames = (int)this.numericGroupMinGames.Value;
+        }
+
+        private void numericGroupMaxGames_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentGroupSchedule.MaxGames = (int)this.numericGroupMaxGames.Value;
+        }
+
+        private void treeGroupSchedule_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (this.m_LockToPanel || this.treeGroupSchedule.SelectedNode == null)
+                return;
+            if (this.treeGroupSchedule.SelectedNode.Tag == null)
+            {
+                this.groupGroupScheduleDetails.Visible = false;
+                this.buttonGroupAddTime.Enabled = false;
+                this.buttonGroupRemoveTime.Enabled = false;
+                this.buttonRemoveGroupLeg.Enabled = false;
+            }
+            else
+            {
+                this.m_CurrentGroupSchedule = (Schedule)this.treeGroupSchedule.SelectedNode.Tag;
+                this.buttonRemoveGroupLeg.Enabled = true;
+                this.GroupScheduleToPanel();
+            }
+        }
+
+        private void comboInitTeam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            ComboBox comboBox = (ComboBox)sender;
+            for (int orderId = 0; orderId < 24; ++orderId)
+            {
+                if (comboBox == this.m_InitTeamCombo[orderId])
+                {
+                    InitTeam initTeam = this.m_CurrentTrophy.InitTeamArray[orderId];
+                    if (initTeam == null)
+                    {
+                        initTeam = new InitTeam(orderId, -1);
+                        this.m_CurrentTrophy.InitTeamArray[orderId] = initTeam;
+                    }
+                    if (initTeam != null)
+                        initTeam.Team = comboBox.SelectedIndex != 0 ? (Team)comboBox.SelectedItem : (Team)null;
+                }
+            }
+        }
+
+        private void numericNTeams_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentGroup == null || this.numericNTeams.Value == (Decimal)(this.m_CurrentGroup.Ranks.Count - 1))
+                return;
+            if (this.numericNTeams.Value >= (Decimal)this.m_CurrentGroup.Ranks.Count)
+            {
+                for (int count = this.m_CurrentGroup.Ranks.Count; (Decimal)count <= this.numericNTeams.Value; ++count)
+                    this.m_CurrentGroup.AddRank();
+            }
+            else
+            {
+                for (int index = this.m_CurrentGroup.Ranks.Count - 1; (Decimal)index > this.numericNTeams.Value; --index)
+                    this.m_CurrentGroup.RemoveRank();
+            }
+            this.GroupToPanel();
+        }
+
+        private void numericNumGames_ValueChanged_1(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentGroup.Settings.m_num_games = (int)this.numericNumGames.Value;
+        }
+
+        private void EnableToolWorld()
+        {
+            if (this.m_CurrentCompobj == null || this.m_CurrentCompobj.IsWorld())
+            {
+                this.buttonAddNatiom.Visible = false;
+                this.buttonDeleteNation.Visible = false;
+                this.buttonAddTrophy.Visible = true;
+                this.buttonPasteTrophy.Visible = true;
+                this.comboTargetLeague.Visible = true;
+                this.buttonCopyTrophy.Visible = false;
+                this.buttonDeleteTrophy.Visible = false;
+                this.buttonAddStage.Visible = false;
+                this.buttonDeleteStage.Visible = false;
+                this.buttonAddGroup.Visible = false;
+                this.buttonDeleteGroup.Visible = false;
+            }
+            else if (this.m_CurrentCompobj.IsConfederation())
+            {
+                this.buttonAddNatiom.Visible = true;
+                this.buttonDeleteNation.Visible = false;
+                this.buttonAddTrophy.Visible = true;
+                this.buttonPasteTrophy.Visible = true;
+                this.comboTargetLeague.Visible = true;
+                this.buttonCopyTrophy.Visible = false;
+                this.buttonDeleteTrophy.Visible = false;
+                this.buttonAddStage.Visible = false;
+                this.buttonDeleteStage.Visible = false;
+                this.buttonAddGroup.Visible = false;
+                this.buttonDeleteGroup.Visible = false;
+            }
+            else if (this.m_CurrentCompobj.IsNation())
+            {
+                this.buttonAddNatiom.Visible = false;
+                this.buttonDeleteNation.Visible = true;
+                this.buttonAddTrophy.Visible = true;
+                this.buttonPasteTrophy.Visible = true;
+                this.comboTargetLeague.Visible = true;
+                this.buttonCopyTrophy.Visible = false;
+                this.buttonDeleteTrophy.Visible = false;
+                this.buttonAddStage.Visible = false;
+                this.buttonDeleteStage.Visible = false;
+                this.buttonAddGroup.Visible = false;
+                this.buttonDeleteGroup.Visible = false;
+            }
+            else if (this.m_CurrentCompobj.IsTrophy())
+            {
+                this.buttonAddNatiom.Visible = false;
+                this.buttonDeleteNation.Visible = false;
+                this.buttonAddTrophy.Visible = false;
+                this.buttonPasteTrophy.Visible = false;
+                this.comboTargetLeague.Visible = false;
+                this.buttonCopyTrophy.Visible = true;
+                this.buttonDeleteTrophy.Visible = true;
+                this.buttonAddStage.Visible = false;
+                this.buttonDeleteStage.Visible = false;
+                this.buttonAddGroup.Visible = false;
+                this.buttonDeleteGroup.Visible = false;
+            }
+            else if (this.m_CurrentCompobj.IsStage())
+            {
+                this.buttonAddNatiom.Visible = false;
+                this.buttonDeleteNation.Visible = false;
+                this.buttonAddTrophy.Visible = false;
+                this.buttonPasteTrophy.Visible = false;
+                this.comboTargetLeague.Visible = false;
+                this.buttonCopyTrophy.Visible = false;
+                this.buttonDeleteTrophy.Visible = false;
+                this.buttonAddStage.Visible = true;
+                this.buttonDeleteStage.Visible = true;
+                this.buttonAddGroup.Visible = false;
+                this.buttonDeleteGroup.Visible = false;
+            }
+            else
+            {
+                if (!this.m_CurrentCompobj.IsGroup())
+                    return;
+                this.buttonAddNatiom.Visible = false;
+                this.buttonDeleteNation.Visible = false;
+                this.buttonAddTrophy.Visible = false;
+                this.buttonPasteTrophy.Visible = false;
+                this.comboTargetLeague.Visible = false;
+                this.buttonCopyTrophy.Visible = false;
+                this.buttonDeleteTrophy.Visible = false;
+                this.buttonAddStage.Visible = false;
+                this.buttonDeleteStage.Visible = false;
+                this.buttonAddGroup.Visible = true;
+                this.buttonDeleteGroup.Visible = true;
+            }
+        }
+
+        private void labelDatabaseCountry_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.m_CurrentNation.Country == null)
+                return;
+            MainForm.CM.JumpTo((IdObject)this.m_CurrentNation.Country);
+        }
+
+        private void buttonAddNatiom_Click(object sender, EventArgs e)
+        {
+            Nation nation = new Nation(FifaEnvironment.CompetitionObjects.GetNewId(), "COUN", "NationName_XXX", (Compobj)this.m_CurrentConfederation);
+            this.m_CurrentConfederation.Nations.Add((object)nation);
+            FifaEnvironment.CompetitionObjects.Add((object)nation);
+            nation.Settings.m_schedule_seasonstartmonth = this.m_CurrentConfederation.Settings.m_schedule_seasonstartmonth;
+            nation.Settings.m_rule_numyellowstored = 3;
+            TreeNode treeNode = this.treeWorld.SelectedNode.Nodes.Add(nation.ToString());
+            treeNode.Tag = (object)nation;
+            treeNode.ForeColor = Color.Blue;
+            this.treeWorld.SelectedNode = treeNode;
+            this.treeWorld.Refresh();
+        }
+
+        private void buttonDeleteNation_Click(object sender, EventArgs e)
+        {
+            this.m_CurrentConfederation = (Confederation)this.m_CurrentNation.ParentObj;
+            foreach (Trophy trophy in (ArrayList)this.m_CurrentNation.Trophies)
+            {
+                foreach (Stage stage in (ArrayList)trophy.Stages)
+                {
+                    foreach (IdObject group in (ArrayList)stage.Groups)
+                        this.m_Competitions.RemoveId(group);
+                    this.m_Competitions.RemoveId((IdObject)stage);
+                }
+                this.m_Competitions.RemoveId((IdObject)trophy);
+            }
+            this.m_CurrentConfederation.Nations.RemoveId((IdObject)this.m_CurrentNation);
+            this.treeWorld.SelectedNode.Remove();
+        }
+
+        private void buttonAddTrophy_Click(object sender, EventArgs e)
+        {
+            int newId = FifaEnvironment.CompetitionObjects.GetNewId();
+            int assetId = Trophy.AutoAsset();
+            string conventionalString = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
+            string typeString = "C" + assetId.ToString();
+            Trophy trophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
+            this.m_CurrentCompobj.Trophies.Add((object)trophy);
+            this.m_Competitions.Add((object)trophy);
+            trophy.Settings.m_asset_id[0] = assetId;
+            trophy.Settings.m_rule_numsubsbench = 5;
+            trophy.Settings.m_match_matchimportance = 25;
+            trophy.Settings.m_comp_type = "LEAGUE";
+            if (!trophy.InsertStage(0))
+                return;
+            Stage stage = (Stage)trophy.Stages[0];
+            stage.InsertGroup(0);
+            Group group = (Group)stage.Groups[0];
+            TreeNode treeNode1 = this.treeWorld.SelectedNode.Nodes.Add(trophy.ToString());
+            treeNode1.Tag = (object)trophy;
+            treeNode1.ForeColor = Color.DarkGreen;
+            TreeNode treeNode2 = treeNode1.Nodes.Add(stage.ToString());
+            treeNode2.Tag = (object)stage;
+            treeNode2.ForeColor = Color.Magenta;
+            TreeNode treeNode3 = treeNode2.Nodes.Add(group.ToString());
+            treeNode3.Tag = (object)group;
+            treeNode3.ForeColor = Color.DarkRed;
+            this.treeWorld.SelectedNode = treeNode1;
+            this.Preset();
+            this.treeWorld.Refresh();
+        }
+
+        private void buttonDeleteTrophy_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentTrophy.ParentObj.IsConfederation())
+            {
+                this.m_CurrentConfederation = (Confederation)this.m_CurrentTrophy.ParentObj;
+                this.m_CurrentConfederation.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
+            }
+            else if (this.m_CurrentTrophy.ParentObj.IsNation())
+            {
+                this.m_CurrentNation = (Nation)this.m_CurrentTrophy.ParentObj;
+                this.m_CurrentNation.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
+            }
+            else if (this.m_CurrentTrophy.ParentObj.IsWorld())
+                this.m_CurrentWorld.Trophies.RemoveId((IdObject)this.m_CurrentTrophy);
+            foreach (Stage stage in (ArrayList)this.m_CurrentTrophy.Stages)
+            {
+                foreach (IdObject group in (ArrayList)stage.Groups)
+                    this.m_Competitions.RemoveId(group);
+                this.m_Competitions.RemoveId((IdObject)stage);
+            }
+            this.m_Competitions.RemoveId((IdObject)this.m_CurrentTrophy);
+            this.treeWorld.SelectedNode.Remove();
+            this.Preset();
+        }
+
+        private Stage CreateFirstStage(Trophy parentTrophy)
+        {
+            return !parentTrophy.InsertStage(0) ? (Stage)null : (Stage)parentTrophy.Stages[0];
+        }
+
+        private Group CreateFirstGroup(Stage parentStage)
+        {
+            Group group = new Group(FifaEnvironment.CompetitionObjects.GetNewId(), "G1", "FCE_Setup_Group", (Compobj)parentStage);
+            parentStage.Groups.Add((object)group);
+            FifaEnvironment.CompetitionObjects.Add((object)group);
+            group.Settings.m_num_games = 1;
+            return group;
+        }
+
+        private void buttonAddStage_Click(object sender, EventArgs e)
+        {
+            int num = this.m_CurrentTrophy.Stages.IndexOf((object)this.m_CurrentStage);
+            if (num < 0)
+                return;
+            int index = num + 1;
+            if (!this.m_CurrentTrophy.InsertStage(index))
+                return;
+            this.m_CurrentStage = (Stage)this.m_CurrentTrophy.Stages[index];
+            this.m_Competitions.Add((object)this.m_CurrentStage);
+            this.m_CurrentStage.InsertGroup(0);
+            Group group = (Group)this.m_CurrentStage.Groups[0];
+            this.m_Competitions.Add((object)group);
+            TreeNode treeNode1 = this.treeWorld.SelectedNode.Parent.Nodes.Insert(index, this.m_CurrentStage.ToString());
+            treeNode1.ForeColor = Color.Magenta;
+            treeNode1.Tag = (object)this.m_CurrentStage;
+            TreeNode treeNode2 = treeNode1.Nodes.Add(group.ToString());
+            treeNode2.Tag = (object)group;
+            treeNode2.ForeColor = Color.DarkRed;
+            this.treeWorld.SelectedNode = treeNode1;
+            this.Preset();
+        }
+
+        private void buttonDeleteStage_Click(object sender, EventArgs e)
+        {
+            foreach (Group group in (ArrayList)this.m_CurrentStage.Groups)
+            {
+                for (int index = 1; index < group.Ranks.Count; ++index)
+                {
+                    Rank rank = (Rank)group.Ranks[index];
+                    if (rank.MoveFrom != null)
+                        rank.MoveFrom.MoveTo = (Rank)null;
+                    if (rank.MoveTo != null)
+                        rank.MoveTo.MoveFrom = (Rank)null;
+                }
+                this.m_Competitions.RemoveId((IdObject)group);
+            }
+            this.m_Competitions.RemoveId((IdObject)this.m_CurrentStage);
+            this.m_CurrentTrophy.RemoveStage(this.m_CurrentStage);
+            this.treeWorld.SelectedNode.Remove();
+            this.Preset();
+        }
+
+        private void checkCalccompavgs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_calccompavgs = this.checkCalccompavgs.Checked ? 1 : -1;
+        }
+
+        private void checkRandomDraw_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_randomdraw = this.checkRandomDraw.Checked ? 1 : -1;
+        }
+
+        private void buttonAddGroup_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null)
+                return;
+            this.m_ClipboardGroup = this.m_CurrentGroup;
+            int num = this.m_CurrentStage.Groups.IndexOf((object)this.m_CurrentGroup);
+            if (num < 0)
+                return;
+            int index = num + 1;
+            if (!this.m_CurrentStage.InsertGroup(index))
+                return;
+            this.m_CurrentGroup = (Group)this.m_CurrentStage.Groups[index];
+            this.m_Competitions.Add((object)this.m_CurrentGroup);
+            for (int orderId = 1; orderId < this.m_ClipboardGroup.Ranks.Count; ++orderId)
+            {
+                Rank rank1 = new Rank(this.m_CurrentGroup, orderId);
+                Rank rank2 = (Rank)this.m_ClipboardGroup.Ranks[orderId];
+                if (rank2.MoveFrom != null && rank2.MoveFrom.Id == 0)
+                    rank1.MoveFrom = rank2.MoveFrom;
+                this.m_CurrentGroup.Ranks.Add((object)rank1);
+            }
+            this.m_CurrentGroup.Settings.m_num_games = this.m_ClipboardGroup.Settings.m_num_games;
+            TreeNode treeNode = this.treeWorld.SelectedNode.Parent.Nodes.Insert(index, this.m_CurrentGroup.ToString());
+            treeNode.ForeColor = Color.Brown;
+            treeNode.Tag = (object)this.m_CurrentGroup;
+            this.treeWorld.SelectedNode = treeNode;
+            foreach (TreeNode node in this.treeWorld.SelectedNode.Parent.Nodes)
+                node.Text = ((Group)node.Tag).ToString();
+            this.Preset();
+        }
+
+        private void buttonDeleteGroup_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null)
+                return;
+            for (int index = 1; index < this.m_CurrentGroup.Ranks.Count; ++index)
+            {
+                Rank rank = (Rank)this.m_CurrentGroup.Ranks[index];
+                if (rank.MoveFrom != null)
+                    rank.MoveFrom.MoveTo = (Rank)null;
+                if (rank.MoveTo != null)
+                    rank.MoveTo.MoveFrom = (Rank)null;
+            }
+            this.m_CurrentStage.RemoveGroup(this.m_CurrentGroup);
+            this.m_Competitions.RemoveId((IdObject)this.m_CurrentGroup);
+            TreeNode parent = this.treeWorld.SelectedNode.Parent;
+            this.treeWorld.SelectedNode.Remove();
+            foreach (TreeNode node in parent.Nodes)
+                node.Text = ((Group)node.Tag).ToString();
+            this.Preset();
+        }
+
+        private void buttonCopyTrophy_Click(object sender, EventArgs e)
+        {
+            this.m_ClipboardTrophy = this.m_CurrentTrophy;
+            this.buttonPasteTrophy.Enabled = this.m_ClipboardTrophy != null;
+            this.comboTargetLeague.Enabled = this.buttonPasteTrophy.Enabled;
+        }
+
+        private void buttonPasteTrophy_Click(object sender, EventArgs e)
+        {
+            if (this.m_ClipboardTrophy == null)
+                return;
+            bool flag = false;
+            if (this.m_ClipboardTrophy.Stages != null && ((Compobj)this.m_ClipboardTrophy.Stages[0]).Settings.m_match_stagetype == "LEAGUE")
+                flag = true;
+            int newId = FifaEnvironment.CompetitionObjects.GetNewId();
+            League targetLeague = (League)null;
+            if (this.comboTargetLeague.SelectedIndex > 0)
+                targetLeague = (League)this.comboTargetLeague.SelectedItem;
+            int assetId = !flag || targetLeague == null ? Trophy.AutoAsset() : targetLeague.Id;
+            string conventionalString = FifaEnvironment.Language.GetTournamentConventionalString(assetId, Language.ETournamentStringType.Abbr15);
+            string typeString = "C" + assetId.ToString();
+            Trophy newTrophy = new Trophy(newId, typeString, conventionalString, this.m_CurrentCompobj);
+            this.m_CurrentCompobj.Trophies.Add((object)newTrophy);
+            this.m_Competitions.Add((object)newTrophy);
+            newTrophy.Settings.m_asset_id[0] = assetId;
+            newTrophy.Settings.m_rule_numsubsbench = this.m_ClipboardTrophy.Settings.m_rule_numsubsbench;
+            newTrophy.Settings.m_match_matchimportance = this.m_ClipboardTrophy.Settings.m_match_matchimportance;
+            newTrophy.Settings.m_comp_type = this.m_ClipboardTrophy.Settings.m_comp_type;
+            newTrophy.Settings.m_StandingsSort = this.m_ClipboardTrophy.Settings.m_StandingsSort;
+            newTrophy.Settings.m_schedule_checkconflict = this.m_ClipboardTrophy.Settings.m_schedule_checkconflict;
+            newTrophy.Settings.TrophyCompdependency = this.m_ClipboardTrophy.Settings.TrophyCompdependency;
+            newTrophy.Settings.TrophyForcecomp = this.m_ClipboardTrophy.Settings.TrophyForcecomp;
+            newTrophy.Settings.LeaguePromo = this.m_ClipboardTrophy.Settings.LeaguePromo;
+            newTrophy.Settings.LeagueReleg = this.m_ClipboardTrophy.Settings.LeagueReleg;
+            TreeNode treeNode1 = this.treeWorld.SelectedNode.Nodes.Add(newTrophy.ToString());
+            treeNode1.Tag = (object)newTrophy;
+            treeNode1.ForeColor = Color.DarkGreen;
+            for (int index1 = 0; index1 < this.m_ClipboardTrophy.Stages.Count; ++index1)
+            {
+                newTrophy.AddStage();
+                Stage stage1 = (Stage)newTrophy.Stages[index1];
+                Stage stage2 = (Stage)this.m_ClipboardTrophy.Stages[index1];
+                if (stage2.Schedules != null)
+                {
+                    foreach (Schedule schedule1 in (ArrayList)stage2.Schedules)
+                    {
+                        Schedule schedule2 = new Schedule(stage1, schedule1.Day, schedule1.Leg, schedule1.MinGames, schedule1.MaxGames, schedule1.Time);
+                        stage1.AddSchedule(schedule2);
+                    }
+                }
+                stage1.Description = stage2.Description;
+                stage1.Settings.m_match_stagetype = stage2.Settings.m_match_stagetype;
+                stage1.Settings.m_match_matchsituation = stage2.Settings.m_match_matchsituation;
+                stage1.Settings.m_schedule_matchreplay = stage2.Settings.m_schedule_matchreplay;
+                stage1.Settings.m_info_prize_money = stage2.Settings.m_info_prize_money;
+                stage1.Settings.m_info_prize_money_drop = stage2.Settings.m_info_prize_money_drop;
+                stage1.Settings.m_advance_maxteamsassoc = stage2.Settings.m_advance_maxteamsassoc;
+                stage1.Settings.m_advance_maxteamsgroup = stage2.Settings.m_advance_maxteamsgroup;
+                stage1.Settings.m_schedule_reversed = stage2.Settings.m_schedule_reversed;
+                stage1.Settings.Advance_standingskeep = stage2.Settings.Advance_standingskeep;
+                stage1.Settings.Advance_standingsagg = stage2.Settings.Advance_standingsagg;
+                stage1.Settings.Advance_pointskeep = stage2.Settings.Advance_pointskeep;
+                stage1.Settings.m_advance_pointskeeppercentage = stage2.Settings.m_advance_pointskeeppercentage;
+                stage1.Settings.Advance_standingsrank = stage2.Settings.Advance_standingsrank;
+                stage1.Settings.m_EndRuleKo1Leg = stage2.Settings.m_EndRuleKo1Leg;
+                stage1.Settings.m_EndRuleKo2Leg2 = stage2.Settings.m_EndRuleKo2Leg2;
+                stage1.Settings.Standings_checkrank = stage2.Settings.Standings_checkrank;
+                stage1.Settings.m_advance_randomdraw = stage2.Settings.m_advance_randomdraw;
+                stage1.Settings.m_advance_jleagueignorecheck = stage2.Settings.m_advance_jleagueignorecheck;
+                stage1.Settings.m_advance_calccompavgs = stage2.Settings.m_advance_calccompavgs;
+                stage2.CopyTasks(stage1, targetLeague);
+                TreeNode treeNode2 = treeNode1.Nodes.Add(stage1.ToString());
+                treeNode2.Tag = (object)stage1;
+                treeNode2.ForeColor = Color.Magenta;
+                for (int groupIndex = 0; groupIndex < stage2.Groups.Count; ++groupIndex)
+                {
+                    stage1.InsertGroup(groupIndex);
+                    Group group1 = (Group)stage1.Groups[groupIndex];
+                    Group group2 = (Group)stage2.Groups[groupIndex];
+                    TreeNode treeNode3 = treeNode2.Nodes.Add(group1.ToString());
+                    treeNode3.Tag = (object)group1;
+                    treeNode3.ForeColor = Color.DarkRed;
+                    if (group2.Schedules != null)
+                    {
+                        foreach (Schedule schedule1 in (ArrayList)group2.Schedules)
+                        {
+                            Schedule schedule2 = new Schedule(group1, schedule1.Day, schedule1.Leg, schedule1.MinGames, schedule1.MaxGames, schedule1.Time);
+                            group1.AddSchedule(schedule2);
+                        }
+                    }
+                    group1.Description = group2.Description;
+                    for (int index2 = 1; index2 < group2.Ranks.Count; ++index2)
+                    {
+                        group1.AddRank();
+                        Rank rank1 = (Rank)group2.Ranks[index2];
+                        Rank rank2 = (Rank)group1.Ranks[index2];
+                    }
+                    group1.Settings.m_num_games = group2.Settings.m_num_games;
+                    group1.Settings.m_StandingsSort = group2.Settings.m_StandingsSort;
+                    group1.Settings.m_info_color_slot_champ = group2.Settings.m_info_color_slot_champ;
+                    group1.Settings.m_info_slot_champ = group2.Settings.m_info_slot_champ;
+                    int min;
+                    int max;
+                    group2.Settings.GetInfoColorSlotChampCup(out min, out max);
+                    group1.Settings.SetInfoColorSlotChampCup(min, max);
+                    group2.Settings.GetInfoColorSlotEuroLeague(out min, out max);
+                    group1.Settings.SetInfoColorSlotEuroLeague(min, max);
+                    group2.Settings.GetInfoColorSlotRelegPoss(out min, out max);
+                    group1.Settings.SetInfoColorSlotRelegPoss(min, max);
+                    group2.Settings.GetInfoColorSlotReleg(out min, out max);
+                    group1.Settings.SetInfoColorSlotReleg(min, max);
+                    group2.Settings.GetInfoColorSlotPromo(out min, out max);
+                    group1.Settings.SetInfoColorSlotPromo(min, max);
+                    group2.Settings.GetInfoColorSlotPromoPoss(out min, out max);
+                    group1.Settings.SetInfoColorSlotPromoPoss(min, max);
+                    group2.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+                    group1.Settings.SetInfoColorSlotAdvGroup(min, max);
+                    group2.Settings.GetInfoSlotRelegPoss(out min, out max);
+                    group1.Settings.SetInfoSlotRelegPoss(min, max);
+                    group2.Settings.GetInfoSlotReleg(out min, out max);
+                    group1.Settings.SetInfoSlotReleg(min, max);
+                    group2.Settings.GetInfoSlotPromo(out min, out max);
+                    group1.Settings.SetInfoSlotPromo(min, max);
+                    group2.Settings.GetInfoSlotPromoPoss(out min, out max);
+                    group1.Settings.SetInfoSlotPromoPoss(min, max);
+                    group2.CopyTasks(group1, targetLeague);
+                }
+            }
+            this.m_ClipboardTrophy.CopyTasks(newTrophy, targetLeague);
+            newTrophy.LinkCompetitions();
+            for (int index1 = 0; index1 < this.m_ClipboardTrophy.Stages.Count; ++index1)
+            {
+                Stage stage1 = (Stage)newTrophy.Stages[index1];
+                Stage stage2 = (Stage)this.m_ClipboardTrophy.Stages[index1];
+                stage1.LinkCompetitions();
+                for (int index2 = 0; index2 < stage2.Groups.Count; ++index2)
+                {
+                    Group group1 = (Group)stage1.Groups[index2];
+                    Group group2 = (Group)stage2.Groups[index2];
+                    group1.LinkCompetitions();
+                    for (int index3 = 1; index3 < group2.Ranks.Count; ++index3)
+                    {
+                        Rank rank1 = (Rank)group2.Ranks[index3];
+                        Rank rank2 = (Rank)group1.Ranks[index3];
+                        if (rank1.MoveFrom != null)
+                        {
+                            int num = rank1.MoveFrom.Group.Id - rank1.Group.Id;
+                            Compobj compobj = (Compobj)this.m_Competitions.SearchId(rank2.Group.Id + num);
+                            if (compobj.IsGroup())
+                            {
+                                Group group3 = (Group)compobj;
+                                if (group3 != null && group3.Ranks.Count > rank1.MoveFrom.Id)
+                                    rank2.MoveFrom = (Rank)group3.Ranks[rank1.MoveFrom.Id];
+                            }
+                        }
+                        if (rank1.MoveTo != null)
+                        {
+                            int num = rank1.MoveTo.Group.Id - rank1.Group.Id;
+                            Compobj compobj = (Compobj)this.m_Competitions.SearchId(rank2.Group.Id + num);
+                            if (compobj != null && compobj.IsGroup())
+                            {
+                                Group group3 = (Group)compobj;
+                                if (group3 != null)
+                                    rank2.MoveTo = (Rank)group3.Ranks[rank1.MoveTo.Id];
+                            }
+                        }
+                    }
+                }
+            }
+            this.treeWorld.SelectedNode = treeNode1;
+            this.Preset();
+            this.treeWorld.Refresh();
+        }
+
+        private void buttonCopyStageCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStage.NSchedule == 0)
+                return;
+            this.m_ClipboardStageForSchedule = this.m_CurrentStage;
+            this.m_ClipboardGroupForSchedule = (Group)null;
+            this.buttonPasteStageCalendar.Enabled = true;
+            this.buttonPasteGroupCalendar.Enabled = true;
+        }
+
+        private void buttonPasteStageCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_ClipboardStageForSchedule != null && this.m_CurrentStage != this.m_ClipboardStageForSchedule)
+            {
+                this.m_CurrentStage.RemoveAllSchedules();
+                foreach (Schedule schedule in (ArrayList)this.m_ClipboardStageForSchedule.Schedules)
+                    this.m_CurrentStage.AddSchedule(new Schedule(this.m_CurrentStage, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
+                this.StageToPanel();
+            }
+            else
+            {
+                if (this.m_ClipboardGroupForSchedule == null || this.m_ClipboardGroupForSchedule.NSchedule == 0)
+                    return;
+                this.m_CurrentStage.RemoveAllSchedules();
+                foreach (Schedule schedule in (ArrayList)this.m_ClipboardGroupForSchedule.Schedules)
+                    this.m_CurrentStage.AddSchedule(new Schedule(this.m_CurrentStage, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
+                this.StageToPanel();
+            }
+        }
+
+        private void buttonNewStageLeg_Click(object sender, EventArgs e)
+        {
+            int dayDelay = 7;
+            this.m_CurrentStageSchedule = this.m_CurrentStageSchedule == null || this.m_CurrentStage.Schedules == null || this.m_CurrentStage.Schedules.Count == 0 ? this.m_CurrentStage.AppendLeg(dayDelay) : this.m_CurrentStage.Schedules.DuplicatetLeg(this.m_CurrentStageSchedule.Leg, dayDelay);
+            this.StageToPanel();
+        }
+
+        private void buttonDeleteStageLeg_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStageSchedule == null)
+                return;
+            this.m_CurrentStage.Schedules.RemoveLeg(this.m_CurrentStageSchedule.Leg);
+            this.m_CurrentStageSchedule = (Schedule)null;
+            this.StageToPanel();
+        }
+
+        private void buttonStageAddTime_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStage == null || this.m_CurrentStageSchedule == null)
+                return;
+            this.m_CurrentStage.CloneSchedule(this.m_CurrentStageSchedule, 100);
+            this.StageToPanel();
+        }
+
+        private void buttonStageRemoveTime_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStage == null || this.m_CurrentStageSchedule == null)
+                return;
+            this.m_CurrentStage.DeleteSchedule(this.m_CurrentStageSchedule);
+            this.m_CurrentStageSchedule = (Schedule)null;
+            this.StageToPanel();
+        }
+
+        private void buttonCopyGroupCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup.NSchedule <= 0)
+                return;
+            this.m_ClipboardStageForSchedule = (Stage)null;
+            this.m_ClipboardGroupForSchedule = this.m_CurrentGroup;
+            this.buttonPasteStageCalendar.Enabled = true;
+            this.buttonPasteGroupCalendar.Enabled = true;
+        }
+
+        private void buttonPasteGroupCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_ClipboardStageForSchedule != null && this.m_ClipboardStageForSchedule.NSchedule != 0)
+            {
+                this.m_CurrentGroup.RemoveAllSchedules();
+                foreach (Schedule schedule in (ArrayList)this.m_ClipboardStageForSchedule.Schedules)
+                    this.m_CurrentGroup.AddSchedule(new Schedule(this.m_CurrentGroup, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
+                this.GroupToPanel();
+            }
+            else
+            {
+                if (this.m_ClipboardGroupForSchedule == null || this.m_ClipboardGroupForSchedule == this.m_CurrentGroup)
+                    return;
+                this.m_CurrentGroup.RemoveAllSchedules();
+                foreach (Schedule schedule in (ArrayList)this.m_ClipboardGroupForSchedule.Schedules)
+                    this.m_CurrentGroup.AddSchedule(new Schedule(this.m_CurrentGroup, schedule.Day, schedule.Leg, schedule.MinGames, schedule.MaxGames, schedule.Time));
+                this.GroupToPanel();
+            }
+        }
+
+        private void buttonGroupAddTime_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null || this.m_CurrentGroupSchedule == null)
+                return;
+            this.m_CurrentGroup.CloneSchedule(this.m_CurrentGroupSchedule, 100);
+            this.GroupToPanel();
+        }
+
+        private void buttonGroupRemoveTime_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null || this.m_CurrentGroupSchedule == null)
+                return;
+            this.m_CurrentGroup.DeleteSchedule(this.m_CurrentGroupSchedule);
+            this.m_CurrentGroupSchedule = (Schedule)null;
+            this.GroupToPanel();
+        }
+
+        private void buttonAddRule_Click(object sender, EventArgs e)
+        {
+            this.m_CurrentGroup.AddTask(new Task("start", "", this.m_CurrentGroup.Id, 0, 0, 0)
+            {
+                Group = this.m_CurrentGroup
+            });
+            this.GroupToPanel();
+        }
+
+        private void buttonRemoveRule_Click(object sender, EventArgs e)
+        {
+            this.m_CurrentGroup.RemoveLastTask("start");
+            this.GroupToPanel();
+        }
+
+        private void checkInfoChamp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentGroup.Settings.m_info_slot_champ = this.checkInfoChamp.Checked ? 1 : -1;
+        }
+
+        private void checkInfoPossibleRelegation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericPossibleRelegationMin.Visible = this.numericPossibleRelegationMax.Visible = this.checkInfoPossibleRelegation.Checked;
+            if (this.checkInfoPossibleRelegation.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericPossibleRelegationMin.Value = (Decimal)min;
+                this.numericPossibleRelegationMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(-1, -1);
+        }
+
+        private void checkInfoRelegation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericRelegationMin.Visible = this.numericRelegationMax.Visible = this.checkInfoRelegation.Checked;
+            if (this.checkInfoRelegation.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericRelegationMin.Value = (Decimal)min;
+                this.numericRelegationMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoSlotReleg(-1, -1);
+        }
+
+        private void checkInfoPromotion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericPromotionMin.Visible = this.numericPromotionMax.Visible = this.checkInfoPromotion.Checked;
+            if (this.checkInfoPromotion.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericPromotionMin.Value = (Decimal)min;
+                this.numericPromotionMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoSlotPromo(-1, -1);
+        }
+
+        private void checkInfoPossiblePromotion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericPossiblePromotionMin.Visible = this.numericPossiblePromotionMax.Visible = this.checkInfoPossiblePromotion.Checked;
+            if (this.checkInfoPossiblePromotion.Checked)
+            {
+                int min;
+                int max;
+                this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericPossiblePromotionMin.Value = (Decimal)min;
+                this.numericPossiblePromotionMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(-1, -1);
+        }
+
+        private void numericPossibleRelegationMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPossibleRelegationMin.Value;
+            int max1 = (int)this.numericPossibleRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(min1, max1))
+                return;
+            this.numericPossibleRelegationMin.Value = (Decimal)min2;
+        }
+
+        private void numericRelegationMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericRelegationMin.Value;
+            int max1 = (int)this.numericRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotReleg(min1, max1))
+                return;
+            this.numericRelegationMin.Value = (Decimal)min2;
+        }
+
+        private void numericPromotionMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPromotionMin.Value;
+            int max1 = (int)this.numericPromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromo(min1, max1))
+                return;
+            this.numericPromotionMin.Value = (Decimal)min2;
+        }
+
+        private void numericPossiblePromotionMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPossiblePromotionMin.Value;
+            int max1 = (int)this.numericPossiblePromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(min1, max1))
+                return;
+            this.numericPossiblePromotionMin.Value = (Decimal)min2;
+        }
+
+        private void numericPossibleRelegationMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPossibleRelegationMin.Value;
+            int max1 = (int)this.numericPossibleRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotRelegPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotRelegPoss(min1, max1))
+                return;
+            this.numericPossibleRelegationMax.Value = (Decimal)max2;
+        }
+
+        private void numericRelegationMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericRelegationMin.Value;
+            int max1 = (int)this.numericRelegationMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotReleg(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotReleg(min1, max1))
+                return;
+            this.numericRelegationMax.Value = (Decimal)max2;
+        }
+
+        private void numericPromotionMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPromotionMin.Value;
+            int max1 = (int)this.numericPromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotPromo(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromo(min1, max1))
+                return;
+            this.numericPromotionMax.Value = (Decimal)max2;
+        }
+
+        private void numericPossiblePromotionMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericPossiblePromotionMin.Value;
+            int max1 = (int)this.numericPossiblePromotionMax.Value;
+            int min2;
+            int max2;
+            this.m_CurrentGroup.Settings.GetInfoSlotPromoPoss(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentGroup.Settings.SetInfoSlotPromoPoss(min1, max1))
+                return;
+            this.numericPossiblePromotionMax.Value = (Decimal)max2;
+        }
+
+        private void buttonCleanGroupCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null)
+                return;
+            this.m_CurrentGroup.RemoveAllSchedules();
+            this.GroupToPanel();
+        }
+
+        private void buttonCleanStageCalendar_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStage == null)
+                return;
+            this.m_CurrentStage.RemoveAllSchedules();
+            this.StageToPanel();
+        }
+
+        private void buttonNewGroupLeg_Click(object sender, EventArgs e)
+        {
+            int dayDelay = 7;
+            this.m_CurrentGroupSchedule = this.m_CurrentGroupSchedule == null || this.m_CurrentGroup.Schedules.Count == 0 ? this.m_CurrentGroup.AppendLeg(dayDelay) : this.m_CurrentGroup.Schedules.DuplicatetLeg(this.m_CurrentGroupSchedule.Leg, dayDelay);
+            this.GroupToPanel();
+        }
+
+        private void buttonRemoveGroupLeg_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroupSchedule == null)
+                return;
+            this.m_CurrentGroup.Schedules.RemoveLeg(this.m_CurrentGroupSchedule.Leg);
+            this.m_CurrentGroupSchedule = (Schedule)null;
+            this.GroupToPanel();
+        }
+
+        private void checkMatchReplay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_schedule_matchreplay = this.checkMatchReplay.Checked ? 1 : -1;
+        }
+
+        private void checkMaxteamsassoc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_maxteamsassoc = this.checkMaxteamsassoc.Checked ? 1 : -1;
+        }
+
+        private void numericStageRef_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_maxteamsstageref == (int)this.numericStageRef.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_maxteamsstageref = (int)this.numericStageRef.Value;
+        }
+
+        private void checkClausuraSchedule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_schedule_reversed = this.checkClausuraSchedule.Checked ? 1 : -1;
+        }
+
+        private void probUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+            string tag = (string)numericUpDown.Tag;
+            if (tag == null)
+                return;
+            int int32 = Convert.ToInt32(tag.Substring(1));
+            if (tag.StartsWith("R"))
+                this.m_CurrentNation.RainProb[int32] = (int)numericUpDown.Value;
+            else if (tag.StartsWith("S"))
+            {
+                this.m_CurrentNation.SnowProb[int32] = (int)numericUpDown.Value;
+            }
+            else
+            {
+                if (!tag.StartsWith("O"))
+                    return;
+                this.m_CurrentNation.OvercastProb[int32] = (int)numericUpDown.Value;
+            }
+        }
+
+        private void TimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            ComboBox comboBox = (ComboBox)sender;
+            string tag = (string)comboBox.Tag;
+            if (tag == null)
+                return;
+            int int32 = Convert.ToInt32(tag.Substring(1));
+            if (tag.StartsWith("U"))
+            {
+                this.m_CurrentNation.SunsetTime[int32] = this.ConvertIndexToTime(comboBox.SelectedIndex);
+            }
+            else
+            {
+                if (!tag.StartsWith("N"))
+                    return;
+                this.m_CurrentNation.DarkTime[int32] = this.ConvertIndexToTime(comboBox.SelectedIndex);
+            }
+        }
+
+        private int ConvertIndexToTime(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return 1600;
+                case 1:
+                    return 1630;
+                case 2:
+                    return 1700;
+                case 3:
+                    return 1730;
+                case 4:
+                    return 1800;
+                case 5:
+                    return 1830;
+                case 6:
+                    return 1900;
+                case 7:
+                    return 1930;
+                case 8:
+                    return 2000;
+                case 9:
+                    return 2030;
+                case 10:
+                    return 2100;
+                case 11:
+                    return 2130;
+                case 12:
+                    return 2200;
+                default:
+                    return 0;
+            }
+        }
+
+        private void numericBall_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentTrophy == null)
+                return;
+            this.m_CurrentTrophy.ballid = (int)this.numericBall.Value;
+            int ballId = (int)this.numericBall.Value;
+            if (ballId >= 0)
+                this.pictureBall.BackgroundImage = (Image)Ball.GetBallPicture(ballId);
+            else
+                this.pictureBall.BackgroundImage = (Image)null;
+        }
+
+        private void buttonReplicateTrophy128_Click(object sender, EventArgs e)
+        {
+            Bitmap currentBitmap = this.viewer2DTrophy256.CurrentBitmap;
+            Rectangle srcRect = new Rectangle(0, 0, 256, 256);
+            Bitmap bitmap = new Bitmap(128, 128, PixelFormat.Format32bppPArgb);
+            Rectangle destRect = new Rectangle(0, 0, 128, 128);
+            GraphicUtil.RemapRectangle(currentBitmap, srcRect, bitmap, destRect);
+            this.m_CurrentTrophy.SetTrophy128(bitmap);
+            this.viewer2DTrophy128.CurrentBitmap = bitmap;
+        }
+
+        private void buttonShow3DModel_Click(object sender, EventArgs e)
+        {
+            this.Show3DTrophy();
+        }
+
+        private void buttonImport3DModel_Click(object sender, EventArgs e)
+        {
+            string rx3FileName = FifaEnvironment.BrowseAndCheckModel(ref this.m_TrophyCurrentFolder, "Open 3D Trophy Model file", "3D trophy model files (*.rx3)|trophy_*.rx3");
+            if (rx3FileName == null)
+                return;
+            this.m_CurrentTrophy.SetModel(rx3FileName);
+            this.ReloadTrophy(this.m_CurrentTrophy);
+        }
+
+        private void buttonExport3DModel_Click(object sender, EventArgs e)
+        {
+            string fileName = this.m_CurrentTrophy.ModelFileName();
+            if (fileName == null)
+                return;
+            FifaEnvironment.AskAndExportFromZdata(fileName, ref this.m_TrophyCurrentFolder);
+        }
+
+        private void buttonRemove3DModel_Click(object sender, EventArgs e)
+        {
+            this.m_CurrentTrophy.DeleteModel();
+            this.ReloadTrophy(this.m_CurrentTrophy);
+        }
+
+        private void tabTrophy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ReloadTrophy(this.m_CurrentTrophy);
+        }
+
+        private void labelUpdateTable_Click(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            Label label = (Label)sender;
+            int num = -1;
+            Task tag = (Task)label.Tag;
+            for (int index = 0; index < this.m_UpdateTableLabels.Length; ++index)
+            {
+                if (label == this.m_UpdateTableLabels[index])
+                {
+                    num = index;
+                    break;
+                }
+            }
+            if (num == -1)
+                return;
+            this.m_RankingRuleDialog.Rank = tag == null || tag.Group == null || (tag.Group.Ranks == null || tag.Parameter2 >= tag.Group.Ranks.Count) ? new Rank((Group)((Compobj)this.m_CurrentTrophy.Stages[0]).Groups[0], 1) : (Rank)tag.Group.Ranks[tag.Parameter2];
+            if (this.m_RankingRuleDialog.ShowDialog() == DialogResult.OK)
+            {
+                Task task = new Task("end", "UpdateTable", this.m_CurrentTrophy.Id, this.m_RankingRuleDialog.Rank.Group.Id, this.m_RankingRuleDialog.Rank.Id, num + 1);
+                task.LinkTrophy(this.m_CurrentTrophy);
+                label.Tag = (object)task;
+                if (tag == null)
+                    this.m_CurrentTrophy.AddTask(task);
+                else
+                    this.m_CurrentTrophy.ReplaceTask(tag, task);
+            }
+            this.TrophyRankingToPanel();
+        }
+
+        private void numericUpdateTableEntries_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.numericUpdateTableEntries.Value == (Decimal)this.m_NUpdateTableLabels)
+                return;
+            for (int index = 0; index < 24; ++index)
+                this.m_InitTeamPanel[index].Visible = (Decimal)index < this.numericUpdateTableEntries.Value;
+            int num = (int)this.numericUpdateTableEntries.Value;
+            if (num < this.m_NUpdateTableLabels)
+            {
+                for (int index = num; index < this.m_NUpdateTableLabels; ++index)
+                {
+                    Task tag = (Task)this.m_UpdateTableLabels[index].Tag;
+                    if (tag != null)
+                    {
+                        this.m_CurrentTrophy.RemoveTask(tag);
+                        this.m_UpdateTableLabels[index].Tag = (object)null;
+                        this.m_UpdateTableLabels[index].Text = (string)null;
+                    }
+                }
+            }
+            else
+            {
+                for (int nupdateTableLabels = this.m_NUpdateTableLabels; nupdateTableLabels < num; ++nupdateTableLabels)
+                {
+                    this.m_UpdateTableLabels[nupdateTableLabels].Tag = (object)null;
+                    this.m_UpdateTableLabels[nupdateTableLabels].Text = (string)null;
+                }
+            }
+            this.m_NUpdateTableLabels = num;
+        }
+
+        private void numericInternationalFirstYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.Settings.m_schedule_year_start = (int)this.numericInternationalFirstYear.Value;
+        }
+
+        private void numericInternationalPeriodicity_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.Settings.m_schedule_year_offset = (int)this.numericInternationalPeriodicity.Value;
+        }
+
+        private void checkClearLeagueStats_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
+            if (this.checkClearLeagueStats.Checked)
+            {
+                League selectedItem = (League)this.comboLeagueStats.SelectedItem;
+                if (selectedItem == null)
+                    return;
+                Task task = new Task("start", "ClearLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("start", "ClearLeagueStats", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("start", "ClearLeagueStats", -1, -1, -1);
+        }
+
+        private void checkUpdateLeagueStats_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
+            if (this.checkUpdateLeagueStats.Checked)
+            {
+                League selectedItem = (League)this.comboLeagueStats.SelectedItem;
+                if (selectedItem == null)
+                    return;
+                Task task = new Task("end", "UpdateLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueStats", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("end", "UpdateLeagueStats", -1, -1, -1);
+        }
+
+        private void checkUpdateLeagueTable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboLeagueStats.Visible = this.checkClearLeagueStats.Checked || this.checkUpdateLeagueStats.Checked || this.checkUpdateLeagueTable.Checked;
+            if (this.checkUpdateLeagueTable.Checked)
+            {
+                League selectedItem = (League)this.comboLeagueStats.SelectedItem;
+                if (selectedItem == null)
+                    return;
+                Task task = new Task("end", "UpdateLeagueTable", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueTable", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("end", "UpdateLeagueTable", -1, -1, -1);
+        }
+
+        private void comboLeagueStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            League selectedItem = (League)this.comboLeagueStats.SelectedItem;
+            if (selectedItem == null)
+                return;
+            if (this.checkClearLeagueStats.Checked)
+            {
+                Task task = new Task("start", "ClearLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("end", "ClearLeagueStats", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("end", "ClearLeagueStats", -1, -1, -1);
+            if (this.checkUpdateLeagueStats.Checked)
+            {
+                Task task = new Task("end", "UpdateLeagueStats", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueStats", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("end", "UpdateLeagueStats", -1, -1, -1);
+            if (this.checkUpdateLeagueTable.Checked)
+            {
+                Task task = new Task("end", "UpdateLeagueTable", this.m_CurrentStage.Id, selectedItem.Id, 0, 0);
+                task.LinkStage(this.m_CurrentStage);
+                int index = this.m_CurrentStage.SearchTaskIndex("end", "UpdateLeagueTable", -1, -1, -1);
+                if (index >= 0)
+                    this.m_CurrentStage.ReplaceTask(task, index);
+                else
+                    this.m_CurrentStage.AddTask(task);
+            }
+            else
+                this.m_CurrentStage.RemoveTask("end", "UpdateLeagueTable", -1, -1, -1);
+        }
+
+        private void checkStageStandingsRules_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.comboStageStandingRules.Visible = this.checkStageStandingsRules.Checked;
+            if (this.checkStageStandingsRules.Checked)
+                this.m_CurrentStage.Settings.m_StandingsSort = this.comboStageStandingRules.SelectedIndex;
+            else
+                this.m_CurrentStage.Settings.m_StandingsSort = -1;
+        }
+
+        private void comboStageStandingRules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboStageStandingRules.SelectedIndex < 0)
+                return;
+            this.m_CurrentStage.Settings.m_StandingsSort = this.comboStageStandingRules.SelectedIndex;
+        }
+
+        private void comboTrophyStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboTrophyStartMonth.SelectedItem == null)
+                return;
+            this.m_CurrentTrophy.Settings.m_schedule_seasonstartmonth = (string)this.comboTrophyStartMonth.SelectedItem;
+        }
+
+        private void checkRandomDrawEvent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_random_draw_event = this.checkRandomDrawEvent.Checked ? 1 : -1;
+        }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_match_canusefancards = this.checkUseFanCards.Checked ? "on" : null;
+        }
+
+        private void tabCompetitions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!this.m_LockTree)
+            {
+                this.m_LockTree = true;
+                if (this.tabCompetitions.SelectedTab == this.pageWorld)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentWorld);
+                else if (this.tabCompetitions.SelectedTab == this.pageConfederation)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentConfederation);
+                else if (this.tabCompetitions.SelectedTab == this.pageNation)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentNation);
+                else if (this.tabCompetitions.SelectedTab == this.pageTrophy)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentTrophy);
+                else if (this.tabCompetitions.SelectedTab == this.pageStage)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentStage);
+                else if (this.tabCompetitions.SelectedTab == this.pageGroup)
+                    this.SelectWorldTreeNode((Compobj)this.m_CurrentGroup);
+                this.m_LockTree = false;
+            }
+            this.CompetitionToPanel();
+        }
+
+        private void CompetitionToPanel()
+        {
+            if (this.tabCompetitions.SelectedTab == this.pageWorld)
+                this.WorldToPanel();
+            else if (this.tabCompetitions.SelectedTab == this.pageConfederation)
+                this.ConfederationToPanel();
+            else if (this.tabCompetitions.SelectedTab == this.pageNation)
+                this.NationToPanel();
+            else if (this.tabCompetitions.SelectedTab == this.pageTrophy)
+                this.TrophyToPanel();
+            else if (this.tabCompetitions.SelectedTab == this.pageStage)
+            {
+                this.StageToPanel();
+            }
+            else
+            {
+                if (this.tabCompetitions.SelectedTab != this.pageGroup)
+                    return;
+                this.GroupToPanel();
+            }
+        }
+
+        private void buttongroupSortLegs_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentGroup == null || this.m_CurrentGroup.Schedules == null)
+                return;
+            this.m_CurrentGroup.Schedules.RenumberLegs();
+            this.GroupToPanel();
+        }
+
+        private void buttonStageSortLegs_Click(object sender, EventArgs e)
+        {
+            if (this.m_CurrentStage == null || this.m_CurrentStage.Schedules == null)
+                return;
+            this.m_CurrentStage.Schedules.RenumberLegs();
+            this.StageToPanel();
+        }
+
+        private void checkScheduleUseDates_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.checkScheduleUseDates.Checked == (this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp != -1))
+                return;
+            this.m_CurrentTrophy.Settings.m_schedule_use_dates_comp = this.checkScheduleUseDates.Checked ? FifaEnvironment.CompetitionObjects.GetInternationalFriendlyId() : -1;
+        }
+
+        private void numericKeepPointsStageRef_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_pointskeep == (int)this.numericKeepPointsStageRef.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_pointskeep = (int)this.numericKeepPointsStageRef.Value;
+        }
+
+        private void buttonReplicateTropy_Click(object sender, EventArgs e)
+        {
+            Bitmap currentBitmap = this.viewer2DTrophy256.CurrentBitmap;
+            Rectangle srcRect = new Rectangle(0, 0, 256, 256);
+            Bitmap bitmap = new Bitmap(256, 256, PixelFormat.Format32bppPArgb);
+            Rectangle destRect = new Rectangle(0, 0, 192, 192);
+            GraphicUtil.RemapRectangle(currentBitmap, srcRect, bitmap, destRect);
+            this.m_CurrentTrophy.SetTrophy(bitmap);
+            this.viewer2DTrophy.CurrentBitmap = bitmap;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+                this.components.Dispose();
+            base.Dispose(disposing);
+        }
 
 
-    private void checkStageInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.numericStageColorAdvanceMin.Visible = this.numericStageColorAdvanceMax.Visible = this.checkStageInfoColorAdvance.Checked;
-      if (this.checkStageInfoColorAdvance.Checked)
-      {
-        int min, max;
-        this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
-        if (min <= 0 || max <= 0)
-          min = max = 1;
-        this.numericStageColorAdvanceMin.Value = (Decimal)min;
-        this.numericStageColorAdvanceMax.Value = (Decimal)max;
-      }
-      else
-        this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(-1, -1);
-    }
+        private void checkStageInfoColorAdvance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.numericStageColorAdvanceMin.Visible = this.numericStageColorAdvanceMax.Visible = this.checkStageInfoColorAdvance.Checked;
+            if (this.checkStageInfoColorAdvance.Checked)
+            {
+                int min, max;
+                this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min, out max);
+                if (min <= 0 || max <= 0)
+                    min = max = 1;
+                this.numericStageColorAdvanceMin.Value = (Decimal)min;
+                this.numericStageColorAdvanceMax.Value = (Decimal)max;
+            }
+            else
+                this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(-1, -1);
+        }
 
-    private void numericStageColorAdvanceMax_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericStageColorAdvanceMin.Value;
-      int max1 = (int)this.numericStageColorAdvanceMax.Value;
-      int min2, max2;
-      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericStageColorAdvanceMax.Value = (Decimal)max2;
-    }
+        private void numericStageColorAdvanceMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericStageColorAdvanceMin.Value;
+            int max1 = (int)this.numericStageColorAdvanceMax.Value;
+            int min2, max2;
+            this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+                return;
+            this.numericStageColorAdvanceMax.Value = (Decimal)max2;
+        }
 
-    private void numericStageColorAdvanceMin_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      int min1 = (int)this.numericStageColorAdvanceMin.Value;
-      int max1 = (int)this.numericStageColorAdvanceMax.Value;
-      int min2, max2;
-      this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
-      if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
-        return;
-      this.numericStageColorAdvanceMin.Value = (Decimal)min2;
-    }
+        private void numericStageColorAdvanceMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            int min1 = (int)this.numericStageColorAdvanceMin.Value;
+            int max1 = (int)this.numericStageColorAdvanceMax.Value;
+            int min2, max2;
+            this.m_CurrentStage.Settings.GetInfoColorSlotAdvGroup(out min2, out max2);
+            if (min1 == min2 && max1 == max2 || this.m_CurrentStage.Settings.SetInfoColorSlotAdvGroup(min1, max1))
+                return;
+            this.numericStageColorAdvanceMin.Value = (Decimal)min2;
+        }
 
-    private void comboWorldStartMonth_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.comboWorldStartingMonth.SelectedItem == null)
-        return;
-      this.m_CurrentWorld.Settings.m_schedule_seasonstartmonth = (string)this.comboWorldStartingMonth.SelectedItem;
-    }
+        private void comboWorldStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.comboWorldStartingMonth.SelectedItem == null)
+                return;
+            this.m_CurrentWorld.Settings.m_schedule_seasonstartmonth = (string)this.comboWorldStartingMonth.SelectedItem;
+        }
 
-    private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentTrophy.Settings.m_match_celebrationlevel = this.checkLowCelebrationLevel.Checked ? "LOW" : null;
-    }
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentTrophy.Settings.m_match_celebrationlevel = this.checkLowCelebrationLevel.Checked ? "LOW" : null;
+        }
 
-    private void numericAssetIdAperClau_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_Locked)
-        return;
-      int assetId = (int)this.numericAssetIdAperClau.Value;
-      if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[1])
-        return;
-      this.m_Locked = true;
-      this.m_CurrentTrophy.Settings.SetAssetId(1, assetId);
-      this.m_Locked = false;
-    }
+        private void numericAssetIdAperClau_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_Locked)
+                return;
+            int assetId = (int)this.numericAssetIdAperClau.Value;
+            if (assetId == this.m_CurrentTrophy.Settings.m_asset_id[1])
+                return;
+            this.m_Locked = true;
+            this.m_CurrentTrophy.Settings.SetAssetId(1, assetId);
+            this.m_Locked = false;
+        }
 
-    private void InitializeComponent()
-    {
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompetitionForm));
             this.treeWorld = new System.Windows.Forms.TreeView();
@@ -4689,6 +4765,8 @@ namespace CreationMaster
             this.numericNationYellowsStored = new System.Windows.Forms.NumericUpDown();
             this.comboNationStartMonth = new System.Windows.Forms.ComboBox();
             this.groupTrophy = new System.Windows.Forms.GroupBox();
+            this.comboTrophyAdvCompDependency = new System.Windows.Forms.ComboBox();
+            this.checkTrophyAdvCompDependency = new System.Windows.Forms.CheckBox();
             this.label73 = new System.Windows.Forms.Label();
             this.numericAssetIdAperClau = new System.Windows.Forms.NumericUpDown();
             this.checkLowCelebrationLevel = new System.Windows.Forms.CheckBox();
@@ -4831,6 +4909,16 @@ namespace CreationMaster
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabCompetitions = new System.Windows.Forms.TabControl();
             this.pageWorld = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.labelWeather = new System.Windows.Forms.Label();
+            this.labelSettings = new System.Windows.Forms.Label();
+            this.labelStandings = new System.Windows.Forms.Label();
+            this.labelInitTeams = new System.Windows.Forms.Label();
+            this.labelTasks = new System.Windows.Forms.Label();
+            this.labelSchedule = new System.Windows.Forms.Label();
+            this.labelCompObj = new System.Windows.Forms.Label();
+            this.labelAdvancements = new System.Windows.Forms.Label();
+            this.labelCompIds = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.numericFIFAYellowStored = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -5136,6 +5224,7 @@ namespace CreationMaster
             this.splitContainer1.SuspendLayout();
             this.tabCompetitions.SuspendLayout();
             this.pageWorld.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericFIFAYellowStored)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -6772,6 +6861,8 @@ namespace CreationMaster
             // 
             // groupTrophy
             // 
+            this.groupTrophy.Controls.Add(this.comboTrophyAdvCompDependency);
+            this.groupTrophy.Controls.Add(this.checkTrophyAdvCompDependency);
             this.groupTrophy.Controls.Add(this.label73);
             this.groupTrophy.Controls.Add(this.numericAssetIdAperClau);
             this.groupTrophy.Controls.Add(this.checkLowCelebrationLevel);
@@ -6803,6 +6894,27 @@ namespace CreationMaster
             this.groupTrophy.TabStop = false;
             this.groupTrophy.Text = "Trophy";
             this.groupTrophy.Visible = false;
+            // 
+            // comboTrophyAdvCompDependency
+            // 
+            this.comboTrophyAdvCompDependency.FormattingEnabled = true;
+            this.comboTrophyAdvCompDependency.Location = new System.Drawing.Point(165, 244);
+            this.comboTrophyAdvCompDependency.Name = "comboTrophyAdvCompDependency";
+            this.comboTrophyAdvCompDependency.Size = new System.Drawing.Size(185, 21);
+            this.comboTrophyAdvCompDependency.TabIndex = 172;
+            this.comboTrophyAdvCompDependency.SelectedIndexChanged += new System.EventHandler(this.comboTrophyAdvCompDependency_SelectedIndexChanged);
+            // 
+            // checkTrophyAdvCompDependency
+            // 
+            this.checkTrophyAdvCompDependency.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkTrophyAdvCompDependency.Location = new System.Drawing.Point(15, 242);
+            this.checkTrophyAdvCompDependency.Name = "checkTrophyAdvCompDependency";
+            this.checkTrophyAdvCompDependency.Size = new System.Drawing.Size(136, 23);
+            this.checkTrophyAdvCompDependency.TabIndex = 171;
+            this.checkTrophyAdvCompDependency.Text = "Competition Dependency";
+            this.toolTip.SetToolTip(this.checkTrophyAdvCompDependency, "Select a competition to use the teams from it");
+            this.checkTrophyAdvCompDependency.UseVisualStyleBackColor = true;
+            this.checkTrophyAdvCompDependency.CheckedChanged += new System.EventHandler(this.checkTrophyAdvCompDependency_CheckedChanged);
             // 
             // label73
             // 
@@ -6847,7 +6959,7 @@ namespace CreationMaster
             this.groupInternationalschedule.Controls.Add(this.label69);
             this.groupInternationalschedule.Controls.Add(this.label68);
             this.groupInternationalschedule.Controls.Add(this.numericInternationalFirstYear);
-            this.groupInternationalschedule.Location = new System.Drawing.Point(8, 526);
+            this.groupInternationalschedule.Location = new System.Drawing.Point(8, 541);
             this.groupInternationalschedule.Name = "groupInternationalschedule";
             this.groupInternationalschedule.Size = new System.Drawing.Size(347, 90);
             this.groupInternationalschedule.TabIndex = 167;
@@ -6998,7 +7110,7 @@ namespace CreationMaster
             // 
             this.groupBenchPlayers.Controls.Add(this.radioBench7Players);
             this.groupBenchPlayers.Controls.Add(this.radioBench5Players);
-            this.groupBenchPlayers.Location = new System.Drawing.Point(6, 470);
+            this.groupBenchPlayers.Location = new System.Drawing.Point(6, 485);
             this.groupBenchPlayers.Name = "groupBenchPlayers";
             this.groupBenchPlayers.Size = new System.Drawing.Size(349, 50);
             this.groupBenchPlayers.TabIndex = 161;
@@ -7138,7 +7250,7 @@ namespace CreationMaster
             this.groupPromotionRelegation.Controls.Add(this.comboPromotionLeague);
             this.groupPromotionRelegation.Controls.Add(this.checkPromotionLeague);
             this.groupPromotionRelegation.Controls.Add(this.checkRelegationLeague);
-            this.groupPromotionRelegation.Location = new System.Drawing.Point(6, 373);
+            this.groupPromotionRelegation.Location = new System.Drawing.Point(6, 388);
             this.groupPromotionRelegation.Name = "groupPromotionRelegation";
             this.groupPromotionRelegation.Size = new System.Drawing.Size(349, 91);
             this.groupPromotionRelegation.TabIndex = 20;
@@ -7205,7 +7317,7 @@ namespace CreationMaster
             this.groupSchedule.Controls.Add(this.checkScheduleConflicts);
             this.groupSchedule.Controls.Add(this.comboSchedForce);
             this.groupSchedule.Controls.Add(this.checkForceSchedule);
-            this.groupSchedule.Location = new System.Drawing.Point(9, 238);
+            this.groupSchedule.Location = new System.Drawing.Point(6, 271);
             this.groupSchedule.Name = "groupSchedule";
             this.groupSchedule.Size = new System.Drawing.Size(349, 108);
             this.groupSchedule.TabIndex = 21;
@@ -7248,7 +7360,7 @@ namespace CreationMaster
             // checkForceSchedule
             // 
             this.checkForceSchedule.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkForceSchedule.Location = new System.Drawing.Point(4, 43);
+            this.checkForceSchedule.Location = new System.Drawing.Point(8, 43);
             this.checkForceSchedule.Name = "checkForceSchedule";
             this.checkForceSchedule.Size = new System.Drawing.Size(136, 23);
             this.checkForceSchedule.TabIndex = 19;
@@ -7301,7 +7413,7 @@ namespace CreationMaster
             this.groupStage.Size = new System.Drawing.Size(790, 724);
             this.groupStage.TabIndex = 10;
             this.groupStage.TabStop = false;
-            this.groupStage.Text = "Stage";
+            this.groupStage.Text = "Stage (Settings)";
             this.groupStage.Visible = false;
             // 
             // numericStandingAgg
@@ -7489,7 +7601,7 @@ namespace CreationMaster
             this.groupLeaguetasks.Size = new System.Drawing.Size(187, 125);
             this.groupLeaguetasks.TabIndex = 172;
             this.groupLeaguetasks.TabStop = false;
-            this.groupLeaguetasks.Text = "League Actions";
+            this.groupLeaguetasks.Text = "League Actions (Tasks)";
             // 
             // checkUpdateLeagueTable
             // 
@@ -8620,6 +8732,7 @@ namespace CreationMaster
             // 
             // pageWorld
             // 
+            this.pageWorld.Controls.Add(this.groupBox4);
             this.pageWorld.Controls.Add(this.label74);
             this.pageWorld.Controls.Add(this.numericFIFAYellowStored);
             this.pageWorld.Controls.Add(this.groupBox3);
@@ -8635,6 +8748,105 @@ namespace CreationMaster
             this.pageWorld.TabIndex = 5;
             this.pageWorld.Text = "FIFA";
             this.pageWorld.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.labelWeather);
+            this.groupBox4.Controls.Add(this.labelSettings);
+            this.groupBox4.Controls.Add(this.labelStandings);
+            this.groupBox4.Controls.Add(this.labelInitTeams);
+            this.groupBox4.Controls.Add(this.labelTasks);
+            this.groupBox4.Controls.Add(this.labelSchedule);
+            this.groupBox4.Controls.Add(this.labelCompObj);
+            this.groupBox4.Controls.Add(this.labelAdvancements);
+            this.groupBox4.Controls.Add(this.labelCompIds);
+            this.groupBox4.Location = new System.Drawing.Point(16, 294);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(262, 266);
+            this.groupBox4.TabIndex = 166;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "CompData (Red = Risk of crashing the Game)";
+            // 
+            // labelWeather
+            // 
+            this.labelWeather.AutoSize = true;
+            this.labelWeather.Location = new System.Drawing.Point(15, 238);
+            this.labelWeather.Name = "labelWeather";
+            this.labelWeather.Size = new System.Drawing.Size(83, 13);
+            this.labelWeather.TabIndex = 8;
+            this.labelWeather.Text = "Weather: 0/468";
+            // 
+            // labelSettings
+            // 
+            this.labelSettings.AutoSize = true;
+            this.labelSettings.Location = new System.Drawing.Point(14, 134);
+            this.labelSettings.Name = "labelSettings";
+            this.labelSettings.Size = new System.Drawing.Size(86, 13);
+            this.labelSettings.TabIndex = 7;
+            this.labelSettings.Text = "Settings: 0/3752";
+            // 
+            // labelStandings
+            // 
+            this.labelStandings.AutoSize = true;
+            this.labelStandings.Location = new System.Drawing.Point(15, 159);
+            this.labelStandings.Name = "labelStandings";
+            this.labelStandings.Size = new System.Drawing.Size(95, 13);
+            this.labelStandings.TabIndex = 6;
+            this.labelStandings.Text = "Standings: 0/5274";
+            // 
+            // labelInitTeams
+            // 
+            this.labelInitTeams.AutoSize = true;
+            this.labelInitTeams.Location = new System.Drawing.Point(15, 186);
+            this.labelInitTeams.Name = "labelInitTeams";
+            this.labelInitTeams.Size = new System.Drawing.Size(88, 13);
+            this.labelInitTeams.TabIndex = 5;
+            this.labelInitTeams.Text = "InitTeams: 0/366";
+            // 
+            // labelTasks
+            // 
+            this.labelTasks.AutoSize = true;
+            this.labelTasks.Location = new System.Drawing.Point(14, 109);
+            this.labelTasks.Name = "labelTasks";
+            this.labelTasks.Size = new System.Drawing.Size(71, 13);
+            this.labelTasks.TabIndex = 4;
+            this.labelTasks.Text = "Tasks: 0/800";
+            // 
+            // labelSchedule
+            // 
+            this.labelSchedule.AutoSize = true;
+            this.labelSchedule.Location = new System.Drawing.Point(15, 213);
+            this.labelSchedule.Name = "labelSchedule";
+            this.labelSchedule.Size = new System.Drawing.Size(93, 13);
+            this.labelSchedule.TabIndex = 3;
+            this.labelSchedule.Text = "Schedule: 0/6995";
+            // 
+            // labelCompObj
+            // 
+            this.labelCompObj.AutoSize = true;
+            this.labelCompObj.Location = new System.Drawing.Point(14, 58);
+            this.labelCompObj.Name = "labelCompObj";
+            this.labelCompObj.Size = new System.Drawing.Size(91, 13);
+            this.labelCompObj.TabIndex = 2;
+            this.labelCompObj.Text = "CompObj: 0/1809";
+            // 
+            // labelAdvancements
+            // 
+            this.labelAdvancements.AutoSize = true;
+            this.labelAdvancements.Location = new System.Drawing.Point(14, 84);
+            this.labelAdvancements.Name = "labelAdvancements";
+            this.labelAdvancements.Size = new System.Drawing.Size(119, 13);
+            this.labelAdvancements.TabIndex = 1;
+            this.labelAdvancements.Text = "Advancements: 0/3549";
+            // 
+            // labelCompIds
+            // 
+            this.labelCompIds.AutoSize = true;
+            this.labelCompIds.Location = new System.Drawing.Point(14, 32);
+            this.labelCompIds.Name = "labelCompIds";
+            this.labelCompIds.Size = new System.Drawing.Size(77, 13);
+            this.labelCompIds.TabIndex = 0;
+            this.labelCompIds.Text = "CompIds: 0/99";
             // 
             // label74
             // 
@@ -8673,7 +8885,7 @@ namespace CreationMaster
             // 
             this.groupBox3.Controls.Add(this.radioFIFABenchPlayers7);
             this.groupBox3.Controls.Add(this.radioFIFABenchPlayers5);
-            this.groupBox3.Location = new System.Drawing.Point(16, 150);
+            this.groupBox3.Location = new System.Drawing.Point(16, 151);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(262, 50);
             this.groupBox3.TabIndex = 163;
@@ -8708,7 +8920,7 @@ namespace CreationMaster
             // 
             this.groupBox1.Controls.Add(this.radioFIFASubs5);
             this.groupBox1.Controls.Add(this.radioFIFASubs3);
-            this.groupBox1.Location = new System.Drawing.Point(16, 206);
+            this.groupBox1.Location = new System.Drawing.Point(16, 207);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(262, 50);
             this.groupBox1.TabIndex = 162;
@@ -8904,7 +9116,7 @@ namespace CreationMaster
             this.groupInitTeams.Size = new System.Drawing.Size(522, 657);
             this.groupInitTeams.TabIndex = 163;
             this.groupInitTeams.TabStop = false;
-            this.groupInitTeams.Text = "Ranking";
+            this.groupInitTeams.Text = "Ranking (InitTeams)";
             // 
             // label70
             // 
@@ -11461,9 +11673,9 @@ namespace CreationMaster
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(93, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "4 Chars Name";
+            this.label1.Text = "5 Chars Code";
             // 
             // CompetitionForm
             // 
@@ -11578,6 +11790,8 @@ namespace CreationMaster
             this.tabCompetitions.ResumeLayout(false);
             this.pageWorld.ResumeLayout(false);
             this.pageWorld.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericFIFAYellowStored)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -11675,79 +11889,79 @@ namespace CreationMaster
             this.panelCompObj.PerformLayout();
             this.ResumeLayout(false);
 
-    }
+        }
 
-    private void checkStandingAgg_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
-      this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
-      //this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
-    }
+        private void checkStandingAgg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
+            this.numericStandingAgg.Visible = this.checkStandingAgg.Checked;
+        }
 
-    private void numericStandingAgg_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingsagg == (int)this.numericStandingAgg.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
-    }
+        private void numericStandingAgg_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_standingsagg == (int)this.numericStandingAgg.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_standingsagg = this.checkStandingAgg.Checked ? (int)this.numericStandingAgg.Value : -1;
+        }
 
-    private void checkBoxQuarterJLeague_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
-      this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
-    }
+        private void checkBoxQuarterJLeague_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
+            this.numericQuarterJLeague.Visible = this.checkBoxQuarterJLeague.Checked;
+        }
 
-    private void numericQuarterJLeague_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_jleagueqtrsetup == (int)this.numericQuarterJLeague.Value)
-        return;
-      this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
-    }
+        private void numericQuarterJLeague_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || this.m_CurrentStage.Settings.Advance_jleagueqtrsetup == (int)this.numericQuarterJLeague.Value)
+                return;
+            this.m_CurrentStage.Settings.Advance_jleagueqtrsetup = this.checkBoxQuarterJLeague.Checked ? (int)this.numericQuarterJLeague.Value : -1;
+        }
 
-    private void checkBoxIgnoreJLeague_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentStage.Settings.m_advance_jleagueignorecheck = this.checkBoxIgnoreJLeague.Checked ? 1 : -1;
-    }
+        private void checkBoxIgnoreJLeague_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentStage.Settings.m_advance_jleagueignorecheck = this.checkBoxIgnoreJLeague.Checked ? 1 : -1;
+        }
 
-    private void numericFIFAYellowStored_ValueChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel)
-        return;
-      this.m_CurrentWorld.Settings.m_rule_numyellowstored = (int)this.numericFIFAYellowStored.Value;
-    }
+        private void numericFIFAYellowStored_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel)
+                return;
+            this.m_CurrentWorld.Settings.m_rule_numyellowstored = (int)this.numericFIFAYellowStored.Value;
+        }
 
-    private void radioFIFABenchPlayers7_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioFIFABenchPlayers7.Checked)
-        return;
-      this.m_CurrentWorld.Settings.m_rule_numsubsbench = 7;
-    }
+        private void radioFIFABenchPlayers7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioFIFABenchPlayers7.Checked)
+                return;
+            this.m_CurrentWorld.Settings.m_rule_numsubsbench = 7;
+        }
 
-    private void radioFIFABenchPlayers5_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioFIFABenchPlayers5.Checked)
-        return;
-      this.m_CurrentWorld.Settings.m_rule_numsubsbench = 5;
-    }
+        private void radioFIFABenchPlayers5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioFIFABenchPlayers5.Checked)
+                return;
+            this.m_CurrentWorld.Settings.m_rule_numsubsbench = 5;
+        }
 
-    private void radioFIFASubs5_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioFIFASubs5.Checked)
-        return;
-      this.m_CurrentWorld.Settings.m_rule_numsubsmatch = 5;
-    }
+        private void radioFIFASubs5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioFIFASubs5.Checked)
+                return;
+            this.m_CurrentWorld.Settings.m_rule_numsubsmatch = 5;
+        }
 
-    private void radioFIFASubs3_CheckedChanged(object sender, EventArgs e)
-    {
-      if (this.m_LockToPanel || !this.radioFIFASubs3.Checked)
-        return;
-      this.m_CurrentWorld.Settings.m_rule_numsubsmatch = 3;
+        private void radioFIFASubs3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_LockToPanel || !this.radioFIFASubs3.Checked)
+                return;
+            this.m_CurrentWorld.Settings.m_rule_numsubsmatch = 3;
+        }
+
     }
-  }
 }

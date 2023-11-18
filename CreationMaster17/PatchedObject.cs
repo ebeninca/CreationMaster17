@@ -1171,7 +1171,7 @@ namespace CreationMaster
             if (record.IntField[FI.teamstadiumlinks_teamid] == this.m_Id)
             {
               usedObject.FillFromTeamStadiumLinks(record);
-              usedObject.stadiumid = MainForm.m_PatchLoaderForm.CrossReference("Stadium", record.IntField[FI.teamstadiumlinks_stadiumid]);
+              usedObject.Stadiumid = MainForm.m_PatchLoaderForm.CrossReference("Stadium", record.IntField[FI.teamstadiumlinks_stadiumid]);
               usedObject.LinkStadium(FifaEnvironment.Stadiums);
               break;
             }
@@ -1641,7 +1641,7 @@ namespace CreationMaster
         return;
       int styleId = this.m_Id / 20;
       int colorId = this.m_Id - 20 * styleId;
-      string str1 = NumberFont.NumberFontFileName(styleId, colorId);
+      string str1 = NumberFont.NumberFontFileName(styleId, colorId, null);
       string str2 = MainForm.m_PatchLoaderForm.m_TempFolder + "\\" + str1;
       if (!File.Exists(str2))
         return;

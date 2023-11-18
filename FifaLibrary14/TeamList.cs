@@ -224,11 +224,11 @@ namespace FifaLibrary
         team.LinkTeam(teamList);
     }
 
-    public void LinkCountry(CountryList countryList)
-    {
-      foreach (Team team in (ArrayList)this)
-        team.LinkCountry(countryList);
-    }
+    //public void LinkCountry(CountryList countryList)
+    //{
+    //  foreach (Team team in (ArrayList)this)
+    //    team.LinkCountry(countryList);
+    //}
 
     public void LinkFormation(FormationList formationList)
     {

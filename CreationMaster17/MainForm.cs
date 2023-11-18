@@ -1742,6 +1742,8 @@ namespace CreationMaster
         private void SaveFiles()
         {
             FifaEnvironment.Save(this.statusBar);
+            FifaEnvironment.UpdateCompetitionData();
+            MainForm.CM.m_TrophyForm.UpdateDataUsage();
         }
 
         private void CloseFile()

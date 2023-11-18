@@ -6,12 +6,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.IO.Pipes;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace FifaControls
@@ -22,8 +20,6 @@ namespace FifaControls
         private int m_ObjectId = -1;
         private string m_FilesPath;
         private ObjectTypeServerPort m_ObjectType;
-        private string m_XFileMesh;
-        private string[] m_Meshes;
         private Bitmap[] m_Textures;
         private Color m_AmbientColor;
 
@@ -248,8 +244,6 @@ namespace FifaControls
             this.m_FilesPath = null;
             this.m_ObjectId = -1;
             this.m_Textures = null;
-            this.m_XFileMesh = null;
-            this.m_Meshes = null;
             this.BackColor = System.Drawing.Color.Gray;
             this.m_AmbientColor = System.Drawing.Color.Gray;
 

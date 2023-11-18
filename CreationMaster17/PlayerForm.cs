@@ -934,7 +934,7 @@ namespace CreationMaster
             // radioFemale
             // 
             this.radioFemale.AutoSize = true;
-            this.radioFemale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Female", true));
+            this.radioFemale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Female", true, DataSourceUpdateMode.OnPropertyChanged));
             this.radioFemale.Location = new System.Drawing.Point(316, 207);
             this.radioFemale.Name = "radioFemale";
             this.radioFemale.Size = new System.Drawing.Size(59, 17);
@@ -951,7 +951,7 @@ namespace CreationMaster
             // radioMale
             // 
             this.radioMale.AutoSize = true;
-            this.radioMale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Male", true));
+            this.radioMale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Male", true, DataSourceUpdateMode.OnPropertyChanged));
             this.radioMale.Location = new System.Drawing.Point(259, 207);
             this.radioMale.Name = "radioMale";
             this.radioMale.Size = new System.Drawing.Size(48, 17);
@@ -1380,7 +1380,7 @@ namespace CreationMaster
             // checkJerseyFit
             // 
             this.checkJerseyFit.AutoSize = true;
-            this.checkJerseyFit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "jerseyfit", true));
+            this.checkJerseyFit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "jerseyfit", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkJerseyFit.Location = new System.Drawing.Point(280, 18);
             this.checkJerseyFit.Name = "checkJerseyFit";
             this.checkJerseyFit.Size = new System.Drawing.Size(70, 17);
@@ -1391,7 +1391,7 @@ namespace CreationMaster
             // checkTrainingPants
             // 
             this.checkTrainingPants.AutoSize = true;
-            this.checkTrainingPants.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "TrainingPants", true));
+            this.checkTrainingPants.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "TrainingPants", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkTrainingPants.Location = new System.Drawing.Point(238, 131);
             this.checkTrainingPants.Name = "checkTrainingPants";
             this.checkTrainingPants.Size = new System.Drawing.Size(112, 17);
@@ -1819,7 +1819,7 @@ namespace CreationMaster
             // 
             // checkIsLoan
             // 
-            this.checkIsLoan.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "IsLoaned", true));
+            this.checkIsLoan.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "IsLoaned", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkIsLoan.Location = new System.Drawing.Point(6, 125);
             this.checkIsLoan.Name = "checkIsLoan";
             this.checkIsLoan.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -4317,7 +4317,7 @@ namespace CreationMaster
             // 
             this.checkGKFlatKick.AutoSize = true;
             this.checkGKFlatKick.BackColor = System.Drawing.Color.Transparent;
-            this.checkGKFlatKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkFlatKick", true));
+            this.checkGKFlatKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkFlatKick", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkGKFlatKick.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkGKFlatKick.Location = new System.Drawing.Point(16, 216);
             this.checkGKFlatKick.Name = "checkGKFlatKick";
@@ -4330,7 +4330,7 @@ namespace CreationMaster
             // 
             this.checkDrivenPass.AutoSize = true;
             this.checkDrivenPass.BackColor = System.Drawing.Color.Transparent;
-            this.checkDrivenPass.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "DrivenPass", true));
+            this.checkDrivenPass.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "DrivenPass", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkDrivenPass.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkDrivenPass.Location = new System.Drawing.Point(16, 194);
             this.checkDrivenPass.Name = "checkDrivenPass";
@@ -4343,7 +4343,7 @@ namespace CreationMaster
             // 
             this.checkDivingHeader.AutoSize = true;
             this.checkDivingHeader.BackColor = System.Drawing.Color.Transparent;
-            this.checkDivingHeader.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "DivingHeader", true));
+            this.checkDivingHeader.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "DivingHeader", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkDivingHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkDivingHeader.Location = new System.Drawing.Point(16, 172);
             this.checkDivingHeader.Name = "checkDivingHeader";
@@ -4356,7 +4356,7 @@ namespace CreationMaster
             // 
             this.checkBycicleKick.AutoSize = true;
             this.checkBycicleKick.BackColor = System.Drawing.Color.Transparent;
-            this.checkBycicleKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "BycicleKick", true));
+            this.checkBycicleKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "BycicleKick", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkBycicleKick.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkBycicleKick.Location = new System.Drawing.Point(16, 150);
             this.checkBycicleKick.Name = "checkBycicleKick";
@@ -4369,7 +4369,7 @@ namespace CreationMaster
             // 
             this.checkChipperPenalty.AutoSize = true;
             this.checkChipperPenalty.BackColor = System.Drawing.Color.Transparent;
-            this.checkChipperPenalty.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "ChipperPenalty", true));
+            this.checkChipperPenalty.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "ChipperPenalty", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkChipperPenalty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkChipperPenalty.Location = new System.Drawing.Point(16, 128);
             this.checkChipperPenalty.Name = "checkChipperPenalty";
@@ -4382,7 +4382,7 @@ namespace CreationMaster
             // 
             this.checkStutterPenalty.AutoSize = true;
             this.checkStutterPenalty.BackColor = System.Drawing.Color.Transparent;
-            this.checkStutterPenalty.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "StutterPenalty", true));
+            this.checkStutterPenalty.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "StutterPenalty", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkStutterPenalty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkStutterPenalty.Location = new System.Drawing.Point(16, 106);
             this.checkStutterPenalty.Name = "checkStutterPenalty";
@@ -4395,7 +4395,7 @@ namespace CreationMaster
             // 
             this.checkFancyFlicks.AutoSize = true;
             this.checkFancyFlicks.BackColor = System.Drawing.Color.Transparent;
-            this.checkFancyFlicks.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyFlicks", true));
+            this.checkFancyFlicks.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyFlicks", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkFancyFlicks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkFancyFlicks.Location = new System.Drawing.Point(16, 84);
             this.checkFancyFlicks.Name = "checkFancyFlicks";
@@ -4408,7 +4408,7 @@ namespace CreationMaster
             // 
             this.checkFancyPasses.AutoSize = true;
             this.checkFancyPasses.BackColor = System.Drawing.Color.Transparent;
-            this.checkFancyPasses.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyPasses", true));
+            this.checkFancyPasses.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyPasses", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkFancyPasses.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkFancyPasses.Location = new System.Drawing.Point(16, 62);
             this.checkFancyPasses.Name = "checkFancyPasses";
@@ -4421,7 +4421,7 @@ namespace CreationMaster
             // 
             this.checkFancyFeet.AutoSize = true;
             this.checkFancyFeet.BackColor = System.Drawing.Color.Transparent;
-            this.checkFancyFeet.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyFeet", true));
+            this.checkFancyFeet.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FancyFeet", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkFancyFeet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkFancyFeet.Location = new System.Drawing.Point(16, 40);
             this.checkFancyFeet.Name = "checkFancyFeet";
@@ -4434,7 +4434,7 @@ namespace CreationMaster
             // 
             this.checkGKOneonOne.AutoSize = true;
             this.checkGKOneonOne.BackColor = System.Drawing.Color.Transparent;
-            this.checkGKOneonOne.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkOneOnOne", true));
+            this.checkGKOneonOne.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkOneOnOne", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkGKOneonOne.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkGKOneonOne.Location = new System.Drawing.Point(24, 213);
             this.checkGKOneonOne.Name = "checkGKOneonOne";
@@ -4447,7 +4447,7 @@ namespace CreationMaster
             // 
             this.checkAcrobaticClearance.AutoSize = true;
             this.checkAcrobaticClearance.BackColor = System.Drawing.Color.Transparent;
-            this.checkAcrobaticClearance.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "AcrobaticClearance", true));
+            this.checkAcrobaticClearance.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "AcrobaticClearance", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkAcrobaticClearance.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkAcrobaticClearance.Location = new System.Drawing.Point(24, 235);
             this.checkAcrobaticClearance.Name = "checkAcrobaticClearance";
@@ -4460,7 +4460,7 @@ namespace CreationMaster
             // 
             this.checkSecondWind.AutoSize = true;
             this.checkSecondWind.BackColor = System.Drawing.Color.Transparent;
-            this.checkSecondWind.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "SecondWind", true));
+            this.checkSecondWind.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "SecondWind", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkSecondWind.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkSecondWind.Location = new System.Drawing.Point(24, 81);
             this.checkSecondWind.Name = "checkSecondWind";
@@ -4473,7 +4473,7 @@ namespace CreationMaster
             // 
             this.checkCrowdFavourite.AutoSize = true;
             this.checkCrowdFavourite.BackColor = System.Drawing.Color.Transparent;
-            this.checkCrowdFavourite.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "CrowdFavorite", true));
+            this.checkCrowdFavourite.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "CrowdFavorite", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkCrowdFavourite.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkCrowdFavourite.Location = new System.Drawing.Point(334, 213);
             this.checkCrowdFavourite.Name = "checkCrowdFavourite";
@@ -4486,7 +4486,7 @@ namespace CreationMaster
             // 
             this.checkInflexible.AutoSize = true;
             this.checkInflexible.BackColor = System.Drawing.Color.Transparent;
-            this.checkInflexible.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Inflexible", true));
+            this.checkInflexible.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Inflexible", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkInflexible.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkInflexible.Location = new System.Drawing.Point(334, 191);
             this.checkInflexible.Name = "checkInflexible";
@@ -4499,7 +4499,7 @@ namespace CreationMaster
             // 
             this.checkTeamPlayer.AutoSize = true;
             this.checkTeamPlayer.BackColor = System.Drawing.Color.Transparent;
-            this.checkTeamPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "TeamPlayer", true));
+            this.checkTeamPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "TeamPlayer", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkTeamPlayer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkTeamPlayer.Location = new System.Drawing.Point(334, 169);
             this.checkTeamPlayer.Name = "checkTeamPlayer";
@@ -4511,7 +4511,7 @@ namespace CreationMaster
             // checkSwervePasser
             // 
             this.checkSwervePasser.AutoSize = true;
-            this.checkSwervePasser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "SwervePasser", true));
+            this.checkSwervePasser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "SwervePasser", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkSwervePasser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkSwervePasser.Location = new System.Drawing.Point(170, 125);
             this.checkSwervePasser.Name = "checkSwervePasser";
@@ -4523,7 +4523,7 @@ namespace CreationMaster
             // checkCornerSpecialist
             // 
             this.checkCornerSpecialist.AutoSize = true;
-            this.checkCornerSpecialist.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "OutsideFootShot", true));
+            this.checkCornerSpecialist.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "OutsideFootShot", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkCornerSpecialist.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkCornerSpecialist.Location = new System.Drawing.Point(170, 258);
             this.checkCornerSpecialist.Name = "checkCornerSpecialist";
@@ -4535,7 +4535,7 @@ namespace CreationMaster
             // checkPowerHeader
             // 
             this.checkPowerHeader.AutoSize = true;
-            this.checkPowerHeader.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "PowerHeader", true));
+            this.checkPowerHeader.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "PowerHeader", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkPowerHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkPowerHeader.Location = new System.Drawing.Point(170, 192);
             this.checkPowerHeader.Name = "checkPowerHeader";
@@ -4547,7 +4547,7 @@ namespace CreationMaster
             // checkGkLongThrower
             // 
             this.checkGkLongThrower.AutoSize = true;
-            this.checkGkLongThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkLongThrower", true));
+            this.checkGkLongThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GkLongThrower", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkGkLongThrower.Location = new System.Drawing.Point(24, 191);
             this.checkGkLongThrower.Name = "checkGkLongThrower";
             this.checkGkLongThrower.Size = new System.Drawing.Size(110, 17);
@@ -4558,7 +4558,7 @@ namespace CreationMaster
             // checkLongPasser
             // 
             this.checkLongPasser.AutoSize = true;
-            this.checkLongPasser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "LongPasser", true));
+            this.checkLongPasser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "LongPasser", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkLongPasser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkLongPasser.Location = new System.Drawing.Point(170, 103);
             this.checkLongPasser.Name = "checkLongPasser";
@@ -4570,7 +4570,7 @@ namespace CreationMaster
             // checkFlair
             // 
             this.checkFlair.AutoSize = true;
-            this.checkFlair.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Flair", true));
+            this.checkFlair.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Flair", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkFlair.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkFlair.Location = new System.Drawing.Point(170, 147);
             this.checkFlair.Name = "checkFlair";
@@ -4582,7 +4582,7 @@ namespace CreationMaster
             // checkFinesseShot
             // 
             this.checkFinesseShot.AutoSize = true;
-            this.checkFinesseShot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FinesseShot", true));
+            this.checkFinesseShot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "FinesseShot", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkFinesseShot.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkFinesseShot.Location = new System.Drawing.Point(170, 236);
             this.checkFinesseShot.Name = "checkFinesseShot";
@@ -4594,7 +4594,7 @@ namespace CreationMaster
             // checkArguesWithOfficials
             // 
             this.checkArguesWithOfficials.AutoSize = true;
-            this.checkArguesWithOfficials.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "ArguesWithOfficials", true));
+            this.checkArguesWithOfficials.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "ArguesWithOfficials", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkArguesWithOfficials.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkArguesWithOfficials.Location = new System.Drawing.Point(334, 125);
             this.checkArguesWithOfficials.Name = "checkArguesWithOfficials";
@@ -4607,7 +4607,7 @@ namespace CreationMaster
             // 
             this.checkBeatsOffsideTrap.AutoSize = true;
             this.checkBeatsOffsideTrap.BackColor = System.Drawing.Color.Transparent;
-            this.checkBeatsOffsideTrap.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "BeatDefensiveLine", true));
+            this.checkBeatsOffsideTrap.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "BeatDefensiveLine", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkBeatsOffsideTrap.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkBeatsOffsideTrap.Location = new System.Drawing.Point(334, 59);
             this.checkBeatsOffsideTrap.Name = "checkBeatsOffsideTrap";
@@ -4620,7 +4620,7 @@ namespace CreationMaster
             // 
             this.checkAvoidsWeakFoot.AutoSize = true;
             this.checkAvoidsWeakFoot.BackColor = System.Drawing.Color.Transparent;
-            this.checkAvoidsWeakFoot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "AvoidsWeakFoot", true));
+            this.checkAvoidsWeakFoot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "AvoidsWeakFoot", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkAvoidsWeakFoot.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkAvoidsWeakFoot.Location = new System.Drawing.Point(170, 37);
             this.checkAvoidsWeakFoot.Name = "checkAvoidsWeakFoot";
@@ -4633,7 +4633,7 @@ namespace CreationMaster
             // 
             this.checkInjuryFree.AutoSize = true;
             this.checkInjuryFree.BackColor = System.Drawing.Color.Transparent;
-            this.checkInjuryFree.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "InjuryFree", true));
+            this.checkInjuryFree.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "InjuryFree", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkInjuryFree.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkInjuryFree.Location = new System.Drawing.Point(24, 59);
             this.checkInjuryFree.Name = "checkInjuryFree";
@@ -4645,7 +4645,7 @@ namespace CreationMaster
             // checkPowerFreeKick
             // 
             this.checkPowerFreeKick.AutoSize = true;
-            this.checkPowerFreeKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "PowerfulFreeKicks", true));
+            this.checkPowerFreeKick.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "PowerfulFreeKicks", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkPowerFreeKick.Location = new System.Drawing.Point(334, 37);
             this.checkPowerFreeKick.Name = "checkPowerFreeKick";
             this.checkPowerFreeKick.Size = new System.Drawing.Size(104, 17);
@@ -4656,7 +4656,7 @@ namespace CreationMaster
             // checkSelfish
             // 
             this.checkSelfish.AutoSize = true;
-            this.checkSelfish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Selfish", true));
+            this.checkSelfish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Selfish", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkSelfish.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkSelfish.Location = new System.Drawing.Point(334, 81);
             this.checkSelfish.Name = "checkSelfish";
@@ -4668,7 +4668,7 @@ namespace CreationMaster
             // checkPlaymaker
             // 
             this.checkPlaymaker.AutoSize = true;
-            this.checkPlaymaker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Playmaker", true));
+            this.checkPlaymaker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Playmaker", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkPlaymaker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkPlaymaker.Location = new System.Drawing.Point(170, 59);
             this.checkPlaymaker.Name = "checkPlaymaker";
@@ -4680,7 +4680,7 @@ namespace CreationMaster
             // checkTechnicaldribbler
             // 
             this.checkTechnicaldribbler.AutoSize = true;
-            this.checkTechnicaldribbler.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Technicaldribbler", true));
+            this.checkTechnicaldribbler.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Technicaldribbler", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkTechnicaldribbler.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkTechnicaldribbler.Location = new System.Drawing.Point(170, 169);
             this.checkTechnicaldribbler.Name = "checkTechnicaldribbler";
@@ -4693,7 +4693,7 @@ namespace CreationMaster
             // 
             this.checkLeadership.AutoSize = true;
             this.checkLeadership.BackColor = System.Drawing.Color.Transparent;
-            this.checkLeadership.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Leadership", true));
+            this.checkLeadership.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Leadership", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkLeadership.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkLeadership.Location = new System.Drawing.Point(334, 235);
             this.checkLeadership.Name = "checkLeadership";
@@ -4705,7 +4705,7 @@ namespace CreationMaster
             // checkPuncher
             // 
             this.checkPuncher.AutoSize = true;
-            this.checkPuncher.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Puncher", true));
+            this.checkPuncher.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Puncher", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkPuncher.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkPuncher.Location = new System.Drawing.Point(24, 169);
             this.checkPuncher.Name = "checkPuncher";
@@ -4717,7 +4717,7 @@ namespace CreationMaster
             // checkDiver
             // 
             this.checkDiver.AutoSize = true;
-            this.checkDiver.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Diver", true));
+            this.checkDiver.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Diver", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkDiver.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkDiver.Location = new System.Drawing.Point(334, 103);
             this.checkDiver.Name = "checkDiver";
@@ -4729,7 +4729,7 @@ namespace CreationMaster
             // checkDivesintotackles
             // 
             this.checkDivesintotackles.AutoSize = true;
-            this.checkDivesintotackles.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Divesintotackles", true));
+            this.checkDivesintotackles.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Divesintotackles", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkDivesintotackles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkDivesintotackles.Location = new System.Drawing.Point(24, 257);
             this.checkDivesintotackles.Name = "checkDivesintotackles";
@@ -4741,7 +4741,7 @@ namespace CreationMaster
             // checkLongshottaker
             // 
             this.checkLongshottaker.AutoSize = true;
-            this.checkLongshottaker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "LongShotTaker", true));
+            this.checkLongshottaker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "LongShotTaker", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkLongshottaker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkLongshottaker.Location = new System.Drawing.Point(170, 214);
             this.checkLongshottaker.Name = "checkLongshottaker";
@@ -4754,7 +4754,7 @@ namespace CreationMaster
             // 
             this.checkHighClubIdentification.AutoSize = true;
             this.checkHighClubIdentification.BackColor = System.Drawing.Color.Transparent;
-            this.checkHighClubIdentification.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "HighClubIdentification", true));
+            this.checkHighClubIdentification.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "HighClubIdentification", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkHighClubIdentification.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkHighClubIdentification.Location = new System.Drawing.Point(334, 147);
             this.checkHighClubIdentification.Name = "checkHighClubIdentification";
@@ -4766,7 +4766,7 @@ namespace CreationMaster
             // checkPushesupforcorners
             // 
             this.checkPushesupforcorners.AutoSize = true;
-            this.checkPushesupforcorners.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Pushesupforcorners", true));
+            this.checkPushesupforcorners.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Pushesupforcorners", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkPushesupforcorners.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkPushesupforcorners.Location = new System.Drawing.Point(24, 147);
             this.checkPushesupforcorners.Name = "checkPushesupforcorners";
@@ -4778,7 +4778,7 @@ namespace CreationMaster
             // checkEarlycrosser
             // 
             this.checkEarlycrosser.AutoSize = true;
-            this.checkEarlycrosser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Earlycrosser", true));
+            this.checkEarlycrosser.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Earlycrosser", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkEarlycrosser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkEarlycrosser.Location = new System.Drawing.Point(170, 81);
             this.checkEarlycrosser.Name = "checkEarlycrosser";
@@ -4791,7 +4791,7 @@ namespace CreationMaster
             // 
             this.checkInjuryProne.AutoSize = true;
             this.checkInjuryProne.BackColor = System.Drawing.Color.Transparent;
-            this.checkInjuryProne.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "InjuryProne", true));
+            this.checkInjuryProne.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "InjuryProne", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkInjuryProne.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkInjuryProne.Location = new System.Drawing.Point(24, 37);
             this.checkInjuryProne.Name = "checkInjuryProne";
@@ -4803,7 +4803,7 @@ namespace CreationMaster
             // checkGiantThrower
             // 
             this.checkGiantThrower.AutoSize = true;
-            this.checkGiantThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GiantThrow", true));
+            this.checkGiantThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "GiantThrow", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkGiantThrower.Location = new System.Drawing.Point(24, 125);
             this.checkGiantThrower.Name = "checkGiantThrower";
             this.checkGiantThrower.Size = new System.Drawing.Size(93, 17);
@@ -4814,7 +4814,7 @@ namespace CreationMaster
             // checkLongThrower
             // 
             this.checkLongThrower.AutoSize = true;
-            this.checkLongThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Longthrows", true));
+            this.checkLongThrower.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.playerBindingSource, "Longthrows", true, DataSourceUpdateMode.OnPropertyChanged));
             this.checkLongThrower.Location = new System.Drawing.Point(24, 103);
             this.checkLongThrower.Name = "checkLongThrower";
             this.checkLongThrower.Size = new System.Drawing.Size(92, 17);
@@ -8020,7 +8020,7 @@ namespace CreationMaster
             //    nMeshes = 3;
             //if (Player.s_Model3DHairPart5 != null)
             //    nMeshes = 4;
-           
+
             /*Kit kit = (Kit)null;
             if (this.buttonShowJesey.Checked && this.m_CurrentPlayer.m_PlayingForTeams.Count > 0)
             {
