@@ -1634,6 +1634,8 @@ namespace FifaLibrary
             {
                 string str = id.ToString() + ",schedule_compdependency," + (object)this.m_TrophyCompdependency.Id;
                 w.WriteLine(str);
+                str = id.ToString() + ",advance_teamcompdependency," + (object)this.m_TrophyCompdependency.Id;
+                w.WriteLine(str);
             }
             if (this.TrophyForcecomp != null)
             {
@@ -1903,11 +1905,7 @@ namespace FifaLibrary
                 string str = id.ToString() + ",advance_jleague_qtr_setup," + (object)this.m_advance_jleagueqtrsetup;
                 w.WriteLine(str);
             }
-            if (this.m_advance_teamcompdependency != -1)
-            {
-                string str = id.ToString() + ",advance_teamcompdependency," + (object)this.m_advance_teamcompdependency;
-                w.WriteLine(str);
-            }
+
             return true;
         }
 

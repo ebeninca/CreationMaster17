@@ -64,9 +64,20 @@ If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this r
 - FIX TEMPLATE/DB FILES TO BUILD AND RUN CORRECTLY: Probably need to package the original db file within cm17
 
 - What is the purpose of shortstyle? Roda JC Kerkade (321) value = 3, maybe affects the 3d model?
-- Teams: fix on National Team relation ???
 
 ## Changelog
+
+v009
+- CompData: competition dependency bug fixed (EuropaLeague/ChampionsLeague)
+- Mainform: ask to save when clicking on window close(X)
+- Teams: National Team automatically updating Country screen
+- Teams: fixed Rival/Opponent Team link
+- Country: fixed all text fields only saving after leaving field
+- Country: fixed ISO Level only updating after leaving field
+- Teams: fixed National Team relation
+- Teams: support for ROTW Team
+- Teams: Segregated National Team combo from ROTW Team
+- Teams: fixed Last Year Performance League combo
 
 v008
 - Country: fixed National team target not saving
