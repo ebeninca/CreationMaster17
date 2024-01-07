@@ -2333,9 +2333,7 @@ namespace FifaLibrary
             // Causing stackoverflow when removing national team
             //  FifaEnvironment.s_TeamList.LinkCountry(FifaEnvironment.s_CountryList);
             if (FifaEnvironment.s_TeamList != null && FifaEnvironment.s_CountryList != null)
-            {
                 FifaEnvironment.s_CountryList.LinkTeam(FifaEnvironment.s_TeamList);
-            }
 
             if (FifaEnvironment.s_CompetitionObjects == null)
                 return;

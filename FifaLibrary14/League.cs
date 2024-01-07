@@ -204,6 +204,7 @@ namespace FifaLibrary
 
     public static League GetDefaultLeague()
     {
+      // 76 = Rest of the World 
       return FifaEnvironment.Leagues.SearchLeague(76);
     }
 
@@ -712,7 +713,7 @@ namespace FifaLibrary
     {
       foreach (Team playingTeam in (ArrayList) this.m_PlayingTeams)
       {
-        if (playingTeam.NationalTeam)
+        if (playingTeam.IsNationalTeam)
           return true;
       }
       return false;

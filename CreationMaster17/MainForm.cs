@@ -259,7 +259,7 @@ namespace CreationMaster
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1384, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1384, 25);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -277,7 +277,7 @@ namespace CreationMaster
             this.menuExit,
             this.menuOpenDebug});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(37, 20);
+            this.menuFile.Size = new System.Drawing.Size(39, 21);
             this.menuFile.Text = "File";
             // 
             // menuOpenFifa15
@@ -285,7 +285,7 @@ namespace CreationMaster
             this.menuOpenFifa15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa15.Image")));
             this.menuOpenFifa15.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuOpenFifa15.Name = "menuOpenFifa15";
-            this.menuOpenFifa15.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenFifa15.Size = new System.Drawing.Size(195, 22);
             this.menuOpenFifa15.Text = "Open - FIFA 15";
             this.menuOpenFifa15.Click += new System.EventHandler(this.menuOpenFifa15Demo_Click);
             // 
@@ -293,7 +293,7 @@ namespace CreationMaster
             // 
             this.menuOpenLang15.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang15.Image")));
             this.menuOpenLang15.Name = "menuOpenLang15";
-            this.menuOpenLang15.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenLang15.Size = new System.Drawing.Size(195, 22);
             this.menuOpenLang15.Text = "Open - Select lan.db";
             this.menuOpenLang15.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -302,7 +302,7 @@ namespace CreationMaster
             this.menuOpenFifa14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenFifa14.Image")));
             this.menuOpenFifa14.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuOpenFifa14.Name = "menuOpenFifa14";
-            this.menuOpenFifa14.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenFifa14.Size = new System.Drawing.Size(195, 22);
             this.menuOpenFifa14.Text = "Open - FIFA 14";
             this.menuOpenFifa14.Click += new System.EventHandler(this.menuOpenFifa_Click);
             // 
@@ -310,7 +310,7 @@ namespace CreationMaster
             // 
             this.menuOpenLang14.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenLang14.Image")));
             this.menuOpenLang14.Name = "menuOpenLang14";
-            this.menuOpenLang14.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenLang14.Size = new System.Drawing.Size(195, 22);
             this.menuOpenLang14.Text = "Open - Select lan.db";
             this.menuOpenLang14.Click += new System.EventHandler(this.openSelectLandbToolStripMenuItem_Click);
             // 
@@ -319,14 +319,14 @@ namespace CreationMaster
             this.menuOpenAll.Image = ((System.Drawing.Image)(resources.GetObject("menuOpenAll.Image")));
             this.menuOpenAll.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuOpenAll.Name = "menuOpenAll";
-            this.menuOpenAll.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenAll.Size = new System.Drawing.Size(195, 22);
             this.menuOpenAll.Text = "Open - Select all";
             this.menuOpenAll.Click += new System.EventHandler(this.openSelectAllToolStripMenuItem_Click);
             // 
             // menuReopen
             // 
             this.menuReopen.Name = "menuReopen";
-            this.menuReopen.Size = new System.Drawing.Size(181, 22);
+            this.menuReopen.Size = new System.Drawing.Size(195, 22);
             this.menuReopen.Text = "Open - Recent";
             this.menuReopen.Click += new System.EventHandler(this.menuReopen_Click);
             // 
@@ -336,7 +336,7 @@ namespace CreationMaster
             this.menuSave.Image = ((System.Drawing.Image)(resources.GetObject("menuSave.Image")));
             this.menuSave.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuSave.Name = "menuSave";
-            this.menuSave.Size = new System.Drawing.Size(181, 22);
+            this.menuSave.Size = new System.Drawing.Size(195, 22);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
@@ -346,7 +346,7 @@ namespace CreationMaster
             this.menuClose.Image = ((System.Drawing.Image)(resources.GetObject("menuClose.Image")));
             this.menuClose.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuClose.Name = "menuClose";
-            this.menuClose.Size = new System.Drawing.Size(181, 22);
+            this.menuClose.Size = new System.Drawing.Size(195, 22);
             this.menuClose.Text = "Close";
             this.menuClose.Click += new System.EventHandler(this.menuClose_Click);
             // 
@@ -355,14 +355,14 @@ namespace CreationMaster
             this.menuExit.Image = ((System.Drawing.Image)(resources.GetObject("menuExit.Image")));
             this.menuExit.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(181, 22);
+            this.menuExit.Size = new System.Drawing.Size(195, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 
             // menuOpenDebug
             // 
             this.menuOpenDebug.Name = "menuOpenDebug";
-            this.menuOpenDebug.Size = new System.Drawing.Size(181, 22);
+            this.menuOpenDebug.Size = new System.Drawing.Size(195, 22);
             this.menuOpenDebug.Text = "Open - Demo";
             this.menuOpenDebug.Visible = false;
             // 
@@ -380,7 +380,7 @@ namespace CreationMaster
             this.menuMinimizeNamesTable,
             this.menuPreserveOriginalNames});
             this.menuTools.Name = "menuTools";
-            this.menuTools.Size = new System.Drawing.Size(46, 20);
+            this.menuTools.Size = new System.Drawing.Size(51, 21);
             this.menuTools.Text = "Tools";
             // 
             // menuEnableAllMessages
@@ -388,7 +388,7 @@ namespace CreationMaster
             this.menuEnableAllMessages.Image = ((System.Drawing.Image)(resources.GetObject("menuEnableAllMessages.Image")));
             this.menuEnableAllMessages.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuEnableAllMessages.Name = "menuEnableAllMessages";
-            this.menuEnableAllMessages.Size = new System.Drawing.Size(238, 22);
+            this.menuEnableAllMessages.Size = new System.Drawing.Size(260, 22);
             this.menuEnableAllMessages.Text = "Enable all messages";
             this.menuEnableAllMessages.Click += new System.EventHandler(this.menuEnableAllMessages_Click);
             // 
@@ -397,7 +397,7 @@ namespace CreationMaster
             this.menuOptions.Image = ((System.Drawing.Image)(resources.GetObject("menuOptions.Image")));
             this.menuOptions.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuOptions.Name = "menuOptions";
-            this.menuOptions.Size = new System.Drawing.Size(238, 22);
+            this.menuOptions.Size = new System.Drawing.Size(260, 22);
             this.menuOptions.Text = "Options";
             this.menuOptions.Visible = false;
             this.menuOptions.Click += new System.EventHandler(this.menuOptions_Click);
@@ -407,7 +407,7 @@ namespace CreationMaster
             this.menuRegenerate.Image = ((System.Drawing.Image)(resources.GetObject("menuRegenerate.Image")));
             this.menuRegenerate.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuRegenerate.Name = "menuRegenerate";
-            this.menuRegenerate.Size = new System.Drawing.Size(238, 22);
+            this.menuRegenerate.Size = new System.Drawing.Size(260, 22);
             this.menuRegenerate.Text = "Regenerate BH";
             this.menuRegenerate.Click += new System.EventHandler(this.menuRegenerate_Click);
             // 
@@ -416,7 +416,7 @@ namespace CreationMaster
             this.menuExpandDatabase.Image = ((System.Drawing.Image)(resources.GetObject("menuExpandDatabase.Image")));
             this.menuExpandDatabase.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuExpandDatabase.Name = "menuExpandDatabase";
-            this.menuExpandDatabase.Size = new System.Drawing.Size(238, 22);
+            this.menuExpandDatabase.Size = new System.Drawing.Size(260, 22);
             this.menuExpandDatabase.Text = "Expand Database";
             this.menuExpandDatabase.Click += new System.EventHandler(this.menuExpandDatabase_Click);
             // 
@@ -425,7 +425,7 @@ namespace CreationMaster
             this.menuRemoveKidProtection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuRemoveKidProtection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuRemoveKidProtection.Name = "menuRemoveKidProtection";
-            this.menuRemoveKidProtection.Size = new System.Drawing.Size(238, 22);
+            this.menuRemoveKidProtection.Size = new System.Drawing.Size(260, 22);
             this.menuRemoveKidProtection.Text = "Remove \"Kid Protection\" Kits";
             this.menuRemoveKidProtection.Visible = false;
             this.menuRemoveKidProtection.Click += new System.EventHandler(this.menuRemoveKidProtection_Click);
@@ -435,7 +435,7 @@ namespace CreationMaster
             this.menuCleanFAT.Image = ((System.Drawing.Image)(resources.GetObject("menuCleanFAT.Image")));
             this.menuCleanFAT.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuCleanFAT.Name = "menuCleanFAT";
-            this.menuCleanFAT.Size = new System.Drawing.Size(238, 22);
+            this.menuCleanFAT.Size = new System.Drawing.Size(260, 22);
             this.menuCleanFAT.Text = "Clean FAT";
             this.menuCleanFAT.Visible = false;
             this.menuCleanFAT.Click += new System.EventHandler(this.menuCleanFAT_Click);
@@ -443,7 +443,7 @@ namespace CreationMaster
             // menuRemoveAllLongTeamNames
             // 
             this.menuRemoveAllLongTeamNames.Name = "menuRemoveAllLongTeamNames";
-            this.menuRemoveAllLongTeamNames.Size = new System.Drawing.Size(238, 22);
+            this.menuRemoveAllLongTeamNames.Size = new System.Drawing.Size(260, 22);
             this.menuRemoveAllLongTeamNames.Text = "Remove All Long Team Names";
             this.menuRemoveAllLongTeamNames.Visible = false;
             this.menuRemoveAllLongTeamNames.Click += new System.EventHandler(this.removeAllLongTeamNames_Click);
@@ -451,27 +451,27 @@ namespace CreationMaster
             // menuAlignLanguageDB
             // 
             this.menuAlignLanguageDB.Name = "menuAlignLanguageDB";
-            this.menuAlignLanguageDB.Size = new System.Drawing.Size(238, 22);
+            this.menuAlignLanguageDB.Size = new System.Drawing.Size(260, 22);
             this.menuAlignLanguageDB.Text = "Align Language DB";
             this.menuAlignLanguageDB.Click += new System.EventHandler(this.menuAlignLanguageDB_Click);
             // 
             // menuMinimizeNamesTable
             // 
             this.menuMinimizeNamesTable.Name = "menuMinimizeNamesTable";
-            this.menuMinimizeNamesTable.Size = new System.Drawing.Size(238, 22);
+            this.menuMinimizeNamesTable.Size = new System.Drawing.Size(260, 22);
             this.menuMinimizeNamesTable.Text = "Minimize Player Names Table";
             this.menuMinimizeNamesTable.ToolTipText = "Reserve more room in the player names table for created players but makes the dat" +
-          "abase not compatible with online gaming . ";
+    "abase not compatible with online gaming . ";
             this.menuMinimizeNamesTable.Click += new System.EventHandler(this.minimizeNamesTableToolStripMenuItem_Click);
             // 
             // menuPreserveOriginalNames
             // 
             this.menuPreserveOriginalNames.Name = "menuPreserveOriginalNames";
-            this.menuPreserveOriginalNames.Size = new System.Drawing.Size(238, 22);
+            this.menuPreserveOriginalNames.Size = new System.Drawing.Size(260, 22);
             this.menuPreserveOriginalNames.Text = "Preserve Original Player Names";
             this.menuPreserveOriginalNames.ToolTipText = "Preserve all the names originally present in the player names table, in this way " +
-          "the database will be compatible with online gaming but the space of names for ne" +
-          "w players will be reduced. ";
+    "the database will be compatible with online gaming but the space of names for ne" +
+    "w players will be reduced. ";
             this.menuPreserveOriginalNames.Click += new System.EventHandler(this.menuPreserveOriginalNames_Click);
             // 
             // menuPatch
@@ -480,7 +480,7 @@ namespace CreationMaster
             this.menuCreatePatch,
             this.menuLoadPatch});
             this.menuPatch.Name = "menuPatch";
-            this.menuPatch.Size = new System.Drawing.Size(49, 20);
+            this.menuPatch.Size = new System.Drawing.Size(51, 21);
             this.menuPatch.Text = "Patch";
             // 
             // menuCreatePatch
@@ -488,7 +488,7 @@ namespace CreationMaster
             this.menuCreatePatch.Image = ((System.Drawing.Image)(resources.GetObject("menuCreatePatch.Image")));
             this.menuCreatePatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuCreatePatch.Name = "menuCreatePatch";
-            this.menuCreatePatch.Size = new System.Drawing.Size(108, 22);
+            this.menuCreatePatch.Size = new System.Drawing.Size(114, 22);
             this.menuCreatePatch.Text = "Create";
             this.menuCreatePatch.Click += new System.EventHandler(this.menuCreatePatch_Click);
             // 
@@ -497,7 +497,7 @@ namespace CreationMaster
             this.menuLoadPatch.Image = ((System.Drawing.Image)(resources.GetObject("menuLoadPatch.Image")));
             this.menuLoadPatch.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuLoadPatch.Name = "menuLoadPatch";
-            this.menuLoadPatch.Size = new System.Drawing.Size(108, 22);
+            this.menuLoadPatch.Size = new System.Drawing.Size(114, 22);
             this.menuLoadPatch.Text = "Load";
             this.menuLoadPatch.Click += new System.EventHandler(this.menuLoadPatch_Click);
             // 
@@ -509,7 +509,7 @@ namespace CreationMaster
             this.menuImportUgcKits,
             this.menuImportUgcPlayers});
             this.menuUgc.Name = "menuUgc";
-            this.menuUgc.Size = new System.Drawing.Size(81, 20);
+            this.menuUgc.Size = new System.Drawing.Size(87, 21);
             this.menuUgc.Text = "UG Content";
             // 
             // menuImportUgc
@@ -517,28 +517,28 @@ namespace CreationMaster
             this.menuImportUgc.Image = ((System.Drawing.Image)(resources.GetObject("menuImportUgc.Image")));
             this.menuImportUgc.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuImportUgc.Name = "menuImportUgc";
-            this.menuImportUgc.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgc.Size = new System.Drawing.Size(190, 22);
             this.menuImportUgc.Text = "Import DB only";
             this.menuImportUgc.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // menuImportUgcWothKits
             // 
             this.menuImportUgcWothKits.Name = "menuImportUgcWothKits";
-            this.menuImportUgcWothKits.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcWothKits.Size = new System.Drawing.Size(190, 22);
             this.menuImportUgcWothKits.Text = "Import DB and KITS";
             this.menuImportUgcWothKits.Click += new System.EventHandler(this.importDBAndKITSToolStripMenuItem_Click);
             // 
             // menuImportUgcKits
             // 
             this.menuImportUgcKits.Name = "menuImportUgcKits";
-            this.menuImportUgcKits.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcKits.Size = new System.Drawing.Size(190, 22);
             this.menuImportUgcKits.Text = "Import KITS only";
             this.menuImportUgcKits.Click += new System.EventHandler(this.importKITSOmlyToolStripMenuItem_Click);
             // 
             // menuImportUgcPlayers
             // 
             this.menuImportUgcPlayers.Name = "menuImportUgcPlayers";
-            this.menuImportUgcPlayers.Size = new System.Drawing.Size(176, 22);
+            this.menuImportUgcPlayers.Size = new System.Drawing.Size(190, 22);
             this.menuImportUgcPlayers.Text = "Import Players only";
             this.menuImportUgcPlayers.Click += new System.EventHandler(this.menuImportUgcPlayers_Click);
             // 
@@ -548,20 +548,20 @@ namespace CreationMaster
             this.menuOnlineDBFifa14,
             this.menuOnlineDBFifa15});
             this.menuUpdateDB.Name = "menuUpdateDB";
-            this.menuUpdateDB.Size = new System.Drawing.Size(98, 20);
+            this.menuUpdateDB.Size = new System.Drawing.Size(111, 21);
             this.menuUpdateDB.Text = "Update Rosters";
             // 
             // menuOnlineDBFifa14
             // 
             this.menuOnlineDBFifa14.Name = "menuOnlineDBFifa14";
-            this.menuOnlineDBFifa14.Size = new System.Drawing.Size(167, 22);
+            this.menuOnlineDBFifa14.Size = new System.Drawing.Size(177, 22);
             this.menuOnlineDBFifa14.Text = "Online DB FIFA 14";
             this.menuOnlineDBFifa14.Click += new System.EventHandler(this.menuOnlineDBFifa14_Click);
             // 
             // menuOnlineDBFifa15
             // 
             this.menuOnlineDBFifa15.Name = "menuOnlineDBFifa15";
-            this.menuOnlineDBFifa15.Size = new System.Drawing.Size(167, 22);
+            this.menuOnlineDBFifa15.Size = new System.Drawing.Size(177, 22);
             this.menuOnlineDBFifa15.Text = "Online DB FIFA 15";
             this.menuOnlineDBFifa15.Click += new System.EventHandler(this.menuOnlineDBFifa15_Click);
             // 
@@ -572,7 +572,7 @@ namespace CreationMaster
             this.menuAbout,
             this.menuHelpCms});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // menuHelp
@@ -580,7 +580,7 @@ namespace CreationMaster
             this.menuHelp.Image = ((System.Drawing.Image)(resources.GetObject("menuHelp.Image")));
             this.menuHelp.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuHelp.Name = "menuHelp";
-            this.menuHelp.Size = new System.Drawing.Size(107, 22);
+            this.menuHelp.Size = new System.Drawing.Size(111, 22);
             this.menuHelp.Text = "Help";
             this.menuHelp.Click += new System.EventHandler(this.menuHelp_Click);
             // 
@@ -589,7 +589,7 @@ namespace CreationMaster
             this.menuAbout.Image = ((System.Drawing.Image)(resources.GetObject("menuAbout.Image")));
             this.menuAbout.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.menuAbout.Name = "menuAbout";
-            this.menuAbout.Size = new System.Drawing.Size(107, 22);
+            this.menuAbout.Size = new System.Drawing.Size(111, 22);
             this.menuAbout.Text = "About";
             this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
             // 
@@ -608,84 +608,84 @@ namespace CreationMaster
             this.teamsToolStripMenuItem,
             this.tournamentsToolStripMenuItem});
             this.menuHelpCms.Name = "menuHelpCms";
-            this.menuHelpCms.Size = new System.Drawing.Size(107, 22);
+            this.menuHelpCms.Size = new System.Drawing.Size(111, 22);
             this.menuHelpCms.Text = "CMS";
             this.menuHelpCms.Visible = false;
             // 
             // genericToolStripMenuItem
             // 
             this.genericToolStripMenuItem.Name = "genericToolStripMenuItem";
-            this.genericToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.genericToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.genericToolStripMenuItem.Text = "Generic";
             this.genericToolStripMenuItem.Click += new System.EventHandler(this.menuHelpCms_Click);
             // 
             // adboardsToolStripMenuItem
             // 
             this.adboardsToolStripMenuItem.Name = "adboardsToolStripMenuItem";
-            this.adboardsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.adboardsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.adboardsToolStripMenuItem.Text = "Adboards";
             this.adboardsToolStripMenuItem.Click += new System.EventHandler(this.adboardsToolStripMenuItem_Click);
             // 
             // ballsToolStripMenuItem
             // 
             this.ballsToolStripMenuItem.Name = "ballsToolStripMenuItem";
-            this.ballsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.ballsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.ballsToolStripMenuItem.Text = "Balls";
             this.ballsToolStripMenuItem.Click += new System.EventHandler(this.ballsToolStripMenuItem_Click);
             // 
             // bootsToolStripMenuItem
             // 
             this.bootsToolStripMenuItem.Name = "bootsToolStripMenuItem";
-            this.bootsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.bootsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.bootsToolStripMenuItem.Text = "Boots";
             this.bootsToolStripMenuItem.Click += new System.EventHandler(this.bootsToolStripMenuItem_Click);
             // 
             // countryToolStripMenuItem
             // 
             this.countryToolStripMenuItem.Name = "countryToolStripMenuItem";
-            this.countryToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.countryToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.countryToolStripMenuItem.Text = "Country";
             this.countryToolStripMenuItem.Click += new System.EventHandler(this.countryToolStripMenuItem_Click);
             // 
             // fontsToolStripMenuItem
             // 
             this.fontsToolStripMenuItem.Name = "fontsToolStripMenuItem";
-            this.fontsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.fontsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.fontsToolStripMenuItem.Text = "Fonts";
             this.fontsToolStripMenuItem.Click += new System.EventHandler(this.fontsToolStripMenuItem_Click);
             // 
             // formationsToolStripMenuItem
             // 
             this.formationsToolStripMenuItem.Name = "formationsToolStripMenuItem";
-            this.formationsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.formationsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.formationsToolStripMenuItem.Text = "Formations";
             this.formationsToolStripMenuItem.Click += new System.EventHandler(this.formationsToolStripMenuItem_Click);
             // 
             // leaguesToolStripMenuItem
             // 
             this.leaguesToolStripMenuItem.Name = "leaguesToolStripMenuItem";
-            this.leaguesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.leaguesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.leaguesToolStripMenuItem.Text = "Leagues";
             this.leaguesToolStripMenuItem.Click += new System.EventHandler(this.leaguesToolStripMenuItem_Click);
             // 
             // stadiumsToolStripMenuItem
             // 
             this.stadiumsToolStripMenuItem.Name = "stadiumsToolStripMenuItem";
-            this.stadiumsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.stadiumsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.stadiumsToolStripMenuItem.Text = "Stadiums";
             this.stadiumsToolStripMenuItem.Click += new System.EventHandler(this.stadiumsToolStripMenuItem_Click);
             // 
             // teamsToolStripMenuItem
             // 
             this.teamsToolStripMenuItem.Name = "teamsToolStripMenuItem";
-            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.teamsToolStripMenuItem.Text = "Teams";
             this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
             // 
             // tournamentsToolStripMenuItem
             // 
             this.tournamentsToolStripMenuItem.Name = "tournamentsToolStripMenuItem";
-            this.tournamentsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.tournamentsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.tournamentsToolStripMenuItem.Text = "Tournaments";
             this.tournamentsToolStripMenuItem.Click += new System.EventHandler(this.tournamentsToolStripMenuItem_Click);
             // 
@@ -709,7 +709,7 @@ namespace CreationMaster
             // statusBar
             // 
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(39, 17);
+            this.statusBar.Size = new System.Drawing.Size(44, 17);
             this.statusBar.Text = "Ready";
             // 
             // splitVert
@@ -718,7 +718,7 @@ namespace CreationMaster
             this.splitVert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitVert.Enabled = false;
             this.splitVert.IsSplitterFixed = true;
-            this.splitVert.Location = new System.Drawing.Point(0, 79);
+            this.splitVert.Location = new System.Drawing.Point(0, 80);
             this.splitVert.Name = "splitVert";
             // 
             // splitVert.Panel1
@@ -730,7 +730,7 @@ namespace CreationMaster
             this.splitVert.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
             this.splitVert.Panel2.Controls.Add(this.panelRight);
             this.splitVert.Panel2.Controls.Add(this.toolStripRight);
-            this.splitVert.Size = new System.Drawing.Size(1384, 780);
+            this.splitVert.Size = new System.Drawing.Size(1384, 779);
             this.splitVert.SplitterDistance = 1355;
             this.splitVert.SplitterWidth = 2;
             this.splitVert.TabIndex = 2;
@@ -754,8 +754,8 @@ namespace CreationMaster
             this.splitHoriz.Panel2.BackColor = System.Drawing.Color.LightSkyBlue;
             this.splitHoriz.Panel2.Controls.Add(this.panelBottom);
             this.splitHoriz.Panel2.Controls.Add(this.toolStripBottom);
-            this.splitHoriz.Size = new System.Drawing.Size(1355, 780);
-            this.splitHoriz.SplitterDistance = 750;
+            this.splitHoriz.Size = new System.Drawing.Size(1355, 779);
+            this.splitHoriz.SplitterDistance = 749;
             this.splitHoriz.SplitterWidth = 2;
             this.splitHoriz.TabIndex = 0;
             // 
@@ -766,7 +766,7 @@ namespace CreationMaster
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1355, 750);
+            this.panelMain.Size = new System.Drawing.Size(1355, 749);
             this.panelMain.TabIndex = 1;
             // 
             // panelBottom
@@ -817,7 +817,7 @@ namespace CreationMaster
             // stripLabelBottom
             // 
             this.stripLabelBottom.Name = "stripLabelBottom";
-            this.stripLabelBottom.Size = new System.Drawing.Size(41, 22);
+            this.stripLabelBottom.Size = new System.Drawing.Size(44, 22);
             this.stripLabelBottom.Text = "Empty";
             // 
             // panelRight
@@ -827,7 +827,7 @@ namespace CreationMaster
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRight.Location = new System.Drawing.Point(24, 0);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(3, 780);
+            this.panelRight.Size = new System.Drawing.Size(3, 779);
             this.panelRight.TabIndex = 2;
             // 
             // toolStripRight
@@ -840,7 +840,7 @@ namespace CreationMaster
             this.stripLabelRight});
             this.toolStripRight.Location = new System.Drawing.Point(0, 0);
             this.toolStripRight.Name = "toolStripRight";
-            this.toolStripRight.Size = new System.Drawing.Size(24, 780);
+            this.toolStripRight.Size = new System.Drawing.Size(24, 779);
             this.toolStripRight.TabIndex = 1;
             this.toolStripRight.Text = "toolBottom";
             // 
@@ -868,7 +868,7 @@ namespace CreationMaster
             // stripLabelRight
             // 
             this.stripLabelRight.Name = "stripLabelRight";
-            this.stripLabelRight.Size = new System.Drawing.Size(21, 41);
+            this.stripLabelRight.Size = new System.Drawing.Size(21, 44);
             this.stripLabelRight.Text = "Empty";
             this.stripLabelRight.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
@@ -893,7 +893,7 @@ namespace CreationMaster
             this.buttonNewspaper,
             this.buttonGloves,
             this.buttonAudio});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 24);
+            this.toolStripMain.Location = new System.Drawing.Point(0, 25);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(1384, 55);
             this.toolStripMain.TabIndex = 0;
@@ -1108,6 +1108,7 @@ namespace CreationMaster
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Creation Master 17 Legacy (2023.10)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -2494,6 +2495,11 @@ namespace CreationMaster
             if (!this.InitializeFifaEnvironment(15) || !this.AskUserOpenLangDatabase())
                 return;
             this.Open();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.AskAndExit();
         }
     }
 }

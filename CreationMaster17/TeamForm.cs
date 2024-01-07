@@ -43,10 +43,8 @@ namespace CreationMaster
         private TextBox textStadiumName;
         private Label labelStadiumName;
         private GroupBox groupBox3;
-        private ComboBox comboTeamCountry;
-        private Label labelTeamCountry;
-        private BindingSource countryListBindingSource;
-        private Label labelOpponent;
+        private BindingSource countryNationalListBindingSource;
+        private Label labelRivalTeam;
         private BindingSource teamListBindingSource;
         private NumericStars numericStarsInternationalPrestige;
         private NumericStars numericStarsDomesticPrestige;
@@ -299,13 +297,20 @@ namespace CreationMaster
         private Label m_DraggedLabel;
         private int m_BoundLeft;
         private int m_BoundTop;
-        private CheckBox checkIsNationalTeam;
         private bool m_LockUserChanges;
 
         private GroupBox groupBox7;
         private Label labelHomeKit;
         private Label labelThirdKit;
         private Label labelKeeprKit;
+        private GroupBox groupBoxCountry;
+        private CheckBox checkIsRowTeam;
+        private ComboBox comboRowTeamCountry;
+        private CheckBox checkIsNationalTeam;
+        private ComboBox comboNationalTeamCountry;
+        private Label labelNationalTeamCountry;
+        private Label labelRowTeamCountry;
+        private BindingSource countryRowListBindingSource;
         private Label labelAwayKit;
 
         protected override void Dispose(bool disposing)
@@ -354,7 +359,6 @@ namespace CreationMaster
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkIsNationalTeam = new System.Windows.Forms.CheckBox();
             this.labelProbObjective = new System.Windows.Forms.Label();
             this.labelMaxObjective = new System.Windows.Forms.Label();
             this.comboProbObjective = new System.Windows.Forms.ComboBox();
@@ -375,18 +379,25 @@ namespace CreationMaster
             this.numericBall = new System.Windows.Forms.NumericUpDown();
             this.labelTeamId = new System.Windows.Forms.Label();
             this.pictureBall = new System.Windows.Forms.PictureBox();
-            this.comboTeamCountry = new System.Windows.Forms.ComboBox();
-            this.countryListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericStarsInternationalPrestige = new FifaControls.NumericStars();
-            this.labelTeamCountry = new System.Windows.Forms.Label();
-            this.labelOpponent = new System.Windows.Forms.Label();
+            this.labelRivalTeam = new System.Windows.Forms.Label();
             this.labelDomesticPrestige = new System.Windows.Forms.Label();
             this.numericStarsDomesticPrestige = new FifaControls.NumericStars();
             this.labelInitialBudget = new System.Windows.Forms.Label();
             this.labelInternationalPrestige = new System.Windows.Forms.Label();
             this.numericInitialBudget = new System.Windows.Forms.NumericUpDown();
+            this.groupBoxCountry = new System.Windows.Forms.GroupBox();
+            this.labelRowTeamCountry = new System.Windows.Forms.Label();
+            this.checkIsRowTeam = new System.Windows.Forms.CheckBox();
+            this.comboRowTeamCountry = new System.Windows.Forms.ComboBox();
+            this.countryRowListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.checkIsNationalTeam = new System.Windows.Forms.CheckBox();
+            this.comboNationalTeamCountry = new System.Windows.Forms.ComboBox();
+            this.countryNationalListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelNationalTeamCountry = new System.Windows.Forms.Label();
             this.groupLastYear = new System.Windows.Forms.GroupBox();
             this.comboPrevLeague = new System.Windows.Forms.ComboBox();
+            this.prevLeagueListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericPositionLastYear = new System.Windows.Forms.NumericUpDown();
             this.checkIsChampion = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -592,7 +603,6 @@ namespace CreationMaster
             this.teamListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.formationListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ballListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.prevLeagueListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableEditTeam.SuspendLayout();
             this.pageTeamGeneric.SuspendLayout();
             this.flowPanelTeamGeneric.SuspendLayout();
@@ -610,9 +620,12 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBall)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.countryListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericInitialBudget)).BeginInit();
+            this.groupBoxCountry.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.countryRowListBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.countryNationalListBindingSource)).BeginInit();
             this.groupLastYear.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevLeagueListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPositionLastYear)).BeginInit();
             this.groupLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUtcOffset)).BeginInit();
@@ -654,7 +667,6 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.teamListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ballListBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.prevLeagueListBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableEditTeam
@@ -691,6 +703,7 @@ namespace CreationMaster
             this.flowPanelTeamGeneric.Controls.Add(this.groupBox1);
             this.flowPanelTeamGeneric.Controls.Add(this.groupManager);
             this.flowPanelTeamGeneric.Controls.Add(this.groupBox3);
+            this.flowPanelTeamGeneric.Controls.Add(this.groupBoxCountry);
             this.flowPanelTeamGeneric.Controls.Add(this.groupLastYear);
             this.flowPanelTeamGeneric.Controls.Add(this.groupLocation);
             this.flowPanelTeamGeneric.Controls.Add(this.groupTeamTraits);
@@ -842,7 +855,6 @@ namespace CreationMaster
             this.label3.Text = "Name (7 chars)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip.SetToolTip(this.label3, "Double click to fill automatically");
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             this.label3.DoubleClick += new System.EventHandler(this.labelTeamName7_DoubleClick);
             // 
             // textTeamName7
@@ -860,7 +872,7 @@ namespace CreationMaster
             // 
             // textScoreBoardName
             // 
-            this.textScoreBoardName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true));
+            this.textScoreBoardName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameAbbr3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textScoreBoardName.Location = new System.Drawing.Point(98, 130);
             this.textScoreBoardName.Name = "textScoreBoardName";
             this.textScoreBoardName.Size = new System.Drawing.Size(160, 20);
@@ -869,7 +881,7 @@ namespace CreationMaster
             // 
             // textDatabaseTeamName
             // 
-            this.textDatabaseTeamName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "DatabaseName", true));
+            this.textDatabaseTeamName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "DatabaseName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textDatabaseTeamName.Location = new System.Drawing.Point(98, 15);
             this.textDatabaseTeamName.Name = "textDatabaseTeamName";
             this.textDatabaseTeamName.Size = new System.Drawing.Size(160, 20);
@@ -877,7 +889,7 @@ namespace CreationMaster
             // 
             // textFullTeamName
             // 
-            this.textFullTeamName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameFull", true));
+            this.textFullTeamName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "TeamNameFull", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textFullTeamName.Location = new System.Drawing.Point(98, 38);
             this.textFullTeamName.Name = "textFullTeamName";
             this.textFullTeamName.Size = new System.Drawing.Size(160, 20);
@@ -982,16 +994,16 @@ namespace CreationMaster
             // labelStadiumName
             // 
             this.labelStadiumName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelStadiumName.Location = new System.Drawing.Point(0, 41);
+            this.labelStadiumName.Location = new System.Drawing.Point(5, 39);
             this.labelStadiumName.Name = "labelStadiumName";
-            this.labelStadiumName.Size = new System.Drawing.Size(90, 20);
+            this.labelStadiumName.Size = new System.Drawing.Size(80, 20);
             this.labelStadiumName.TabIndex = 73;
             this.labelStadiumName.Text = "Stadium Name";
             this.labelStadiumName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboStadiums
             // 
-            this.comboStadiums.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "Stadium", true, DataSourceUpdateMode.OnPropertyChanged));
+            this.comboStadiums.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "Stadium", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.comboStadiums.DataSource = this.stadiumListBindingSource;
             this.comboStadiums.Location = new System.Drawing.Point(98, 15);
             this.comboStadiums.Name = "comboStadiums";
@@ -1008,9 +1020,9 @@ namespace CreationMaster
             this.labelStadium.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStadium.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.labelStadium.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelStadium.Location = new System.Drawing.Point(0, 15);
+            this.labelStadium.Location = new System.Drawing.Point(6, 15);
             this.labelStadium.Name = "labelStadium";
-            this.labelStadium.Size = new System.Drawing.Size(101, 20);
+            this.labelStadium.Size = new System.Drawing.Size(80, 20);
             this.labelStadium.TabIndex = 71;
             this.labelStadium.Text = "Stadium Model";
             this.labelStadium.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1067,7 +1079,6 @@ namespace CreationMaster
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.checkIsNationalTeam);
             this.groupBox3.Controls.Add(this.labelProbObjective);
             this.groupBox3.Controls.Add(this.labelMaxObjective);
             this.groupBox3.Controls.Add(this.comboProbObjective);
@@ -1087,10 +1098,8 @@ namespace CreationMaster
             this.groupBox3.Controls.Add(this.numericBall);
             this.groupBox3.Controls.Add(this.labelTeamId);
             this.groupBox3.Controls.Add(this.pictureBall);
-            this.groupBox3.Controls.Add(this.comboTeamCountry);
             this.groupBox3.Controls.Add(this.numericStarsInternationalPrestige);
-            this.groupBox3.Controls.Add(this.labelTeamCountry);
-            this.groupBox3.Controls.Add(this.labelOpponent);
+            this.groupBox3.Controls.Add(this.labelRivalTeam);
             this.groupBox3.Controls.Add(this.labelDomesticPrestige);
             this.groupBox3.Controls.Add(this.numericStarsDomesticPrestige);
             this.groupBox3.Controls.Add(this.labelInitialBudget);
@@ -1098,28 +1107,15 @@ namespace CreationMaster
             this.groupBox3.Controls.Add(this.numericInitialBudget);
             this.groupBox3.Location = new System.Drawing.Point(279, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(270, 486);
+            this.groupBox3.Size = new System.Drawing.Size(270, 445);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info";
             // 
-            // checkIsNationalTeam
-            // 
-            this.checkIsNationalTeam.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.teamBindingSource, "NationalTeam", true, DataSourceUpdateMode.OnPropertyChanged));
-            this.checkIsNationalTeam.Location = new System.Drawing.Point(-4, 105);
-            this.checkIsNationalTeam.Name = "checkIsNationalTeam";
-            this.checkIsNationalTeam.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkIsNationalTeam.Size = new System.Drawing.Size(116, 16);
-            this.checkIsNationalTeam.TabIndex = 155;
-            this.checkIsNationalTeam.Text = "Is National Team           ";
-            this.checkIsNationalTeam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkIsNationalTeam.UseVisualStyleBackColor = true;
-            this.checkIsNationalTeam.CheckedChanged += new System.EventHandler(this.checkNationalTeam_CheckedChanged);
-            // 
             // labelProbObjective
             // 
             this.labelProbObjective.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelProbObjective.Location = new System.Drawing.Point(8, 283);
+            this.labelProbObjective.Location = new System.Drawing.Point(8, 237);
             this.labelProbObjective.Name = "labelProbObjective";
             this.labelProbObjective.Size = new System.Drawing.Size(76, 20);
             this.labelProbObjective.TabIndex = 154;
@@ -1129,7 +1125,7 @@ namespace CreationMaster
             // labelMaxObjective
             // 
             this.labelMaxObjective.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelMaxObjective.Location = new System.Drawing.Point(7, 255);
+            this.labelMaxObjective.Location = new System.Drawing.Point(7, 209);
             this.labelMaxObjective.Name = "labelMaxObjective";
             this.labelMaxObjective.Size = new System.Drawing.Size(78, 20);
             this.labelMaxObjective.TabIndex = 153;
@@ -1157,7 +1153,7 @@ namespace CreationMaster
             "Reach the Playoff Semi Final",
             "Reach the Playoff Final",
             "Become the Playoff Champion"});
-            this.comboProbObjective.Location = new System.Drawing.Point(91, 282);
+            this.comboProbObjective.Location = new System.Drawing.Point(91, 236);
             this.comboProbObjective.Name = "comboProbObjective";
             this.comboProbObjective.Size = new System.Drawing.Size(167, 21);
             this.comboProbObjective.TabIndex = 8;
@@ -1184,7 +1180,7 @@ namespace CreationMaster
             "Reach the Playoff Semi Final",
             "Reach the Playoff Final",
             "Become the Playoff Champion"});
-            this.comboMaxOnjective.Location = new System.Drawing.Point(91, 254);
+            this.comboMaxOnjective.Location = new System.Drawing.Point(91, 208);
             this.comboMaxOnjective.Name = "comboMaxOnjective";
             this.comboMaxOnjective.Size = new System.Drawing.Size(167, 21);
             this.comboMaxOnjective.TabIndex = 7;
@@ -1211,7 +1207,7 @@ namespace CreationMaster
             "Reach the Playoff Semi Final",
             "Reach the Playoff Final",
             "Become the Playoff Champion"});
-            this.comboObjective.Location = new System.Drawing.Point(91, 227);
+            this.comboObjective.Location = new System.Drawing.Point(91, 181);
             this.comboObjective.Name = "comboObjective";
             this.comboObjective.Size = new System.Drawing.Size(167, 21);
             this.comboObjective.TabIndex = 6;
@@ -1220,7 +1216,7 @@ namespace CreationMaster
             // labelObjective
             // 
             this.labelObjective.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelObjective.Location = new System.Drawing.Point(7, 227);
+            this.labelObjective.Location = new System.Drawing.Point(7, 181);
             this.labelObjective.Name = "labelObjective";
             this.labelObjective.Size = new System.Drawing.Size(85, 20);
             this.labelObjective.TabIndex = 149;
@@ -1229,7 +1225,7 @@ namespace CreationMaster
             // 
             // comboTeamLeague
             // 
-            this.comboTeamLeague.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "League", true));
+            this.comboTeamLeague.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "League", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.comboTeamLeague.DataSource = this.leagueListBindingSource;
             this.comboTeamLeague.Enabled = false;
             this.comboTeamLeague.Location = new System.Drawing.Point(91, 75);
@@ -1301,7 +1297,7 @@ namespace CreationMaster
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 336);
+            this.label1.Location = new System.Drawing.Point(6, 289);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 20);
             this.label1.TabIndex = 96;
@@ -1312,7 +1308,7 @@ namespace CreationMaster
             // comboRivalTeam
             // 
             this.comboRivalTeam.FormattingEnabled = true;
-            this.comboRivalTeam.Location = new System.Drawing.Point(91, 313);
+            this.comboRivalTeam.Location = new System.Drawing.Point(91, 264);
             this.comboRivalTeam.Name = "comboRivalTeam";
             this.comboRivalTeam.Size = new System.Drawing.Size(167, 21);
             this.comboRivalTeam.TabIndex = 9;
@@ -1366,7 +1362,7 @@ namespace CreationMaster
             // numericBall
             // 
             this.numericBall.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "balltype", true));
-            this.numericBall.Location = new System.Drawing.Point(167, 338);
+            this.numericBall.Location = new System.Drawing.Point(167, 291);
             this.numericBall.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1398,71 +1394,41 @@ namespace CreationMaster
             // pictureBall
             // 
             this.pictureBall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBall.Location = new System.Drawing.Point(9, 362);
+            this.pictureBall.Location = new System.Drawing.Point(9, 316);
             this.pictureBall.Name = "pictureBall";
             this.pictureBall.Size = new System.Drawing.Size(249, 110);
             this.pictureBall.TabIndex = 5;
             this.pictureBall.TabStop = false;
             // 
-            // comboTeamCountry
-            // 
-            this.comboTeamCountry.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "Country", true, DataSourceUpdateMode.OnPropertyChanged));
-            this.comboTeamCountry.DataSource = this.countryListBindingSource;
-            this.comboTeamCountry.Enabled = false;
-            this.comboTeamCountry.Location = new System.Drawing.Point(91, 126);
-            this.comboTeamCountry.Name = "comboTeamCountry";
-            this.comboTeamCountry.Size = new System.Drawing.Size(167, 21);
-            this.comboTeamCountry.TabIndex = 1;
-            this.comboTeamCountry.SelectedIndexChanged += new System.EventHandler(this.comboTeamCountry_SelectedIndexChanged);
-            // 
-            // countryListBindingSource
-            // 
-            this.countryListBindingSource.DataSource = typeof(FifaLibrary.CountryList);
-            // 
             // numericStarsInternationalPrestige
             // 
             this.numericStarsInternationalPrestige.BackColor = System.Drawing.Color.Transparent;
-            this.numericStarsInternationalPrestige.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "internationalprestige", true));
-            this.numericStarsInternationalPrestige.Location = new System.Drawing.Point(91, 178);
+            this.numericStarsInternationalPrestige.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "internationalprestige", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericStarsInternationalPrestige.Location = new System.Drawing.Point(91, 132);
             this.numericStarsInternationalPrestige.Name = "numericStarsInternationalPrestige";
             this.numericStarsInternationalPrestige.Size = new System.Drawing.Size(167, 20);
             this.numericStarsInternationalPrestige.TabIndex = 4;
             this.numericStarsInternationalPrestige.Value = 0;
             // 
-            // labelTeamCountry
+            // labelRivalTeam
             // 
-            this.labelTeamCountry.AutoSize = true;
-            this.labelTeamCountry.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelTeamCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTeamCountry.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.labelTeamCountry.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelTeamCountry.Location = new System.Drawing.Point(7, 130);
-            this.labelTeamCountry.Name = "labelTeamCountry";
-            this.labelTeamCountry.Size = new System.Drawing.Size(43, 13);
-            this.labelTeamCountry.TabIndex = 122;
-            this.labelTeamCountry.Text = "Country";
-            this.labelTeamCountry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelTeamCountry.DoubleClick += new System.EventHandler(this.labelTeamCountry_DoubleClick);
-            // 
-            // labelOpponent
-            // 
-            this.labelOpponent.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelOpponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOpponent.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.labelOpponent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelOpponent.Location = new System.Drawing.Point(6, 312);
-            this.labelOpponent.Name = "labelOpponent";
-            this.labelOpponent.Size = new System.Drawing.Size(86, 20);
-            this.labelOpponent.TabIndex = 124;
-            this.labelOpponent.Text = "Opponent Team";
-            this.labelOpponent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelOpponent.DoubleClick += new System.EventHandler(this.labelOpponent_DoubleClick);
+            this.labelRivalTeam.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelRivalTeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRivalTeam.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.labelRivalTeam.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelRivalTeam.Location = new System.Drawing.Point(6, 263);
+            this.labelRivalTeam.Name = "labelRivalTeam";
+            this.labelRivalTeam.Size = new System.Drawing.Size(79, 20);
+            this.labelRivalTeam.TabIndex = 124;
+            this.labelRivalTeam.Text = "Rival Team";
+            this.labelRivalTeam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelRivalTeam.DoubleClick += new System.EventHandler(this.labelOpponent_DoubleClick);
             // 
             // labelDomesticPrestige
             // 
             this.labelDomesticPrestige.BackColor = System.Drawing.Color.Transparent;
             this.labelDomesticPrestige.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelDomesticPrestige.Location = new System.Drawing.Point(6, 154);
+            this.labelDomesticPrestige.Location = new System.Drawing.Point(6, 108);
             this.labelDomesticPrestige.Name = "labelDomesticPrestige";
             this.labelDomesticPrestige.Size = new System.Drawing.Size(85, 20);
             this.labelDomesticPrestige.TabIndex = 103;
@@ -1472,8 +1438,8 @@ namespace CreationMaster
             // numericStarsDomesticPrestige
             // 
             this.numericStarsDomesticPrestige.BackColor = System.Drawing.Color.Transparent;
-            this.numericStarsDomesticPrestige.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "domesticprestige", true));
-            this.numericStarsDomesticPrestige.Location = new System.Drawing.Point(91, 154);
+            this.numericStarsDomesticPrestige.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "domesticprestige", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericStarsDomesticPrestige.Location = new System.Drawing.Point(91, 106);
             this.numericStarsDomesticPrestige.Name = "numericStarsDomesticPrestige";
             this.numericStarsDomesticPrestige.Size = new System.Drawing.Size(167, 20);
             this.numericStarsDomesticPrestige.TabIndex = 3;
@@ -1482,7 +1448,7 @@ namespace CreationMaster
             // labelInitialBudget
             // 
             this.labelInitialBudget.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelInitialBudget.Location = new System.Drawing.Point(6, 202);
+            this.labelInitialBudget.Location = new System.Drawing.Point(6, 156);
             this.labelInitialBudget.Name = "labelInitialBudget";
             this.labelInitialBudget.Size = new System.Drawing.Size(85, 20);
             this.labelInitialBudget.TabIndex = 95;
@@ -1493,7 +1459,7 @@ namespace CreationMaster
             // 
             this.labelInternationalPrestige.BackColor = System.Drawing.Color.Transparent;
             this.labelInternationalPrestige.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelInternationalPrestige.Location = new System.Drawing.Point(6, 178);
+            this.labelInternationalPrestige.Location = new System.Drawing.Point(6, 132);
             this.labelInternationalPrestige.Name = "labelInternationalPrestige";
             this.labelInternationalPrestige.Size = new System.Drawing.Size(84, 20);
             this.labelInternationalPrestige.TabIndex = 101;
@@ -1502,13 +1468,13 @@ namespace CreationMaster
             // 
             // numericInitialBudget
             // 
-            this.numericInitialBudget.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "transferbudget", true));
+            this.numericInitialBudget.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "transferbudget", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numericInitialBudget.Increment = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericInitialBudget.Location = new System.Drawing.Point(91, 202);
+            this.numericInitialBudget.Location = new System.Drawing.Point(91, 156);
             this.numericInitialBudget.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -1525,6 +1491,101 @@ namespace CreationMaster
             0,
             0});
             // 
+            // groupBoxCountry
+            // 
+            this.groupBoxCountry.Controls.Add(this.labelRowTeamCountry);
+            this.groupBoxCountry.Controls.Add(this.checkIsRowTeam);
+            this.groupBoxCountry.Controls.Add(this.comboRowTeamCountry);
+            this.groupBoxCountry.Controls.Add(this.checkIsNationalTeam);
+            this.groupBoxCountry.Controls.Add(this.comboNationalTeamCountry);
+            this.groupBoxCountry.Controls.Add(this.labelNationalTeamCountry);
+            this.groupBoxCountry.Location = new System.Drawing.Point(279, 454);
+            this.groupBoxCountry.Name = "groupBoxCountry";
+            this.groupBoxCountry.Size = new System.Drawing.Size(270, 139);
+            this.groupBoxCountry.TabIndex = 164;
+            this.groupBoxCountry.TabStop = false;
+            this.groupBoxCountry.Text = "Country";
+            // 
+            // labelRowTeamCountry
+            // 
+            this.labelRowTeamCountry.AutoSize = true;
+            this.labelRowTeamCountry.Location = new System.Drawing.Point(9, 104);
+            this.labelRowTeamCountry.Name = "labelRowTeamCountry";
+            this.labelRowTeamCountry.Size = new System.Drawing.Size(43, 13);
+            this.labelRowTeamCountry.TabIndex = 165;
+            this.labelRowTeamCountry.Text = "Country";
+            // 
+            // checkIsRowTeam
+            // 
+            this.checkIsRowTeam.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.teamBindingSource, "IsRowTeam", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.checkIsRowTeam.Location = new System.Drawing.Point(12, 79);
+            this.checkIsRowTeam.Name = "checkIsRowTeam";
+            this.checkIsRowTeam.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkIsRowTeam.Size = new System.Drawing.Size(187, 16);
+            this.checkIsRowTeam.TabIndex = 164;
+            this.checkIsRowTeam.Text = "Is Rest of the World Team";
+            this.toolTip.SetToolTip(this.checkIsRowTeam, "A Team that is not currently in a League (Rest of the World) or \nis in a League f" +
+        "rom another Country (e.g. Wales Teams in English Leagues)");
+            this.checkIsRowTeam.UseVisualStyleBackColor = true;
+            this.checkIsRowTeam.CheckedChanged += new System.EventHandler(this.checkIsRowTeam_CheckedChanged);
+            // 
+            // comboRowTeamCountry
+            // 
+            this.comboRowTeamCountry.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "CountryRowTeam", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.comboRowTeamCountry.DataSource = this.countryRowListBindingSource;
+            this.comboRowTeamCountry.Enabled = false;
+            this.comboRowTeamCountry.Location = new System.Drawing.Point(91, 99);
+            this.comboRowTeamCountry.Name = "comboRowTeamCountry";
+            this.comboRowTeamCountry.Size = new System.Drawing.Size(167, 21);
+            this.comboRowTeamCountry.TabIndex = 162;
+            this.comboRowTeamCountry.SelectedIndexChanged += new System.EventHandler(this.comboRowTeamCountry_SelectedIndexChanged);
+            // 
+            // countryRowListBindingSource
+            // 
+            this.countryRowListBindingSource.DataSource = typeof(FifaLibrary.CountryList);
+            // 
+            // checkIsNationalTeam
+            // 
+            this.checkIsNationalTeam.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.teamBindingSource, "IsNationalTeam", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.checkIsNationalTeam.Location = new System.Drawing.Point(12, 26);
+            this.checkIsNationalTeam.Name = "checkIsNationalTeam";
+            this.checkIsNationalTeam.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkIsNationalTeam.Size = new System.Drawing.Size(142, 20);
+            this.checkIsNationalTeam.TabIndex = 161;
+            this.checkIsNationalTeam.Text = "Is Men\'s National Team";
+            this.checkIsNationalTeam.UseVisualStyleBackColor = true;
+            this.checkIsNationalTeam.CheckedChanged += new System.EventHandler(this.checkIsNationalTeam_CheckedChanged);
+            // 
+            // comboNationalTeamCountry
+            // 
+            this.comboNationalTeamCountry.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "CountryNationalTeam", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.comboNationalTeamCountry.DataSource = this.countryNationalListBindingSource;
+            this.comboNationalTeamCountry.Enabled = false;
+            this.comboNationalTeamCountry.Location = new System.Drawing.Point(91, 50);
+            this.comboNationalTeamCountry.Name = "comboNationalTeamCountry";
+            this.comboNationalTeamCountry.Size = new System.Drawing.Size(167, 21);
+            this.comboNationalTeamCountry.TabIndex = 159;
+            this.comboNationalTeamCountry.SelectedIndexChanged += new System.EventHandler(this.comboNationalTeamCountry_SelectedIndexChanged);
+            // 
+            // countryNationalListBindingSource
+            // 
+            this.countryNationalListBindingSource.DataSource = typeof(FifaLibrary.CountryList);
+            // 
+            // labelNationalTeamCountry
+            // 
+            this.labelNationalTeamCountry.AutoSize = true;
+            this.labelNationalTeamCountry.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelNationalTeamCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNationalTeamCountry.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.labelNationalTeamCountry.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelNationalTeamCountry.Location = new System.Drawing.Point(8, 54);
+            this.labelNationalTeamCountry.Name = "labelNationalTeamCountry";
+            this.labelNationalTeamCountry.Size = new System.Drawing.Size(43, 13);
+            this.labelNationalTeamCountry.TabIndex = 160;
+            this.labelNationalTeamCountry.Text = "Country";
+            this.labelNationalTeamCountry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelNationalTeamCountry.DoubleClick += new System.EventHandler(this.labelNationalTeamCountry_DoubleClick);
+            // 
             // groupLastYear
             // 
             this.groupLastYear.Controls.Add(this.comboPrevLeague);
@@ -1532,7 +1593,7 @@ namespace CreationMaster
             this.groupLastYear.Controls.Add(this.checkIsChampion);
             this.groupLastYear.Controls.Add(this.label19);
             this.groupLastYear.Controls.Add(this.label18);
-            this.groupLastYear.Location = new System.Drawing.Point(279, 495);
+            this.groupLastYear.Location = new System.Drawing.Point(279, 599);
             this.groupLastYear.Name = "groupLastYear";
             this.groupLastYear.Size = new System.Drawing.Size(270, 101);
             this.groupLastYear.TabIndex = 4;
@@ -1541,18 +1602,22 @@ namespace CreationMaster
             // 
             // comboPrevLeague
             // 
-            this.comboPrevLeague.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "PrevLeague", true));
-            this.comboPrevLeague.DataSource = this.leagueListBindingSource;
-            this.comboPrevLeague.Location = new System.Drawing.Point(97, 18);
+            this.comboPrevLeague.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.teamBindingSource, "PrevLeague", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.comboPrevLeague.DataSource = this.prevLeagueListBindingSource;
+            this.comboPrevLeague.Location = new System.Drawing.Point(91, 18);
             this.comboPrevLeague.Name = "comboPrevLeague";
             this.comboPrevLeague.Size = new System.Drawing.Size(167, 21);
             this.comboPrevLeague.TabIndex = 0;
             this.comboPrevLeague.SelectedIndexChanged += new System.EventHandler(this.comboPrevLeague_SelectedIndexChanged);
             // 
+            // prevLeagueListBindingSource
+            // 
+            this.prevLeagueListBindingSource.DataSource = typeof(FifaLibrary.LeagueList);
+            // 
             // numericPositionLastYear
             // 
-            this.numericPositionLastYear.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "previousyeartableposition", true));
-            this.numericPositionLastYear.Location = new System.Drawing.Point(97, 42);
+            this.numericPositionLastYear.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "previousyeartableposition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericPositionLastYear.Location = new System.Drawing.Point(91, 44);
             this.numericPositionLastYear.Maximum = new decimal(new int[] {
             24,
             0,
@@ -1590,7 +1655,7 @@ namespace CreationMaster
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.Color.Transparent;
             this.label19.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label19.Location = new System.Drawing.Point(6, 44);
+            this.label19.Location = new System.Drawing.Point(8, 47);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(44, 13);
             this.label19.TabIndex = 149;
@@ -1617,7 +1682,7 @@ namespace CreationMaster
             this.groupLocation.Controls.Add(this.label25);
             this.groupLocation.Controls.Add(this.label24);
             this.groupLocation.Controls.Add(this.label23);
-            this.groupLocation.Location = new System.Drawing.Point(279, 602);
+            this.groupLocation.Location = new System.Drawing.Point(555, 3);
             this.groupLocation.Name = "groupLocation";
             this.groupLocation.Size = new System.Drawing.Size(270, 102);
             this.groupLocation.TabIndex = 162;
@@ -1627,7 +1692,7 @@ namespace CreationMaster
             // numericUtcOffset
             // 
             this.numericUtcOffset.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.teamBindingSource, "utcoffset", true));
-            this.numericUtcOffset.Location = new System.Drawing.Point(91, 73);
+            this.numericUtcOffset.Location = new System.Drawing.Point(91, 71);
             this.numericUtcOffset.Maximum = new decimal(new int[] {
             13,
             0,
@@ -1732,7 +1797,7 @@ namespace CreationMaster
             this.groupTeamTraits.Controls.Add(this.checkSquadRotation);
             this.groupTeamTraits.Controls.Add(this.checkLoyalBoard);
             this.groupTeamTraits.Controls.Add(this.checkImpatientBoard);
-            this.groupTeamTraits.Location = new System.Drawing.Point(555, 3);
+            this.groupTeamTraits.Location = new System.Drawing.Point(555, 111);
             this.groupTeamTraits.Name = "groupTeamTraits";
             this.groupTeamTraits.Size = new System.Drawing.Size(270, 209);
             this.groupTeamTraits.TabIndex = 161;
@@ -1875,7 +1940,7 @@ namespace CreationMaster
             this.groupBox7.Controls.Add(this.labelKeeprKit);
             this.groupBox7.Controls.Add(this.labelAwayKit);
             this.groupBox7.Controls.Add(this.labelHomeKit);
-            this.groupBox7.Location = new System.Drawing.Point(555, 218);
+            this.groupBox7.Location = new System.Drawing.Point(555, 326);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(270, 61);
             this.groupBox7.TabIndex = 163;
@@ -3762,8 +3827,8 @@ namespace CreationMaster
             // labelPos0
             // 
             this.labelPos0.AllowDrop = true;
-            this.labelPos0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.labelPos0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPos0.BackColor = System.Drawing.Color.Transparent;
             this.labelPos0.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -4705,10 +4770,6 @@ namespace CreationMaster
             // 
             this.ballListBindingSource.DataSource = typeof(FifaLibrary.BallList);
             // 
-            // prevLeagueListBindingSource
-            // 
-            this.prevLeagueListBindingSource.DataSource = typeof(FifaLibrary.LeagueList);
-            // 
             // TeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4741,10 +4802,14 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.numericTeamId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericBall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBall)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.countryListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericInitialBudget)).EndInit();
+            this.groupBoxCountry.ResumeLayout(false);
+            this.groupBoxCountry.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.countryRowListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.countryNationalListBindingSource)).EndInit();
             this.groupLastYear.ResumeLayout(false);
             this.groupLastYear.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevLeagueListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPositionLastYear)).EndInit();
             this.groupLocation.ResumeLayout(false);
             this.groupLocation.PerformLayout();
@@ -4797,7 +4862,6 @@ namespace CreationMaster
             ((System.ComponentModel.ISupportInitialize)(this.teamListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ballListBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.prevLeagueListBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5025,7 +5089,8 @@ namespace CreationMaster
             }
             if (this.m_CurrentTeam != null)
             {
-                newObject.Country = this.m_CurrentTeam.Country;
+                newObject.CountryNationalTeam = this.m_CurrentTeam.CountryNationalTeam;
+                newObject.CountryRowTeam = this.m_CurrentTeam.CountryRowTeam;
                 newObject.adboardid = this.m_CurrentTeam.adboardid;
                 newObject.balltype = this.m_CurrentTeam.balltype;
                 newObject.Stadium = this.m_CurrentTeam.Stadium;
@@ -5043,8 +5108,8 @@ namespace CreationMaster
                         Player newId = (Player)FifaEnvironment.Players.CreateNewId();
                         if (newId != null)
                         {
-                            if (this.m_CurrentTeam.Country != null)
-                                newId.Country = this.m_CurrentTeam.Country;
+                            if (this.m_CurrentTeam.League.Country != null)
+                                newId.Country = this.m_CurrentTeam.League.Country;
                             teamPlayerArray[index] = new TeamPlayer(newId);
                             newId.preferredposition1 = index >= 11 ? newObject.Formation.PlayingRoles[index * 3 % 11].Id : newObject.Formation.PlayingRoles[index].Id;
                             newObject.AddTeamPlayer(teamPlayerArray[index]);
@@ -5126,7 +5191,8 @@ namespace CreationMaster
         {
             this.numericTeamId.Value = (Decimal)this.m_CurrentTeam.Id;
             this.comboRivalTeam.SelectedItem = (object)this.m_CurrentTeam.RivalTeam;
-            this.checkIsNationalTeam.Checked = this.m_CurrentTeam.NationalTeam;
+            this.checkIsNationalTeam.Checked = this.m_CurrentTeam.IsNationalTeam;
+            this.checkIsRowTeam.Checked = this.m_CurrentTeam.IsRowTeam;
             this.comboObjective.SelectedIndex = this.m_CurrentTeam.objective;
             this.comboMaxOnjective.SelectedIndex = this.m_CurrentTeam.highestpossible;
             this.comboProbObjective.SelectedIndex = this.m_CurrentTeam.highestprobable;
@@ -5137,11 +5203,14 @@ namespace CreationMaster
             this.viewer2DCrest16.CurrentBitmap = this.m_CurrentTeam.GetCrest16();
             if (this.m_CurrentTeam.Stadium == null)
                 this.comboStadiums.Text = string.Empty;
-            if (this.m_CurrentTeam.Country == null)
-                this.comboTeamCountry.Text = string.Empty;
-            if (this.m_CurrentTeam.League != null)
-                return;
-            this.comboTeamLeague.Text = string.Empty;
+            if (this.m_CurrentTeam.CountryNationalTeam == null)
+                this.comboNationalTeamCountry.Text = string.Empty;
+            if (this.m_CurrentTeam.CountryRowTeam == null)
+                this.comboRowTeamCountry.Text = string.Empty;
+            if (this.m_CurrentTeam.League == null)
+                this.comboTeamLeague.Text = string.Empty;
+            if (this.m_CurrentTeam.PrevLeague == null)
+                this.comboPrevLeague.Text = string.Empty;
         }
 
         public void LoadAdboardPage()
@@ -5209,9 +5278,12 @@ namespace CreationMaster
             this.stadiumListBindingSource.DataSource = (object)FifaEnvironment.Stadiums;
             this.comboStadiums.DataSource = (object)this.stadiumListBindingSource;
             this.stadiumListBindingSource.ResetBindings(false);
-            this.countryListBindingSource.DataSource = (object)FifaEnvironment.Countries;
-            this.comboTeamCountry.DataSource = (object)this.countryListBindingSource;
-            this.countryListBindingSource.ResetBindings(false);
+            this.countryNationalListBindingSource.DataSource = (object)FifaEnvironment.Countries;
+            this.comboNationalTeamCountry.DataSource = (object)this.countryNationalListBindingSource;
+            this.countryNationalListBindingSource.ResetBindings(false);
+            this.countryRowListBindingSource.DataSource = (object)FifaEnvironment.Countries;
+            this.comboRowTeamCountry.DataSource = (object)this.countryRowListBindingSource;
+            this.countryRowListBindingSource.ResetBindings(false);
             this.leagueListBindingSource.DataSource = (object)FifaEnvironment.Leagues;
             this.prevLeagueListBindingSource.DataSource = (object)FifaEnvironment.Leagues;
             this.comboTeamLeague.DataSource = (object)this.leagueListBindingSource;
@@ -5481,7 +5553,7 @@ namespace CreationMaster
                 for (int index = 0; index < this.m_CurrentAvailablePlayer.m_PlayingForTeams.Count; ++index)
                 {
                     Team playingForTeam = (Team)this.m_CurrentAvailablePlayer.m_PlayingForTeams[index];
-                    if (!playingForTeam.IsNationalTeam())
+                    if (!playingForTeam.IsNationalTeam)
                     {
                         team = playingForTeam;
                         break;
@@ -5624,13 +5696,6 @@ namespace CreationMaster
             this.pictureBall.BackgroundImage = (Image)Ball.GetBallPicture(this.m_CurrentTeam.balltype);
         }
 
-        private void labelTeamCountry_DoubleClick(object sender, EventArgs e)
-        {
-            if (this.m_CurrentTeam.Country == null)
-                return;
-            MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.Country);
-        }
-
         private void labelTeamLeague_DoubleClick(object sender, EventArgs e)
         {
             if (this.m_CurrentTeam.League == null)
@@ -5677,12 +5742,6 @@ namespace CreationMaster
                 return;
             this.m_CurrentTeamPlayer.Player.contractvaliduntil = (int)this.numericRosterYear.Value;
             this.listViewTeamPlayers.SelectedItems[0].SubItems[3] = new ListViewItem.ListViewSubItem(this.listViewTeamPlayers.SelectedItems[0], this.m_CurrentTeamPlayer.Player.contractvaliduntil.ToString());
-        }
-
-        private void comboTeamCountry_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.m_CurrentTeam.Country = (Country)comboTeamCountry.SelectedItem;
-            this.SetNationalTeam();
         }
 
         private void dateJoiningDate_ValueChanged(object sender, EventArgs e)
@@ -6556,16 +6615,22 @@ namespace CreationMaster
 
         private void comboTeamLeague_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboTeamLeague.SelectedItem != null)
+            if (this.comboTeamLeague.SelectedItem == null)
+            {
+                this.comboTeamLeague.Text = string.Empty;
                 return;
-            this.comboTeamLeague.Text = string.Empty;
+            }
+            this.m_CurrentTeam.League = (League)this.comboTeamLeague.SelectedItem;
         }
 
         private void comboPrevLeague_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboPrevLeague.SelectedItem != null)
+            if (this.comboPrevLeague.SelectedItem == null)
+            {
+                this.comboPrevLeague.Text = string.Empty;
                 return;
-            this.comboPrevLeague.Text = string.Empty;
+            }
+            this.m_CurrentTeam.PrevLeague = (League)this.comboPrevLeague.SelectedItem;
         }
 
         private void textShortTeamName_TextChanged(object sender, EventArgs e)
@@ -6797,10 +6862,6 @@ namespace CreationMaster
             this.textTeamName7.Text = this.m_CurrentTeam.TeamNameAbbr7;
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-        }
-
         private void numericLatitude_ValueChanged(object sender, EventArgs e)
         {
             if (this.m_LockUserChanges)
@@ -6820,39 +6881,6 @@ namespace CreationMaster
             if (this.m_LockUserChanges)
                 return;
             this.m_CurrentTeam.utcoffset = (int)this.numericUtcOffset.Value;
-        }
-
-        private void checkNationalTeam_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.m_CurrentTeam == null || this.m_LockUserChanges)
-                return;
-            this.SetNationalTeam();
-        }
-
-        private void SetNationalTeam()
-        {
-            if (this.checkIsNationalTeam.Checked)
-            {
-                comboTeamCountry.Enabled = true;
-                if (this.m_CurrentTeam.Country == null || this.m_CurrentTeam.IsFemale())
-                    return;
-                this.m_CurrentTeam.NationalTeam = true;
-                this.m_CurrentTeam.Country.SetNationalTeam(this.m_CurrentTeam, this.m_CurrentTeam.Id);
-            }
-            else
-            {
-                comboTeamCountry.Enabled = false;
-                if (this.m_CurrentTeam.Country == null || this.m_CurrentTeam.IsFemale())
-                    return;
-                this.m_CurrentTeam.NationalTeam = false;
-                this.m_CurrentTeam.Country.SetNationalTeam((Team)null, 0);
-                comboTeamCountry.SelectedIndex = -1;
-
-            }
-
-            this.Validate();
-            this.teamBindingSource.EndEdit();
-            this.countryListBindingSource.EndEdit();
         }
 
         private void labelHomeKit_DoubleClick(object sender, EventArgs e)
@@ -6905,6 +6933,67 @@ namespace CreationMaster
             {
                 int num = (int)FifaEnvironment.UserMessages.ShowMessage(3001);
             }
+        }
+
+        private void checkIsNationalTeam_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_CurrentTeam == null || this.m_LockUserChanges)
+                return;
+            if (this.checkIsNationalTeam.Checked)
+            {
+                comboNationalTeamCountry.Enabled = true;
+                countryNationalListBindingSource.ResetBindings(false);
+            }
+            else if (!this.checkIsNationalTeam.Checked)
+            {
+                comboNationalTeamCountry.Enabled = false;
+                comboNationalTeamCountry.Text = string.Empty;
+                m_CurrentTeam.CountryNationalTeam = null;
+            }
+        }
+
+        private void checkIsRowTeam_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.m_CurrentTeam == null || this.m_LockUserChanges)
+                return;
+            if (this.checkIsRowTeam.Checked)
+            {
+                comboRowTeamCountry.Enabled = true;
+                countryRowListBindingSource.ResetBindings(false);
+            }
+            else if (!this.checkIsRowTeam.Checked)
+            {
+                comboRowTeamCountry.Enabled = false;
+                comboRowTeamCountry.Text = string.Empty;
+                m_CurrentTeam.CountryRowTeam = null;
+            }
+        }
+
+        private void labelNationalTeamCountry_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.m_CurrentTeam.CountryNationalTeam == null)
+                return;
+            MainForm.CM.JumpTo((IdObject)this.m_CurrentTeam.CountryNationalTeam);
+        }
+
+        private void comboRowTeamCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboRowTeamCountry.SelectedItem == null)
+            {
+                this.comboRowTeamCountry.Text = string.Empty;
+                return;
+            }
+            this.m_CurrentTeam.CountryRowTeam = (Country)this.comboRowTeamCountry.SelectedItem;
+        }
+
+        private void comboNationalTeamCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboNationalTeamCountry.SelectedItem == null)
+            {
+                this.comboNationalTeamCountry.Text = string.Empty;
+                return;
+            }
+            this.m_CurrentTeam.CountryNationalTeam = (Country)this.comboNationalTeamCountry.SelectedItem;
         }
     }
 }

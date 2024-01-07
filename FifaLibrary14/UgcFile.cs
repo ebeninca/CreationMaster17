@@ -383,7 +383,7 @@ namespace FifaLibrary
                 if (team == null)
                 {
                     team = FifaEnvironment.Teams.FitTeam(record1.StringField[FI.teams_teamname]);
-                    if (team != null && country.Id != 216 && team.Country != country)
+                    if (team != null && country.Id != 216 && team.League.Country != country)
                         team = (Team)null;
                     team?.Roster.ResetToEmpty();
                     flag = team != null;
@@ -393,7 +393,7 @@ namespace FifaLibrary
                     minId2 = FifaEnvironment.Teams.GetNextId(minId2);
                     team = new Team(table7.Records[index1]);
                     team.Id = minId2;
-                    team.Country = country;
+                    team.League.Country = country;
                     FifaEnvironment.Teams.InsertId((IdObject)team);
                 }
                 if (statusBar != null)
@@ -547,14 +547,14 @@ namespace FifaLibrary
             {
                 for (int index2 = 0; index2 < teamArray.Length; ++index2)
                 {
-                    if (teamArray[index1].rivalteam == teamArray[index2].assetid)
+                    if (teamArray[index1].rivalteamId == teamArray[index2].assetid)
                     {
                         teamArray[index1].RivalTeam = teamArray[index2];
                         break;
                     }
                 }
                 if (teamArray[index1].RivalTeam == null)
-                    teamArray[index1].RivalTeam = (Team)FifaEnvironment.Teams.SearchId(teamArray[index1].rivalteam);
+                    teamArray[index1].RivalTeam = (Team)FifaEnvironment.Teams.SearchId(teamArray[index1].rivalteamId);
                 if (teamArray[index1].RivalTeam == null)
                     teamArray[index1].RivalTeam = teamArray[0];
             }
@@ -976,7 +976,7 @@ namespace FifaLibrary
                 if (team == null)
                 {
                     team = FifaEnvironment.Teams.FitTeam(record.StringField[FI.teams_teamname]);
-                    if (team != null && country.Id != 216 && team.Country != country)
+                    if (team != null && country.Id != 216 && team.League.Country != country)
                         team = (Team)null;
                     team?.Roster.ResetToEmpty();
                 }

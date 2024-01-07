@@ -12,7 +12,10 @@ Installation modules needed in Visual Studio 2019 Community (https://visualstudi
 
 The Unity 3dRender executable is provided in this project, so you can build at once.
 
-If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this repository: <asdsfsf>. In this case you will need the extra module installed with Visual Studio:
+If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this repository: 
+https://github.com/ebeninca/Fbx3dRender. 
+
+In this case you will need the extra module installed with Visual Studio:
 - Game development with Unity
 
 
@@ -23,7 +26,9 @@ If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this r
 - Ivory Coast stadium: Etihad Stadium
 - Turkey stadium: Stadion Hanguk
 
-## Pendencies
+## TODO List
+
+### Compdata pendencies:
 
 - Weather Probability
 - Argentina num_games = 0
@@ -58,6 +63,8 @@ If you want to edit the 3dRender project in Unity 2022.3.10f1 IDE, follow this r
 +1699,standings_sort,H2HGOALSFOR
  
  ```
+ 
+### Next up:
  
 - FIFA DB IS SMALLER AFTER SAVING FOR THE FIRST TIME, LOSS OF DATA?
 
@@ -129,17 +136,3 @@ v002
 v001
 - Compdata: Use Fan Cards
 - Compdata: Support to new Qualification Rules (ChampionsCup, EuroLeague)
-
-## Current progress ##
-
-* window is now centered and adjusted to display resolution
-* enabled linear filtering for textures in 3D preview
-* correct 3D render for all vertex formats
-
-## How to download and install ##
-
-Download binaries (cm15-2021-bin.zip) from
-
-https://bitbucket.org/fifa-tools/cm15/downloads/
-
-Copy&Paste to original CM15 install folder.

@@ -194,7 +194,7 @@ namespace FifaLibrary
         for (int index = 0; index < this.Count; ++index)
         {
           Formation formation = (Formation) this[index];
-          if (formation.Team != null && formation.Team.Country == country)
+          if (formation.Team != null && formation.Team.League.Country == country)
             formationList.Add((object) formation);
         }
         return (IdArrayList) formationList;

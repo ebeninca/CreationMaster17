@@ -1,6 +1,7 @@
 ﻿// Original code created by Rinaldo
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace FifaLibrary
@@ -47,7 +48,7 @@ namespace FifaLibrary
         private Ball m_Ball;
         private bool m_HasSpecificAdboard;
         private Stadium m_Stadium;
-        private int m_rivalteam;
+        private int m_rivalteamId;
         private Team m_RivalTeam;
         private int m_formationid;
         private Formation m_Formation;
@@ -133,10 +134,10 @@ namespace FifaLibrary
         private int m_matchdaydefenserating;
         private int m_matchdaymidfieldrating;
         private int m_matchdayattackrating;
-        private int m_countryid_IfNationalTeam;
-        public int m_countryid_IfRowTeam;
-        public int m_countryid_IfLeagueTeam;
-        private Country m_Country;
+        //private int m_countryid_IfNationalTeam;
+        //private int m_countryid_IfRowTeam;
+        private Country m_CountryNationalTeam;
+        private Country m_CountryRowTeam;
         private int m_leagueid;
         private League m_League;
         private int m_prevleagueid;
@@ -391,15 +392,15 @@ namespace FifaLibrary
             }
         }
 
-        public int rivalteam
+        public int rivalteamId
         {
             get
             {
-                return this.m_rivalteam;
+                return this.m_rivalteamId;
             }
             set
             {
-                this.m_rivalteam = value;
+                this.m_rivalteamId = value;
             }
         }
 
@@ -411,10 +412,12 @@ namespace FifaLibrary
             }
             set
             {
-                this.m_RivalTeam = value;
-                if (this.m_RivalTeam == null)
+                if (value == null)
                     return;
-                this.m_rivalteam = this.m_RivalTeam.Id;
+                if (((Team)value).Id == this.Id)
+                    return;
+                this.m_RivalTeam = value;
+                this.m_rivalteamId = this.m_RivalTeam.Id;
             }
         }
 
@@ -1117,20 +1120,6 @@ namespace FifaLibrary
             }
         }
 
-        public int countryid_IfNationalTeam
-        {
-            get
-            {
-                return this.m_countryid_IfNationalTeam;
-            }
-            set
-            {
-                this.m_countryid_IfNationalTeam = value;
-            }
-        }
-
-
-
         public Roster Roster
         {
             get
@@ -1139,97 +1128,57 @@ namespace FifaLibrary
             }
         }
 
-        public Country Country
+        public Country CountryNationalTeam
         {
-            get => this.m_Country;
+            get => this.m_CountryNationalTeam;
             set
             {
-                if (value == this.m_Country)
+                if (this.m_CountryNationalTeam == null && value == null)
                     return;
-                if (this.IsNationalTeam())
+
+                if (this.m_CountryNationalTeam != null && value == null)
                 {
-                    if (value == null)
-                    {
-                        this.m_Country.NationalTeam = (Team)null;
-                        return;
-                    }
-                    if (this.m_Country != null)
-                        this.m_Country.NationalTeam = (Team)null;
-                    value.SetNationalTeam(this, this.Id);
-                    this.SetCountryAsNationalTeam(value);
+                    FifaEnvironment.Countries.SearchCountry(this.m_CountryNationalTeam.Id).NationalTeam = null;
+                    this.m_CountryNationalTeam = null;
+                    return;
                 }
-                else if (value != null)
+                if (this.m_CountryNationalTeam == null && value != null)
                 {
-                    if (this.m_League != null)
-                    {
-                        if (value.Id == this.m_League.Country.Id)
-                            this.SetCountryAsLeagueTeam(value);
-                        else
-                            this.SetCountryAsRowTeam(value);
-                    }
-                    else
-                        this.SetCountryAsRowTeam(value);
+                    FifaEnvironment.Countries.SearchCountry(value.Id).NationalTeam = this;
+                    this.m_CountryNationalTeam = value;
+                    return;
                 }
-                else if (this.m_League != null)
-                    this.SetCountryAsLeagueTeam(this.m_League.Country);
-                else
-                    this.ClearCountry();
+                if (this.m_CountryNationalTeam != null && value != null)
+                {
+                    FifaEnvironment.Countries.SearchCountry(this.m_CountryNationalTeam.Id).NationalTeam = null;
+                    FifaEnvironment.Countries.SearchCountry(value.Id).NationalTeam = this;
+                    this.m_CountryNationalTeam = value;
+                    return;
+                }
             }
         }
 
-        public void SetCountryAsNationalTeam(Country country)
+        public Country CountryRowTeam
         {
-            if (country != null)
-            {
-                this.m_Country = country;
-                this.m_countryid_IfNationalTeam = country.Id;
-                this.m_countryid_IfRowTeam = 0;
-                this.m_countryid_IfLeagueTeam = 0;
-            }
-        }
-        private void SetCountryAsRowTeam(Country country)
-        {
-            if (country == null)
-                return;
-            this.m_Country = country;
-            this.m_countryid_IfNationalTeam = 0;
-            this.m_countryid_IfRowTeam = country.Id;
-            this.m_countryid_IfLeagueTeam = 0;
+            get => this.m_CountryRowTeam;
+            set => this.m_CountryRowTeam = value;
         }
 
-        private void UnsetAsNationalTeam()
+        public bool IsNationalTeam
         {
-            if (this.m_League != null && this.m_League.Country != null && this.m_Country == this.m_League.Country)
-                this.SetCountryAsLeagueTeam(this.m_Country);
-            this.SetCountryAsRowTeam(this.m_Country);
+            get => this.m_CountryNationalTeam != null;
         }
 
-        private void ClearCountry()
+        public bool IsRowTeam
         {
-            this.m_Country = (Country)null;
-            this.m_countryid_IfNationalTeam = 0;
-            this.m_countryid_IfRowTeam = 0;
-            this.m_countryid_IfLeagueTeam = 0;
+            get => !this.IsNationalTeam && this.m_CountryRowTeam != null;
         }
-
-        public bool IsNationalTeam() => this.m_countryid_IfNationalTeam != 0;
-
-        public bool NationalTeam
-        {
-            get => this.IsNationalTeam();
-            set
-            {
-                if (value)
-                    this.SetAsNationalTeam(this.m_Country);
-                else
-                    this.UnsetAsNationalTeam();
-            }
-        }
-        private void SetAsNationalTeam(Country country) => this.SetCountryAsNationalTeam(country);
 
         public bool IsClub()
         {
-            return !this.IsNationalTeam() && this.Id != 111072 && (this.Id != 111205 && this.Id != 112190) && this.Id != 111596 && this.Id != 111592;
+            //Ids of Super Teams
+            List<int> specialTeamsList = new List<int> { 111072, 111205, 112190, 111596, 111592 };
+            return !this.IsNationalTeam && !specialTeamsList.Contains(this.Id);
         }
 
         public League League
@@ -1257,6 +1206,7 @@ namespace FifaLibrary
         {
             get
             {
+
                 return this.m_PrevLeague;
             }
             set
@@ -1650,12 +1600,11 @@ namespace FifaLibrary
 
         public override string ToString()
         {
+            if (this.m_teamname != null && this.m_teamname != string.Empty)
+                return this.m_teamname;
             if (this.m_TeamNameFull != null && this.m_TeamNameFull != string.Empty)
                 return this.m_TeamNameFull;
-            if (this.m_teamname == null)
-                return string.Empty;
-            this.m_TeamNameFull = this.m_teamname;
-            return this.m_teamname;
+            return string.Empty;
         }
 
         public Team(Record recTeams)
@@ -1709,7 +1658,7 @@ namespace FifaLibrary
             for (int index = 0; index < 10; ++index)
                 this.m_teamkitidList[index] = -1;
             this.m_RivalTeam = (Team)null;
-            this.m_rivalteam = 1;
+            this.m_rivalteamId = 1;
             this.m_assetid = this.Id;
             this.m_transferbudget = 1000000;
             this.m_internationalprestige = 10;
@@ -1760,8 +1709,8 @@ namespace FifaLibrary
             this.m_bodytypeid = 1;
             this.m_ethnicity = 2;
             this.m_personalityid = 0;
-            this.m_countryid_IfNationalTeam = 0;
-            this.m_Country = (Country)null;
+            this.m_CountryNationalTeam = (Country)null;
+            this.m_CountryRowTeam = (Country)null;
             this.m_leagueid = 0;
             this.m_League = (League)null;
             this.m_prevleagueid = 0;
@@ -1818,7 +1767,7 @@ namespace FifaLibrary
             this.m_transferbudget = r.GetAndCheckIntField(FI.teams_transferbudget);
             this.m_domesticprestige = r.GetAndCheckIntField(FI.teams_domesticprestige);
             this.m_internationalprestige = r.GetAndCheckIntField(FI.teams_internationalprestige);
-            this.m_rivalteam = r.GetAndCheckIntField(FI.teams_rivalteam);
+            this.m_rivalteamId = r.GetAndCheckIntField(FI.teams_rivalteam);
             this.m_captainid = r.GetAndCheckIntField(FI.teams_captainid);
             this.m_penaltytakerid = r.GetAndCheckIntField(FI.teams_penaltytakerid);
             this.m_freekicktakerid = r.GetAndCheckIntField(FI.teams_freekicktakerid);
@@ -1957,16 +1906,17 @@ namespace FifaLibrary
             this.m_formationid = r.GetAndCheckIntField(FI.teamformationteamstylelinks_formationid);
         }
 
-        public void FillFromCountry(Country country)
+        public void FillNationalTeamFromCountry(Country country)
         {
-            this.m_countryid_IfNationalTeam = country.NationalTeamId;
-            this.m_Country = country;
+            //this.m_countryid_IfNationalTeam = country.NationalTeamId;
+            this.m_CountryNationalTeam = country;
         }
 
-        public void FillFromNations(Record r)
+        /*public void FillFromNations(Record r)
         {
-            this.m_countryid_IfNationalTeam = r.GetAndCheckIntField(FI.nations_nationid);
-        }
+            this.m_CountryNationalTeam = FifaEnvironment.Countries.SearchCountry(r.GetAndCheckIntField(FI.nations_nationid));
+            // this.m_countryid_IfNationalTeam = r.GetAndCheckIntField(FI.nations_nationid);
+        }*/
 
         public void FillFromLeagueTeamLinks(Record r)
         {
@@ -2007,7 +1957,8 @@ namespace FifaLibrary
 
         public void FillFromRowTeamNationLinks(Record r)
         {
-            this.m_countryid_IfRowTeam = r.GetAndCheckIntField(FI.rowteamnationlinks_nationid);
+            this.m_CountryRowTeam = FifaEnvironment.Countries.SearchCountry(r.GetAndCheckIntField(FI.rowteamnationlinks_nationid));
+            //this.m_countryid_IfRowTeam = r.GetAndCheckIntField(FI.rowteamnationlinks_nationid);
         }
 
         public void LinkBall(BallList ballList)
@@ -2039,10 +1990,10 @@ namespace FifaLibrary
         {
             if (teamList == null)
                 return;
-            this.m_RivalTeam = (Team)teamList.SearchId(this.m_rivalteam);
+            this.m_RivalTeam = (Team)teamList.SearchId(this.m_rivalteamId);
         }
 
-        public void LinkCountry(CountryList countryList)
+        /*public void LinkCountry(CountryList countryList)
         {
             if (countryList == null)
                 return;
@@ -2063,7 +2014,7 @@ namespace FifaLibrary
                     return;
                 this.SetCountryAsLeagueTeam(this.m_League.Country);
             }
-        }
+        }*/
 
         public bool IsFemale()
         {
@@ -2071,16 +2022,6 @@ namespace FifaLibrary
             if (this.m_Roster != null && this.m_Roster.Count > 0)
                 flag = this.m_Roster.GetBestPlayer().Player.Female;
             return flag;
-        }
-
-        public bool IsRowTeam() => !this.IsNationalTeam() && this.m_countryid_IfRowTeam > 0 && this.m_countryid_IfRowTeam != this.m_countryid_IfLeagueTeam;
-
-        private void SetCountryAsLeagueTeam(Country country)
-        {
-            this.m_Country = country;
-            this.m_countryid_IfNationalTeam = 0;
-            this.m_countryid_IfRowTeam = 0;
-            this.m_countryid_IfLeagueTeam = country.Id;
         }
 
         public void LinkFormation(FormationList formationList)
@@ -2151,7 +2092,7 @@ namespace FifaLibrary
             r.IntField[FI.teams_numtransfersin] = this.m_numtransfersin;
             r.IntField[FI.teams_genericint1] = this.m_genericint1;
             r.IntField[FI.teams_genericint2] = this.m_genericint2;
-            r.IntField[FI.teams_rivalteam] = this.m_rivalteam;
+            r.IntField[FI.teams_rivalteam] = this.m_rivalteamId;
             r.IntField[FI.teams_assetid] = this.m_assetid;
             r.IntField[FI.teams_transferbudget] = this.m_transferbudget;
             r.IntField[FI.teams_internationalprestige] = this.m_internationalprestige;
@@ -2459,10 +2400,10 @@ namespace FifaLibrary
 
         public void SaveRowTeamNationLinks(Record r)
         {
-            r.IntField[FI.rowteamnationlinks_teamid] = this.Id;
-            if (this.m_Country == null)
+            if (this.m_CountryRowTeam == null)
                 return;
-            r.IntField[FI.rowteamnationlinks_nationid] = this.m_Country.Id;
+            r.IntField[FI.rowteamnationlinks_teamid] = this.Id;
+            r.IntField[FI.rowteamnationlinks_nationid] = this.m_CountryRowTeam.Id;
         }
 
         public string CrestTemplateFileName()

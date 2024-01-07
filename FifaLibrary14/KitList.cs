@@ -117,7 +117,7 @@ namespace FifaLibrary
                 for (int index = 0; index < this.Count; ++index)
                 {
                     Kit kit = (Kit)this[index];
-                    if (kit.Team != null && kit.Team.Country == country)
+                    if (kit.Team != null && kit.Team.League.Country == country)
                         kitList.Add((object)kit);
                 }
                 return (IdArrayList)kitList;
