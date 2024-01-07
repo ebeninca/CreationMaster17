@@ -6,7 +6,7 @@ https://bitbucket.org/fifa-tools/cm15/src/master/
 
 ## Project Structure / To Build
 
-Installation modules needed in Visual Studio 2019 Community (https://visualstudio.microsoft.com/pt-br/vs/older-downloads/):
+Installation modules needed in Visual Studio 2019 Community (https://visualstudio.microsoft.com/vs/older-downloads/):
 - .NET desktop development
 - Desktop development with C++
 
